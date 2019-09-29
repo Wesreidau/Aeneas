@@ -7,3 +7,9 @@
 */
 /turf/mirror
 	var/turf/reflection	//The real turf that we're reflecting
+
+/turf/proc/is_mirror()
+	return FALSE
+
+/turf/mirror/is_mirror()
+	return TRUE
