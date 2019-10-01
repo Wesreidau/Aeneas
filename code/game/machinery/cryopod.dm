@@ -214,7 +214,7 @@
 /obj/machinery/cryopod/lifepod/proc/launch()
 	launched = 1
 	for(var/d in GLOB.cardinal)
-		var/turf/T = get_step(src,d)
+		var/turf/T = get_physical_step(src,d)
 		var/obj/machinery/door/blast/B = locate() in T
 		if(B && B.density)
 			B.force_open()

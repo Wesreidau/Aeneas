@@ -19,9 +19,9 @@
 
 /obj/machinery/computer/teleporter/Initialize()
 	. = ..()
-	station = locate(/obj/machinery/teleport/station, get_step(src, turn(dir, 90)))
+	station = locate(/obj/machinery/teleport/station, get_physical_step(src, turn(dir, 90)))
 	if(station)
-		hub = locate(/obj/machinery/teleport/hub, get_step(station, turn(dir, 90)))
+		hub = locate(/obj/machinery/teleport/hub, get_physical_step(station, turn(dir, 90)))
 
 	if(istype(station))
 		station.hub = hub

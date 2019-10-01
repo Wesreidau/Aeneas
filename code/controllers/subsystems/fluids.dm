@@ -87,7 +87,7 @@ var/datum/controller/subsystem/fluids/SSfluids
 			for(var/spread_dir in GLOB.cardinal)
 				if(F.start_loc.fluid_blocked_dirs & spread_dir)
 					continue
-				var/turf/T = get_step(F.start_loc, spread_dir)
+				var/turf/T = get_physical_step(F.start_loc, spread_dir)
 				var/coming_from = GLOB.reverse_dir[spread_dir]
 				if(!istype(T) || T.flooded)
 					continue

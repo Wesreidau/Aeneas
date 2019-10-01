@@ -463,7 +463,7 @@
 		if(istype(M)) //If there is someting living...
 			return 1 //Return 1
 		else
-			M = locate() in get_step(src,targloc)
+			M = locate() in get_physical_step(src,targloc)
 			if(istype(M))
 				return 1
 

@@ -41,11 +41,11 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/atmos_init()
 			else if (!node2_dir)
 				node2_dir = direction
 
-	for(var/obj/machinery/atmospherics/pipe/simple/heat_exchanging/target in get_step(src,node1_dir))
+	for(var/obj/machinery/atmospherics/pipe/simple/heat_exchanging/target in get_physical_step(src,node1_dir))
 		if(target.initialize_directions_he & get_dir(target,src))
 			node1 = target
 			break
-	for(var/obj/machinery/atmospherics/pipe/simple/heat_exchanging/target in get_step(src,node2_dir))
+	for(var/obj/machinery/atmospherics/pipe/simple/heat_exchanging/target in get_physical_step(src,node2_dir))
 		if(target.initialize_directions_he & get_dir(target,src))
 			node2 = target
 			break
@@ -123,14 +123,14 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/set_dir(new_dir)
 obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/atmos_init()
 	..()
 	// Only check back side for normal pipes
-	for(var/obj/machinery/atmospherics/target in get_step(src,GLOB.flip_dir[src.dir]))
+	for(var/obj/machinery/atmospherics/target in get_physical_step(src,GLOB.flip_dir[src.dir]))
 		if(target.initialize_directions & get_dir(target,src))
 			// Snowflake check; keeps back from connecting to HE pipes
 			if(!istype(target,/obj/machinery/atmospherics/pipe/simple/heat_exchanging))
 				node1 = target
 				break
 	// Only check front side for HE pipes
-	for(var/obj/machinery/atmospherics/pipe/simple/heat_exchanging/target in get_step(src,initialize_directions_he))
+	for(var/obj/machinery/atmospherics/pipe/simple/heat_exchanging/target in get_physical_step(src,initialize_directions_he))
 		if(target.initialize_directions_he & get_dir(target,src))
 			node2 = target
 			break

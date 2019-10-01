@@ -75,7 +75,7 @@
 
 /datum/unit_test/observation/global_listeners_shall_receive_events/conduct_test()
 	var/turf/start = get_safe_turf()
-	var/turf/target = get_step(start, NORTH)
+	var/turf/target = get_physical_step(start, NORTH)
 	var/obj/O = get_named_instance(/obj, start)
 
 	GLOB.moved_event.register_global(src, /datum/unit_test/observation/proc/receive_move)

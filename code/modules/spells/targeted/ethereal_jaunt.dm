@@ -47,7 +47,7 @@
 			sleep(5)
 			if(!target.forceMove(mobloc))
 				for(var/direction in list(1,2,4,8,5,6,9,10))
-					var/turf/T = get_step(mobloc, direction)
+					var/turf/T = get_physical_step(mobloc, direction)
 					if(T)
 						if(target.forceMove(T))
 							break
@@ -98,7 +98,7 @@
 
 /obj/effect/dummy/spell_jaunt/relaymove(var/mob/user, direction)
 	if (!canmove || reappearing) return
-	var/turf/newLoc = get_step(src, direction)
+	var/turf/newLoc = get_physical_step(src, direction)
 	if(!(newLoc.turf_flags & TURF_FLAG_NOJAUNT))
 		forceMove(newLoc)
 		var/turf/T = get_turf(loc)

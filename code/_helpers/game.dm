@@ -319,14 +319,14 @@ proc/isInSight(var/atom/A, var/atom/B)
 	var/dy = finish.y - start.y
 	if(abs(dy) > abs (dx)) //slope is above 1:1 (move horizontally in a tie)
 		if(dy > 0)
-			return get_step(start, SOUTH)
+			return get_physical_step(start, SOUTH)
 		else
-			return get_step(start, NORTH)
+			return get_physical_step(start, NORTH)
 	else
 		if(dx > 0)
-			return get_step(start, WEST)
+			return get_physical_step(start, WEST)
 		else
-			return get_step(start, EAST)
+			return get_physical_step(start, EAST)
 
 /proc/get_mob_by_key(var/key)
 	for(var/mob/M in SSmobs.mob_list)
@@ -480,7 +480,7 @@ datum/projectile_data
 	var/minp=16777216;
 	var/maxp=0;
 	for(var/dir in GLOB.cardinal)
-		var/turf/simulated/T=get_turf(get_step(loc,dir))
+		var/turf/simulated/T=get_turf(get_physical_step(loc,dir))
 		var/cp=0
 		if(T && istype(T) && T.zone)
 			var/datum/gas_mixture/environment = T.return_air()
@@ -511,7 +511,7 @@ datum/projectile_data
 				direction = 3
 			if(WEST)
 				direction = 4
-		var/turf/simulated/T=get_turf(get_step(loc,dir))
+		var/turf/simulated/T=get_turf(get_physical_step(loc,dir))
 		var/list/rstats = new /list(stats.len)
 		if(T && istype(T) && T.zone)
 			var/datum/gas_mixture/environment = T.return_air()

@@ -164,12 +164,12 @@
 		// only stop when we've gone the whole distance (or max throw range) and are on a non-space tile, or hit something, or hit the end of the map, or someone picks it up
 		var/atom/step
 		if(error >= 0)
-			step = get_step(src, major_dir)
+			step = get_physical_step(src, major_dir)
 			error -= minor_dist
 		else
-			step = get_step(src, minor_dir)
+			step = get_physical_step(src, minor_dir)
 			error += major_dist
-		if(!step) // going off the edge of the map makes get_step return null, don't let things go off the edge
+		if(!step) // going off the edge of the map makes get_physical_step return null, don't let things go off the edge
 			break
 		src.Move(step)
 		hit_check(speed)

@@ -172,7 +172,7 @@
 
 /obj/structure/bed/chair/wheelchair/proc/create_track()
 	var/obj/effect/decal/cleanable/blood/tracks/B = new(loc)
-	var/newdir = get_dir(get_step(loc, dir), loc)
+	var/newdir = get_dir(get_physical_step(loc, dir), loc)
 	if(newdir == dir)
 		B.set_dir(newdir)
 	else

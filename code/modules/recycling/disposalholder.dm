@@ -71,7 +71,7 @@
 			active = 0
 		if(!active || QDELETED(src))
 			return PROCESS_KILL
-		
+
 		var/obj/structure/disposalpipe/last
 
 		if(hasmob && prob(3))
@@ -95,7 +95,7 @@
 
 	// find the turf which should contain the next pipe
 /obj/structure/disposalholder/proc/nextloc()
-	return get_step(loc,dir)
+	return get_physical_step(loc,dir)
 
 // find a matching pipe on a turf
 /obj/structure/disposalholder/proc/findpipe(var/turf/T)

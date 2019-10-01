@@ -252,7 +252,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 /obj/structure/cable/proc/mergeDiagonalsNetworks(var/direction)
 
 	//search for and merge diagonally matching cables from the first direction component (north/south)
-	var/turf/T  = get_step(src, direction&3)//go north/south
+	var/turf/T  = get_physical_step(src, direction&3)//go north/south
 
 	for(var/obj/structure/cable/C in T)
 
@@ -273,7 +273,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 				C.powernet.add_cable(src) //else, we simply connect to the matching cable powernet
 
 	//the same from the second direction component (east/west)
-	T  = get_step(src, direction&12)//go east/west
+	T  = get_physical_step(src, direction&12)//go east/west
 
 	for(var/obj/structure/cable/C in T)
 
@@ -384,7 +384,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 					. += C
 		if(cable_dir & (cable_dir - 1)) // Diagonal, check for /\/\/\ style cables along cardinal directions
 			for(var/pair in list(NORTH|SOUTH, EAST|WEST))
-				T = get_step(src, cable_dir & pair)
+				T = get_physical_step(src, cable_dir & pair)
 				if(T)
 					var/req_dir = cable_dir ^ pair
 					for(var/obj/structure/cable/C in T)
@@ -428,7 +428,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	var/list/P_list
 	if(!T1)	return
 	if(d1)
-		T1 = get_step(T1, d1)
+		T1 = get_physical_step(T1, d1)
 		P_list = power_list(T1, src, turn(d1,180),0,cable_only = 1)	// what adjacently joins on to cut cable...
 
 	P_list += power_list(loc, src, d1, 0, cable_only = 1)//... and on turf

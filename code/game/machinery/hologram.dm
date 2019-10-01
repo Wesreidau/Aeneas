@@ -280,7 +280,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	hologram.anchored = 1//So space wind cannot drag it.
 	if(caller_id)
 		hologram.SetName("[caller_id.name] (Hologram)")
-		hologram.forceMove(get_step(src,1))
+		hologram.forceMove(get_physical_step(src,1))
 		masters[caller_id] = hologram
 	else
 		hologram.SetName("[A.name] (Hologram)") //If someone decides to right click.

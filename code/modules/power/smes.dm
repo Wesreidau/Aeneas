@@ -80,7 +80,7 @@
 	for(var/d in GLOB.cardinal)
 		var/obj/item/weapon/stock_parts/power/terminal/part = install_component(/obj/item/weapon/stock_parts/power/terminal, refresh_parts = FALSE)
 		part.terminal_dir = d
-		var/turf/T = get_step(src, d)
+		var/turf/T = get_physical_step(src, d)
 		for(var/obj/machinery/power/terminal/term in T)
 			if(term.dir == turn(d, 180) && !term.master)
 				part.set_terminal(src, term)
@@ -172,9 +172,9 @@
 		var/is_input_available = FALSE
 		for(var/obj/item/weapon/stock_parts/power/terminal/term in power_components)
 			if(!term.terminal || !term.terminal.powernet)
-				continue			
+				continue
 			is_input_available = TRUE
-			term.terminal.powernet.smes_demand += target_load		
+			term.terminal.powernet.smes_demand += target_load
 			term.terminal.powernet.inputting.Add(src)
 		if(!is_input_available)
 			target_load = 0 // We won't input any power without powernet connection.

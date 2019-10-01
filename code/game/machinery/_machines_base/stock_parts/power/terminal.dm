@@ -24,7 +24,7 @@
 		machine.update_power_channel(cached_channel)
 		machine.power_change()
 		return
-	
+
 	var/surplus = terminal.surplus()
 	var/usage = machine.get_power_usage()
 	terminal.draw_power(usage)
@@ -74,7 +74,7 @@
 	if(!terminal)
 		GLOB.moved_event.unregister(machine, src, .proc/machine_moved)
 		return
-	if(istype(new_loc) && (terminal.loc == get_step(new_loc, terminal_dir)))
+	if(istype(new_loc) && (terminal.loc == get_physical_step(new_loc, terminal_dir)))
 		return     // This location is fine
 	machine.visible_message(SPAN_WARNING("The terminal is ripped out of \the [machine]!"))
 	qdel(terminal) // will handle everything via the destroyed event
@@ -82,7 +82,7 @@
 /obj/item/weapon/stock_parts/power/terminal/proc/make_terminal(var/obj/machinery/machine)
 	if(!machine)
 		return
-	var/obj/machinery/power/terminal/new_terminal = new (get_step(machine, terminal_dir))
+	var/obj/machinery/power/terminal/new_terminal = new (get_physical_step(machine, terminal_dir))
 	new_terminal.set_dir(terminal_dir ? GLOB.reverse_dir[terminal_dir] : machine.dir)
 	new_terminal.connect_to_network()
 	set_terminal(machine, new_terminal)
@@ -111,7 +111,7 @@
 
 	// Interactions inside machine only
 	if (istype(I, /obj/item/stack/cable_coil) && !terminal)
-		var/turf/T = get_step(machine, terminal_dir)
+		var/turf/T = get_physical_step(machine, terminal_dir)
 		if(terminal_dir && user.loc != T)
 			return FALSE // Wrong terminal handler.
 		if(blocking_terminal_at_loc(machine, T, user))
@@ -144,7 +144,7 @@
 		return TRUE
 
 	if(isWirecutter(I) && terminal)
-		var/turf/T = get_step(machine, terminal_dir)
+		var/turf/T = get_physical_step(machine, terminal_dir)
 		if(terminal_dir && user.loc != T)
 			return FALSE // Wrong terminal handler.
 		if(istype(T) && !T.is_plating())

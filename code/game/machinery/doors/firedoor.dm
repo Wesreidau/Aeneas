@@ -71,7 +71,7 @@
 	areas_added = list(A)
 
 	for(var/direction in GLOB.cardinal)
-		A = get_area(get_step(src,direction))
+		A = get_area(get_physical_step(src,direction))
 		if(istype(A) && !(A in areas_added))
 			LAZYADD(A.all_doors, src)
 			areas_added += A
@@ -365,7 +365,7 @@
 /obj/machinery/door/firedoor/proc/can_safely_open()
 	var/turf/neighbour
 	for(var/dir in GLOB.cardinal)
-		neighbour = get_step(src.loc, dir)
+		neighbour = get_physical_step(src.loc, dir)
 		if(neighbour.c_airblock(src.loc) & AIR_BLOCKED)
 			continue
 		for(var/obj/O in src.loc)

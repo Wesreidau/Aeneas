@@ -357,7 +357,7 @@
 
 	pixel_x = 0
 	pixel_y = 0
-	var/turf/T = get_step(get_turf(src), turn(dir, 180))
+	var/turf/T = get_physical_step(get_turf(src), turn(dir, 180))
 	if(istype(T) && T.density)
 		if(dir == NORTH)
 			pixel_y = -21
@@ -943,7 +943,7 @@ FIRE ALARM
 	pixel_x = 0
 	pixel_y = 0
 	var/walldir = (dir & (NORTH|SOUTH)) ? GLOB.reverse_dir[dir] : dir
-	var/turf/T = get_step(get_turf(src), walldir)
+	var/turf/T = get_physical_step(get_turf(src), walldir)
 	if(istype(T) && T.density)
 		if(dir == SOUTH)
 			pixel_y = 21

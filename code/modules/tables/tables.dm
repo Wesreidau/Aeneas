@@ -339,7 +339,7 @@
 		var/type = 0
 		var/tabledirs = 0
 		for(var/direction in list(turn(dir,90), turn(dir,-90)) )
-			var/obj/structure/table/T = locate(/obj/structure/table ,get_step(src,direction))
+			var/obj/structure/table/T = locate(/obj/structure/table ,get_physical_step(src,direction))
 			if (T && T.flipped == 1 && T.dir == src.dir && material && T.material && T.material.name == material.name)
 				type++
 				tabledirs |= direction
@@ -391,7 +391,7 @@
 		blocked_dirs |= W.dir
 
 	for(var/D in list(NORTH, SOUTH, EAST, WEST) - blocked_dirs)
-		var/turf/T = get_step(src, D)
+		var/turf/T = get_physical_step(src, D)
 		for(var/obj/structure/window/W in T)
 			if(W.is_fulltile() || W.dir == GLOB.reverse_dir[D])
 				blocked_dirs |= D
@@ -401,7 +401,7 @@
 					blocked_dirs |= W.dir|D // blocks the diagonal
 
 	for(var/D in list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST) - blocked_dirs)
-		var/turf/T = get_step(src, D)
+		var/turf/T = get_physical_step(src, D)
 
 		for(var/obj/structure/window/W in T)
 			if(W.is_fulltile() || (W.dir & GLOB.reverse_dir[D]))

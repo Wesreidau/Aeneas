@@ -258,7 +258,7 @@ field_generator power level display
 	if(!NSEW)//Make sure its ran right
 		return
 	for(var/dist = 0, dist <= 9, dist += 1) // checks out to 8 tiles away for another generator
-		T = get_step(T, NSEW)
+		T = get_physical_step(T, NSEW)
 		if(T.density)//We cant shoot a field though this
 			return 0
 		for(var/atom/A in T.contents)
@@ -278,8 +278,8 @@ field_generator power level display
 		return
 	T = get_turf(src)
 	for(var/dist = 0, dist < steps, dist += 1) // creates each field tile
-		var/field_dir = get_dir(T,get_step(G.loc, NSEW))
-		T = get_step(T, NSEW)
+		var/field_dir = get_dir(T,get_physical_step(G.loc, NSEW))
+		T = get_physical_step(T, NSEW)
 		if(!locate(/obj/machinery/containment_field) in T)
 			var/obj/machinery/containment_field/CF = new/obj/machinery/containment_field()
 			CF.set_master(src,G)

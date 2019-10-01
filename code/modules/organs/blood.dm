@@ -53,7 +53,7 @@
 	var/bled = 0
 	spawn(0)
 		for(var/i = 1 to BLOOD_SPRAY_DISTANCE)
-			sprayloc = get_step(sprayloc, spraydir)
+			sprayloc = get_physical_step(sprayloc, spraydir)
 			if(!istype(sprayloc) || sprayloc.density)
 				break
 			var/hit_mob

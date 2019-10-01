@@ -44,10 +44,10 @@
 		if(get_dist(src, F) >= link_range)
 			continue
 		var/backwards = turn(F.dir, 180)
-		var/obj/machinery/disperser/middle/M = locate() in get_step(F, backwards)
+		var/obj/machinery/disperser/middle/M = locate() in get_physical_step(F, backwards)
 		if(!M || get_dist(src, M) >= link_range)
 			continue
-		var/obj/machinery/disperser/back/B = locate() in get_step(M, backwards)
+		var/obj/machinery/disperser/back/B = locate() in get_physical_step(M, backwards)
 		if(!B || get_dist(src, B) >= link_range)
 			continue
 		front = F

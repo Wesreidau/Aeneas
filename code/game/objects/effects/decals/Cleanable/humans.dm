@@ -250,7 +250,7 @@ var/global/list/image/splatter_cache=list()
 				var/obj/effect/decal/cleanable/blood/b = new /obj/effect/decal/cleanable/blood/splatter(loc)
 				b.basecolor = src.basecolor
 				b.update_icon()
-			if (step_to(src, get_step(src, direction), 0))
+			if (step_to(src, get_physical_step(src, direction), 0))
 				break
 
 /obj/effect/decal/cleanable/blood/gibs/start_drying()

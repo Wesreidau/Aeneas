@@ -35,7 +35,7 @@
 	for(var/atom/movable/A in src)
 		A.dropInto(loc)
 	if(beaker)
-		beaker.forceMove(get_step(loc, SOUTH)) //Beaker is carefully ejected from the wreckage of the cryotube
+		beaker.forceMove(get_physical_step(loc, SOUTH)) //Beaker is carefully ejected from the wreckage of the cryotube
 		beaker = null
 	. = ..()
 
@@ -43,7 +43,7 @@
 	..()
 	if(node) return
 	var/node_connect = dir
-	for(var/obj/machinery/atmospherics/target in get_step(src,node_connect))
+	for(var/obj/machinery/atmospherics/target in get_physical_step(src,node_connect))
 		if(target.initialize_directions & get_dir(target,src))
 			node = target
 			break
@@ -179,7 +179,7 @@
 
 	if(href_list["ejectBeaker"])
 		if(beaker)
-			beaker.forceMove(get_step(loc, SOUTH))
+			beaker.forceMove(get_physical_step(loc, SOUTH))
 			beaker = null
 		return TOPIC_REFRESH
 
@@ -271,7 +271,7 @@
 	if (occupant.client)
 		occupant.client.eye = occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
-	occupant.forceMove(get_step(loc, SOUTH))	//this doesn't account for walls or anything, but i don't forsee that being a problem.
+	occupant.forceMove(get_physical_step(loc, SOUTH))	//this doesn't account for walls or anything, but i don't forsee that being a problem.
 	if (occupant.bodytemperature < 261 && occupant.bodytemperature >= 70) //Patch by Aranclanos to stop people from taking burn damage after being ejected
 		occupant.bodytemperature = 261									  // Changed to 70 from 140 by Zuhayr due to reoccurance of bug.
 	occupant = null

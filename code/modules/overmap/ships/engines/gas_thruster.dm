@@ -137,14 +137,14 @@
 /obj/machinery/atmospherics/unary/engine/proc/check_blockage()
 	blockage = FALSE
 	var/exhaust_dir = reverse_direction(dir)
-	var/turf/A = get_step(src, exhaust_dir)
+	var/turf/A = get_physical_step(src, exhaust_dir)
 	var/turf/B = A
 	while(isturf(A) && !(isspace(A) || isopenspace(A)))
 		if((B.c_airblock(A)) & AIR_BLOCKED)
 			blockage = TRUE
 			break
 		B = A
-		A = get_step(A, exhaust_dir)
+		A = get_physical_step(A, exhaust_dir)
 	return blockage
 
 /obj/machinery/atmospherics/unary/engine/proc/burn()
@@ -164,7 +164,7 @@
 		network.update = 1
 
 	var/exhaust_dir = reverse_direction(dir)
-	var/turf/T = get_step(src,exhaust_dir)
+	var/turf/T = get_physical_step(src,exhaust_dir)
 	if(T)
 		T.assume_air(removed)
 		new/obj/effect/engine_exhaust(T, exhaust_dir, air_contents.check_combustability() && air_contents.temperature >= PHORON_MINIMUM_BURN_TEMPERATURE)

@@ -234,7 +234,7 @@
 		prob_slip *= 0.5
 	return prob_slip
 
-#define DO_MOVE(this_dir) var/final_dir = turn(this_dir, -dir2angle(dir)); Move(get_step(mob, final_dir), final_dir);
+#define DO_MOVE(this_dir) var/final_dir = turn(this_dir, -dir2angle(dir)); Move(get_physical_step(mob, final_dir), final_dir);
 
 /client/verb/moveup()
 	set name = ".moveup"

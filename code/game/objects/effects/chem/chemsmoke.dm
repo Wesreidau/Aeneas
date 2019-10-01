@@ -248,7 +248,7 @@
 	while(pending.len)
 		for(var/turf/current in pending)
 			for(var/D in GLOB.cardinal)
-				var/turf/target = get_step(current, D)
+				var/turf/target = get_physical_step(current, D)
 				if(wallList)
 					if(istype(target, /turf/simulated/wall))
 						if(!(target in wallList))

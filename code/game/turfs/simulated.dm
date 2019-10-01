@@ -100,7 +100,7 @@
 
 			if (bloodDNA && H.species.get_move_trail(H))
 				src.AddTracks(H.species.get_move_trail(H),bloodDNA,H.dir,0,bloodcolor) // Coming
-				var/turf/simulated/from = get_step(H,reverse_direction(H.dir))
+				var/turf/simulated/from = get_physical_step(H,reverse_direction(H.dir))
 				if(istype(from) && from)
 					from.AddTracks(H.species.get_move_trail(H),bloodDNA,0,H.dir,bloodcolor) // Going
 

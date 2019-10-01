@@ -107,22 +107,22 @@
 			neighbor_status |= 2
 			if (UpdateNeighbors)
 				R.update_icon(0)
-	for (var/obj/structure/railing/R in get_step(src, Lturn))
+	for (var/obj/structure/railing/R in get_physical_step(src, Lturn))
 		if ((R.dir == src.dir) && R.anchored)
 			neighbor_status |= 16
 			if (UpdateNeighbors)
 				R.update_icon(0)
-	for (var/obj/structure/railing/R in get_step(src, Rturn))
+	for (var/obj/structure/railing/R in get_physical_step(src, Rturn))
 		if ((R.dir == src.dir) && R.anchored)
 			neighbor_status |= 1
 			if (UpdateNeighbors)
 				R.update_icon(0)
-	for (var/obj/structure/railing/R in get_step(src, (Lturn + src.dir)))
+	for (var/obj/structure/railing/R in get_physical_step(src, (Lturn + src.dir)))
 		if ((R.dir == Rturn) && R.anchored)
 			neighbor_status |= 64
 			if (UpdateNeighbors)
 				R.update_icon(0)
-	for (var/obj/structure/railing/R in get_step(src, (Rturn + src.dir)))
+	for (var/obj/structure/railing/R in get_physical_step(src, (Rturn + src.dir)))
 		if ((R.dir == Lturn) && R.anchored)
 			neighbor_status |= 4
 			if (UpdateNeighbors)
@@ -172,7 +172,7 @@
 		to_chat(usr, "<span class='warning'>You can't flip \the [src] - something is in the way.</span>")
 		return 0
 
-	forceMove(get_step(src, src.dir))
+	forceMove(get_physical_step(src, src.dir))
 	set_dir(turn(dir, 180))
 	update_icon()
 
@@ -205,7 +205,7 @@
 					G.affecting.apply_damage(8, BRUTE, BP_HEAD)
 				else
 					if (get_turf(G.affecting) == get_turf(src))
-						G.affecting.forceMove(get_step(src, src.dir))
+						G.affecting.forceMove(get_physical_step(src, src.dir))
 					else
 						G.affecting.dropInto(loc)
 					G.affecting.Weaken(5)
@@ -277,7 +277,7 @@
 /obj/structure/railing/can_climb(var/mob/living/user, post_climb_check=0)
 	. = ..()
 	if(. && get_turf(user) == get_turf(src))
-		var/turf/T = get_step(src, src.dir)
+		var/turf/T = get_physical_step(src, src.dir)
 		if(T.turf_is_crowded(user))
 			to_chat(user, "<span class='warning'>You can't climb there, the way is blocked.</span>")
 			return 0

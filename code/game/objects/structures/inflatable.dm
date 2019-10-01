@@ -77,7 +77,7 @@
 	var/max_local_temp = 0
 
 	for(var/check_dir in GLOB.cardinal)
-		var/turf/T = get_step(get_turf(src), check_dir)
+		var/turf/T = get_physical_step(get_turf(src), check_dir)
 		var/datum/gas_mixture/env = T.return_air()
 		var/pressure = env.return_pressure()
 		min_pressure = min(min_pressure, pressure)

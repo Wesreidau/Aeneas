@@ -115,11 +115,11 @@
 /obj/machinery/conveyor/set_broken(new_state)
 	. = ..()
 	if(. && new_state)
-		var/obj/machinery/conveyor/C = locate() in get_step(src, dir)
+		var/obj/machinery/conveyor/C = locate() in get_physical_step(src, dir)
 		if(C)
 			C.set_operable(dir, id, 0)
 
-		C = locate() in get_step(src, turn(dir,180))
+		C = locate() in get_physical_step(src, turn(dir,180))
 		if(C)
 			C.set_operable(turn(dir,180), id, 0)
 
@@ -132,7 +132,7 @@
 	operable = op
 
 	update_icon()
-	var/obj/machinery/conveyor/C = locate() in get_step(src, stepdir)
+	var/obj/machinery/conveyor/C = locate() in get_physical_step(src, stepdir)
 	if(C)
 		C.set_operable(stepdir, id, op)
 

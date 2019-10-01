@@ -137,7 +137,7 @@
 	pain_emotes_with_pain_level = list(
 			list(/decl/emote/audible/bug_hiss) = 40
 	)
-	
+
 /datum/species/nabber/New()
 	equip_adjust = list(
 		slot_head_str =    list("[NORTH]" = list("x" = 0, "y" = 7),  "[EAST]" = list("x" = 0, "y" = 8),  "[SOUTH]" = list("x" = 0, "y" = 8),  "[WEST]" = list("x" = 0, "y" = 8)),
@@ -284,7 +284,7 @@
 		to_chat(attacker, "<span class='notice'>You can't attack again so soon.</span>")
 		return 0
 	attacker.last_attack = world.time
-	var/turf/T = get_step(get_turf(target), get_dir(get_turf(attacker), get_turf(target)))
+	var/turf/T = get_physical_step(get_turf(target), get_dir(get_turf(attacker), get_turf(target)))
 	playsound(target.loc, 'sound/weapons/pushhiss.ogg', 50, 1, -1)
 	if(!T.density)
 		step(target, get_dir(get_turf(attacker), get_turf(target)))

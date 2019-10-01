@@ -295,12 +295,12 @@
 			else if (!node2_dir)
 				node2_dir = direction
 
-	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
+	for(var/obj/machinery/atmospherics/target in get_physical_step(src,node1_dir))
 		if(target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node1 = target
 				break
-	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
+	for(var/obj/machinery/atmospherics/target in get_physical_step(src,node2_dir))
 		if(target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node2 = target
@@ -550,7 +550,7 @@
 
 	for(var/direction in GLOB.cardinal)
 		if(direction&connect_directions)
-			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
+			for(var/obj/machinery/atmospherics/target in get_physical_step(src,direction))
 				if(target.initialize_directions & get_dir(target,src))
 					if (check_connect_types(target,src))
 						node1 = target
@@ -562,7 +562,7 @@
 
 	for(var/direction in GLOB.cardinal)
 		if(direction&connect_directions)
-			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
+			for(var/obj/machinery/atmospherics/target in get_physical_step(src,direction))
 				if(target.initialize_directions & get_dir(target,src))
 					if (check_connect_types(target,src))
 						node2 = target
@@ -574,7 +574,7 @@
 
 	for(var/direction in GLOB.cardinal)
 		if(direction&connect_directions)
-			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
+			for(var/obj/machinery/atmospherics/target in get_physical_step(src,direction))
 				if(target.initialize_directions & get_dir(target,src))
 					if (check_connect_types(target,src))
 						node3 = target
@@ -829,25 +829,25 @@
 
 /obj/machinery/atmospherics/pipe/manifold4w/atmos_init()
 	..()
-	for(var/obj/machinery/atmospherics/target in get_step(src,1))
+	for(var/obj/machinery/atmospherics/target in get_physical_step(src,1))
 		if(target.initialize_directions & 2)
 			if (check_connect_types(target,src))
 				node1 = target
 				break
 
-	for(var/obj/machinery/atmospherics/target in get_step(src,2))
+	for(var/obj/machinery/atmospherics/target in get_physical_step(src,2))
 		if(target.initialize_directions & 1)
 			if (check_connect_types(target,src))
 				node2 = target
 				break
 
-	for(var/obj/machinery/atmospherics/target in get_step(src,4))
+	for(var/obj/machinery/atmospherics/target in get_physical_step(src,4))
 		if(target.initialize_directions & 8)
 			if (check_connect_types(target,src))
 				node3 = target
 				break
 
-	for(var/obj/machinery/atmospherics/target in get_step(src,8))
+	for(var/obj/machinery/atmospherics/target in get_physical_step(src,8))
 		if(target.initialize_directions & 4)
 			if (check_connect_types(target,src))
 				node4 = target
@@ -1009,7 +1009,7 @@
 
 /obj/machinery/atmospherics/pipe/cap/atmos_init()
 	..()
-	for(var/obj/machinery/atmospherics/target in get_step(src, dir))
+	for(var/obj/machinery/atmospherics/target in get_physical_step(src, dir))
 		if(target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node = target
@@ -1126,7 +1126,7 @@
 	..()
 	var/connect_direction = dir
 
-	for(var/obj/machinery/atmospherics/target in get_step(src,connect_direction))
+	for(var/obj/machinery/atmospherics/target in get_physical_step(src,connect_direction))
 		if(target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node1 = target

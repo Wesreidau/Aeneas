@@ -160,10 +160,10 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/adir = get_dir(A,B)
 	var/rdir = get_dir(B,A)
 	if((adir & (NORTH|SOUTH)) && (adir & (EAST|WEST)))	//	diagonal
-		var/iStep = get_step(A,adir&(NORTH|SOUTH))
+		var/iStep = get_physical_step(A,adir&(NORTH|SOUTH))
 		if(!LinkBlocked(A,iStep) && !LinkBlocked(iStep,B)) return 0
 
-		var/pStep = get_step(A,adir&(EAST|WEST))
+		var/pStep = get_physical_step(A,adir&(EAST|WEST))
 		if(!LinkBlocked(A,pStep) && !LinkBlocked(pStep,B)) return 0
 		return 1
 
@@ -592,14 +592,14 @@ proc/GaussRandRound(var/sigma,var/roundto)
 			if(!is_blocked_turf(turf_last2))
 				free_tile = turf_last2
 				break
-			turf_last1 = get_step(turf_last1,dir_alt1)
-			turf_last2 = get_step(turf_last2,dir_alt2)
+			turf_last1 = get_physical_step(turf_last1,dir_alt1)
+			turf_last2 = get_physical_step(turf_last2,dir_alt2)
 			breakpoint++
 
-		if(!free_tile) return get_step(ref, base_dir)
+		if(!free_tile) return get_physical_step(ref, base_dir)
 		else return get_step_towards(ref,free_tile)
 
-	else return get_step(ref, base_dir)
+	else return get_physical_step(ref, base_dir)
 
 //Takes: Anything that could possibly have variables and a varname to check.
 //Returns: 1 if found, 0 if not.
@@ -1044,7 +1044,7 @@ var/list/WALLITEMS = list(
 
 
 	//Some stuff is placed directly on the wallturf (signs)
-	for(var/obj/O in get_step(loc, dir))
+	for(var/obj/O in get_physical_step(loc, dir))
 		for(var/item in WALLITEMS)
 			if(istype(O, item))
 				if(O.pixel_x == 0 && O.pixel_y == 0)

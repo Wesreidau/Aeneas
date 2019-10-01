@@ -336,7 +336,7 @@
 	var/list/turfs = list()
 	var/turf/T = src.loc
 	for(var/i = 1 to steps)
-		T = get_step(T,direction)
+		T = get_physical_step(T,direction)
 	if(!isturf(T))
 		return 0
 	turfs.Add(T)
@@ -351,12 +351,12 @@
 			dir3 = 2
 	var/turf/T2 = T
 	for(var/j = 1 to steps)
-		T2 = get_step(T2,dir2)
+		T2 = get_physical_step(T2,dir2)
 		if(!isturf(T2))
 			return 0
 		turfs.Add(T2)
 	for(var/k = 1 to steps)
-		T = get_step(T,dir3)
+		T = get_physical_step(T,dir3)
 		if(!isturf(T))
 			return 0
 		turfs.Add(T)

@@ -51,11 +51,11 @@
 	var/dirs = 0
 
 	for(var/direction in GLOB.cardinal)
-		var/turf/T = get_step(src, direction)
+		var/turf/T = get_physical_step(src, direction)
 		var/success = 0
 
 		if(direction in list(NORTH, EAST))
-			T = get_step(T, direction)
+			T = get_physical_step(T, direction)
 
 		if( istype(T, /turf/simulated/wall))
 			success = 1

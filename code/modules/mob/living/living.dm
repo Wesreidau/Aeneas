@@ -144,7 +144,7 @@ default behaviour is:
 
 				var/t = get_dir(src, AM)
 				if (istype(AM, /obj/structure/window))
-					for(var/obj/structure/window/win in get_step(AM,t))
+					for(var/obj/structure/window/win in get_physical_step(AM,t))
 						now_pushing = 0
 						return
 				step(AM, t)
@@ -563,7 +563,7 @@ default behaviour is:
 	if(!can_pull())
 		stop_pulling()
 		return
-	
+
 	if (!isliving(pulling))
 		step(pulling, get_dir(pulling.loc, old_loc))
 	else

@@ -507,7 +507,7 @@ its easier to just keep the beam vertical.
 
 	//climbing over border objects like railings
 	if((atom_flags & ATOM_FLAG_CHECKS_BORDER) && get_turf(user) == target_turf)
-		target_turf = get_step(src, dir)
+		target_turf = get_physical_step(src, dir)
 
 	user.forceMove(target_turf)
 

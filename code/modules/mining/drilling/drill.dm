@@ -295,7 +295,7 @@
 
 /obj/machinery/mining/brace/proc/connect()
 
-	var/turf/T = get_step(get_turf(src), src.dir)
+	var/turf/T = get_physical_step(get_turf(src), src.dir)
 
 	for(var/thing in T.contents)
 		if(istype(thing, /obj/machinery/mining/drill))

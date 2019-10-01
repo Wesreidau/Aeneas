@@ -383,7 +383,7 @@
 	//	for(var/turf/simulated/t in oview(src,1))
 
 	for(var/d in GLOB.cardinal)
-		var/turf/simulated/T = get_step(src, d)
+		var/turf/simulated/T = get_physical_step(src, d)
 		if(istype(T) && !T.density)
 			if(!LinkBlockedWithAccess(src, T, ID))
 				L.Add(T)
@@ -398,11 +398,11 @@
 	var/adir = get_dir(A,B)
 	var/rdir = get_dir(B,A)
 	if((adir & (NORTH|SOUTH)) && (adir & (EAST|WEST)))	//	diagonal
-		var/iStep = get_step(A,adir&(NORTH|SOUTH))
+		var/iStep = get_physical_step(A,adir&(NORTH|SOUTH))
 		if(!LinkBlockedWithAccess(A,iStep, ID) && !LinkBlockedWithAccess(iStep,B,ID))
 			return 0
 
-		var/pStep = get_step(A,adir&(EAST|WEST))
+		var/pStep = get_physical_step(A,adir&(EAST|WEST))
 		if(!LinkBlockedWithAccess(A,pStep,ID) && !LinkBlockedWithAccess(pStep,B,ID))
 			return 0
 		return 1

@@ -120,7 +120,7 @@
 	var/turf/T
 
 	for(var/card in GLOB.cardinal)
-		T = get_step(loc,card)
+		T = get_physical_step(loc,card)
 		cdir = get_dir(T,loc)
 
 		for(var/obj/structure/cable/C in T)
@@ -139,7 +139,7 @@
 	var/turf/T
 
 	for(var/card in GLOB.cardinal)
-		T = get_step(loc,card)
+		T = get_physical_step(loc,card)
 		cdir = get_dir(T,loc)
 
 		for(var/obj/structure/cable/C in T)

@@ -170,7 +170,7 @@
 	var/direction = 16
 
 	for(var/wallDir in GLOB.cardinal)
-		var/turf/newTurf = get_step(T,wallDir)
+		var/turf/newTurf = get_physical_step(T,wallDir)
 		if(newTurf && newTurf.density)
 			direction |= wallDir
 
@@ -221,7 +221,7 @@
 			damage *= 2
 		adjust_health(-damage)
 		playsound(get_turf(src), W.hitsound, 100, 1)
-		
+
 /obj/effect/vine/AltClick(var/mob/user)
 	if(!CanPhysicallyInteract(user) || user.incapacitated())
 		return ..()

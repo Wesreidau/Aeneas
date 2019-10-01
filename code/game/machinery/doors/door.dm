@@ -505,7 +505,7 @@
 	var/dirs = 0
 
 	for(var/direction in GLOB.cardinal)
-		var/turf/T = get_step(src, direction)
+		var/turf/T = get_physical_step(src, direction)
 		var/success = 0
 
 		if( istype(T, /turf/simulated/wall))
@@ -545,7 +545,7 @@
 	return electronics
 
 /obj/machinery/door/proc/access_area_by_dir(direction)
-	var/turf/T = get_turf(get_step(src, direction))
+	var/turf/T = get_turf(get_physical_step(src, direction))
 	if (T && !T.density)
 		return get_area(T)
 
@@ -554,7 +554,7 @@
 	var/area/aft = access_area_by_dir(GLOB.reverse_dir[dir])
 	fore = fore || aft
 	aft = aft || fore
-	
+
 	if (!fore && !aft)
 		req_access = list()
 	else if (fore.secure || aft.secure)

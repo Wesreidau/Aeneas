@@ -58,7 +58,7 @@
 			L.visible_message("<span class='danger'>\The [src] tackles [L]!</span>")
 			var/tackle_length = rand(3,5)
 			for (var/i = 1 to tackle_length)
-				var/turf/T = get_step(L.loc, dir)//on a first step of tackling standing mob would block movement so let's check if there's something behind it. Works for consequent moves too
+				var/turf/T = get_physical_step(L.loc, dir)//on a first step of tackling standing mob would block movement so let's check if there's something behind it. Works for consequent moves too
 				if (T.density || LinkBlocked(L.loc, T) || TurfBlockedNonWindow(T) || DirBlocked(T, GLOB.flip_dir[dir]))
 					break
 				sleep(2)

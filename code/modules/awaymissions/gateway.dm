@@ -61,7 +61,7 @@ obj/machinery/gateway/centerstation/Process()
 	var/turf/T = loc
 
 	for(var/i in GLOB.alldirs)
-		T = get_step(loc, i)
+		T = get_physical_step(loc, i)
 		var/obj/machinery/gateway/G = locate(/obj/machinery/gateway) in T
 		if(G)
 			linked.Add(G)
@@ -118,7 +118,7 @@ obj/machinery/gateway/centerstation/Process()
 	if(!active)		return
 	if(!awaygate)	return
 	if(awaygate.calibrated)
-		M.forceMove(get_step(awaygate.loc, SOUTH))
+		M.forceMove(get_physical_step(awaygate.loc, SOUTH))
 		M.set_dir(SOUTH)
 		return
 	else
@@ -163,7 +163,7 @@ obj/machinery/gateway/centerstation/Process()
 	var/turf/T = loc
 
 	for(var/i in GLOB.alldirs)
-		T = get_step(loc, i)
+		T = get_physical_step(loc, i)
 		var/obj/machinery/gateway/G = locate(/obj/machinery/gateway) in T
 		if(G)
 			linked.Add(G)
@@ -217,7 +217,7 @@ obj/machinery/gateway/centerstation/Process()
 			if(E.imp_in == M)//Checking that it's actually implanted vs just in their pocket
 				to_chat(M, "The remote gate has detected your exile implant and is blocking your entry.")
 				return
-	M.forceMove(get_step(stationgate.loc, SOUTH))
+	M.forceMove(get_physical_step(stationgate.loc, SOUTH))
 	M.set_dir(SOUTH)
 
 /obj/machinery/gateway/centeraway/attackby(obj/item/device/W as obj, mob/user as mob)

@@ -291,7 +291,7 @@
 	pixel_x = 0
 	pixel_y = 0
 
-	var/turf/T = get_step(get_turf(src), turn(src.dir, 180))
+	var/turf/T = get_physical_step(get_turf(src), turn(src.dir, 180))
 	if(istype(T, /turf/simulated/wall))
 		if(dir == SOUTH)
 			pixel_y = 21

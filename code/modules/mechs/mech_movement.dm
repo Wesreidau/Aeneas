@@ -9,9 +9,9 @@
 	if(. && !istype(loc, /turf/space))
 		playsound(src.loc, mech_step_sound, 40, 1)
 
-//Override this and space move once a way to travel vertically is in 
+//Override this and space move once a way to travel vertically is in
 ///mob/living/exosuit/can_ztravel()
-//	if(Allow_Spacemove()) //Handle here 
+//	if(Allow_Spacemove()) //Handle here
 	// 	return 1
 
 	// for(var/turf/simulated/T in trange(1,src))
@@ -52,7 +52,7 @@
 		to_chat(mover, SPAN_WARNING("The power indicator flashes briefly."))
 		next_move = world.time + 3 //On fast exosuits this got annoying fast
 		return MOVEMENT_STOP
-	
+
 	next_move = world.time + (exosuit.legs ? exosuit.legs.move_delay : 3)
 	return MOVEMENT_PROCEED
 
@@ -76,7 +76,7 @@
 		exosuit.set_dir(moving_dir)
 		next_move = world.time + exosuit.legs.turn_delay
 	else
-		var/turf/target_loc = get_step(exosuit, direction)
+		var/turf/target_loc = get_physical_step(exosuit, direction)
 		if(target_loc && exosuit.legs && exosuit.legs.can_move_on(exosuit.loc, target_loc) && exosuit.MayEnterTurf(target_loc))
 			exosuit.Move(target_loc)
 	return MOVEMENT_HANDLED

@@ -139,7 +139,7 @@
 		unload(user)
 		visible_message("<span class='warning'>\The [user] falls off \the [src]!</span>")
 		return
-	return Move(get_step(src, direction))
+	return Move(get_physical_step(src, direction))
 
 /obj/vehicle/bike/Move(var/turf/destination)
 	if(kickstand || (world.time <= l_move_time + move_delay)) return

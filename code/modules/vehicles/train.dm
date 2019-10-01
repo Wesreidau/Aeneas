@@ -43,7 +43,7 @@
 	var/atom/movable/A = Obstacle
 
 	if(!A.anchored)
-		var/turf/T = get_step(A, dir)
+		var/turf/T = get_physical_step(A, dir)
 		if(isturf(T))
 			A.Move(T)	//bump things away when hit
 
@@ -77,7 +77,7 @@
 	if(user.incapacitated())
 		return 0
 
-	var/turf/T = get_step_to(src, get_step(src, direction))
+	var/turf/T = get_step_to(src, get_physical_step(src, direction))
 	if(!T)
 		to_chat(user, "You can't find a clear area to step onto.")
 		return 0

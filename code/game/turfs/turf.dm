@@ -42,7 +42,7 @@
 
 
 /*
-	Used for looping, this should be wrapped around a lot of uses of get_step
+	Used for looping, this should be wrapped around a lot of uses of get_physical_step
 */
 /turf/proc/get_self()
 	return src

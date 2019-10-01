@@ -4,10 +4,10 @@
 		return 0
 	var/obj/structure/table/T
 	for(var/angle in list(-90,90))
-		T = locate() in get_step(src.loc,turn(direction,angle))
+		T = locate() in get_physical_step(src.loc,turn(direction,angle))
 		if(T && T.flipped == 0 && T.material && material && T.material.name == material.name)
 			return 0
-	T = locate() in get_step(src.loc,direction)
+	T = locate() in get_physical_step(src.loc,direction)
 	if (!T || T.flipped == 1 || T.material != material)
 		return 1
 	return T.straight_table_check(direction)
@@ -49,7 +49,7 @@
 		L.Add(turn(src.dir,-90))
 		L.Add(turn(src.dir,90))
 	for(var/new_dir in L)
-		var/obj/structure/table/T = locate() in get_step(src.loc,new_dir)
+		var/obj/structure/table/T = locate() in get_physical_step(src.loc,new_dir)
 		if(T && T.material && material && T.material.name == material.name)
 			if(T.flipped == 1 && T.dir == src.dir && !T.unflipping_check(new_dir))
 				return 0
@@ -78,7 +78,7 @@
 	verbs -=/obj/structure/table/verb/do_flip
 	verbs +=/obj/structure/table/proc/do_put
 
-	var/list/targets = list(get_step(src,dir),get_step(src,turn(dir, 45)),get_step(src,turn(dir, -45)))
+	var/list/targets = list(get_physical_step(src,dir),get_physical_step(src,turn(dir, 45)),get_physical_step(src,turn(dir, -45)))
 	for (var/atom/movable/A in get_turf(src))
 		if (!A.anchored)
 			spawn(0)
@@ -91,7 +91,7 @@
 	flipped = 1
 	atom_flags |= ATOM_FLAG_CHECKS_BORDER
 	for(var/D in list(turn(direction, 90), turn(direction, -90)))
-		var/obj/structure/table/T = locate() in get_step(src,D)
+		var/obj/structure/table/T = locate() in get_physical_step(src,D)
 		if(T && T.can_connect() && T.flipped == 0 && material && T.material && T.material.name == material.name)
 			T.flip(direction)
 	take_damage(rand(5, 10))
@@ -111,7 +111,7 @@
 	flipped = 0
 	atom_flags &= ~ATOM_FLAG_CHECKS_BORDER
 	for(var/D in list(turn(dir, 90), turn(dir, -90)))
-		var/obj/structure/table/T = locate() in get_step(src.loc,D)
+		var/obj/structure/table/T = locate() in get_physical_step(src.loc,D)
 		if(T && T.flipped == 1 && T.dir == src.dir && material && T.material&& T.material.name == material.name)
 			T.unflip()
 
