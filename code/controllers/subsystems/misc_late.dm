@@ -8,4 +8,8 @@ SUBSYSTEM_DEF(misc_late)
 	GLOB.using_map.build_exoplanets()
 	var/decl/asset_cache/asset_cache = decls_repository.get_decl(/decl/asset_cache)
 	asset_cache.load()
+
+	//Initializing loop areas. This has to be done after both mapping and atoms, here fits.
+	for (var/area/loop/L in SSmapping.all_loop_areas)
+		L.find_reflections()
 	. = ..()

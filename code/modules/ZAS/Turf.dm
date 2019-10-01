@@ -22,7 +22,7 @@
 	for(var/d = 1, d < 16, d *= 2)
 	#endif
 
-		var/turf/unsim = get_step(src, d)
+		var/turf/unsim = get_physical_step(src, d)
 
 		if(!unsim)
 			continue
@@ -67,7 +67,7 @@
 		//for each pair of "adjacent" cardinals (e.g. NORTH and WEST, but not NORTH and SOUTH)
 		if((dir & check_dirs) == dir)
 			//check that they are connected by the corner turf
-			var/connected_dirs = get_zone_neighbours(get_step(src, dir))
+			var/connected_dirs = get_zone_neighbours(get_physical_step(src, dir))
 			if(connected_dirs && (dir & GLOB.reverse_dir[connected_dirs]) == dir)
 				unconnected_dirs &= ~dir //they are, so unflag the cardinals in question
 
@@ -84,7 +84,7 @@
 		var/to_check = GLOB.cardinal
 		#endif
 		for(var/dir in to_check)
-			var/turf/simulated/other = get_step(T, dir)
+			var/turf/simulated/other = get_physical_step(T, dir)
 			if(istype(other) && other.zone == T.zone && !(other.c_airblock(T) & AIR_BLOCKED) && get_dist(src, other) <= 1)
 				. |= dir
 
@@ -121,7 +121,7 @@
 	for(var/d = 1, d < 16, d *= 2)
 	#endif
 
-		var/turf/unsim = get_step(src, d)
+		var/turf/unsim = get_physical_step(src, d)
 
 		if(!unsim) //edge of map
 			continue

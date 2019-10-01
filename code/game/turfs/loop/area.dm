@@ -6,8 +6,16 @@
 	for (var/turf/T in contents)
 		if (!T.is_mirror())
 			T.ChangeTurf(/turf/mirror)
+
+	SSmapping.all_loop_areas |= src
 	.=..()
 
+/*
+	Called from level datum once its completed its initialization. This tells all the turfs to setup their reflections
+*/
+/area/loop/proc/find_reflections()
+	for (var/turf/mirror/TM in contents)
+		TM.find_reflection()
 /*
 Even though the mover is supposed to only be atom/movable, the change area proc passes in a turf when it calls Entered on an area.
 This is not how its supposed to work, but its useful.

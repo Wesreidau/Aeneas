@@ -55,3 +55,11 @@
 		LOOP_CYLINDRICAL_VERTICAL		//Loops north to south
 		LOOP_TORUS						//Loops horizontally, vertically and diagonally
 */
+
+
+/*
+	Stuff that the loop system uses
+
+	turfs/turf.dm
+		/turf/proc/get_self()
+*/

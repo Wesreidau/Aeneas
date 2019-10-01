@@ -173,3 +173,12 @@
 		direction = NORTH
 
 	return direction
+
+
+/*
+	Wrapper for get_step which is used for anything that shouldn't notice loop boundaries.
+*/
+/proc/get_physical_step(Ref,Dir)
+	var/turf/T = get_step(Ref, Dir)
+	if (T)
+		return T.get_self()

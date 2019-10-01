@@ -241,7 +241,6 @@
 	var/turf/T
 
 	//Step 1: Search diagonally starting from lowerleft
-	world << "Step 1, starting search at lowerleft corner"
 	var/index = 1
 	var/done = FALSE
 	while (!done)
@@ -252,13 +251,10 @@
 
 
 		if (!T.is_mirror())
-			world << "Checking [jumplink(T)], it is not mirror, we're done"
 			done = TRUE
 			break
-		world << "Checking [jumplink(T)], is mirror, continue"
 		index++
 
-	world << "Step 1 complete, found [jumplink(locate(index, index, z))]"
 
 	//Step 2: We have found a non loop tile
 	//Check one to the left
@@ -266,7 +262,6 @@
 	if (!T)
 		log_world("Fatal error while measuring bounds of level [z] at coords [index-1],[index]")
 		return
-	world << "Step 2: Testing tile [jumplink(T)]"
 
 	//Set both X and Y to where we are now, even though only one of the two is correct. This helps simplify the code logic
 	bounds_lower.x = index
@@ -276,11 +271,9 @@
 	if (T.is_mirror())
 		//2a: We have found the X boundary
 		direction.y = -1 //Set the delta's y axis
-		world << "it is a mirror, We found X boundary"
 	else
 		//2b: We have found the Y boundary
 		direction.x = -1 //Set the delta's x axis
-		world << "it is not a mirror, We found Y boundary"
 
 	//Step 3: Now lets get the axis we're missing
 	done = FALSE
@@ -295,7 +288,6 @@
 			done = TRUE
 		length++
 
-	world << "Step 3 complete, Lower bound: [jumplink(locate(bounds_lower.x, bounds_lower.y, z))]"
 
 	//We have now successfully located the lowerleft corner of the play area
 	//Step 4: We're not going to repeat the above to find the upper right. We can do the simpler method. Two loops
@@ -319,11 +311,6 @@
 			done = TRUE
 		length++
 
-	//STEP 5
-
-	//AAAND COMPLETE
-	world << "Lower bound: [jumplink(locate(bounds_lower.x, bounds_lower.y, z))]"
-	world << "Upper bound: [jumplink(locate(bounds_upper.x, bounds_upper.y, z))]"
 	return
 
 //Called on the origin level when attempting to transition to a different one. Should return true or false only.
@@ -380,9 +367,6 @@
 /datum/level/proc/get_landing_point(var/atom/mover, var/direction = null,  var/method = ZMOVE_PHASE, var/datum/level/origin = null)
 	var/vector2/coords = get_landing_coords(mover, direction, method, origin)
 	return locate(coords.x, coords.y, z)
-
-
-
 
 
 

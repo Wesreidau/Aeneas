@@ -5,7 +5,6 @@
 
 	#include "ringtest_scene.dm"
 	#include "ringtest.dmm"
-	#include "ringtestbigger.dmm"
 
 	#define using_map_DATUM /datum/map/ringtest
 

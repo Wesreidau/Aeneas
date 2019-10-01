@@ -40,6 +40,13 @@
 	else
 		luminosity = 1
 
+
+/*
+	Used for looping, this should be wrapped around a lot of uses of get_step
+*/
+/turf/proc/get_self()
+	return src
+
 /turf/on_update_icon()
 	update_flood_overlay()
 	queue_ao(FALSE)
