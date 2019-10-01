@@ -3,6 +3,7 @@
 	#include "../../code/datums/music_tracks/businessend.dm"
 	#include "../../code/datums/music_tracks/salutjohn.dm"
 
+	#include "ringtest_scene.dm"
 	#include "ringtest.dmm"
 	#include "ringtestbigger.dmm"
 

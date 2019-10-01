@@ -1,5 +1,27 @@
 /area/loop
 
+//Loop areas should contain only mirror turfs. Mapping them in is most efficient but just in case
+//On initialize, we'll make every turf in the area a mirror if it isnt already
+/area/loop/Initialize()
+	for (var/turf/T in contents)
+		if (!T.is_mirror())
+			T.ChangeTurf(/turf/mirror)
+	.=..()
+
+/*
+Even though the mover is supposed to only be atom/movable, the change area proc passes in a turf when it calls Entered on an area.
+This is not how its supposed to work, but its useful.
+Whenever a turf is added to this area, lets turn it into a mirror if it isn't already
+*/
+/area/loop/Entered(var/mover,var/oldloc)
+	if (istype(mover, /turf))
+		var/turf/T = mover
+		if (!T.is_mirror())
+			T.ChangeTurf(/turf/mirror)
+			return
+	.=..()
+
+
 /area/loop/north
 	icon_state = "loop_north"
 
