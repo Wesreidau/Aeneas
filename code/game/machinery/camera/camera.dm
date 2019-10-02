@@ -359,7 +359,7 @@
 //Return a working camera that can see a given mob
 //or null if none
 /proc/seen_by_camera(var/mob/M)
-	for(var/obj/machinery/camera/C in oview(4, M))
+	for(var/obj/machinery/camera/C in physical_oview(4, M))
 		if(C.can_use())	// check if camera disabled
 			return C
 			break

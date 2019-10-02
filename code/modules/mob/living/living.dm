@@ -6,7 +6,7 @@
 		add_to_living_mob_list()
 
 //mob verbs are faster than object verbs. See mob/verb/examine.
-/mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
+/mob/living/verb/pulled(atom/movable/AM as mob|obj in physical_oview(1))
 	set name = "Pull"
 	set category = "Object"
 

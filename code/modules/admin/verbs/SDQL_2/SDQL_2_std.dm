@@ -99,7 +99,7 @@
 	send_output(thing, msg, control)
 
 /proc/_oview(Dist, Center = usr)
-	return oview(Dist, Center)
+	return physical_oview(Dist, Center)
 
 /proc/_oviewers(Dist, Center = usr)
 	return oviewers(Dist, Center)

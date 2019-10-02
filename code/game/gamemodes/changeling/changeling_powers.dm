@@ -701,7 +701,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!changeling)								return
 
 	var/list/victims = list()
-	for(var/mob/living/carbon/human/C in oview(changeling.sting_range))
+	for(var/mob/living/carbon/human/C in physical_oview(changeling.sting_range))
 		victims += C
 	var/mob/living/carbon/human/T = input(src, "Who will we sting?") as null|anything in victims
 

@@ -74,7 +74,7 @@ Robots and antags can instruct.
 		if(skillset.owner.skill_check(S.type, SKILL_EXPERT))
 			return 1
 
-/mob/proc/instruct(mob/living/carbon/human/target as mob in oview(2))
+/mob/proc/instruct(mob/living/carbon/human/target as mob in physical_oview(2))
 	set category = "IC"
 	set name = "Instruct"
 	set src = usr

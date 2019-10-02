@@ -296,7 +296,7 @@
 		mob.emote("cough")
 		if (mob.wear_mask)
 			return
-		for(var/mob/living/carbon/human/M in oview(2,mob))
+		for(var/mob/living/carbon/human/M in physical_oview(2,mob))
 			mob.spread_disease_to(M)
 
 /datum/disease2/effect/hungry

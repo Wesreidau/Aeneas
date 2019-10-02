@@ -83,6 +83,32 @@
 	for (var/turf/T in L1)
 		. += T.get_contents(TRUE)
 
+
+/proc/physical_oview(var/dist, var/center)
+	var/list/L1 = oview(dist, center)
+	. = list()
+	for (var/turf/T in L1)
+		. += T.get_contents(TRUE)
+
+//Rather than simply being a wrapper on native functionality, this wraps trange instead which is much better for the purpose
+/proc/physical_range(var/dist, var/center)
+	var/list/turfs = trange(dist, center)
+	. = list()
+	for (var/t in turfs)
+		var/turf/T = t
+		. += T.get_contents(TRUE)
+
+/proc/physical_orange(var/dist, var/center)
+	var/turf/origin = get_turf(center)
+	var/list/turfs = trange(dist, center)
+	. = list()
+	for (var/t in turfs)
+		if (t == origin)
+			continue
+		var/turf/T = t
+		. += T.get_contents(TRUE)
+
+
 /proc/circlerange(center=usr,radius=3)
 
 	var/turf/centerturf = get_turf(center)
@@ -119,7 +145,12 @@
 
 	var/turf/x1y1 = locate(((centre.x-rad)<1 ? 1 : centre.x-rad),((centre.y-rad)<1 ? 1 : centre.y-rad),centre.z)
 	var/turf/x2y2 = locate(((centre.x+rad)>world.maxx ? world.maxx : centre.x+rad),((centre.y+rad)>world.maxy ? world.maxy : centre.y+rad),centre.z)
-	return block(x1y1,x2y2)
+	var/list/L1 = block(x1y1,x2y2)
+	. = list()
+	for (var/t in L1)
+		var/turf/T = t
+		. += T.get_self()
+
 
 /proc/get_dist_euclidian(atom/Loc1 as turf|mob|obj,atom/Loc2 as turf|mob|obj)
 	var/dx = Loc1.x - Loc2.x

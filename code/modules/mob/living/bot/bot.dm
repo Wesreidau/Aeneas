@@ -380,7 +380,7 @@
 /turf/proc/CardinalTurfsWithAccess(var/obj/item/weapon/card/id/ID)
 	var/L[] = new()
 
-	//	for(var/turf/simulated/t in oview(src,1))
+	//	for(var/turf/simulated/t in physical_oview(src,1))
 
 	for(var/d in GLOB.cardinal)
 		var/turf/simulated/T = get_physical_step(src, d)

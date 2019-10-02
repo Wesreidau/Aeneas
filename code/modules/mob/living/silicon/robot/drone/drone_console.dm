@@ -88,7 +88,7 @@
 		if(dronefab)
 			return
 
-		for(var/obj/machinery/drone_fabricator/fab in oview(3,src))
+		for(var/obj/machinery/drone_fabricator/fab in physical_oview(3,src))
 
 			if(fab.stat & NOPOWER)
 				continue

@@ -34,7 +34,7 @@
 
 /obj/structure/table/proc/unflipping_check(var/direction)
 
-	for(var/mob/M in oview(src,0))
+	for(var/mob/M in physical_oview(src,0))
 		return 0
 
 	var/obj/occupied = turf_is_crowded()

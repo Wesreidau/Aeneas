@@ -76,7 +76,7 @@
 			to_chat(H, "<span class='warning'>Your nose begins to bleed...</span>")
 			H.drip(1)
 
-/mob/living/carbon/human/proc/psychic_whisper(mob/M as mob in oview())
+/mob/living/carbon/human/proc/psychic_whisper(mob/M as mob in physical_oview())
 	set name = "Psychic Whisper"
 	set desc = "Whisper silently to someone over a distance."
 	set category = "Abilities"
