@@ -41,8 +41,12 @@
 /turf/mirror/get_self()
 	return reflection
 
+/turf/mirror/get_contents(var/includeself)
+	if (reflection)
+		return reflection.get_contents(includeself)
+	return list() //It never includes itself in the return value
+
 //Mirror turfs don't do atmos. Calls to update it are passed to the reflection if applicable
 /turf/mirror/update_air_properties()
 	if (reflection)
 		reflection.update_air_properties()
-	return

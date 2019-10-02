@@ -95,7 +95,7 @@
 
 /mob/living/simple_animal/cat/proc/handle_flee_target()
 	//see if we should stop fleeing
-	if (flee_target && !(flee_target.loc in view(src)))
+	if (flee_target && !(flee_target.loc in physical_view(src)))
 		flee_target = null
 		stop_automated_movement = 0
 

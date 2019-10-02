@@ -6,7 +6,7 @@
 	return a.Adjacent(b)
 
 /decl/dist_check/in_view/within_dist(var/atom/a, var/atom/b)
-	return (b in view(world.view, a))
+	return (b in physical_view(world.view, a))
 
 /decl/dist_check/in_range/within_dist(var/atom/a, var/atom/b)
 	return (b in range(world.view, a))

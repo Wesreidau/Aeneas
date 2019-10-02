@@ -410,7 +410,7 @@
 		toxdamage = round(((src.energy-150)/50)*4,1)
 		radiation = round(((src.energy-150)/50)*5,1)
 	SSradiation.radiate(src, radiation) //Always radiate at max, so a decent dose of radiation is applied
-	for(var/mob/living/M in view(toxrange, src.loc))
+	for(var/mob/living/M in physical_view(toxrange, src.loc))
 		if(M.status_flags & GODMODE)
 			continue
 		M.apply_damage(toxdamage, TOX, null, damage_flags = DAM_DISPERSED)
@@ -441,7 +441,7 @@
 		empulse(src, 12, 16)
 
 /obj/singularity/proc/smwave()
-	for(var/mob/living/M in view(10, src.loc))
+	for(var/mob/living/M in physical_view(10, src.loc))
 		if(prob(67))
 			to_chat(M, "<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
 			to_chat(M, "<span class=\"notice\">Miraculously, it fails to kill you.</span>")

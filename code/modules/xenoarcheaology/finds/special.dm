@@ -75,7 +75,7 @@
 	//see if we've identified anyone nearby
 	if(world.time - last_bloodcall > bloodcall_interval && nearby_mobs.len)
 		var/mob/living/carbon/human/M = pop(nearby_mobs)
-		if(M in view(7,src) && M.health > 20)
+		if(M in physical_view(7,src) && M.health > 20)
 			if(prob(50))
 				bloodcall(M)
 				nearby_mobs.Add(M)
@@ -95,13 +95,13 @@
 	//use up stored charges
 	if(charges >= 10)
 		charges -= 10
-		new /obj/effect/spider/eggcluster(pick(view(1,src)))
+		new /obj/effect/spider/eggcluster(pick(physical_view(1,src)))
 
 	if(charges >= 3)
 		if(prob(5))
 			charges -= 1
 			var/spawn_type = pick(/mob/living/simple_animal/hostile/creature)
-			new spawn_type(pick(view(1,src)))
+			new spawn_type(pick(physical_view(1,src)))
 			playsound(src.loc, pick('sound/hallucinations/growl1.ogg','sound/hallucinations/growl2.ogg','sound/hallucinations/growl3.ogg'), 50, 1, -3)
 
 	if(charges >= 1)
@@ -131,7 +131,7 @@
 
 /obj/item/weapon/vampiric/hear_talk(mob/M as mob, text)
 	..()
-	if(world.time - last_bloodcall >= bloodcall_interval && M in view(7, src))
+	if(world.time - last_bloodcall >= bloodcall_interval && M in physical_view(7, src))
 		bloodcall(M)
 
 /obj/item/weapon/vampiric/proc/bloodcall(var/mob/living/carbon/human/M)

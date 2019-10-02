@@ -15,7 +15,7 @@
 				. += M
 		return
 	if(hunger > 500) //time to look for some food
-		for(var/mob/living/L in view(src, dist))
+		for(var/mob/living/L in physical_view(src, dist))
 			if(!attack_same && L.faction != faction)
 				prey |= weakref(L)
 

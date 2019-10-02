@@ -49,7 +49,7 @@
 	var/lum = source.luminosity
 	source.luminosity = 6
 
-	var/list/heard = view(range, source)
+	var/list/heard = physical_view(range, source)
 	source.luminosity = lum
 
 	return heard
@@ -72,6 +72,17 @@
 /proc/isContactLevel(var/level)
 	return level in GLOB.using_map.contact_levels
 
+/*******************************
+	Detection Procs
+********************************/
+//Physical view: Returns the contents of all physically present turfs within a view radius.
+//Most notably, this accounts for mirror tiles, returning the contents of their reflection
+/proc/physical_view(var/dist, var/center)
+	var/list/L1 = view(dist, center)
+	. = list()
+	for (var/turf/T in L1)
+		. += T.get_contents(TRUE)
+
 /proc/circlerange(center=usr,radius=3)
 
 	var/turf/centerturf = get_turf(center)
@@ -93,7 +104,7 @@
 	var/list/atoms = new/list()
 	var/rsq = radius * (radius+0.5)
 
-	for(var/atom/A in view(radius, centerturf))
+	for(var/atom/A in physical_view(radius, centerturf))
 		var/dx = A.x - centerturf.x
 		var/dy = A.y - centerturf.y
 		if(dx*dx + dy*dy <= rsq)
@@ -138,7 +149,7 @@
 	var/list/turfs = new/list()
 	var/rsq = radius * (radius+0.5)
 
-	for(var/turf/T in view(radius, centerturf))
+	for(var/turf/T in physical_view(radius, centerturf))
 		var/dx = T.x - centerturf.x
 		var/dy = T.y - centerturf.y
 		if(dx*dx + dy*dy <= rsq)

@@ -127,7 +127,7 @@
 	var/mob/shooter = P.firer
 	. = ..()
 	//if we already have a target just ignore to avoid lots of checking
-	if(!target && health < curhealth && shooter && (shooter in view(world.view, src)))
+	if(!target && health < curhealth && shooter && (shooter in physical_view(world.view, src)))
 		react_to_attack(shooter)
 
 /mob/living/bot/secbot/proc/begin_arrest(mob/target, var/threat)
@@ -167,7 +167,7 @@
 	return (check_threat(A) >= SECBOT_THREAT_ARREST)
 
 /mob/living/bot/secbot/lookForTargets()
-	for(var/mob/living/M in view(src))
+	for(var/mob/living/M in physical_view(src))
 		if(M.stat == DEAD)
 			continue
 		if(confirmTarget(M))

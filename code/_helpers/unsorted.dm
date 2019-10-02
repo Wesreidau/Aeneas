@@ -826,7 +826,7 @@ proc/anyprob(value)
 proc/view_or_range(distance = world.view , center = usr , type)
 	switch(type)
 		if("view")
-			. = view(distance,center)
+			. = physical_view(distance,center)
 		if("range")
 			. = range(distance,center)
 	return
@@ -1073,14 +1073,14 @@ var/list/WALLITEMS = list(
 
 GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 
-//Version of view() which ignores darkness, because BYOND doesn't have it.
+//Version of physical_view() which ignores darkness, because BYOND doesn't have it.
 /proc/dview(var/range = world.view, var/center, var/invis_flags = 0)
 	if(!center)
 		return
 
 	GLOB.dview_mob.loc = center
 	GLOB.dview_mob.see_invisible = invis_flags
-	. = view(range, GLOB.dview_mob)
+	. = physical_view(range, GLOB.dview_mob)
 	GLOB.dview_mob.loc = null
 
 /mob/dview

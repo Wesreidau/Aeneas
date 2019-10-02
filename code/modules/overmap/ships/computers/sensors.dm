@@ -43,7 +43,7 @@
 		else
 			data["status"] = "OK"
 		var/list/contacts = list()
-		for(var/obj/effect/overmap/O in view(7,linked))
+		for(var/obj/effect/overmap/O in physical_view(7,linked))
 			if(linked == O)
 				continue
 			var/bearing = round(90 - Atan2(O.x - linked.x, O.y - linked.y),5)
@@ -94,7 +94,7 @@
 
 	if (href_list["scan"])
 		var/obj/effect/overmap/O = locate(href_list["scan"])
-		if(istype(O) && !QDELETED(O) && (O in view(7,linked)))
+		if(istype(O) && !QDELETED(O) && (O in physical_view(7,linked)))
 			playsound(loc, "sound/machines/dotprinter.ogg", 30, 1)
 			new/obj/item/weapon/paper/(get_turf(src), O.get_scan_data(user), "paper (Sensor Scan - [O])")
 		return TOPIC_HANDLED

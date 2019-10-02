@@ -289,7 +289,7 @@
 	if(!proximity || !istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated())
 		return
 	var/found = 0
-	for(var/obj/machinery/conveyor/C in view())
+	for(var/obj/machinery/conveyor/C in physical_view())
 		if(C.id == src.id)
 			found = 1
 			break
@@ -308,7 +308,7 @@
 	if(!proximity || !istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated())
 		return
 	var/found = 0
-	for(var/obj/machinery/conveyor/C in view())
+	for(var/obj/machinery/conveyor/C in physical_view())
 		if(C.id == src.id)
 			found = 1
 			break

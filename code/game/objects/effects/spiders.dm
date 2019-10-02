@@ -268,7 +268,7 @@
 					pixel_y = Clamp(pixel_y + rand(min_y, max_y), -shift_range, shift_range)
 		else if(prob(5))
 			//vent crawl!
-			for(var/obj/machinery/atmospherics/unary/vent_pump/v in view(7,src))
+			for(var/obj/machinery/atmospherics/unary/vent_pump/v in physical_view(7,src))
 				if(!v.welded)
 					entry_vent = v
 					walk_to(src, entry_vent, 5)

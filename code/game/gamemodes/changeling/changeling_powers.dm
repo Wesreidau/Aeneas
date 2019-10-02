@@ -706,7 +706,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	var/mob/living/carbon/human/T = input(src, "Who will we sting?") as null|anything in victims
 
 	if(!T) return
-	if(!(T in view(changeling.sting_range))) return
+	if(!(T in physical_view(changeling.sting_range))) return
 	if(!sting_can_reach(T, changeling.sting_range)) return
 	if(!changeling_power(required_chems)) return
 	var/obj/item/organ/external/target_limb = T.get_organ(src.zone_sel.selecting)

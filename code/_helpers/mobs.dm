@@ -17,7 +17,7 @@
 
 /proc/mobs_in_view(var/range, var/source)
 	var/list/mobs = list()
-	for(var/atom/movable/AM in view(range, source))
+	for(var/atom/movable/AM in physical_view(range, source))
 		var/M = AM.get_mob()
 		if(M)
 			mobs += M

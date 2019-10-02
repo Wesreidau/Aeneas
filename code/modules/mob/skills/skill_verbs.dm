@@ -96,7 +96,7 @@ Robots and antags can instruct.
 		if(!target.skill_check(S.type, SKILL_BASIC) && skill_check(S.type, SKILL_EXPERT))
 			options[S.name] = S
 	var/choice = input(src, "Select skill to instruct \the [target] in:", "Skill select") as null|anything in options
-	if(!(choice in options) || !(target in view(2)))
+	if(!(choice in options) || !(target in physical_view(2)))
 		return
 	var/decl/hierarchy/skill/skill = options[choice]
 

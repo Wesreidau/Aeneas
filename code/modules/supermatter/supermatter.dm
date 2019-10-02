@@ -391,7 +391,7 @@
 
 		env.merge(removed)
 
-	for(var/mob/living/carbon/human/subject in view(src, min(7, round(sqrt(power/6)))))
+	for(var/mob/living/carbon/human/subject in physical_view(src, min(7, round(sqrt(power/6)))))
 		var/obj/item/organ/internal/eyes/eyes = subject.internal_organs_by_name[BP_EYES]
 		if (!eyes)
 			continue
@@ -514,7 +514,7 @@
 
 	//Some poor sod got eaten, go ahead and irradiate people nearby.
 	for(var/mob/living/l in range(10))
-		if(l in view())
+		if(l in physical_view())
 			l.show_message("<span class=\"warning\">As \the [src] slowly stops resonating, you find your skin covered in new radiation burns.</span>", 1,\
 				"<span class=\"warning\">The unearthly ringing subsides and you notice you have new radiation burns.</span>", 2)
 		else

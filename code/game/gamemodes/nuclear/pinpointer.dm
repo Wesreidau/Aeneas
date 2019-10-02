@@ -152,10 +152,10 @@
 
 		if("Location")
 			var/locationx = input(usr, "Please input the x coordinate to search for.", "Location?" , "") as num
-			if(!locationx || !(usr in view(1,src)))
+			if(!locationx || !(usr in physical_view(1,src)))
 				return
 			var/locationy = input(usr, "Please input the y coordinate to search for.", "Location?" , "") as num
-			if(!locationy || !(usr in view(1,src)))
+			if(!locationy || !(usr in physical_view(1,src)))
 				return
 
 			var/turf/Z = get_turf(src)

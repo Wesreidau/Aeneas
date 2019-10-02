@@ -742,7 +742,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	SSstatistics.add_field_details("admin_verb","STATM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 // DEFERRED
 	spawn(0)
-		for(var/turf/T in view())
+		for(var/turf/T in physical_view())
 			T.poison = 0
 			T.oldpoison = 0
 			T.tmppoison = 0

@@ -28,7 +28,7 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 		return
 
 	// robots can interact with things they can see within their view range
-	if((src_object in view(src)) && get_dist(src_object, src) <= src.client.view)
+	if((src_object in physical_view(src)) && get_dist(src_object, src) <= src.client.view)
 		return STATUS_INTERACTIVE	// interactive (green visibility)
 	return STATUS_DISABLED			// no updates, completely disabled (red visibility)
 
@@ -44,7 +44,7 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 		return STATUS_CLOSE
 
 	// If an object is in view then we can interact with it
-	if(src_object in view(client.view, src))
+	if(src_object in physical_view(client.view, src))
 		return STATUS_INTERACTIVE
 
 	// If we're installed in a chassi, rather than transfered to an inteliCard or other container, then check if we have camera view
@@ -63,7 +63,7 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 	return user.shared_living_nano_distance(src_object)
 
 /mob/living/proc/shared_living_nano_distance(var/atom/movable/src_object)
-	if (!(src_object in view(4, src))) 	// If the src object is not visable, disable updates
+	if (!(src_object in physical_view(4, src))) 	// If the src object is not visable, disable updates
 		return STATUS_CLOSE
 
 	var/dist = get_dist(src_object, src)

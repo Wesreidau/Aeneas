@@ -130,7 +130,7 @@
 
 /datum/phenomena/flickering_whisper/activate(var/mob/living/L)
 	var/atom/whisper_from
-	for(var/obj/structure/deity/radiant_statue/rs in view(3, L))
+	for(var/obj/structure/deity/radiant_statue/rs in physical_view(3, L))
 		whisper_from = rs
 		break
 	var/message = sanitize(input(linked, "What is your message?", null) as null|text)

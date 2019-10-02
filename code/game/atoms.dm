@@ -567,3 +567,7 @@ its easier to just keep the beam vertical.
 
 /atom/proc/get_cell()
 	return
+
+//Overrideable if you want to have special contents, used by mirror turfs
+/atom/proc/get_contents(var/includeself = FALSE)
+	return (includeself ? contents + src : contents)

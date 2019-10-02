@@ -257,7 +257,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		var/rendered = "<i><span class='game say'>The holographic image of <span class='message'>[msg]</span></span></i>"
 		master.show_message(rendered, type)
 	if(targetpad)
-		for(var/mob/living/carbon/master in view(targetpad))
+		for(var/mob/living/carbon/master in physical_view(targetpad))
 			var/rendered = "<i><span class='game say'>The holographic image of <span class='message'>[msg]</span></span></i>"
 			master.show_message(rendered, type)
 
@@ -317,7 +317,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 			clear_holo(master)
 			continue
 
-		if(!(masters[master] in view(src)))
+		if(!(masters[master] in physical_view(src)))
 			clear_holo(master)
 			continue
 
@@ -341,7 +341,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		H.dropInto(user.eyeobj)
 		masters[user] = H
 
-		if(!(H in view(src)))
+		if(!(H in physical_view(src)))
 			clear_holo(user)
 			return 0
 

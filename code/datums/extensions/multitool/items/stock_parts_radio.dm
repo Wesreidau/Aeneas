@@ -19,7 +19,7 @@
 // Could use buffers, but am afraid of multitool interaction clashes.
 /datum/extension/interactive/multitool/radio/proc/aquire_target(obj/item/device/multitool/M, mob/user)
 	var/candidates = list()
-	for(var/obj/machinery/new_machine in view(2, user))
+	for(var/obj/machinery/new_machine in physical_view(2, user))
 		candidates += new_machine
 	if(!length(candidates))
 		to_chat(user, "You fail to import configuration settings from anything. Try standing near a machine.")

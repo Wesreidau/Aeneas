@@ -159,7 +159,7 @@
 		.+= ". <a href='?src=\ref[src];list_ungabunga=1'>\[See accessories\]</a>"
 
 /obj/item/clothing/CanUseTopic(var/user)
-	if(user in view(get_turf(src)))
+	if(user in physical_view(get_turf(src)))
 		return STATUS_INTERACTIVE
 
 /obj/item/clothing/OnTopic(var/user, var/list/href_list, var/datum/topic_state/state)

@@ -195,7 +195,7 @@
 	var/mob/living/carbon/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
 	if(!istype(H)) //Invalid input
 		return
-	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
+	if(H in physical_view(get_turf(src))) // Like medbot's analyzer it can be used in range..
 
 
 		var/obj/item/organ/internal/brain/brain = H.internal_organs_by_name[BP_BRAIN]
@@ -244,7 +244,7 @@
 	var/mob/living/carbon/slime/T = get_pin_data_as_type(IC_INPUT, 1, /mob/living/carbon/slime)
 	if(!isslime(T)) //Invalid input
 		return
-	if(T in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
+	if(T in physical_view(get_turf(src))) // Like medbot's analyzer it can be used in range..
 
 		set_pin_data(IC_OUTPUT, 1, T.colour)
 		set_pin_data(IC_OUTPUT, 2, T.is_adult)
@@ -297,7 +297,7 @@
 		return
 	for(var/i=1, i<=outputs.len, i++)
 		set_pin_data(IC_OUTPUT, i, null)
-	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
+	if(H in physical_view(get_turf(src))) // Like medbot's analyzer it can be used in range..
 		if(H.seed)
 			set_pin_data(IC_OUTPUT, 1, H.seed.seed_name)
 			set_pin_data(IC_OUTPUT, 2, H.age)
@@ -340,7 +340,7 @@
 		return
 	for(var/i=1, i<=outputs.len, i++)
 		set_pin_data(IC_OUTPUT, i, null)
-	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
+	if(H in physical_view(get_turf(src))) // Like medbot's analyzer it can be used in range..
 		if(H.seed)
 			for(var/chem_path in H.seed.chems)
 				var/datum/reagent/R = chem_path
@@ -384,7 +384,7 @@
 	var/atom/H = get_pin_data_as_type(IC_INPUT, 1, /atom)
 	var/turf/T = get_turf(src)
 
-	if(!istype(H) || !(H in view(T)))
+	if(!istype(H) || !(H in physical_view(T)))
 		activate_pin(3)
 	else
 		set_pin_data(IC_OUTPUT, 1, H.name)
@@ -427,7 +427,7 @@
 	var/target_y = Clamp(get_pin_data(IC_INPUT, 2), 0, world.maxy)
 	var/turf/A = locate(target_x, target_y, T.z)
 	set_pin_data(IC_OUTPUT, 1, null)
-	if(!A || !(A in view(T)))
+	if(!A || !(A in physical_view(T)))
 		activate_pin(3)
 		return
 	else
@@ -465,7 +465,7 @@
 		activate_pin(3)
 		return
 
-	if(scanned_turf in view(circuit_turf)) // This is a camera. It can't examine things that it can't see.
+	if(scanned_turf in physical_view(circuit_turf)) // This is a camera. It can't examine things that it can't see.
 		var/list/turf_contents = new()
 		for(var/obj/U in scanned_turf)
 			turf_contents += weakref(U)
@@ -577,7 +577,7 @@
 	input_list = I.data
 	if(length(input_list))	//if there is no input don't do anything.
 		var/turf/T = get_turf(src)
-		var/list/nearby_things = view(radius,T)
+		var/list/nearby_things = physical_view(radius,T)
 		var/list/valid_things = list()
 		for(var/item in input_list)
 			if(!isnull(item) && !isnum(item))
@@ -636,7 +636,7 @@
 	var/datum/integrated_io/O = outputs[1]
 	O.data = null
 	var/turf/T = get_turf(src)
-	var/list/nearby_things =  view(radius,T)
+	var/list/nearby_things =  physical_view(radius,T)
 	var/list/valid_things = list()
 	if(isweakref(I.data))
 		var/atom/A = I.data.resolve()
@@ -932,10 +932,10 @@
 	if(!user || !A || (ismob(A) && !isliving(A)))
 		return FALSE
 	if(user.client)
-		if(!(A in view(user.client)))
+		if(!(A in physical_view(user.client)))
 			return FALSE
 	else
-		if(!(A in view(user)))
+		if(!(A in physical_view(user)))
 			return FALSE
 	if(!check_then_do_work())
 		return FALSE
@@ -1037,7 +1037,7 @@
 		var/obj/item/weapon/cell/C = O.get_cell()
 		if(C)
 			var/turf/A = get_turf(src)
-			if(get_turf(O) in view(A))
+			if(get_turf(O) in physical_view(A))
 				set_pin_data(IC_OUTPUT, 1, C.charge)
 				set_pin_data(IC_OUTPUT, 2, C.maxcharge)
 				set_pin_data(IC_OUTPUT, 3, C.percent())
@@ -1081,7 +1081,7 @@
 	if(!O || !O.matter) //Invalid input
 		return
 	var/turf/T = get_turf(src)
-	if(O in view(T)) // This is a camera. It can't examine thngs,that it can't see.
+	if(O in physical_view(T)) // This is a camera. It can't examine thngs,that it can't see.
 		for(var/I in 1 to mtypes.len)
 			var/amount = O.matter[mtypes[I]]
 			if(amount)

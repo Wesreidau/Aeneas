@@ -306,7 +306,7 @@
 	..()
 	//spread some viruses while we are at it
 	if(breath && !internal && virus2.len > 0 && prob(10))
-		for(var/mob/living/carbon/M in view(1,src))
+		for(var/mob/living/carbon/M in physical_view(1,src))
 			src.spread_disease_to(M)
 
 

@@ -323,7 +323,7 @@ Nurse caste procs
 	if(!.)
 		return FALSE
 	if(stance == HOSTILE_STANCE_IDLE)
-		var/list/can_see = view(src, 10)
+		var/list/can_see = physical_view(src, 10)
 		//30% chance to stop wandering and do something
 		if(!busy && prob(30))
 			//first, check for potential food nearby to cocoon

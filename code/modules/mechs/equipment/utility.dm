@@ -161,7 +161,7 @@
 					to_chat(user, SPAN_NOTICE("Locked on [AM]."))
 					return
 				else if(target != locked)
-					if(locked in view(owner))
+					if(locked in physical_view(owner))
 						locked.throw_at(target, 14, 1.5, owner)
 						log_and_message_admins("used [src] to throw [locked] at [target].", user, owner.loc)
 						locked = null

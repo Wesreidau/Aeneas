@@ -124,6 +124,11 @@ var/list/flooring_cache = list()
 
 /decl/flooring/proc/test_link(var/turf/origin, var/turf/T)
 	var/is_linked = FALSE
+
+	//T will be false at roundstart near mirror turfs, but the next update check will find them
+	if (!origin || !T)
+		return is_linked
+
 	//is_wall is true for wall turfs and for floors containing a low wall
 	if(T.is_wall())
 		if(wall_smooth == SMOOTH_ALL)

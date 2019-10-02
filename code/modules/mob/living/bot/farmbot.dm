@@ -110,16 +110,16 @@
 
 /mob/living/bot/farmbot/lookForTargets()
 	if(emagged)
-		for(var/mob/living/carbon/human/H in view(7, src))
+		for(var/mob/living/carbon/human/H in physical_view(7, src))
 			target = H
 			return
 	else
-		for(var/obj/machinery/portable_atmospherics/hydroponics/tray in view(7, src))
+		for(var/obj/machinery/portable_atmospherics/hydroponics/tray in physical_view(7, src))
 			if(confirmTarget(tray))
 				target = tray
 				return
 		if(!target && refills_water && tank && tank.reagents.total_volume < tank.reagents.maximum_volume)
-			for(var/obj/structure/hygiene/sink/source in view(7, src))
+			for(var/obj/structure/hygiene/sink/source in physical_view(7, src))
 				target = source
 				return
 
@@ -250,7 +250,7 @@
 		return 0
 
 	if(emagged && ishuman(targ))
-		if(targ in view(world.view, src))
+		if(targ in physical_view(world.view, src))
 			return 1
 		return 0
 
