@@ -131,7 +131,7 @@
 	var/list/dirs = list()
 	var/list/other_dirs = list()
 
-	for(var/obj/structure/S in orange(src, 1))
+	for(var/obj/structure/S in physical_orange(1, src))
 		if(can_visually_connect_to(S))
 			if(S.can_visually_connect())
 				if(propagate)

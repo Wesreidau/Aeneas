@@ -1292,9 +1292,9 @@
 
 /datum/chemical_reaction/slime/teleport/on_reaction(var/datum/reagents/holder)
 	var/list/turfs = list()
-	for(var/turf/T in orange(holder.my_atom,6))
+	for(var/turf/T in physical_orange(6, holder.my_atom))
 		turfs += T
-	for(var/atom/movable/a in viewers(holder.my_atom,2))
+	for(var/atom/movable/a in viewers(2, holder.my_atom))
 		if(!a.simulated)
 			continue
 		a.forceMove(pick(turfs))

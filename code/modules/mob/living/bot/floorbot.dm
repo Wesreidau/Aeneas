@@ -214,7 +214,7 @@
 
 
 	var/list/things = list()
-	for(var/atom/A in orange(5, src.loc))
+	for(var/atom/A in physical_orange(5, src.loc))
 		things += A
 
 	var/list/shrapnel = list()

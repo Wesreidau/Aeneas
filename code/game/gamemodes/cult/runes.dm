@@ -364,7 +364,7 @@
 
 /obj/effect/rune/obscure/cast(var/mob/living/user)
 	var/runecheck = 0
-	for(var/obj/effect/rune/R in orange(1, src))
+	for(var/obj/effect/rune/R in physical_orange(1, src))
 		if(R != src)
 			R.set_invisibility(INVISIBILITY_OBSERVER)
 		runecheck = 1
@@ -378,7 +378,7 @@
 
 /obj/effect/rune/reveal/cast(var/mob/living/user)
 	var/irunecheck = 0
-	for(var/obj/effect/rune/R in orange(1, src))
+	for(var/obj/effect/rune/R in physical_orange(1, src))
 		if(R != src)
 			R.set_invisibility(SEE_INVISIBLE_NOLIGHTING)
 		irunecheck = 1

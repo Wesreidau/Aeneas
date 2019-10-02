@@ -72,7 +72,7 @@
 	update_nearby_tiles()
 	var/turf/location = loc
 	. = ..()
-	for(var/obj/structure/window/W in orange(location, 1))
+	for(var/obj/structure/window/W in physical_orange(1, location))
 		W.update_icon()
 
 /obj/structure/window/examine(mob/user)
@@ -357,7 +357,7 @@
 //This proc is used to update the icons of nearby windows. It should not be confused with update_nearby_tiles(), which is an atmos proc!
 /obj/structure/window/proc/update_nearby_icons()
 	update_icon()
-	for(var/obj/structure/window/W in orange(src, 1))
+	for(var/obj/structure/window/W in physical_orange(1, src))
 		W.update_icon()
 
 // Visually connect with every type of window as long as it's full-tile.

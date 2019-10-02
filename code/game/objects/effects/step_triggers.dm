@@ -37,7 +37,7 @@
 		return
 	var/curtiles = 0
 	var/stopthrow = 0
-	for(var/obj/effect/step_trigger/thrower/T in orange(2, src))
+	for(var/obj/effect/step_trigger/thrower/T in physical_orange(2, src))
 		if(AM in T.affecting)
 			return
 

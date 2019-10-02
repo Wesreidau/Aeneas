@@ -249,7 +249,7 @@
 
 	if(usr.stat) return
 
-	var/obj/structure/ore_box/B = locate() in orange(1)
+	var/obj/structure/ore_box/B = locate() in physical_orange(1)
 	if(B)
 		for(var/obj/item/weapon/ore/O in contents)
 			O.forceMove(B)

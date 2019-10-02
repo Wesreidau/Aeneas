@@ -155,7 +155,7 @@
 
 
 /obj/machinery/particle_accelerator/control_box/proc/part_scan()
-	for(var/obj/structure/particle_accelerator/fuel_chamber/F in orange(1,src))
+	for(var/obj/structure/particle_accelerator/fuel_chamber/F in physical_orange(1,src))
 		src.set_dir(F.dir)
 	connected_parts = list()
 	var/tally = 0

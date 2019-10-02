@@ -40,7 +40,7 @@
 	playsound(src.loc, 'sound/effects/bang.ogg', 50, 1, 5)
 
 	// This is shit but it will do for the sake of testing.
-	for(var/obj/structure/droppod_door/D in orange(1,src))
+	for(var/obj/structure/droppod_door/D in physical_orange(1,src))
 		if(D.deployed)
 			continue
 		D.deploy()

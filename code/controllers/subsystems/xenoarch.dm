@@ -54,7 +54,7 @@ SUBSYSTEM_DEF(xenoarch)
 
 		var/list/viable_adjacent_turfs = list()
 		if(target_digsite_size > 1)
-			for(var/turf/simulated/mineral/T in orange(2, M))
+			for(var/turf/simulated/mineral/T in physical_orange(2, M))
 				if(!T.density)
 					continue
 				if(T.finds)

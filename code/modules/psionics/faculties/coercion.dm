@@ -32,7 +32,7 @@
 	if(.)
 		user.visible_message(SPAN_DANGER("\The [user] suddenly throws back their head, as though screaming silently!"))
 		to_chat(user, SPAN_DANGER("You strike at all around you with a deafening psionic scream!"))
-		for(var/mob/living/M in orange(user, user.psi.get_rank(PSI_COERCION)))
+		for(var/mob/living/M in physical_orange(user.psi.get_rank(PSI_COERCION), user))
 			if(M == user)
 				continue
 			var/blocked = 100 * M.get_blocked_ratio(null, PSIONIC)

@@ -93,7 +93,7 @@
 	return ohearers(Dist, Center)
 
 /proc/_orange(Dist, Center = usr)
-	return orange(Dist, Center)
+	return physical_orange(Dist, Center)
 
 /proc/_output(thing, msg, control)
 	send_output(thing, msg, control)

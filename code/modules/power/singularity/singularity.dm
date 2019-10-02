@@ -94,7 +94,7 @@
 
 /obj/singularity/proc/admin_investigate_setup()
 	last_warning = world.time
-	var/count = locate(/obj/machinery/containment_field) in orange(30, src)
+	var/count = locate(/obj/machinery/containment_field) in physical_orange(30, src)
 
 	if (!count)
 		message_admins("A singulo has been created without containment fields active ([x], [y], [z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>).")
@@ -267,7 +267,7 @@
 	return 1
 
 /obj/singularity/proc/eat()
-	for(var/atom/X in orange(grav_pull, src))
+	for(var/atom/X in physical_orange(grav_pull, src))
 		var/dist = get_dist(X, src)
 		var/obj/singularity/S = src
 		if(!istype(src))
@@ -454,7 +454,7 @@
 
 /obj/singularity/proc/pulse()
 	for(var/obj/machinery/power/rad_collector/R in rad_collectors)
-		if (get_dist(R, src) <= 15) //Better than using orange() every process.
+		if (get_dist(R, src) <= 15) //Better than using physical_orange() every process.
 			R.receive_pulse(energy)
 
 /obj/singularity/proc/on_capture()

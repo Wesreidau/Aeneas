@@ -93,7 +93,7 @@
 	if(!can_act())
 		return
 	if(confused)
-		walk_to(src, pick(orange(2, src)), 1, move_to_delay)
+		walk_to(src, pick(physical_orange(2, src)), 1, move_to_delay)
 		return
 	stop_automated_movement = 1
 	if(!target_mob || SA_attackable(target_mob))

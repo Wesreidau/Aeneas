@@ -114,7 +114,7 @@ var/intercom_range_display_status = 0
 
 	if(intercom_range_display_status)
 		for(var/obj/item/device/radio/intercom/I in world)
-			for(var/turf/T in orange(7,I))
+			for(var/turf/T in physical_orange(7,I))
 				var/obj/effect/debugging/marker/F = new/obj/effect/debugging/marker(T)
 				if (!(F in physical_view(7,I.loc)))
 					qdel(F)

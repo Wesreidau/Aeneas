@@ -209,7 +209,7 @@
 		//chance to skitter madly away
 		if(!busy && prob(hunt_chance))
 			stop_automated_movement = 1
-			walk_to(src, pick(orange(20, src)), 1, move_to_delay)
+			walk_to(src, pick(physical_orange(20, src)), 1, move_to_delay)
 			addtimer(CALLBACK(src, .proc/disable_stop_automated_movement), 5 SECONDS)
 
 /mob/living/simple_animal/hostile/giant_spider/proc/disable_stop_automated_movement()

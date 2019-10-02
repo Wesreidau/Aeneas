@@ -32,7 +32,7 @@
 	if(!origin)
 		return
 	var/list/turfs = list()
-	for(var/turf/T in orange(origin, outer_range))
+	for(var/turf/T in physical_orange(outer_range, origin))
 		if(!(T.z in GLOB.using_map.sealed_levels)) // Picking a turf outside the map edge isn't recommended
 			if(T.x >= world.maxx-TRANSITIONEDGE || T.x <= TRANSITIONEDGE)	continue
 			if(T.y >= world.maxy-TRANSITIONEDGE || T.y <= TRANSITIONEDGE)	continue

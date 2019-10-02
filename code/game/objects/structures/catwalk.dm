@@ -163,7 +163,7 @@
 		C.name = "plated catwalk"
 		C.update_icon()
 	activated = 1
-	for(var/turf/T in orange(src, 1))
+	for(var/turf/T in physical_orange(1, src))
 		for(var/obj/effect/wallframe_spawn/other in T)
 			if(!other.activated) other.activate()
 

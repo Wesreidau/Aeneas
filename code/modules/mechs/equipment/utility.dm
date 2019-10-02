@@ -179,7 +179,7 @@
 				if(isturf(target))
 					atoms = physical_range(3, target)
 				else
-					atoms = orange(3, target)
+					atoms = physical_orange(3, target)
 				for(var/atom/movable/A in atoms)
 					if(A.anchored || !A.simulated) continue
 					var/dist = 5-get_dist(A,target)

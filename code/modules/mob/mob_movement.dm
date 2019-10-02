@@ -203,7 +203,7 @@
 			if(A.has_gravity || shoegrip)
 				return 1
 
-	for(var/obj/O in orange(1, src))
+	for(var/obj/O in physical_orange(1, src))
 		if(istype(O, /obj/structure/lattice))
 			return 1
 		if(O && O.density && O.anchored)

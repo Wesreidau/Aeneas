@@ -836,7 +836,7 @@ proc/oview_or_orange(distance = world.view , center = usr , type)
 		if("view")
 			. = physical_oview(distance,center)
 		if("range")
-			. = orange(distance,center)
+			. = physical_orange(distance,center)
 	return
 
 proc/get_mob_with_client_list()

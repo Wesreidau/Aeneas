@@ -65,7 +65,7 @@
 				continue
 			turf_targets += T
 	else
-		for(var/turf/T in orange(5, src))
+		for(var/turf/T in physical_orange(5, src))
 			if(!T.is_floor())
 				continue
 			if(!T.z != src.z)
