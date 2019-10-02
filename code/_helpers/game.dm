@@ -149,7 +149,9 @@
 	. = list()
 	for (var/t in L1)
 		var/turf/T = t
-		. += T.get_self()
+		var/turf/T2 = T.get_self()
+		if (T2)
+			. += T2
 
 
 /proc/get_dist_euclidian(atom/Loc1 as turf|mob|obj,atom/Loc2 as turf|mob|obj)

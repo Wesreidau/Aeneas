@@ -86,7 +86,7 @@
 		)
 	var/new_data = 0
 
-	for(var/turf/simulated/T in range(2, target))
+	for(var/turf/simulated/T in physical_range(2, target))
 
 		if(!T.has_resources)
 			continue

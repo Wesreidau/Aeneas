@@ -82,7 +82,7 @@
 
 	//suck up some blood to gain power
 	if(world.time - last_eat > eat_interval)
-		var/obj/effect/decal/cleanable/blood/B = locate() in range(2,src)
+		var/obj/effect/decal/cleanable/blood/B = locate() in physical_range(2,src)
 		if(B)
 			last_eat = world.time
 			if(istype(B, /obj/effect/decal/cleanable/blood/drip))
@@ -144,7 +144,7 @@
 		M.apply_damage(rand(5, 10), BRUTE, target)
 		to_chat(M, "<span class='warning'>The skin on your [parse_zone(target)] feels like it's ripping apart, and a stream of blood flies out.</span>")
 		var/obj/effect/decal/cleanable/blood/splatter/animated/B = new(M.loc)
-		B.target_turf = pick(range(1, src))
+		B.target_turf = pick(physical_range(1, src))
 		B.blood_DNA = list()
 		B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 		M.vessel.remove_reagent(/datum/reagent/blood,rand(25,50))

@@ -38,7 +38,7 @@ SUBSYSTEM_DEF(xenoarch)
 		var/farEnough = 1
 		for(var/A in digsite_spawning_turfs)
 			var/turf/T = A
-			if(T in range(5, M))
+			if(T in physical_range(5, M))
 				farEnough = 0
 				break
 		if(!farEnough)

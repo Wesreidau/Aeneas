@@ -121,7 +121,7 @@
 			continue
 		attack_living(L)
 
-	if(!(locate(/obj/effect/blob/core) in range(T, 2)) && prob(secondary_core_growth_chance))
+	if(!(locate(/obj/effect/blob/core) in physical_range(2, T)) && prob(secondary_core_growth_chance))
 		new/obj/effect/blob/core/secondary(T)
 	else
 		new expandType(T, min(health, 30))

@@ -533,7 +533,7 @@
 		return
 	var/desired_type = A.type
 
-	var/list/nearby_things = range(1, get_turf(src))
+	var/list/nearby_things = physical_range(1, get_turf(src))
 	var/list/valid_things = list()
 	for(var/atom/thing in nearby_things)
 		if(thing.type != desired_type)

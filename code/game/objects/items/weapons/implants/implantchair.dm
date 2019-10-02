@@ -79,7 +79,7 @@
 			var/obj/item/grab/grab = G
 			if(!ismob(grab.affecting))
 				return
-			for(var/mob/living/carbon/slime/M in range(1, grab.affecting))
+			for(var/mob/living/carbon/slime/M in physical_range(1, grab.affecting))
 				if(M.Victim == grab.affecting)
 					to_chat(usr, "[grab.affecting.name] will not fit into the [src.name] because they have a slime latched onto their head.")
 					return

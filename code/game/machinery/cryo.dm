@@ -209,7 +209,7 @@
 		var/obj/item/grab/grab = G
 		if(!ismob(grab.affecting))
 			return
-		for(var/mob/living/carbon/slime/M in range(1,grab.affecting))
+		for(var/mob/living/carbon/slime/M in physical_range(1,grab.affecting))
 			if(M.Victim == grab.affecting)
 				to_chat(user, "[grab.affecting.name] will not fit into the cryo because they have a slime latched onto their head.")
 				return
@@ -351,7 +351,7 @@
 	set name = "Move Inside"
 	set category = "Object"
 	set src in oview(1)
-	for(var/mob/living/carbon/slime/M in range(1,usr))
+	for(var/mob/living/carbon/slime/M in physical_range(1,usr))
 		if(M.Victim == usr)
 			to_chat(usr, "You're too busy getting your life sucked out of you.")
 			return

@@ -93,7 +93,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	return ispath(reagent_type, /datum/reagent) ? initial(R.name) : "Unknown"
 
 /obj/machinery/computer/rdconsole/proc/SyncRDevices() //Makes sure it is properly sync'ed up with the devices attached to it (if any).
-	for(var/obj/machinery/r_n_d/D in range(4, src))
+	for(var/obj/machinery/r_n_d/D in physical_range(4, src))
 		if(D.linked_console != null || D.panel_open)
 			continue
 		if(istype(D, /obj/machinery/r_n_d/destructive_analyzer) && can_analyze == TRUE) // Only science R&D consoles can do research

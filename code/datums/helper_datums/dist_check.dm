@@ -9,7 +9,7 @@
 	return (b in physical_view(world.view, a))
 
 /decl/dist_check/in_range/within_dist(var/atom/a, var/atom/b)
-	return (b in range(world.view, a))
+	return (b in physical_range(world.view, a))
 
 /decl/dist_check/same_z_level/within_dist(var/atom/a, var/atom/b)
 	var/turf/turf_a = get_turf(a)

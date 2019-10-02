@@ -333,7 +333,7 @@
 		return list()
 
 	if(isXRay())
-		see = range(view_range, pos)
+		see = physical_range(view_range, pos)
 	else
 		see = hear(view_range, pos)
 	return see
@@ -367,7 +367,7 @@
 
 /proc/near_range_camera(var/mob/M)
 
-	for(var/obj/machinery/camera/C in range(4, M))
+	for(var/obj/machinery/camera/C in physical_range(4, M))
 		if(C.can_use())	// check if camera disabled
 			return C
 			break

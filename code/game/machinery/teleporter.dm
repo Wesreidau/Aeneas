@@ -75,7 +75,7 @@
 				for(var/mob/O in hearers(src, null))
 					O.show_message("<span class='warning'>Incoming bluespace portal detected, unable to lock in.</span>", 2)
 
-				for(var/obj/machinery/teleport/hub/H in range(1))
+				for(var/obj/machinery/teleport/hub/H in physical_range(1))
 					var/amount = rand(2,5)
 					for(var/i=0;i<amount;i++)
 						new /mob/living/simple_animal/hostile/carp(get_turf(H))

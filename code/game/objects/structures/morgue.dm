@@ -429,7 +429,7 @@
 /obj/machinery/button/crematorium/activate(mob/user)
 	if(operating)
 		return
-	for(var/obj/structure/crematorium/C in range())
+	for(var/obj/structure/crematorium/C in physical_range())
 		if (C.id == id_tag)
 			if (!C.cremating)
 				C.cremate(user)

@@ -117,7 +117,7 @@
 	return rand(L, H)
 
 /proc/_range(Dist, Center = usr)
-	return range(Dist, Center)
+	return physical_range(Dist, Center)
 
 /proc/_regex(pattern, flags)
 	return regex(pattern, flags)

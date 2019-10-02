@@ -64,7 +64,7 @@
 			handle_movement_target()
 
 	if(prob(2)) //spooky
-		var/mob/observer/ghost/spook = locate() in range(src,5)
+		var/mob/observer/ghost/spook = locate() in physical_range(5, src)
 		if(spook)
 			var/turf/T = spook.loc
 			var/list/visible = list()
@@ -171,7 +171,7 @@
 /mob/living/simple_animal/cat/fluff/Life()
 	. = ..()
 	if(!.)
-		return FALSE 
+		return FALSE
 	if (stat || !friend)
 		return
 	if (get_dist(src, friend) <= 1)

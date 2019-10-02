@@ -828,7 +828,7 @@ proc/view_or_range(distance = world.view , center = usr , type)
 		if("view")
 			. = physical_view(distance,center)
 		if("range")
-			. = range(distance,center)
+			. = physical_range(distance,center)
 	return
 
 proc/oview_or_orange(distance = world.view , center = usr , type)

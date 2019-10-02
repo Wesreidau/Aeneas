@@ -6,7 +6,7 @@
 		add_to_living_mob_list()
 
 //mob verbs are faster than object verbs. See mob/verb/examine.
-/mob/living/verb/pulled(atom/movable/AM as mob|obj in physical_oview(1))
+/mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
 	set name = "Pull"
 	set category = "Object"
 
@@ -76,7 +76,7 @@ default behaviour is:
 		if (istype(AM, /mob/living))
 			var/mob/living/tmob = AM
 
-			for(var/mob/living/M in range(tmob, 1))
+			for(var/mob/living/M in range(1, tmob))
 				if(tmob.pinned.len ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/grab, tmob.grabbed_by.len)) )
 					if ( !(world.time % 5) )
 						to_chat(src, "<span class='warning'>[tmob] is restrained, you cannot push past</span>")

@@ -49,7 +49,7 @@
 	//example: n2o triggerproc
 	//note: im lazy
 
-	for (var/turf/simulated/floor/target in range(1,src))
+	for (var/turf/simulated/floor/target in physical_range(1,src))
 		if(!target.blocks_air)
 			target.assume_gas(GAS_N2O, 30)
 
@@ -57,7 +57,7 @@
 		qdel(src)
 
 /obj/effect/mine/proc/triggerphoron(obj)
-	for (var/turf/simulated/floor/target in range(1,src))
+	for (var/turf/simulated/floor/target in physical_range(1,src))
 		if(!target.blocks_air)
 			target.assume_gas(GAS_PHORON, 30)
 

@@ -162,7 +162,7 @@ var/const/enterloopsanity = 100
 
 	var/objects = 0
 	if(A && (A.movable_flags & MOVABLE_FLAG_PROXMOVE))
-		for(var/atom/movable/thing in range(1))
+		for(var/atom/movable/thing in physical_range(1))
 			if(objects > enterloopsanity) break
 			objects++
 			spawn(0)

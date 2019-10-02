@@ -27,7 +27,7 @@
 	if(hunger < 100) //stop hunting when satiated
 		prey.Cut()
 	else
-		for(var/mob/living/simple_animal/S in range(src,1))
+		for(var/mob/living/simple_animal/S in physical_range(1,src))
 			if(S.stat == DEAD)
 				visible_message("[src] consumes \the body of [S]!")
 				var/turf/T = get_turf(S)

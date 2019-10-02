@@ -614,7 +614,7 @@
 /datum/chemical_reaction/phlogiston/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
 	var/turf/location = get_turf(holder.my_atom.loc)
-	for(var/turf/simulated/floor/target_tile in range(0,location))
+	for(var/turf/simulated/floor/target_tile in physical_range(0,location))
 		target_tile.assume_gas(/datum/reagent/toxin/phoron, created_volume, 400+T0C)
 		spawn (0) target_tile.hotspot_expose(700, 400)
 

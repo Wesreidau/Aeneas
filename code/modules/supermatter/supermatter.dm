@@ -513,7 +513,7 @@
 	power += 200
 
 	//Some poor sod got eaten, go ahead and irradiate people nearby.
-	for(var/mob/living/l in range(10))
+	for(var/mob/living/l in physical_range(10))
 		if(l in physical_view())
 			l.show_message("<span class=\"warning\">As \the [src] slowly stops resonating, you find your skin covered in new radiation burns.</span>", 1,\
 				"<span class=\"warning\">The unearthly ringing subsides and you notice you have new radiation burns.</span>", 2)
@@ -524,7 +524,7 @@
 
 
 /proc/supermatter_pull(var/atom/target, var/pull_range = 255, var/pull_power = STAGE_FIVE)
-	for(var/atom/A in range(pull_range, target))
+	for(var/atom/A in physical_range(pull_range, target))
 		A.singularity_pull(target, pull_power)
 
 /obj/machinery/power/supermatter/GotoAirflowDest(n) //Supermatter not pushed around by airflow

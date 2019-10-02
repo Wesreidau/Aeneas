@@ -200,7 +200,7 @@
 			return MOVEMENT_STOP
 
 	if(mob.restrained())
-		for(var/mob/M in range(mob, 1))
+		for(var/mob/M in physical_range(1, mob))
 			if(M.pulling == mob)
 				if(!M.incapacitated() && mob.Adjacent(M))
 					if(mover == mob)

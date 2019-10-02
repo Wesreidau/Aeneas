@@ -3,7 +3,7 @@
 
 /obj/machinery/proc/infect_nearby(datum/disease2/disease/disease, base_chance = 10, skill_threshold = SKILL_BASIC, dist = 2)
 	if(istype(disease) && operator_skill <= skill_threshold)
-		for(var/mob/living/carbon/victim in range(dist, src))
+		for(var/mob/living/carbon/victim in physical_range(dist, src))
 			if(prob(base_chance * 2**(SKILL_MIN - operator_skill)))
 				infect_virus2(victim, disease)
 

@@ -519,7 +519,7 @@
 /obj/machinery/button/windowtint/activate()
 	if(operating)
 		return
-	for(var/obj/structure/window/W in range(src,range))
+	for(var/obj/structure/window/W in physical_range(range, src))
 		if(W.polarized && (W.id == src.id || !W.id))
 			W.toggle()
 	..()
