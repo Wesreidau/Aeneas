@@ -29,7 +29,9 @@
 		log_world("Error: Turf located at [jumplink(src)] failed to find associated level")
 		return
 
-	reflection_coords = new /vector2(Wrap(x, L.bounds_lower.x, L.bounds_upper.x), Wrap(y, L.bounds_lower.y, L.bounds_upper.y))
+	//Here we use wrap to place the reflection within the play area. Its a cool math thing that i'm not sure how to explain
+	//We pass in +1 to the upper bounds because for some reason wrap is inclusive at lower end but exclusive at upper end
+	reflection_coords = new /vector2(Wrap(x, L.bounds_lower.x, L.bounds_upper.x+1), Wrap(y, L.bounds_lower.y, L.bounds_upper.y+1))
 	reflection = locate(reflection_coords.x, reflection_coords.y, z)
 	update_icon()
 

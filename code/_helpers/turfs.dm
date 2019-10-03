@@ -182,3 +182,21 @@
 	var/turf/T = get_step(Ref, Dir)
 	if (T)
 		return T.get_self()
+
+
+/*
+	This does a physical orange call to find turfs adjacent to the origin which match the specified type.
+	The resulting turfs are returned in an associative list, formatted like
+
+	turf = direction
+
+	This is used in floor/wall icons
+*/
+/proc/get_adjacent_turfs(var/atom/origin, var/required_type = /turf)
+	var/list/turfs = list()
+	for (var/direction in GLOB.alldirs)
+		var/T = get_physical_step(origin, direction)
+		if (istype(T, required_type))
+			turfs[T] = direction
+
+	return turfs
