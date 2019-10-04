@@ -38,6 +38,7 @@
 /turf/mirror/update_icon()
 	vis_contents |= reflection
 	icon_state = "transparent"
+	update_adjacent_turfs(src)
 
 //Critical proc, returns the reflection where other turfs would return themselves
 /turf/mirror/get_self()

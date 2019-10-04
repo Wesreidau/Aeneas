@@ -200,3 +200,23 @@
 			turfs[T] = direction
 
 	return turfs
+
+
+/*
+	Updates all walls and floors around this turf
+	This is lazy and a bit inefficient and a bit excessive, its not an ideal function for many cases.
+	But it is thorough. The intention here is to hit every reasonable use case.
+	Where possible, more precise/targeted updating should be done, but this is handy if you're unsure
+
+	Origin doesnt need to be a turf
+*/
+/proc/update_adjacent_turfs(var/origin)
+	var/turf/T = get_turf(origin)
+	var/list/turfs = trange(1, T)
+	turfs -= T
+	for (var/turf/simulated/wall/W in turfs)
+		W.update_connections(0)
+		W.update_icon()
+
+	for (var/turf/simulated/floor/F in turfs)
+		F.update_icon()

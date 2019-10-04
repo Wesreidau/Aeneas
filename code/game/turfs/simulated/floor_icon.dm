@@ -43,8 +43,7 @@ var/list/flooring_cache = list()
 
 		has_smooth = ~(has_border & (NORTH | SOUTH | EAST | WEST))
 
-		if(flooring.can_paint && decals && decals.len)
-			overlays |= decals
+
 
 		//We can only have inner corners if we're smoothed with something
 		if (has_smooth && flooring.flags & TURF_HAS_INNER_CORNERS)
@@ -70,12 +69,16 @@ var/list/flooring_cache = list()
 			else
 				icon_state = flooring.icon_base+"0"
 		*/
+	if(decals && decals.len)
+		overlays |= decals
 
+	/*
 	if(decals && decals.len)
 		for(var/image/I in decals)
 			if(I.layer != DECAL_PLATING_LAYER)
 				continue
 			overlays |= I
+			*/
 
 	if(is_plating() && !(isnull(broken) && isnull(burnt))) //temp, todo
 		icon = 'icons/turf/flooring/plating.dmi'
