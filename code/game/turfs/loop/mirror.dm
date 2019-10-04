@@ -8,6 +8,8 @@
 /turf/mirror
 	var/turf/reflection	//The real turf that we're reflecting
 	var/vector2/reflection_coords
+	dynamic_lighting = FALSE
+	permit_ao = FALSE
 
 //Slightly hacky prototype for mirror movement
 /turf/mirror/Entered(var/atom/movable/mover, var/atom/old_loc)
@@ -33,7 +35,12 @@
 	//We pass in +1 to the upper bounds because for some reason wrap is inclusive at lower end but exclusive at upper end
 	reflection_coords = new /vector2(Wrap(x, L.bounds_lower.x, L.bounds_upper.x+1), Wrap(y, L.bounds_lower.y, L.bounds_upper.y+1))
 	reflection = locate(reflection_coords.x, reflection_coords.y, z)
+
+	//We need to sync our opacity
+	GLOB.opacity_set_event.register(reflection, src, /turf/mirror/proc/synchronise)
+
 	update_icon()
+	synchronise()
 
 /turf/mirror/update_icon()
 	vis_contents |= reflection
@@ -53,3 +60,13 @@
 /turf/mirror/update_air_properties()
 	if (reflection)
 		reflection.update_air_properties()
+
+//Copies over certain properties from the reflection
+/turf/mirror/proc/synchronise()
+	if (!reflection) //This should never happen
+		find_reflection()
+
+	if (!reflection)
+		return
+
+	opacity = reflection.opacity
