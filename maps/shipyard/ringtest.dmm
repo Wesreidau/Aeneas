@@ -47,7 +47,7 @@
 "aU" = (/obj/vehicle/bike/electric,/turf/simulated/floor/tiled,/area/chapel)
 "aV" = (/turf/space,/area/loop/east)
 "aW" = (/obj/item/device/flashlight,/turf/simulated/floor/tiled,/area/chapel)
-"aX" = (/obj/effect/decal/warning_stripes{icon_state = "W-corner"},/obj/machinery/light{icon_state = "tube_map"; dir = 4},/turf/simulated/floor/tiled,/area/chapel)
+"aX" = (/obj/machinery/floodlight,/turf/simulated/floor/tiled,/area/chapel)
 "aY" = (/obj/structure/catwalk,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor,/area/chapel)
 "aZ" = (/obj/effect/manifest,/obj/structure/catwalk,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor,/area/chapel)
 "ba" = (/obj/machinery/atmospherics/unary/tank/air{start_pressure = 15000},/turf/simulated/floor/tiled/steel_ridged,/area/chapel)
@@ -68,7 +68,7 @@
 "bp" = (/obj/effect/landmark{name = "endgame_exit"},/turf/simulated/floor/tiled,/area/chapel)
 "bq" = (/obj/effect/landmark/start{name = "AI"},/turf/simulated/floor/tiled,/area/chapel)
 "br" = (/obj/effect/landmark/start{name = "Doc"},/turf/simulated/floor/tiled,/area/chapel)
-"bs" = (/obj/effect/decal/warning_stripes{icon_state = "E"},/obj/machinery/light{icon_state = "tube_map"; dir = 8},/turf/simulated/floor/tiled,/area/chapel)
+"bs" = (/obj/effect/decal/warning_stripes{icon_state = "E"},/obj/machinery/floodlight,/turf/simulated/floor/tiled,/area/chapel)
 "bt" = (/obj/structure/catwalk,/turf/simulated/floor,/area/chapel)
 "bu" = (/obj/machinery/atmospherics/binary/pump/high_power/on/max_pressure{icon_state = "map_on"; dir = 8},/turf/simulated/floor/tiled/steel_ridged,/area/chapel)
 "bv" = (/obj/machinery/light,/obj/machinery/atmospherics/pipe/simple/visible/cyan{icon_state = "intact"; dir = 4},/turf/simulated/floor/tiled/steel_ridged,/area/chapel)
@@ -355,15 +355,15 @@ aCaCaCaCaCaCaCababababababababababababababababababababababababababababababababab
 aCaCaCaCaCaCaCacacacacacacacacacbGadadadadadadadbGacacacacacacacacacacacacacacacacacacbHacaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
 aCaCaCaCaCaCaCaeamamamamamamamaeadbcagahaiajakafadamanaoapaqarasatauavawaxamamamaxamamacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
 aCaCaCaCaCaCaCaeamamamamamamamaeadazazazazazazaladaAamaBamamamamamamamamamamamamamamamacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCaeamamamamamamamaXadazazazazazazaDaEaFaIaJamamaKaLamamamamamamamamamamamacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCaeamamamamamamamaeadazazazazazazaDaEaFaIaJamamaKaLamamamamamamamamamamamacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
 aCaCaCaCaCaCaCaeamamamamamamamaeadbUazazazazazaGadaHaPaQamaRaSaSaTamaUamamamamamamamamacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCaeamamamamamamamaebGadadadadadadadbGaMamamamaWaWaWaWamamamamamamamamamambHbsaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCaeamamaXamamamamaebGadadadadadadadbGaMamamamaWaWaWaWamamamamamamamamamambHbsaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
 aCaCaCaCaCaCaCaeamfNamfNamamamaeacaearaxamamaxamaNaOamamamamamamamambbamamamamamambVayacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
 aCaCaCaCaCaCaCaeamamamamamamambMbXbYbZcacbamamamamaMamambdamamamamamamamamamamamamcccdbXbNaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
 aCaCaCaCaCaCaCaeamfNamfNamamamaeacaecpcqcqcqcqcqcqcraYaYaYaZaYaYaYbPbQbSbTamblamamamayacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCaeamamamamamamamaebHamcsamamamamamambmamamamamamamamamamamamamamamamamambHbsaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCaeamamamamamamamaebHamcsamamamamamambmamamamamamamamamamamamamamamamamambHayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
 aCaCaCaCaCaCaCaeamamamamamamamaeacamcsamambnbnbnbnbmbnbnbnbnamamboambpambqambramamamamacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCaeamamamamamamamaXbWbWcobWctbtbabebtbmbtbebfbtbwbxambyambzambAambBamamamacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCaeamamamamamamamaebWbWcobWctbtbabebtbmbtbebfbtbwbxambyambzambAambBamamamacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
 aCaCaCaCaCaCaCaeamamamamamamamaebWcucvcwctbtbgbhbEbFbEbibjbtbwambIambJambKambLamamamamacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
 aCaCaCaCaCaCaCaeamamamamamamamaebWcxcycxctbtbkbubOesbObvbCbtbwamambRamamambRamamamamamacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
 aCaCaCaCaCaCaCacacacacacacacacacetexexexexexexexeyezeyczcAcAczcBcCczcDcDcDczcEcFczcAcAczacaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV

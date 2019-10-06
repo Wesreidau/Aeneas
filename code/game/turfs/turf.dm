@@ -33,6 +33,9 @@
 	var/flooded // Whether or not this turf is absolutely flooded ie. a water source.
 	var/footstep_type
 
+	//A list of any mirror turfs which reflect this one
+	var/list/mirrors
+
 /turf/New()
 	..()
 	if(dynamic_lighting)
