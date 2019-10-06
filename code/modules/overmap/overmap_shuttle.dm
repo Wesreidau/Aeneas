@@ -36,7 +36,7 @@
 		return FALSE
 	if(moving_status == SHUTTLE_INTRANSIT)
 		return FALSE //already going somewhere, current_location may be an intransit location instead of in a sector
-	return get_dist(waypoint_sector(current_location), waypoint_sector(next_location)) <= range
+	return get_physical_dist(waypoint_sector(current_location), waypoint_sector(next_location)) <= range
 
 /datum/shuttle/autodock/overmap/can_launch()
 	return ..() && can_go()
@@ -45,7 +45,7 @@
 	return ..() && can_go()
 
 /datum/shuttle/autodock/overmap/get_travel_time()
-	var/distance_mod = get_dist(waypoint_sector(current_location),waypoint_sector(next_location))
+	var/distance_mod = get_physical_dist(waypoint_sector(current_location),waypoint_sector(next_location))
 	var/skill_mod = 0.2*(skill_needed - operator_skill)
 	return move_time * (1 + distance_mod + skill_mod)
 

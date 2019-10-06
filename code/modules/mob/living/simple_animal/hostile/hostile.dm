@@ -100,7 +100,7 @@
 		stance = HOSTILE_STANCE_IDLE
 	if(target_mob in ListTargets(10))
 		if(ranged)
-			if(get_dist(src, target_mob) <= ranged_range)
+			if(get_physical_dist(src, target_mob) <= ranged_range)
 				OpenFire(target_mob)
 			else
 				walk_to(src, target_mob, 1, move_to_delay)
@@ -123,7 +123,7 @@
 			return 0
 	if(next_move >= world.time)
 		return 0
-	if(get_dist(src, target_mob) <= 1)	//Attacking
+	if(get_physical_dist(src, target_mob) <= 1)	//Attacking
 		AttackingTarget()
 		return 1
 

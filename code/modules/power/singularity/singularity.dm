@@ -268,7 +268,7 @@
 
 /obj/singularity/proc/eat()
 	for(var/atom/X in physical_orange(grav_pull, src))
-		var/dist = get_dist(X, src)
+		var/dist = get_physical_dist(X, src)
 		var/obj/singularity/S = src
 		if(!istype(src))
 			return
@@ -454,7 +454,7 @@
 
 /obj/singularity/proc/pulse()
 	for(var/obj/machinery/power/rad_collector/R in rad_collectors)
-		if (get_dist(R, src) <= 15) //Better than using physical_orange() every process.
+		if (get_physical_dist(R, src) <= 15) //Better than using physical_orange() every process.
 			R.receive_pulse(energy)
 
 /obj/singularity/proc/on_capture()

@@ -261,7 +261,7 @@
 /mob/living/bot/proc/stepToTarget()
 	if(!target || !target.loc)
 		return
-	if(get_dist(src, target) > min_target_dist)
+	if(get_physical_dist(src, target) > min_target_dist)
 		if(!target_path.len || get_turf(target) != target_path[target_path.len])
 			calcTargetPath()
 		if(makeStep(target_path))
@@ -309,8 +309,8 @@
 		for(var/obj/machinery/navbeacon/N in navbeacons)
 			if(!N.codes["patrol"])
 				continue
-			if(get_dist(src, N) < minDist)
-				minDist = get_dist(src, N)
+			if(get_physical_dist(src, N) < minDist)
+				minDist = get_physical_dist(src, N)
 				targ = N
 
 	if(targ && targ.codes["next_patrol"])

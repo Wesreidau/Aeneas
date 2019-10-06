@@ -167,7 +167,7 @@
 	if(!istype(user))
 		return
 
-	if (get_dist(user, src) > 1)
+	if (get_physical_dist(user, src) > 1)
 		to_chat(user, "<span class='warning'>You can't reach \the [src] from here.</span>")
 		return
 	var/bodypart = user.hand ? HAND_RIGHT : HAND_LEFT

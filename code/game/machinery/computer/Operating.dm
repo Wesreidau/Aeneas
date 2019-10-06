@@ -22,7 +22,7 @@
 	return TRUE
 
 /obj/machinery/computer/operating/interact(mob/user)
-	if ( (get_dist(src, user) > 1 ) || (stat & (BROKEN|NOPOWER)) )
+	if ( (get_physical_dist(src, user) > 1 ) || (stat & (BROKEN|NOPOWER)) )
 		if (!istype(user, /mob/living/silicon))
 			user.unset_machine()
 			user << browse(null, "window=op")

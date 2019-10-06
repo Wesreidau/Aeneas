@@ -115,7 +115,7 @@
 		if(S.gen != src.gen)
 			continue
 		// The closer we are to impact site, the longer it takes for shield to come back up.
-		S.fail(-(-range + get_dist(src, S)) * 2)
+		S.fail(-(-range + get_physical_dist(src, S)) * 2)
 
 /obj/effect/shield/proc/take_damage(var/damage, var/damtype, var/hitby)
 	if(!gen)

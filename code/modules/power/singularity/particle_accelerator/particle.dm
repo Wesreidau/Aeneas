@@ -76,7 +76,7 @@
 		if(QDELETED(src))
 			return
 		forceMove(destination)
-	if(target && movetotarget && (get_dist(src,target) < 1))
+	if(target && movetotarget && (get_physical_dist(src,target) < 1))
 		movetotarget = 0
 	movement_range--
 	if(movement_range <= 0)

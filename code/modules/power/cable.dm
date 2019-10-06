@@ -570,7 +570,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 /obj/item/stack/cable_coil/examine(mob/user)
 	. = ..()
-	if(get_dist(src, user) > 1)
+	if(get_physical_dist(src, user) > 1)
 		return
 
 	if(get_amount() == 1)
@@ -635,7 +635,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		to_chat(user, "There is no cable left.")
 		return
 
-	if(get_dist(F,user) > 1) // Too far
+	if(get_physical_dist(F,user) > 1) // Too far
 		to_chat(user, "You can't lay cable at a place that far away.")
 		return
 
@@ -677,7 +677,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	if(!isturf(T) || !T.is_plating())		// sanity checks, also stop use interacting with T-scanner revealed cable
 		return
 
-	if(get_dist(C, user) > 1)		// make sure it's close enough
+	if(get_physical_dist(C, user) > 1)		// make sure it's close enough
 		to_chat(user, "You can't lay cable at a place that far away.")
 		return
 

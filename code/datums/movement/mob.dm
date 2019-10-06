@@ -287,7 +287,7 @@
 				L -= mob
 				var/mob/M = L[1]
 				if(M)
-					if (get_dist(old_turf, M) <= 1)
+					if (get_physical_dist(old_turf, M) <= 1)
 						if (isturf(M.loc) && isturf(mob.loc))
 							if (mob.loc != old_turf && M.loc != mob.loc)
 								step(M, get_dir(M.loc, old_turf))

@@ -148,7 +148,7 @@
 
 /obj/machinery/power/turbine/interact(mob/user)
 
-	if ( (get_dist(src, user) > 1 ) || (stat & (NOPOWER|BROKEN)) && (!istype(user, /mob/living/silicon/ai)) )
+	if ( (get_physical_dist(src, user) > 1 ) || (stat & (NOPOWER|BROKEN)) && (!istype(user, /mob/living/silicon/ai)) )
 		user.machine = null
 		user << browse(null, "window=turbine")
 		return

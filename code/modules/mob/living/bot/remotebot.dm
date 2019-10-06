@@ -60,7 +60,7 @@
 	return ..()
 
 /mob/living/bot/remotebot/proc/pickup(var/obj/item/I)
-	if(holding || get_dist(src,I) > 1)
+	if(holding || get_physical_dist(src,I) > 1)
 		return
 	src.visible_message("<b>\The [src]</b> picks up \the [I].")
 	flick("fetchbot-c", src)
@@ -86,7 +86,7 @@
 /mob/living/bot/remotebot/proc/command(var/atom/a)
 	if(working || stat || !on || a == src) //can't touch itself
 		return
-	if(isturf(a) || get_dist(src,a) > 1)
+	if(isturf(a) || get_physical_dist(src,a) > 1)
 		walk_to(src,a,0,movement_delay())
 	else if(istype(a, /obj/item))
 		pickup(a)

@@ -18,7 +18,7 @@
 	if ((T) && (!(isghost(src)))) //Ghosts can hear even in vacuum.
 		var/datum/gas_mixture/environment = T.return_air()
 		var/pressure = (environment)? environment.return_pressure() : 0
-		if(pressure < SOUND_MINIMUM_PRESSURE && get_dist(speaker, src) > 1)
+		if(pressure < SOUND_MINIMUM_PRESSURE && get_physical_dist(speaker, src) > 1)
 			return
 
 		if (pressure < ONE_ATMOSPHERE*0.4) //sound distortion pressure, to help clue people in that the air is thin, even if it isn't a vacuum yet
@@ -89,7 +89,7 @@
 			on_hear_say("<span class='game say'>[track]<span class='name'>[speaker_name]</span>[alt_name] [language.format_message(message, nverb)]</span>")
 		else
 			on_hear_say("<span class='game say'>[track]<span class='name'>[speaker_name]</span>[alt_name] [verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
-		if (speech_sound && (get_dist(speaker, src) <= world.view && src.z == speaker.z))
+		if (speech_sound && (get_physical_dist(speaker, src) <= world.view && src.z == speaker.z))
 			var/turf/source = speaker? get_turf(speaker) : get_turf(src)
 			src.playsound_local(source, speech_sound, sound_vol, 1)
 

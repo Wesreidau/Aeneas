@@ -55,7 +55,7 @@
 			continue
 		if(get_z(buddy) != get_z(src))
 			continue
-		if(get_dist(get_turf(src), get_turf(buddy)) <= 10)
+		if(get_physical_dist(get_turf(src), get_turf(buddy)) <= 10)
 			has_friend = TRUE
 			break
 	if(!has_friend)

@@ -126,7 +126,7 @@
 			shadow_wights.Remove(wight_check_index)
 		else if(isnull(W.loc))
 			shadow_wights.Remove(wight_check_index)
-		else if(get_dist(W, src) > 10)
+		else if(get_physical_dist(W, src) > 10)
 			shadow_wights.Remove(wight_check_index)
 
 /obj/item/weapon/vampiric/hear_talk(mob/M as mob, text)

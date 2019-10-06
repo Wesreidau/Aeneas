@@ -75,7 +75,7 @@ SUBSYSTEM_DEF(radiation)
 			if(A.area_flags & AREA_FLAG_RAD_SHIELDED)
 				continue // In shielded area
 
-		var/dist = get_dist(source.source_turf, T)
+		var/dist = get_physical_dist(source.source_turf, T)
 		if(dist > source.range)
 			continue // Too far to possibly affect
 		if(source.flat)

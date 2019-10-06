@@ -217,7 +217,7 @@
 			var/turf/T = get_turf(M)
 			if(!T || T.z != src.z)
 				continue
-			var/dist = get_dist(M.loc, src.loc)
+			var/dist = get_physical_dist(M.loc, src.loc)
 			shake_camera(M, dist > 20 ? 3 : 5, dist > 20 ? 1 : 3)
 
 

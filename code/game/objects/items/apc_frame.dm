@@ -14,7 +14,7 @@
 		qdel(src)
 
 /obj/item/frame/apc/try_build(turf/on_wall)
-	if (get_dist(on_wall,usr)>1)
+	if (get_physical_dist(on_wall,usr)>1)
 		return
 	var/ndir = get_dir(usr,on_wall)
 	if (!(ndir in GLOB.cardinal))

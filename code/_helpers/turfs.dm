@@ -36,7 +36,7 @@
 		if(!(T.z in GLOB.using_map.sealed_levels)) // Picking a turf outside the map edge isn't recommended
 			if(T.x >= world.maxx-TRANSITIONEDGE || T.x <= TRANSITIONEDGE)	continue
 			if(T.y >= world.maxy-TRANSITIONEDGE || T.y <= TRANSITIONEDGE)	continue
-		if(!inner_range || get_dist(origin, T) >= inner_range)
+		if(!inner_range || get_physical_dist(origin, T) >= inner_range)
 			turfs += T
 	if(turfs.len)
 		return pick(turfs)
@@ -226,12 +226,16 @@
 	Finds the physical distance between two turfs. It does this by comparing the distance from origin, to the target turf, AND to all mirrors of the target turf
 	We will not check mirrors of origin, we assume origin is always a physical turf
 */
-/proc/get_physical_distance(var/turf/origin, var/turf/target)
+/proc/get_physical_dist(var/turf/origin, var/turf/target)
 	if (!istype(origin))
 		origin = get_turf(origin)
+	if (!istype(target))
+		target = get_turf(target)
 
 	var/shortest = get_dist(origin, target)
 	var/newdist
+	if (!target) //If target is null, we'll just return whatever get_dist gave us
+		return shortest
 	for (var/turf/T in target.mirrors)
 		newdist = get_dist(origin, T)
 		if (newdist < shortest)

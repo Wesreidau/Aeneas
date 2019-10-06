@@ -500,7 +500,7 @@ default behaviour is:
 	if (buckled)
 		return
 
-	if(get_dist(src, pulling) > 1)
+	if(get_physical_dist(src, pulling) > 1)
 		stop_pulling()
 
 	var/turf/old_loc = get_turf(src)
@@ -527,7 +527,7 @@ default behaviour is:
 	if(restrained())
 		return FALSE
 
-	if(get_dist(src, pulling) > 2)
+	if(get_physical_dist(src, pulling) > 2)
 		return FALSE
 
 	if(pulling.z != z)

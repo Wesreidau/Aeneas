@@ -451,7 +451,7 @@
 		stop_pulling()
 
 /obj/item/integrated_circuit/manipulation/claw/proc/check_pull()
-	if(get_dist(pulling,src) > 1)
+	if(get_physical_dist(pulling,src) > 1)
 		stop_pulling()
 
 /obj/item/integrated_circuit/manipulation/claw/proc/stop_pulling()

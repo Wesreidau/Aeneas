@@ -31,7 +31,7 @@
 		return 1
 	if(!T0 || T0.z != z)
 		return 0
-	if(get_dist(src,T0) > 1)
+	if(get_physical_dist(src,T0) > 1)
 		return 0
 
 	if(T0.x == x || T0.y == y)
@@ -67,7 +67,7 @@ Quick adjacency (to turf):
 	if(T0 == src)
 		return 1
 
-	if(get_dist(src,T0) > 1)
+	if(get_physical_dist(src,T0) > 1)
 		return 0
 
 	return 1

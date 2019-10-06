@@ -137,7 +137,7 @@
 //attempts to attach src as a follower of the train T
 //Note: there is a modified version of this in code\modules\vehicles\cargo_train.dm specifically for cargo train engines
 /obj/vehicle/train/proc/attach_to(obj/vehicle/train/T, mob/user)
-	if (get_dist(src, T) > 1)
+	if (get_physical_dist(src, T) > 1)
 		to_chat(user, "<span class='warning'>[src] is too far away from [T] to hitch them together.</span>")
 		return
 

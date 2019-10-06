@@ -68,7 +68,7 @@ GLOBAL_LIST_INIT(chop_sound,list('sound/weapons/chop1.ogg','sound/weapons/chop2.
 		var/mob/M = P
 		if(!M || !M.client)
 			continue
-		if(get_dist(M, turf_source) <= (world.view + extrarange) * 2)
+		if(get_physical_dist(M, turf_source) <= (world.view + extrarange) * 2)
 			var/turf/T = get_turf(M)
 			if(T && T.z == turf_source.z && (!is_ambiance || M.get_preference_value(/datum/client_preference/play_ambiance) == GLOB.PREF_YES))
 				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, is_global, extrarange)
@@ -100,7 +100,7 @@ var/const/FALLOFF_SOUNDS = 0.5
 		var/turf/T = get_turf(src)
 
 		//sound volume falloff with distance
-		var/distance = get_dist(T, turf_source)
+		var/distance = get_physical_dist(T, turf_source)
 
 		S.volume -= max(distance - (world.view + extrarange), 0) * 2 //multiplicative falloff to add on top of natural audio falloff.
 

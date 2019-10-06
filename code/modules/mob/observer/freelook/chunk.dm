@@ -83,7 +83,7 @@
 	var/turf/center = locate(x + 8, y + 8, z)
 	for(var/entry in sources)
 		var/atom/A = entry
-		if(get_dist(get_turf(A), center) > 16)
+		if(get_physical_dist(get_turf(A), center) > 16)
 			continue
 		add_source(A)
 

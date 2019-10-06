@@ -73,7 +73,7 @@ proc/infection_chance(var/mob/living/carbon/M, var/vector = "Airborne")
 	if(is_below_sound_pressure(source) || is_below_sound_pressure(target))
 		return FALSE
 	//no infecting from other side of the hallway
-	if(get_dist(source,target) > 5)
+	if(get_physical_dist(source,target) > 5)
 		return FALSE
 	if(istype(source) && istype(target))
 		return source.zone == target.zone

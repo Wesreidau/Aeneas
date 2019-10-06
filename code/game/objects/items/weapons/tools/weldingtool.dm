@@ -136,7 +136,7 @@
 	if(!proximity)
 		return
 
-	if(istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && !welding)
+	if(istype(O, /obj/structure/reagent_dispensers/fueltank) && get_physical_dist(src,O) <= 1 && !welding)
 		if(!tank)
 			to_chat(user, SPAN_WARNING("\The [src] has no tank attached!"))
 			return
@@ -333,7 +333,7 @@
 /obj/item/weapon/welder_tank/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if (!proximity)
 		return
-	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src, O) <= 1)
+	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_physical_dist(src, O) <= 1)
 		if (!can_refuel)
 			to_chat(user, SPAN_DANGER("\The [src] does not have a refuelling port."))
 			return

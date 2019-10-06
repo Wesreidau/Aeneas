@@ -81,7 +81,7 @@
 		return 0
 	if(isnull(user.pulling) || user.pulling.anchored || !isturf(user.pulling.loc))
 		return 0
-	if(user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1)
+	if(user.pulling.loc != user.loc && get_physical_dist(user, user.pulling) > 1)
 		return 0
 	if(user.pulling)
 		do_pull_click(user, src)
@@ -220,12 +220,12 @@ var/const/enterloopsanity = 100
 			. += T
 
 /turf/proc/Distance(turf/t)
-	if(get_dist(src,t) == 1)
+	if(get_physical_dist(src,t) == 1)
 		var/cost = (src.x - t.x) * (src.x - t.x) + (src.y - t.y) * (src.y - t.y)
 		cost *= (pathweight+t.pathweight)/2
 		return cost
 	else
-		return get_dist(src,t)
+		return get_physical_dist(src,t)
 
 /turf/proc/AdjacentTurfsSpace()
 	var/L[] = new()

@@ -37,7 +37,7 @@
 		return A
 
 /proc/in_range(source, user)
-	if(get_dist(source, user) <= 1)
+	if(get_physical_dist(source, user) <= 1)
 		return 1
 
 	return 0 //not in range and not telekinetic

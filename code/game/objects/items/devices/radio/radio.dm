@@ -487,7 +487,7 @@
 /obj/item/device/radio/hear_talk(mob/M as mob, msg, var/verb = "says", var/datum/language/speaking = null)
 
 	if (broadcasting)
-		if(get_dist(src, M) <= canhear_range)
+		if(get_physical_dist(src, M) <= canhear_range)
 			talk_into(M, msg,null,verb,speaking)
 
 

@@ -235,7 +235,7 @@ meteor_act
 			location.add_blood(src)
 		if(ishuman(attacker))
 			var/mob/living/carbon/human/H = attacker
-			if(get_dist(H, src) <= 1) //people with TK won't get smeared with blood
+			if(get_physical_dist(H, src) <= 1) //people with TK won't get smeared with blood
 				H.bloody_body(src)
 				H.bloody_hands(src)
 
@@ -331,7 +331,7 @@ meteor_act
 		//check if we hit
 		var/miss_chance = 15
 		if (O.throw_source)
-			var/distance = get_dist(O.throw_source, loc)
+			var/distance = get_physical_dist(O.throw_source, loc)
 			miss_chance = max(15*(distance-2), 0)
 		zone = get_zone_with_miss_chance(zone, src, miss_chance, ranged_attack=1)
 

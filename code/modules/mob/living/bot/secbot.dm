@@ -139,7 +139,7 @@
 	GLOB.moved_event.register(target, src, /mob/living/bot/secbot/proc/target_moved)
 
 /mob/living/bot/secbot/proc/target_moved(atom/movable/moving_instance, atom/old_loc, atom/new_loc)
-	if(get_dist(get_turf(src), get_turf(target)) >= 1)
+	if(get_physical_dist(get_turf(src), get_turf(target)) >= 1)
 		awaiting_surrender = INFINITY
 		GLOB.moved_event.unregister(moving_instance, src)
 

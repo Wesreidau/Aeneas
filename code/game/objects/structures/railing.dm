@@ -187,7 +187,7 @@
 
 /obj/structure/railing/attackby(var/obj/item/W, var/mob/user)
 	// Handle harm intent grabbing/tabling.
-	if(istype(W, /obj/item/grab) && get_dist(src,user)<2)
+	if(istype(W, /obj/item/grab) && get_physical_dist(src,user)<2)
 		var/obj/item/grab/G = W
 		if(istype(G.affecting, /mob/living/carbon/human))
 			var/obj/occupied = turf_is_crowded()

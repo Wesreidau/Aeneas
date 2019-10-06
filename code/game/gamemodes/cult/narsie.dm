@@ -167,7 +167,7 @@ var/global/list/narsie_list = list()
 		old_narsie(A)
 
 /obj/singularity/narsie/proc/new_narsie(const/atom/A)
-	if (istype(A, /mob/) && (get_dist(A, src) <= 7))
+	if (istype(A, /mob/) && (get_physical_dist(A, src) <= 7))
 		var/mob/M = A
 
 		if(M.status_flags & GODMODE)
@@ -177,7 +177,7 @@ var/global/list/narsie_list = list()
 
 //TURF PROCESSING
 	else if (isturf(A))
-		var/dist = get_dist(A, src)
+		var/dist = get_physical_dist(A, src)
 
 		for (var/atom/movable/AM in A.contents)
 			if (dist <= consume_range)
@@ -208,7 +208,7 @@ var/global/list/narsie_list = list()
 		if (A)
 			qdel(A)
 	else if (isturf(A))
-		var/dist = get_dist(A, src)
+		var/dist = get_physical_dist(A, src)
 
 		for (var/atom/movable/AM2 in A.contents)
 			if (AM2 == src) // This is the snowflake.
@@ -240,7 +240,7 @@ var/global/list/narsie_list = list()
 		if (A)
 			qdel(A)
 	else if (isturf(A))
-		var/dist = get_dist(A, src)
+		var/dist = get_physical_dist(A, src)
 
 		for (var/atom/movable/AM2 in A.contents)
 			if (AM2 == src) // This is the snowflake.
