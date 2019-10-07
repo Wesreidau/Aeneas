@@ -47,7 +47,7 @@
 "aU" = (/obj/vehicle/bike/electric,/turf/simulated/floor/tiled,/area/chapel)
 "aV" = (/turf/space,/area/loop/east)
 "aW" = (/obj/item/device/flashlight,/turf/simulated/floor/tiled,/area/chapel)
-"aX" = (/obj/effect/decal/warning_stripes{icon_state = "W-corner"},/obj/machinery/light{icon_state = "tube_map"; dir = 4},/turf/simulated/floor/tiled,/area/chapel)
+"aX" = (/turf/simulated/wall,/area/rnd/xenobiology)
 "aY" = (/obj/structure/catwalk,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor,/area/chapel)
 "aZ" = (/obj/effect/manifest,/obj/structure/catwalk,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor,/area/chapel)
 "ba" = (/obj/machinery/atmospherics/unary/tank/air{start_pressure = 15000},/turf/simulated/floor/tiled/steel_ridged,/area/chapel)
@@ -68,7 +68,7 @@
 "bp" = (/obj/effect/landmark{name = "endgame_exit"},/turf/simulated/floor/tiled,/area/chapel)
 "bq" = (/obj/effect/landmark/start{name = "AI"},/turf/simulated/floor/tiled,/area/chapel)
 "br" = (/obj/effect/landmark/start{name = "Doc"},/turf/simulated/floor/tiled,/area/chapel)
-"bs" = (/obj/effect/decal/warning_stripes{icon_state = "E"},/obj/machinery/light{icon_state = "tube_map"; dir = 8},/turf/simulated/floor/tiled,/area/chapel)
+"bs" = (/obj/effect/decal/warning_stripes{icon_state = "W-corner"},/turf/simulated/floor/tiled,/area/rnd/xenobiology)
 "bt" = (/obj/structure/catwalk,/turf/simulated/floor,/area/chapel)
 "bu" = (/obj/machinery/atmospherics/binary/pump/high_power/on/max_pressure{icon_state = "map_on"; dir = 8},/turf/simulated/floor/tiled/steel_ridged,/area/chapel)
 "bv" = (/obj/machinery/light,/obj/machinery/atmospherics/pipe/simple/visible/cyan{icon_state = "intact"; dir = 4},/turf/simulated/floor/tiled/steel_ridged,/area/chapel)
@@ -88,8 +88,8 @@
 "bJ" = (/obj/effect/landmark{name = "JoinLateCryo"},/turf/simulated/floor/tiled,/area/chapel)
 "bK" = (/obj/effect/landmark/start{name = "Chief Engineer"},/turf/simulated/floor/tiled,/area/chapel)
 "bL" = (/obj/effect/landmark/start{name = "Merchant"},/turf/simulated/floor/tiled,/area/chapel)
-"bM" = (/obj/effect/decal/warning_stripes{icon_state = "W-corner"},/obj/machinery/atmospherics/pipe/simple/visible{icon_state = "intact"; dir = 4},/obj/machinery/meter,/turf/simulated/floor/tiled,/area/chapel)
-"bN" = (/obj/effect/decal/warning_stripes{icon_state = "E"},/obj/machinery/atmospherics/pipe/simple/visible{icon_state = "intact"; dir = 4},/obj/machinery/meter,/turf/simulated/floor/tiled,/area/chapel)
+"bM" = (/turf/simulated/floor/tiled,/area/rnd/xenobiology)
+"bN" = (/obj/effect/decal/warning_stripes{icon_state = "E"},/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24; req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))},/obj/structure/cable{icon_state = "0-2"; d2 = 2},/turf/simulated/floor,/area/rnd/xenobiology)
 "bO" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{icon_state = "intact"; dir = 4},/obj/structure/catwalk,/turf/simulated/floor,/area/chapel)
 "bP" = (/obj/machinery/light{icon_state = "tube_map"; dir = 4},/obj/structure/catwalk,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor,/area/chapel)
 "bQ" = (/obj/machinery/power/smes/buildable{charge = 500000; inputting = 1; name = "Pre-Charged SMES"; outputting = 1},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor,/area/chapel)
@@ -100,10 +100,10 @@
 "bV" = (/obj/machinery/atmospherics/unary/heater,/turf/simulated/floor/tiled,/area/chapel)
 "bW" = (/turf/simulated/wall,/area/maintenance{icon_state = "sub_maint_starboard"; name = "Maintenace"})
 "bX" = (/obj/machinery/door/airlock/glass/civilian,/obj/machinery/door/firedoor,/obj/machinery/atmospherics/pipe/simple/visible{icon_state = "intact"; dir = 4},/turf/simulated/floor/tiled/steel_ridged,/area/chapel)
-"bY" = (/obj/effect/decal/warning_stripes{icon_state = "W-corner"},/obj/machinery/atmospherics/valve{icon_state = "map_valve0"; dir = 8},/turf/simulated/floor/tiled,/area/chapel)
-"bZ" = (/obj/machinery/atmospherics/pipe/simple/visible{icon_state = "intact"; dir = 4},/obj/machinery/meter,/turf/simulated/floor/tiled,/area/chapel)
-"ca" = (/obj/machinery/atmospherics/portables_connector{dir = 8},/turf/simulated/floor/tiled,/area/chapel)
-"cb" = (/obj/item/weapon/wrench,/turf/simulated/floor/tiled,/area/chapel)
+"bY" = (/obj/effect/decal/warning_stripes{icon_state = "W-corner"},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor,/area/rnd/xenobiology)
+"bZ" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor,/area/rnd/xenobiology)
+"ca" = (/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/machinery/power/smes/buildable{charge = 500000; inputting = 1; name = "Pre-Charged SMES"; outputting = 1},/turf/simulated/floor,/area/rnd/xenobiology)
+"cb" = (/obj/effect/decal/warning_stripes{icon_state = "E"},/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/item/device/multitool,/turf/simulated/floor,/area/rnd/xenobiology)
 "cc" = (/obj/machinery/atmospherics/pipe/simple/visible{icon_state = "intact"; dir = 5},/obj/machinery/meter,/turf/simulated/floor/tiled,/area/chapel)
 "cd" = (/obj/effect/decal/warning_stripes{icon_state = "E"},/obj/machinery/atmospherics/valve{icon_state = "map_valve0"; dir = 8},/turf/simulated/floor/tiled,/area/chapel)
 "ce" = (/turf/simulated/floor/tiled/old_tile,/area/maintenance{icon_state = "sub_maint_starboard"; name = "Maintenace"})
@@ -297,9 +297,32 @@
 "fK" = (/obj/machinery/light,/turf/simulated/floor,/area/security/prison)
 "fL" = (/obj/machinery/atmospherics/unary/tank/hydrogen{connect_dir_type = 1},/turf/simulated/floor,/area/security/prison)
 "fM" = (/obj/machinery/atmospherics/portables_connector{icon_state = "map_connector"; dir = 1},/turf/simulated/floor,/area/security/prison)
-"fN" = (/obj/effect/decal/warning_stripes,/turf/simulated/floor/tiled,/area/chapel)
+"fN" = (/obj/effect/decal/warning_stripes{icon_state = "W-corner"},/obj/machinery/light{icon_state = "tube_map"; dir = 4},/turf/simulated/floor/tiled,/area/rnd/xenobiology)
 "fO" = (/obj/effect/landmark/map_data/ringtest/upper,/turf/space,/area/loop/west)
 "fP" = (/obj/effect/landmark/map_data/ringtest/lower,/turf/space,/area)
+"fQ" = (/obj/effect/decal/warning_stripes{icon_state = "E"},/mob/living/simple_animal/hostile/viscerator,/turf/simulated/floor/tiled,/area/rnd/xenobiology)
+"fR" = (/mob/living/simple_animal/hostile/viscerator,/turf/simulated/floor/tiled,/area/rnd/xenobiology)
+"fS" = (/obj/effect/decal/warning_stripes{icon_state = "E"},/turf/simulated/floor/tiled,/area/rnd/xenobiology)
+"fT" = (/obj/item/weapon/grenade/spawnergrenade/manhacks,/turf/simulated/floor/tiled,/area/chapel)
+"fU" = (/obj/effect/decal/warning_stripes{icon_state = "E"},/obj/machinery/light{icon_state = "tube_map"; dir = 8},/turf/simulated/floor/tiled,/area/rnd/xenobiology)
+"fV" = (/obj/machinery/portable_atmospherics/canister/hydrogen,/turf/simulated/floor/tiled,/area/rnd/xenobiology)
+"fW" = (/obj/effect/decal/warning_stripes,/turf/simulated/floor/tiled,/area/rnd/xenobiology)
+"fX" = (/obj/item/weapon/wrench,/turf/simulated/floor/tiled,/area/rnd/xenobiology)
+"fY" = (/obj/item/weapon/grenade/frag,/turf/simulated/floor/tiled,/area/chapel)
+"fZ" = (/obj/item/weapon/gun/projectile/shotgun/pump/combat,/turf/simulated/floor/tiled,/area/chapel)
+"ga" = (/obj/item/weapon/grenade/empgrenade,/turf/simulated/floor/tiled,/area/chapel)
+"gb" = (/obj/item/weapon/grenade/chem_grenade/metalfoam,/turf/simulated/floor/tiled,/area/chapel)
+"gc" = (/obj/item/weapon/grenade/spawnergrenade/spesscarp,/turf/simulated/floor/tiled,/area/chapel)
+"gd" = (/obj/effect/decal/warning_stripes{icon_state = "W-corner"},/obj/machinery/atmospherics/pipe/simple/visible{icon_state = "intact"; dir = 4},/obj/machinery/meter,/turf/simulated/floor/tiled,/area/rnd/xenobiology)
+"ge" = (/obj/machinery/atmospherics/pipe/simple/visible{icon_state = "intact"; dir = 4},/turf/simulated/floor/tiled,/area/rnd/xenobiology)
+"gf" = (/obj/effect/decal/warning_stripes{icon_state = "W-corner"},/obj/machinery/atmospherics/valve{icon_state = "map_valve0"; dir = 8},/turf/simulated/floor/tiled,/area/rnd/xenobiology)
+"gg" = (/obj/machinery/atmospherics/pipe/simple/visible{icon_state = "intact"; dir = 4},/obj/machinery/meter,/turf/simulated/floor/tiled,/area/rnd/xenobiology)
+"gh" = (/obj/machinery/atmospherics/portables_connector{dir = 8},/turf/simulated/floor/tiled,/area/rnd/xenobiology)
+"gi" = (/obj/machinery/door/airlock/glass/civilian,/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/steel_ridged,/area/chapel)
+"gj" = (/obj/item/weapon/storage/box/ammo/shotgunshells,/turf/simulated/floor/tiled,/area/chapel)
+"gk" = (/obj/item/ammo_magazine/shotholder/shell,/turf/simulated/floor/tiled,/area/chapel)
+"gl" = (/obj/item/weapon/grenade/chem_grenade/incendiary,/turf/simulated/floor/tiled,/area/chapel)
+"gm" = (/obj/effect/decal/warning_stripes{icon_state = "E"},/obj/machinery/atmospherics/pipe/simple/visible{icon_state = "intact"; dir = 4},/obj/machinery/meter,/turf/simulated/floor/tiled,/area/rnd/xenobiology)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -352,21 +375,21 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 (1,1,2) = {"
 aCaCaCaCaCaCaCababababababababababababababababababababababababababababababababababababababaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
 aCaCaCaCaCaCaCababababababababababababababababababababababababababababababababababababababaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCacacacacacacacacacbGadadadadadadadbGacacacacacacacacacacacacacacacacacacbHacaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCaeamamamamamamamaeadbcagahaiajakafadamanaoapaqarasatauavawaxamamamaxamamacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCaeamamamamamamamaeadazazazazazazaladaAamaBamamamamamamamamamamamamamamamacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCaeamamamamamamamaXadazazazazazazaDaEaFaIaJamamaKaLamamamamamamamamamamamacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCaeamamamamamamamaeadbUazazazazazaGadaHaPaQamaRaSaSaTamaUamamamamamamamamacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCaeamamamamamamamaebGadadadadadadadbGaMamamamaWaWaWaWamamamamamamamamamambHbsaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCaeamfNamfNamamamaeacaearaxamamaxamaNaOamamamamamamamambbamamamamamambVayacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCaeamamamamamamambMbXbYbZcacbamamamamaMamambdamamamamamamamamamamamamcccdbXbNaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCaeamfNamfNamamamaeacaecpcqcqcqcqcqcqcraYaYaYaZaYaYaYbPbQbSbTamblamamamayacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCaeamamamamamamamaebHamcsamamamamamambmamamamamamamamamamamamamamamamamambHbsaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCaeamamamamamamamaeacamcsamambnbnbnbnbmbnbnbnbnamamboambpambqambramamamamacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCaeamamamamamamamaXbWbWcobWctbtbabebtbmbtbebfbtbwbxambyambzambAambBamamamacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCaeamamamamamamamaebWcucvcwctbtbgbhbEbFbEbibjbtbwambIambJambKambLamamamamacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCaeamamamamamamamaebWcxcycxctbtbkbubOesbObvbCbtbwamambRamamambRamamamamamacayaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
-aCaCaCaCaCaCaCacacacacacacacacacetexexexexexexexeyezeyczcAcAczcBcCczcDcDcDczcEcFczcAcAczacaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCaXaXaXaXaXaXaXaXaXbGadadadadadadadbGacacacacacacacacacacacacacacacacacacbHaXaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCbsbMbMbMbMbMbMbMbsadbcagahaiajakafadamanaoapaqarasatauavawaxamamamaxamamacbNaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCbYbZcabMbMbMbMbMbsadazazazazazazaladaAamaBamamamamamamamamamamamamamamamaccbaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCbsbMbMbMbMbMbMbMfNadazazazazazazaDaEaFaIaJamamaKaLamamamamamamamamamamamacfQaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCbsfRbMbMbMbMbMbMbsadbUazazazazazaGadaHaPaQamaRaSaSaTamaUamamamamamamamamacfSaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCbsbMbMbMbMbMbMbMbsbGadadadadadadadbGaMamamamaWaWaWaWfTfTamamamamamamamambHfUaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCbsfVfWfXfWbMbMbMbsacaeamaxamamaxamaNaOamfYfYfYfZgagagbbbgcamamamamambVayacfSaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCgdgegfggghbMbMbMbsgiaeamamamamamamamaMamambdgjgkgkgaglgcamamamamamamcccdbXgmaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCbsbMfWbMfWbMbMbMbsacaecpcqcqcqcqcqcqcraYaYaYaZaYaYaYbPbQbSbTamblamamamayacfSaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCbsbMbMbMbMbMbMbMbsbHamcsamamamamamambmamamamamamamamamamamamamamamamamambHfUaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCbsfRbMbMbMbMbMbMbsacamcsamambnbnbnbnbmbnbnbnbnamamboambpambqambramamamamacfQaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCbsbMbMbMbMbMbMbMfNbWbWcobWctbtbabebtbmbtbebfbtbwbxambyambzambAambBamamamacfSaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCbsbMbMbMbMbMbMbMbsbWcucvcwctbtbgbhbEbFbEbibjbtbwambIambJambKambLamamamamacfSaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCbsbMbMbMbMbMbMbMbsbWcxcycxctbtbkbubOesbObvbCbtbwamambRamamambRamamamamamacfSaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
+aCaCaCaCaCaCaCaXaXaXaXaXaXaXaXaXetexexexexexexexeyezeyczcAcAczcBcCczcDcDcDczcEcFczcAcAczaXaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
 aCaCaCaCaCaCaCeuevevevevevevewabexeAeAeEeCeIeFeGeAeHeAcAcGcHcHcHcIcJcDcKcDcBcLcHcHcHcGcAabaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
 aCaCaCaCaCaCaCeBeBeBeBeBeBeBeBabexeAeAeLePeQeAeAeMeNeOcAcMcNcOcPcQczcRcScRczcQcPcTcUcVcAabaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
 aCaCaCaCaCaCaCeDeDeDeDeDeDeDeDabexeAeAeLeReSeAeAeAeHeAcAcMcWcGcGcXcYcZdacZdbdcdddddecVcAabaVaVaVaVaVaVaVaVaVaVaVaVaVaVaV
