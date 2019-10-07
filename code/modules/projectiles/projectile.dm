@@ -253,7 +253,7 @@
 		return 0
 
 	var/passthrough = 0 //if the projectile should continue flying
-	var/distance = get_dist(starting,loc)
+	var/distance = get_physical_dist(starting,loc)
 
 	bumped = 1
 	if(ismob(A))

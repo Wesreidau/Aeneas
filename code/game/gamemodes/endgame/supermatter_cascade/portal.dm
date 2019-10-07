@@ -45,7 +45,7 @@
 
 	else if (isturf(A))
 		var/turf/T = A
-		var/dist = get_dist(T, src)
+		var/dist = get_physical_dist(T, src)
 		if (dist <= consume_range && T.density)
 			T.set_density(0)
 
@@ -74,7 +74,7 @@
 
 /mob/proc/see_rift(var/obj/singularity/narsie/large/exit/R)
 	var/turf/T_mob = get_turf(src)
-	if((R.z == get_z(T_mob)) && (get_dist(R,T_mob) <= (R.consume_range+10)) && !(R in physical_view(T_mob)))
+	if((R.z == get_z(T_mob)) && (get_physical_dist(R,T_mob) <= (R.consume_range+10)) && !(R in physical_view(T_mob)))
 		if(!riftimage)
 			riftimage = image('icons/obj/rift.dmi',T_mob,"rift",LIGHTING_LAYER+2,1)
 			riftimage.mouse_opacity = 0

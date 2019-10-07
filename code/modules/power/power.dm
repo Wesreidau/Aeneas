@@ -100,7 +100,7 @@
 		if(!T.is_plating() || !istype(T, /turf/simulated/floor))
 			return
 
-		if(get_dist(src, user) > 1)
+		if(get_physical_dist(src, user) > 1)
 			return
 
 		coil.turf_place(T, user)

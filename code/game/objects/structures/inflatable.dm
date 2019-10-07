@@ -217,7 +217,7 @@
 	if(isAI(user)) //so the AI can't open it
 		return
 	else if(isrobot(user)) //but cyborgs can
-		if(get_dist(user,src) <= 1) //not remotely though
+		if(get_physical_dist(user,src) <= 1) //not remotely though
 			return TryToSwitchState(user)
 
 /obj/structure/inflatable/door/attack_hand(mob/user as mob)

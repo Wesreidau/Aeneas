@@ -144,7 +144,7 @@
 		else if (friend.stat || friend.health <= 50) //danger or just sleeping
 			follow_dist = 2
 		var/near_dist = max(follow_dist - 2, 1)
-		var/current_dist = get_dist(src, friend)
+		var/current_dist = get_physical_dist(src, friend)
 
 		if (movement_target != friend)
 			if (current_dist > follow_dist && !istype(movement_target, /mob/living/simple_animal/mouse) && (friend in physical_oview(src)))
@@ -174,7 +174,7 @@
 		return FALSE
 	if (stat || !friend)
 		return
-	if (get_dist(src, friend) <= 1)
+	if (get_physical_dist(src, friend) <= 1)
 		if (friend.stat >= DEAD || friend.is_asystole())
 			if (prob((friend.stat < DEAD)? 50 : 15))
 				var/verb = pick("meows", "mews", "mrowls")

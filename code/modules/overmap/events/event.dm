@@ -56,7 +56,7 @@
 		if(random_neighbour)
 			candidate_turfs -= random_neighbour
 			selected_turfs += random_neighbour
-			if(get_dist(origin_turf, random_neighbour) < distance_from_origin)
+			if(get_physical_dist(origin_turf, random_neighbour) < distance_from_origin)
 				selection_turfs += random_neighbour
 		else
 			selection_turfs -= selection_turf

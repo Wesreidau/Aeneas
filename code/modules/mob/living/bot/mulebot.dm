@@ -56,7 +56,7 @@
 	if(user.stat)
 		return
 
-	if(!istype(C) || C.anchored || get_dist(user, src) > 1 || get_dist(src, C) > 1 )
+	if(!istype(C) || C.anchored || get_physical_dist(user, src) > 1 || get_physical_dist(src, C) > 1 )
 		return
 
 	load(C)
@@ -255,7 +255,7 @@
 	return beaconlist
 
 /mob/living/bot/mulebot/proc/load(var/atom/movable/C)
-	if(busy || load || get_dist(C, src) > 1 || !isturf(C.loc))
+	if(busy || load || get_physical_dist(C, src) > 1 || !isturf(C.loc))
 		return
 
 	for(var/obj/structure/plasticflaps/P in src.loc)//Takes flaps into account

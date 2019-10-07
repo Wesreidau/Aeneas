@@ -136,7 +136,7 @@
 
 		var/miss_chance = 15
 		if (O.throw_source)
-			var/distance = get_dist(O.throw_source, loc)
+			var/distance = get_physical_dist(O.throw_source, loc)
 			miss_chance = max(15*(distance-2), 0)
 
 		if (prob(miss_chance))

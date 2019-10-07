@@ -29,7 +29,7 @@
 
 	var/mob/M = thrower
 	if(isGlass && istype(M) && M.a_intent != I_HELP)
-		var/throw_dist = get_dist(throw_source, loc)
+		var/throw_dist = get_physical_dist(throw_source, loc)
 		if(speed > throw_speed || smash_check(throw_dist)) //not as reliable as smashing directly
 			if(reagents)
 				hit_atom.visible_message("<span class='notice'>The contents of \the [src] splash all over [hit_atom]!</span>")

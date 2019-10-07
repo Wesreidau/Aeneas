@@ -32,7 +32,7 @@ proc/empulse(turf/epicenter, heavy_range, light_range, log=0)
 		#ifdef EMPDEBUG
 		var/time = world.timeofday
 		#endif
-		var/distance = get_dist(epicenter, T)
+		var/distance = get_physical_dist(epicenter, T)
 		if(distance < 0)
 			distance = 0
 		if(distance < heavy_range)

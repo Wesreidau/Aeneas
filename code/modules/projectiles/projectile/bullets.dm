@@ -104,7 +104,7 @@
 	return 0
 
 /obj/item/projectile/bullet/pellet/get_structure_damage()
-	var/distance = get_dist(loc, starting)
+	var/distance = get_physical_dist(loc, starting)
 	return ..() * get_pellets(distance)
 
 /obj/item/projectile/bullet/pellet/Move()

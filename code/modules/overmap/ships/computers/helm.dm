@@ -51,7 +51,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 			var/heading = linked.get_heading()
 
 			// Destination is current grid or speedlimit is exceeded
-			if ((get_dist(linked.loc, T) <= brake_path) || ((speedlimit) && (speed > speedlimit)))
+			if ((get_physical_dist(linked.loc, T) <= brake_path) || ((speedlimit) && (speed > speedlimit)))
 				linked.decelerate()
 			// Heading does not match direction
 			else if (heading & ~direction)

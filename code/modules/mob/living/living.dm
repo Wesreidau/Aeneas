@@ -500,7 +500,7 @@ default behaviour is:
 	if (buckled)
 		return
 
-	if(get_dist(src, pulling) > 1)
+	if(pulling && get_physical_dist(src, pulling) > 1)
 		stop_pulling()
 
 	var/turf/old_loc = get_turf(src)
@@ -517,25 +517,30 @@ default behaviour is:
 		for(var/mob/living/carbon/slime/M in physical_view(1,src))
 			M.UpdateFeed()
 
+/*
+	Name is a little unintuitive. This checks if the mob can continue pulling what its already pulling, or start pulling something new
+*/
 /mob/living/proc/can_pull()
 	if(!moving)
 		return FALSE
-	if(pulling.anchored)
-		return FALSE
-	if(!isturf(pulling.loc))
-		return FALSE
 	if(restrained())
 		return FALSE
-
-	if(get_dist(src, pulling) > 2)
-		return FALSE
-
-	if(pulling.z != z)
-		if(pulling.z < z)
+	if (pulling)
+		if(pulling.anchored)
 			return FALSE
-		var/turf/T = GetAbove(src)
-		if(!isopenspace(T))
+		if(!isturf(pulling.loc))
 			return FALSE
+
+
+		if(get_physical_dist(src, pulling) > 2)
+			return FALSE
+
+		if(pulling.z != z)
+			if(pulling.z < z)
+				return FALSE
+			var/turf/T = GetAbove(src)
+			if(!isopenspace(T))
+				return FALSE
 	return TRUE
 
 /mob/living/proc/handle_pulling_after_move(turf/old_loc)
@@ -545,6 +550,10 @@ default behaviour is:
 	if(!can_pull())
 		stop_pulling()
 		return
+
+	//We replace old loc with the nearest mirror - from the pulled item's perspective.
+	//This ensures things can be properly dragged across seams
+	old_loc = get_nearest_mirror(pulling.loc, old_loc)
 
 	if (!isliving(pulling))
 		step(pulling, get_dir(pulling.loc, old_loc))

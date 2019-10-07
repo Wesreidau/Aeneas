@@ -196,7 +196,7 @@
 		hackdoor = null
 		return
 	while(hackprogress < 1000)
-		if(cable && cable.machine == D && cable.machine == hackdoor && get_dist(src, hackdoor) <= 1)
+		if(cable && cable.machine == D && cable.machine == hackdoor && get_physical_dist(src, hackdoor) <= 1)
 			hackprogress = min(hackprogress+rand(1, 20), 1000)
 		else
 			hack_aborted = 1

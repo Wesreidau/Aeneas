@@ -355,7 +355,7 @@
 
 /*
 /obj/machinery/power/port_gen/pacman/interact(mob/user)
-	if (get_dist(src, user) > 1 )
+	if (get_physical_dist(src, user) > 1 )
 		if (!istype(user, /mob/living/silicon/ai))
 			user.unset_machine()
 			user << browse(null, "window=port_gen")

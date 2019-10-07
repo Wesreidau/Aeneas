@@ -184,8 +184,10 @@
 // As such this all gets counted as a single line.
 // The braces and semicolons are there to be able to do this on a single line.
 
-#define APPLY_CORNER(C)              \
-	. = LUM_FALLOFF(C, source_turf); \
+#define APPLY_CORNER(C, T)  \
+	var/vector2/delta =  get_physical_vector_offset(source_turf, T);           \
+	delta -= (direction_to_vector(C.masters[T])*0.5);\
+	. = LUM_FALLOFF(delta); \
 	. *= (light_max_bright ** 2);    \
 	. *= light_max_bright < 0 ? -1:1;\
 	effect_str[C] = .;               \
@@ -210,7 +212,7 @@
 // Assuming a brightness of 1 at range 1, formula should be (brightness = 1 / distance^2)
 // However, due to the weird range factor, brightness = (-(distance - full_dark_start) / (full_dark_start - full_light_end)) ^ light_max_bright
 
-#define LUM_FALLOFF(C, T)(CLAMP01(-((((C.x - T.x) ** 2 +(C.y - T.y) ** 2) ** 0.5 - light_outer_range) / max(light_outer_range - light_inner_range, 1))) ** light_falloff_curve)
+#define LUM_FALLOFF(delta)(CLAMP01(-((((delta.x) ** 2 +(delta.y) ** 2) ** 0.5 - light_outer_range) / max(light_outer_range - light_inner_range, 1))) ** light_falloff_curve)
 
 
 /datum/light_source/proc/apply_lum()
@@ -237,7 +239,7 @@
 				effect_str[C] = 0
 				continue
 
-			APPLY_CORNER(C)
+			APPLY_CORNER(C, T)
 
 		LAZYADD(T.affecting_lights, src)
 		affecting_turfs += T
@@ -268,7 +270,7 @@
 			effect_str[C] = 0
 			continue
 
-		APPLY_CORNER(C)
+		APPLY_CORNER(C, T)
 
 	LAZYADD(T.affecting_lights, src)
 	affecting_turfs += T
@@ -297,7 +299,7 @@
 	if(effect_str.Find(C)) // Already have one.
 		REMOVE_CORNER(C)
 
-	APPLY_CORNER(C)
+	APPLY_CORNER(C, C.masters[1])
 
 /datum/light_source/proc/smart_vis_update()
 	var/list/datum/lighting_corner/corners = list()
@@ -329,7 +331,7 @@
 			effect_str[C] = 0
 			continue
 
-		APPLY_CORNER(C)
+		APPLY_CORNER(C, C.masters[1])
 
 	for(var/datum/lighting_corner/C in effect_str - corners) // Old, now gone, corners.
 		REMOVE_CORNER(C)

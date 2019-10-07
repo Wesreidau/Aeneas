@@ -113,7 +113,7 @@
 			scrubber.update_icon()
 
 	proc/validscrubber( var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber as obj )
-		if(!isobj(scrubber) || get_dist(scrubber.loc, src.loc) > src.range || scrubber.loc.z != src.loc.z)
+		if(!isobj(scrubber) || get_physical_dist(scrubber.loc, src.loc) > src.range || scrubber.loc.z != src.loc.z)
 			return 0
 
 		return 1

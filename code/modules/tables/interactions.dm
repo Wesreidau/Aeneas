@@ -24,7 +24,7 @@
 		cover = get_physical_step(loc, get_dir(from, loc))
 	if(!cover)
 		return 1
-	if (get_dist(P.starting, loc) <= 1) //Tables won't help you if people are THIS close
+	if (get_physical_dist(P.starting, loc) <= 1) //Tables won't help you if people are THIS close
 		return 1
 
 	var/chance = 20

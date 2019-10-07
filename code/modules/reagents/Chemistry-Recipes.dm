@@ -553,7 +553,7 @@
 	s.set_up(2, 1, location)
 	s.start()
 	for(var/mob/living/carbon/M in viewers(world.view, location))
-		switch(get_dist(M, location))
+		switch(get_physical_dist(M, location))
 			if(0 to 3)
 				if(hasvar(M, "glasses"))
 					if(istype(M:glasses, /obj/item/clothing/glasses/sunglasses))

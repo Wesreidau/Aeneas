@@ -40,7 +40,7 @@
 	. = ..()
 
 /spell/hand/proc/valid_target(var/atom/a,var/mob/user) //we use seperate procs for our target checking for the hand spells.
-	var/distance = get_dist(a,user)
+	var/distance = get_physical_dist(a,user)
 	if((min_range && distance < min_range) || (range && distance > range))
 		return FALSE
 	if(!is_type_in_list(a,compatible_targets))

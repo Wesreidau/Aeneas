@@ -131,7 +131,7 @@
 
 /obj/item/integrated_circuit/reagent/injector/proc/target_nearby(var/weakref/target)
 	var/mob/living/L = target.resolve()
-	if(!L || get_dist(src,L) > 1)
+	if(!L || get_physical_dist(src,L) > 1)
 		return
 	return L
 

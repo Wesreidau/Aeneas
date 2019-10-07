@@ -40,7 +40,7 @@ var/list/solars_list = list()
 
 //set the control of the panel to a given computer if closer than SOLAR_MAX_DIST
 /obj/machinery/power/solar/proc/set_control(var/obj/machinery/power/solar_control/SC)
-	if(SC && (get_dist(src, SC) > SOLAR_MAX_DIST))
+	if(SC && (get_physical_dist(src, SC) > SOLAR_MAX_DIST))
 		return 0
 	control = SC
 	return 1

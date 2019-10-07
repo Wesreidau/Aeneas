@@ -36,7 +36,7 @@
 		if(!(T.z in GLOB.using_map.sealed_levels)) // Picking a turf outside the map edge isn't recommended
 			if(T.x >= world.maxx-TRANSITIONEDGE || T.x <= TRANSITIONEDGE)	continue
 			if(T.y >= world.maxy-TRANSITIONEDGE || T.y <= TRANSITIONEDGE)	continue
-		if(!inner_range || get_dist(origin, T) >= inner_range)
+		if(!inner_range || get_physical_dist(origin, T) >= inner_range)
 			turfs += T
 	if(turfs.len)
 		return pick(turfs)
@@ -220,3 +220,77 @@
 
 	for (var/turf/simulated/floor/F in turfs)
 		F.update_icon()
+
+
+/*
+	Finds the physical distance between two turfs. It does this by comparing the distance from origin, to the target turf, AND to all mirrors of the target turf
+	We will not check mirrors of origin, we assume origin is always a physical turf
+*/
+/proc/get_physical_dist(var/turf/origin, var/turf/target)
+	if (!istype(origin))
+		origin = get_turf(origin)
+	if (!istype(target))
+		target = get_turf(target)
+
+	var/shortest = get_dist(origin, target)
+	var/newdist
+	if (!target) //If target is null, we'll just return whatever get_dist gave us
+		return shortest
+	for (var/turf/T in target.mirrors)
+		newdist = get_dist(origin, T)
+		if (newdist < shortest)
+			shortest = newdist
+
+	return shortest
+
+/*
+	As above, but returns a vector2 position delta instead of a length
+*/
+/proc/get_physical_vector_offset(var/turf/origin, var/turf/target)
+	if (!istype(origin))
+		origin = get_turf(origin)
+
+	var/shortest = get_dist(origin, target)
+	var/vector2/shortest_vec = new /vector2(target.x - origin.x, target.y - origin.y)
+	var/newdist
+	for (var/turf/T in target.mirrors)
+		newdist = get_dist(origin, T)
+		if (newdist < shortest)
+			shortest = newdist
+			shortest_vec.x = T.x - origin.x
+			shortest_vec.y = T.y - origin.y
+
+	return shortest_vec
+
+/*
+	Similar to the above, this one returns the actual mirror turf which is closest
+*/
+/proc/get_nearest_mirror(var/turf/origin, var/turf/target)
+	if (!istype(origin))
+		origin = get_turf(origin)
+
+	var/shortest = get_dist(origin, target)
+	var/nearest = target
+	var/newdist
+	for (var/turf/T in target.mirrors)
+		newdist = get_dist(origin, T)
+		if (newdist < shortest)
+			shortest = newdist
+			nearest = T
+
+	return nearest
+
+/*
+	Takes a direction, and returns a ve
+*/
+/proc/direction_to_vector(var/direction)
+	var/vector2/vecdir = new /vector2(0,0)
+
+	if(direction & NORTH)
+		vecdir.y = 1
+	if(direction & SOUTH)
+		vecdir.y = -1
+	if(direction & EAST)
+		vecdir.x = 1
+	if(direction & WEST)
+		vecdir.x = -1

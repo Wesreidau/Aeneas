@@ -115,7 +115,7 @@
 	if(!CanPhysicallyInteract(user))
 		return
 
-	if (!istype(pipe) || get_dist(src,pipe) > 1 )
+	if (!istype(pipe) || get_physical_dist(src,pipe) > 1 )
 		return
 
 	if (pipe.anchored)

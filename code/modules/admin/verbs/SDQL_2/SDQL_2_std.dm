@@ -42,7 +42,7 @@
 	return get_dir(Loc1, Loc2)
 
 /proc/_get_dist(Loc1, Loc2)
-	return get_dist(Loc1, Loc2)
+	return get_physical_dist(Loc1, Loc2)
 
 /proc/_get_physical_step(Ref, Dir)
 	return get_physical_step(Ref, Dir)

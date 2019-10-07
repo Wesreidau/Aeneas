@@ -588,7 +588,7 @@ BLIND     // can't see anything
 	if (hidden_item)
 		if (loc == user)
 			to_chat(user, SPAN_ITALIC("\An [hidden_item] is inside."))
-		else if (get_dist(src, user) == 1)
+		else if (get_physical_dist(src, user) == 1)
 			to_chat(user, SPAN_ITALIC("Something is hidden inside."))
 
 /obj/item/clothing/shoes/attack_hand(var/mob/living/user)
@@ -932,7 +932,7 @@ BLIND     // can't see anything
 
 	var/list/modes = list("Off", "Binary sensors", "Vitals tracker", "Tracking beacon")
 	var/switchMode = input("Select a sensor mode:", "Suit Sensor Mode", modes[sensor_mode + 1]) in modes
-	if(get_dist(user, src) > 1)
+	if(get_physical_dist(user, src) > 1)
 		to_chat(user, "You have moved too far away.")
 		return
 	sensor_mode = modes.Find(switchMode) - 1

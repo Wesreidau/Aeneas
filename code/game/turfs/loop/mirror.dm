@@ -36,6 +36,9 @@
 	reflection_coords = new /vector2(Wrap(x, L.bounds_lower.x, L.bounds_upper.x+1), Wrap(y, L.bounds_lower.y, L.bounds_upper.y+1))
 	reflection = locate(reflection_coords.x, reflection_coords.y, z)
 
+	if (istype(reflection))
+		LAZYADD(reflection.mirrors, src)
+
 	//We need to sync our opacity
 	GLOB.opacity_set_event.register(reflection, src, /turf/mirror/proc/synchronise)
 

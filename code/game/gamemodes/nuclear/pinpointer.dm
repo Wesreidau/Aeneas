@@ -103,7 +103,7 @@
 
 	dir = get_dir(here,there)
 	var/image/pointer = image(icon,"pin_point")
-	var/distance = get_dist(here,there)
+	var/distance = get_physical_dist(here,there)
 	if(distance < world.view)
 		pointer.color = COLOR_LIME
 	else if(distance > 4*world.view)

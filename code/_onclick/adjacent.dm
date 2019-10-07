@@ -26,7 +26,8 @@
 		* Passing through in this case ignores anything with the throwpass flag, such as tables, racks, and morgue trays.
 */
 /turf/Adjacent(var/atom/neighbor, var/atom/target = null)
-	var/turf/T0 = get_turf(neighbor)
+	//We get the nearest mirror of the turf, and this allows us to use legacy functions for get_dist/get_step
+	var/turf/T0 = get_nearest_mirror(src, get_turf(neighbor))
 	if(T0 == src)
 		return 1
 	if(!T0 || T0.z != z)
@@ -47,7 +48,8 @@
 		if(!T0.ClickCross(d, border_only = 1, target_atom = neighbor))
 			continue // could not leave T0 in that direction
 
-		var/turf/T1 = get_physical_step(T0,d)
+
+		var/turf/T1 = get_step(T0,d)
 		if(!T1 || T1.density || !T1.ClickCross(get_dir(T1,T0) | get_dir(T1,src), border_only = 0))
 			continue // couldn't enter or couldn't leave T1
 
@@ -67,7 +69,7 @@ Quick adjacency (to turf):
 	if(T0 == src)
 		return 1
 
-	if(get_dist(src,T0) > 1)
+	if(get_physical_dist(src,T0) > 1)
 		return 0
 
 	return 1

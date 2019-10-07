@@ -22,7 +22,7 @@ GLOBAL_LIST_INIT(fusion_plants, new)
 
 /datum/fusion_plant/proc/within_radius(var/atom/checking)
 	for(var/thing in all_objects)
-		if(get_dist(thing, checking) > network_size)
+		if(get_physical_dist(thing, checking) > network_size)
 			return FALSE
 	return TRUE
 

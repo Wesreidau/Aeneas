@@ -420,7 +420,7 @@
 //attack with an item - open/close cover, insert cell, or (un)lock interface
 
 /obj/machinery/power/apc/attackby(obj/item/W, mob/user)
-	if (istype(user, /mob/living/silicon) && get_dist(src,user)>1)
+	if (istype(user, /mob/living/silicon) && get_physical_dist(src,user)>1)
 		return attack_robot(user)
 	if(istype(W, /obj/item/inducer))
 		return FALSE // inducer.dm afterattack handles this
