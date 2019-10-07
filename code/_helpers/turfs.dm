@@ -249,6 +249,8 @@
 /proc/get_physical_vector_offset(var/turf/origin, var/turf/target)
 	if (!istype(origin))
 		origin = get_turf(origin)
+	if (!istype(target))
+		target = get_turf(target)
 
 	var/shortest = get_dist(origin, target)
 	var/vector2/shortest_vec = new /vector2(target.x - origin.x, target.y - origin.y)
@@ -268,6 +270,8 @@
 /proc/get_nearest_mirror(var/turf/origin, var/turf/target)
 	if (!istype(origin))
 		origin = get_turf(origin)
+	if (!istype(target))
+		target = get_turf(target)
 
 	var/shortest = get_dist(origin, target)
 	var/nearest = target
@@ -281,7 +285,7 @@
 	return nearest
 
 /*
-	Takes a direction, and returns a ve
+	Takes a direction, and returns a vector with axes in the range -1 to 1
 */
 /proc/direction_to_vector(var/direction)
 	var/vector2/vecdir = new /vector2(0,0)
@@ -294,3 +298,4 @@
 		vecdir.x = 1
 	if(direction & WEST)
 		vecdir.x = -1
+

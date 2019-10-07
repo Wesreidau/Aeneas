@@ -50,7 +50,8 @@
 	var/penetration_modifier = 0.2 //How much internal damage this projectile can deal, as a multiplier.
 
 	var/hitscan = 0		// whether the projectile should be hitscan
-	var/step_delay = 1	// the delay between iterations if not a hitscan projectile
+	var/step_delay = 1.2	// the delay between iterations if not a hitscan projectile
+	var/cached_rotation = 0 //This is used to prevent rotation changes from accumulating on redirects
 
 	// effect types to be used
 	var/muzzle_type
@@ -138,7 +139,7 @@
 //called to launch a projectile
 /obj/item/projectile/proc/launch(atom/target, var/target_zone, var/x_offset=0, var/y_offset=0, var/angle_offset=0)
 	var/turf/curloc = get_turf(src)
-	var/turf/targloc = get_turf(target)
+	var/turf/targloc = get_nearest_mirror(curloc,get_turf(target))
 	if (!istype(targloc) || !istype(curloc))
 		return 1
 
@@ -324,6 +325,7 @@
 
 		trajectory.increment()	// increment the current location
 		location = trajectory.return_location(location)		// update the locally stored location data
+		debug_mark_turf(current)
 
 		if(!location)
 			qdel(src)	// if it's left the world... kill it
@@ -368,14 +370,16 @@
 
 	// plot the initial trajectory
 	trajectory = new()
-	trajectory.setup(starting, original, pixel_x, pixel_y, angle_offset=offset)
+	trajectory.setup(starting, targloc, pixel_x, pixel_y, angle_offset=offset)
 
 	// generate this now since all visual effects the projectile makes can use it
 	effect_transform = new()
 	effect_transform.Scale(round(trajectory.return_hypotenuse() + 0.005, 0.001) , 1) //Seems like a weird spot to truncate, but it minimizes gaps.
 	effect_transform.Turn(round(-trajectory.return_angle(), 0.1))		//no idea why this has to be inverted, but it works
 
-	transform = turn(transform, -(trajectory.return_angle() + 90)) //no idea why 90 needs to be added, but it works
+	var/newrot = (-(trajectory.return_angle() + 90))
+	transform = turn(transform, newrot - cached_rotation) //Bullets are turned because their sprites are drawn side-facing
+	cached_rotation = newrot
 
 /obj/item/projectile/proc/muzzle_effect(var/matrix/T)
 	if(silenced)

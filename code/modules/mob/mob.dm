@@ -298,7 +298,7 @@
 		to_chat(src, "<span class='notice'>Something is there but you can't see it.</span>")
 		return 1
 
-	face_atom(A)
+	physical_face_atom(A)
 
 	if(!isghost(src))
 		if(A.loc != src || A == l_hand || A == r_hand)
@@ -331,7 +331,7 @@
 		if(P)
 			qdel(P)	// qdel
 
-	face_atom(A)
+	physical_face_atom(A)
 	return 1
 
 //Gets the mob grab conga line.

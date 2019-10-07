@@ -58,12 +58,12 @@
 	for(var/atom/A in ListTargets(10))
 		var/atom/F = Found(A)
 		if(F)
-			face_atom(F)
+			physical_face_atom(F)
 			return F
 
 		if(ValidTarget(A))
 			stance = HOSTILE_STANCE_ATTACK
-			face_atom(A)
+			physical_face_atom(A)
 			return A
 
 /mob/living/simple_animal/hostile/proc/ValidTarget(var/atom/A)
@@ -128,7 +128,7 @@
 		return 1
 
 /mob/living/simple_animal/hostile/proc/AttackingTarget()
-	face_atom(target_mob)
+	physical_face_atom(target_mob)
 	setClickCooldown(attack_delay)
 	if(!Adjacent(target_mob))
 		return
@@ -178,13 +178,13 @@
 				target_mob = FindTarget()
 
 			if(HOSTILE_STANCE_ATTACK)
-				face_atom(target_mob)
+				physical_face_atom(target_mob)
 				if(destroy_surroundings)
 					DestroySurroundings()
 				MoveToTarget()
 
 			if(HOSTILE_STANCE_ATTACKING)
-				face_atom(target_mob)
+				physical_face_atom(target_mob)
 				if(destroy_surroundings)
 					DestroySurroundings()
 				AttackTarget()
@@ -256,7 +256,7 @@
 	if(!can_act())
 		return
 	if(prob(break_stuff_probability) && !Adjacent(target_mob))
-		face_atom(target_mob)
+		physical_face_atom(target_mob)
 		var/turf/targ = get_step_towards(src, target_mob)
 		if(!targ)
 			return
@@ -269,7 +269,7 @@
 		for(var/type in valid_obstacles_by_priority)
 			var/obj/obstacle = locate(type) in targ
 			if(obstacle)
-				face_atom(obstacle)
+				physical_face_atom(obstacle)
 				obstacle.attack_generic(src, rand(melee_damage_lower, melee_damage_upper), attacktext)
 				return
 
@@ -278,7 +278,7 @@
 				if(obstacle.density)
 					if(!obstacle.can_open(1))
 						return
-					face_atom(obstacle)
+					physical_face_atom(obstacle)
 					var/pry_time_holder = (obstacle.pry_mod * pry_time)
 					pry_door(src, pry_time_holder, obstacle)
 					return

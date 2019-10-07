@@ -74,7 +74,7 @@
 
 	// Do not allow player facing change in fixed chairs
 	if(!istype(buckled) || buckled.buckle_movable)
-		face_atom(A) // change direction to face what you clicked on
+		physical_face_atom(A) // change direction to face what you clicked on
 
 	if(!canClick()) // in the year 2000...
 		return
@@ -192,7 +192,7 @@
 	animals lunging, etc.
 */
 /mob/proc/RangedAttack(var/atom/A, var/params)
-	if(!mutations.len) 
+	if(!mutations.len)
 		return FALSE
 
 	if((MUTATION_LASER in mutations) && a_intent == I_HURT)
@@ -241,7 +241,7 @@
 */
 /mob/proc/CtrlClickOn(var/atom/A)
 	return A.CtrlClick(src)
-	
+
 /atom/proc/CtrlClick(var/mob/user)
 	return FALSE
 
@@ -327,7 +327,13 @@
 		to_chat(src, SPAN_WARNING("You're out of energy! You need food!"))
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
-/mob/proc/face_atom(var/atom/A)
+/atom/proc/physical_face_atom(var/atom/A)
+	return face_atom(get_nearest_mirror(src, A))
+
+/atom/proc/face_atom(var/atom/A)
+	return
+
+/mob/face_atom(var/atom/A)
 	if(!A || !x || !y || !A.x || !A.y) return
 	var/dx = A.x - x
 	var/dy = A.y - y

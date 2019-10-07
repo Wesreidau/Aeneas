@@ -15,9 +15,12 @@
 /turf/mirror/Entered(var/atom/movable/mover, var/atom/old_loc)
 	if (reflection && !ismirror(old_loc))
 		mover.loc = reflection
-		return reflection.Entered(mover, old_loc)
+		.= reflection.Entered(mover, old_loc)
+		mover.crossed_seam()
+		return
 
 	.=..()
+
 
 /turf/proc/is_mirror()
 	return FALSE

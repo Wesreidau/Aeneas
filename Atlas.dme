@@ -1399,6 +1399,7 @@
 #include "code\game\turfs\initialization\init.dm"
 #include "code\game\turfs\initialization\maintenance.dm"
 #include "code\game\turfs\loop\area.dm"
+#include "code\game\turfs\loop\atom.dm"
 #include "code\game\turfs\loop\mirror.dm"
 #include "code\game\turfs\simulated\floor.dm"
 #include "code\game\turfs\simulated\floor_acts.dm"

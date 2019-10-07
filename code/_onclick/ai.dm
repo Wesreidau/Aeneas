@@ -46,7 +46,7 @@
 		CtrlClickOn(A)
 		return
 
-	face_atom(A) // change direction to face what you clicked on
+	physical_face_atom(A) // change direction to face what you clicked on
 
 	if(control_disabled || !canClick())
 		return
