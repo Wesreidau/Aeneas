@@ -239,7 +239,7 @@
 	for (var/turf/T in target.mirrors)
 		newdist = get_dist(origin, T)
 		if (newdist < shortest)
-			newdist = shortest
+			shortest = newdist
 
 	return shortest
 
@@ -256,7 +256,7 @@
 	for (var/turf/T in target.mirrors)
 		newdist = get_dist(origin, T)
 		if (newdist < shortest)
-			newdist = shortest
+			shortest = newdist
 			shortest_vec.x = T.x - origin.x
 			shortest_vec.y = T.y - origin.y
 
@@ -275,7 +275,7 @@
 	for (var/turf/T in target.mirrors)
 		newdist = get_dist(origin, T)
 		if (newdist < shortest)
-			newdist = shortest
+			shortest = newdist
 			nearest = T
 
 	return nearest
