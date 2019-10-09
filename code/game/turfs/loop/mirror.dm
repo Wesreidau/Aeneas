@@ -21,12 +21,13 @@
 
 	.=..()
 
-
+//Returns true if this is a mirror turf
 /turf/proc/is_mirror()
 	return FALSE
 
 /turf/mirror/is_mirror()
 	return TRUE
+
 
 /turf/mirror/proc/find_reflection()
 	var/datum/level/L = get_level_from_z(z)

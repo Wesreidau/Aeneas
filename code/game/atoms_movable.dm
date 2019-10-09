@@ -111,11 +111,15 @@
 		return 0
 	if(target.z != src.z)
 		return 0
+
+
 	//use a modified version of Bresenham's algorithm to get from the atom's current position to that of the target
 	src.throwing = 1
 	src.thrower = thrower
 	src.throw_source = get_turf(src)	//store the origin turf
 	src.pixel_z = 0
+
+	target = get_nearest_mirror(throw_source, target)
 	if(usr)
 		if(MUTATION_HULK in usr.mutations)
 			src.throwing = 2 // really strong throw!
@@ -164,14 +168,21 @@
 		// only stop when we've gone the whole distance (or max throw range) and are on a non-space tile, or hit something, or hit the end of the map, or someone picks it up
 		var/atom/step
 		if(error >= 0)
-			step = get_physical_step(src, major_dir)
+			step = get_step(src, major_dir)
 			error -= minor_dist
 		else
-			step = get_physical_step(src, minor_dir)
+			step = get_step(src, minor_dir)
 			error += major_dist
 		if(!step) // going off the edge of the map makes get_physical_step return null, don't let things go off the edge
 			break
 		src.Move(step)
+
+		//Update the target turf every step, incase we just crossed a seam
+		//Kind of inefficient, but its the simplest way to do things since this is all happening inside one proc
+		//Possible todo: Add a crossed seam far, set by the crossed_seam function and checked in this loop. Do we really need more vars though?
+		target = get_nearest_mirror(src, target)
+
+
 		hit_check(speed)
 		dist_travelled++
 		dist_since_sleep++

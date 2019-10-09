@@ -270,8 +270,11 @@
 /proc/get_nearest_mirror(var/turf/origin, var/turf/target)
 	if (!istype(origin))
 		origin = get_turf(origin)
-	if (!istype(target))
-		target = get_turf(target)
+	target = get_turf(target)
+	target = target.get_self()
+		//Get self will ensure that if the target was a mirror, we get its original
+		//This helps for cases where this function is repeatedly called with a mirror as target, like with throwing
+
 
 	var/shortest = get_dist(origin, target)
 	var/nearest = target
