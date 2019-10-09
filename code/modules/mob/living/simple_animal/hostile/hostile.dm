@@ -2,6 +2,7 @@
 	faction = "hostile"
 	var/stance = HOSTILE_STANCE_IDLE	//Used to determine behavior
 	var/mob/living/target_mob
+	var/turf/target_turf
 	var/attack_same = 0
 	var/ranged = 0
 	var/rapid = 0
@@ -43,6 +44,8 @@
 		return FALSE
 	return TRUE
 
+
+
 /mob/living/simple_animal/hostile/proc/kick_stance()
 	if(target_mob)
 		stance = HOSTILE_STANCE_ATTACK
@@ -65,6 +68,20 @@
 			stance = HOSTILE_STANCE_ATTACK
 			physical_face_atom(A)
 			return A
+
+/*
+	This wraps all uses of target_mob = thing. Creates or removes listeners as needed
+	Call it with null to unset target
+*/
+/mob/living/simple_animal/hostile/proc/set_target(var/datum/newtarget)
+	//First, if we already had a target, remove the listener from them
+	if (target_mob)
+		GLOB.moved_event.unregister(target_mob, src, /mob/living/simple_animal/hostile/proc/update_target)
+
+	target_mob = newtarget
+
+	if (target_mob)
+		GLOB.moved_event.register(target_mob, src, /mob/living/simple_animal/hostile/proc/update_target)
 
 /mob/living/simple_animal/hostile/proc/ValidTarget(var/atom/A)
 	if(A == src)
@@ -89,24 +106,40 @@
 /mob/living/simple_animal/hostile/proc/Found(var/atom/A)
 	return
 
+/mob/living/simple_animal/hostile/crossed_seam()
+	update_target()
+	..()
+
+//This proc is called whenever the target moves, or we cross a seam
+/mob/living/simple_animal/hostile/proc/update_target()
+	//We won't do vision checks, thats done in regular life tick
+	if (target_mob && (stance == HOSTILE_STANCE_ATTACKING || stance == HOSTILE_STANCE_ATTACK))
+		target_turf = get_nearest_mirror(src,target_mob)
+		walk_to(src, target_turf, 1, move_to_delay)
+	else
+		//If we don't have a target, this shouldn't be called
+		LoseTarget()
+
 /mob/living/simple_animal/hostile/proc/MoveToTarget()
 	if(!can_act())
 		return
 	if(confused)
-		walk_to(src, pick(physical_orange(2, src)), 1, move_to_delay)
+		walk_to(src, pick(orange(2, src)), 1, move_to_delay)
 		return
 	stop_automated_movement = 1
 	if(!target_mob || SA_attackable(target_mob))
 		stance = HOSTILE_STANCE_IDLE
+	target_turf = get_nearest_mirror(src,target_mob)
 	if(target_mob in ListTargets(10))
 		if(ranged)
 			if(get_physical_dist(src, target_mob) <= ranged_range)
 				OpenFire(target_mob)
 			else
-				walk_to(src, target_mob, 1, move_to_delay)
+				walk_to(src, target_turf, 1, move_to_delay)
 		else
 			stance = HOSTILE_STANCE_ATTACKING
-			walk_to(src, target_mob, 1, move_to_delay)
+
+			walk_to(src, target_turf, 1, move_to_delay)
 
 /mob/living/simple_animal/hostile/proc/AttackTarget()
 	stop_automated_movement = 1
@@ -127,6 +160,7 @@
 		AttackingTarget()
 		return 1
 
+
 /mob/living/simple_animal/hostile/proc/AttackingTarget()
 	physical_face_atom(target_mob)
 	setClickCooldown(attack_delay)
@@ -142,7 +176,7 @@
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE
-	target_mob = null
+	set_target(null)
 	walk(src, 0)
 
 /mob/living/simple_animal/hostile/proc/LostTarget()
@@ -150,7 +184,7 @@
 	walk(src, 0)
 
 /mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 7)
-	var/list/L = hearers(src, dist)
+	var/list/L = mobs_in_view(7, src)
 	return L
 
 /mob/living/simple_animal/hostile/proc/get_accuracy()
@@ -175,7 +209,7 @@
 	if(isturf(src.loc) && !src.buckled)
 		switch(stance)
 			if(HOSTILE_STANCE_IDLE)
-				target_mob = FindTarget()
+				set_target(FindTarget())
 
 			if(HOSTILE_STANCE_ATTACK)
 				physical_face_atom(target_mob)
@@ -194,26 +228,26 @@
 		if(stance != HOSTILE_STANCE_INSIDE)
 			stance = HOSTILE_STANCE_INSIDE
 			walk(src,0)
-			target_mob = null
+			set_target(null)
 
 /mob/living/simple_animal/hostile/attackby(var/obj/item/O, var/mob/user)
 	var/oldhealth = health
 	. = ..()
 	if(health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
-		target_mob = user
+		set_target(user)
 		MoveToTarget()
 
 /mob/living/simple_animal/hostile/attack_hand(mob/living/carbon/human/M)
 	. = ..()
 	if(M.a_intent == I_HURT && !incapacitated(INCAPACITATION_KNOCKOUT))
-		target_mob = M
+		set_target(M)
 		MoveToTarget()
 
 /mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)
 	var/oldhealth = health
 	. = ..()
 	if(!target_mob && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
-		target_mob = Proj.firer
+		set_target(Proj.firer)
 		MoveToTarget()
 
 /mob/living/simple_animal/hostile/proc/OpenFire(target_mob)
@@ -239,7 +273,7 @@
 			new casingtype
 
 	stance = HOSTILE_STANCE_IDLE
-	target_mob = null
+	set_target(null)
 	return
 
 /mob/living/simple_animal/hostile/proc/Shoot(var/target, var/start, var/user, var/bullet = 0)

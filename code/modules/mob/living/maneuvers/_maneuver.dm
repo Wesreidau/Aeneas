@@ -37,7 +37,7 @@
 	if(can_be_used_by(user, target))
 		if(!reflexively)
 			show_initial_message(user, target)
-		user.face_atom(target)
+		user.physical_face_atom(target)
 		. = (!delay || reflexively || (do_after(user, delay) && can_be_used_by(user, target)))
 		if(cooldown)
 			user.last_special = world.time + cooldown

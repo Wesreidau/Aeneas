@@ -212,4 +212,4 @@
 
 /mob/living/silicon/ai/face_atom(var/atom/A)
 	if(eyeobj)
-		eyeobj.face_atom(A)
+		eyeobj.physical_face_atom(A)
