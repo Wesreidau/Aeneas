@@ -476,6 +476,9 @@
 	if(!istype(target) || !istype(firer))
 		return 0
 
+	target = get_nearest_mirror(firer, target)
+
+
 	var/obj/item/projectile/test/trace = new /obj/item/projectile/test(get_turf(firer)) //Making the test....
 
 	//Set the flags and pass flags to that of the real projectile...
