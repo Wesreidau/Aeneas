@@ -49,3 +49,30 @@
 	..()
 	if(density && prob(50))
 		do_simple_ranged_interaction()
+
+//Used to allow atoms to move seamlessly across map loop edges, a wrapper for step proc
+/proc/seamless_step(var/atom/movable/mover, var/direction)
+	//First of all, find out where we're actually going
+	var/turf/destination = get_step(mover, direction)
+
+	//If the destination turf isn't a mirror, we don't need to do anything special.
+	//Not sure when we'd fail to get any turf, but in that case just let default behaviour handle it too
+	if (!destination || !destination.is_mirror())
+		return step(mover, direction)
+
+	//Ok, we're trying to step into a mirror turf, this is where things get tricky.
+	//First cache our old loc
+	var/turf/old_location = get_turf(mover)
+
+	//Rather than stepping into the mirror, what we will do is teleport the atom next to the real destination turf, and then step into it.
+	var/turf/true_destination = destination.get_self() //Get self returns the real turf, when used on a mirror
+	var/turf/step_from = get_step(true_destination, GLOB.reverse_dir[direction]) //We find the appropriate turf next to our destination.
+	//	This will usually be a mirror but not necessarily, it doesn't matter either way
+
+	mover.loc = step_from //We teleport the atom by directly setting its loc. This ensures that no enter/exit procs are called
+		//As far as most things are concerned, we haven't moved yet. The surroundings will look identical to where we left
+
+	.=mover.Move(true_destination, direction) //Then we take a step, this will handle all the events that come with a move as normal
+	if (!.)
+		//If we failed to move, quietly put us back where we started, as if it never happened
+		mover.loc = old_location
