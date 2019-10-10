@@ -171,7 +171,7 @@
 	if(reinf_material) tforce *= 0.25
 	if(health - tforce <= 7 && !reinf_material)
 		set_anchored(FALSE)
-		step(src, get_dir(AM, src))
+		seamless_step(src, get_dir(AM, src))
 	take_damage(tforce)
 
 /obj/structure/window/attack_hand(mob/user as mob)
@@ -291,7 +291,7 @@
 			hit(W.force)
 			if(health <= 7)
 				set_anchored(FALSE)
-				step(src, get_dir(user, src))
+				seamless_step(src, get_dir(user, src))
 		else
 			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		..()

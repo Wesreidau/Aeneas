@@ -116,33 +116,33 @@
 	if (direct & (direct - 1))
 		if (direct & 1)
 			if (direct & 4)
-				if (step(src, NORTH))
-					step(src, EAST)
+				if (seamless_step(src, NORTH))
+					seamless_step(src, EAST)
 				else
-					if (step(src, EAST))
-						step(src, NORTH)
+					if (seamless_step(src, EAST))
+						seamless_step(src, NORTH)
 			else
 				if (direct & 8)
-					if (step(src, NORTH))
-						step(src, WEST)
+					if (seamless_step(src, NORTH))
+						seamless_step(src, WEST)
 					else
-						if (step(src, WEST))
-							step(src, NORTH)
+						if (seamless_step(src, WEST))
+							seamless_step(src, NORTH)
 		else
 			if (direct & 2)
 				if (direct & 4)
-					if (step(src, SOUTH))
-						step(src, EAST)
+					if (seamless_step(src, SOUTH))
+						seamless_step(src, EAST)
 					else
-						if (step(src, EAST))
-							step(src, SOUTH)
+						if (seamless_step(src, EAST))
+							seamless_step(src, SOUTH)
 				else
 					if (direct & 8)
-						if (step(src, SOUTH))
-							step(src, WEST)
+						if (seamless_step(src, SOUTH))
+							seamless_step(src, WEST)
 						else
-							if (step(src, WEST))
-								step(src, SOUTH)
+							if (seamless_step(src, WEST))
+								seamless_step(src, SOUTH)
 	else
 		var/atom/A = src.loc
 
@@ -219,7 +219,7 @@
 	if(prob(skill_fail_chance(SKILL_EVA, slip_chance(10), SKILL_EXPERT)))
 		to_chat(src, "<span class='warning'>You slipped!</span>")
 		src.inertia_dir = src.last_move
-		step(src, src.inertia_dir)
+		seamless_step(src, src.inertia_dir)
 		return 1
 	return 0
 

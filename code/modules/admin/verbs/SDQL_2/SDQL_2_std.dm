@@ -150,7 +150,7 @@
 	return sin(X)
 
 /proc/_step(Ref, Dir, Speed = 0)
-	return step(Ref, Dir, Speed)
+	return seamless_step(Ref, Dir, Speed)
 
 
 /proc/_list_add(var/list/L, ...)

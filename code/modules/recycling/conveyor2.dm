@@ -74,7 +74,7 @@
 		for(var/atom/movable/A in affecting)
 			if(!A.anchored)
 				if(A.loc == src.loc) // prevents the object from being affected if it's not currently here.
-					step(A,movedir)
+					seamless_step(A,movedir)
 					items_moved++
 			if(items_moved >= 10)
 				break
@@ -102,11 +102,11 @@
 	if(ismob(user.pulling))
 		var/mob/M = user.pulling
 		M.stop_pulling()
-		step(user.pulling, get_dir(user.pulling.loc, src))
+		seamless_step(user.pulling, get_dir(user.pulling.loc, src))
 		user.stop_pulling()
 		return TRUE
 	else
-		step(user.pulling, get_dir(user.pulling.loc, src))
+		seamless_step(user.pulling, get_dir(user.pulling.loc, src))
 		user.stop_pulling()
 		return TRUE
 

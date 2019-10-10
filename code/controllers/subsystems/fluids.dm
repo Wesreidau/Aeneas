@@ -179,7 +179,7 @@ var/datum/controller/subsystem/fluids/SSfluids
 				for(var/atom/movable/AM in F.loc.contents)
 					if(isnull(pushing_atoms[AM]) && AM.is_fluid_pushable(F.flow_amount))
 						pushing_atoms[AM] = TRUE
-						step(AM, F.dir)
+						seamless_step(AM, F.dir)
 
 			if (F.fluid_amount <= FLUID_EVAPORATION_POINT & prob(10))
 				LOSE_FLUID(F, rand(1, 3))

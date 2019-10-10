@@ -141,7 +141,7 @@
 		if(assembly.loc == T) // Check if we're held by someone.  If the loc is the floor, we're not held.
 			var/datum/integrated_io/wanted_dir = inputs[1]
 			if(isnum(wanted_dir.data))
-				if(step(assembly, wanted_dir.data))
+				if(seamless_step(assembly, wanted_dir.data))
 					activate_pin(2)
 					return
 				else

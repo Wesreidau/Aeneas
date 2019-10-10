@@ -147,16 +147,16 @@ default behaviour is:
 					for(var/obj/structure/window/win in get_physical_step(AM,t))
 						now_pushing = 0
 						return
-				step(AM, t)
+				seamless_step(AM, t)
 				if (istype(AM, /mob/living))
 					var/mob/living/tmob = AM
 					if(istype(tmob.buckled, /obj/structure/bed))
 						if(!tmob.buckled.anchored)
-							step(tmob.buckled, t)
+							seamless_step(tmob.buckled, t)
 				if(ishuman(AM))
 					var/mob/living/carbon/human/M = AM
 					for(var/obj/item/grab/G in M.grabbed_by)
-						step(G.assailant, get_dir(G.assailant, AM))
+						seamless_step(G.assailant, get_dir(G.assailant, AM))
 						G.adjust_position()
 				now_pushing = 0
 
@@ -556,7 +556,7 @@ default behaviour is:
 	old_loc = get_nearest_mirror(pulling.loc, old_loc)
 
 	if (!isliving(pulling))
-		step(pulling, get_dir(pulling.loc, old_loc))
+		seamless_step(pulling, get_dir(pulling.loc, old_loc))
 	else
 		var/mob/living/M = pulling
 		if(M.grabbed_by.len)
@@ -570,7 +570,7 @@ default behaviour is:
 
 			var/atom/movable/t = M.pulling
 			M.stop_pulling()
-			step(M, get_dir(pulling.loc, old_loc))
+			seamless_step(M, get_dir(pulling.loc, old_loc))
 			if(t)
 				M.start_pulling(t)
 

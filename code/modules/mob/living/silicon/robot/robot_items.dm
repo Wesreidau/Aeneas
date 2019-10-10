@@ -258,7 +258,7 @@
 				spawn()
 					for(var/i = 1, i <= rand(1,2), i++)
 						if(I)
-							step(I, pick(NORTH,SOUTH,EAST,WEST))
+							seamless_step(I, pick(NORTH,SOUTH,EAST,WEST))
 							sleep(rand(2,4))
 		if ( droppedSomething )
 			if ( foundtable )
@@ -574,7 +574,7 @@
 		if(istype(A, /obj/item/weapon/reagent_containers/food/snacks/grown))
 			generating_power = base_power_generation
 			using_item = A
-		else 
+		else
 			for(var/fuel_type in fuel_types)
 				if(istype(A, fuel_type))
 					generating_power = fuel_types[fuel_type] * base_power_generation

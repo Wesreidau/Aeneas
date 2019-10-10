@@ -72,6 +72,7 @@
 	mover.loc = step_from //We teleport the atom by directly setting its loc. This ensures that no enter/exit procs are called
 		//As far as most things are concerned, we haven't moved yet. The surroundings will look identical to where we left
 
+	sleep(3)
 	.=mover.Move(true_destination, direction) //Then we take a step, this will handle all the events that come with a move as normal
 	if (!.)
 		//If we failed to move, quietly put us back where we started, as if it never happened

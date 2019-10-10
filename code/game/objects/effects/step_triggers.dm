@@ -70,7 +70,7 @@
 
 		if(AM)
 			var/predir = AM.dir
-			step(AM, direction)
+			seamless_step(AM, direction)
 			if(!facedir)
 				AM.set_dir(predir)
 

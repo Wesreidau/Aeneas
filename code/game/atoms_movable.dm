@@ -86,7 +86,7 @@
 	else if(isobj(hit_atom))
 		var/obj/O = hit_atom
 		if(!O.anchored)
-			step(O, src.last_move)
+			seamless_step(O, src.last_move)
 		O.hitby(src,speed)
 
 	else if(isturf(hit_atom))

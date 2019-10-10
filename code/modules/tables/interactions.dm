@@ -72,7 +72,7 @@
 		return
 	user.unequip_item()
 	if (O.loc != src.loc)
-		step(O, get_dir(O, src))
+		seamless_step(O, get_dir(O, src))
 	return
 
 /obj/structure/table/attackby(obj/item/W, mob/user, var/click_params)

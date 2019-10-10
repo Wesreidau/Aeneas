@@ -71,7 +71,7 @@
 	else
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		src.connected = new /obj/structure/m_tray( src.loc )
-		step(src.connected, src.dir)
+		seamless_step(src.connected, src.dir)
 		var/turf/T = get_physical_step(src, src.dir)
 		if (T.contents.Find(src.connected))
 			src.connected.connected = src
@@ -111,7 +111,7 @@
 	if (user.stat)
 		return
 	src.connected = new /obj/structure/m_tray( src.loc )
-	step(src.connected, EAST)
+	seamless_step(src.connected, EAST)
 	var/turf/T = get_physical_step(src, EAST)
 	if (T.contents.Find(src.connected))
 		src.connected.connected = src
@@ -243,7 +243,7 @@
 	else if(src.locked == 0)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		src.connected = new /obj/structure/c_tray(src.loc)
-		step(src.connected, dir)
+		seamless_step(src.connected, dir)
 		var/turf/T = get_physical_step(src, dir)
 		if (T.contents.Find(src.connected))
 			src.connected.connected = src
@@ -275,7 +275,7 @@
 	if (user.stat || locked)
 		return
 	src.connected = new /obj/structure/c_tray( src.loc )
-	step(src.connected, SOUTH)
+	seamless_step(src.connected, SOUTH)
 	var/turf/T = get_physical_step(src, SOUTH)
 	if (T.contents.Find(src.connected))
 		src.connected.connected = src

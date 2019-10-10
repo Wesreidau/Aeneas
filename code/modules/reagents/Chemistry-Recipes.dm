@@ -1055,7 +1055,7 @@
 		if(B)
 			if(prob(50))
 				for(var/j = 1, j <= rand(1, 3), j++)
-					step(B, pick(NORTH, SOUTH, EAST, WEST))
+					seamless_step(B, pick(NORTH, SOUTH, EAST, WEST))
 
 //Blue
 /datum/chemical_reaction/slime/frost

@@ -60,7 +60,7 @@ proc/NewStutter(phrase,stunned)
 	return sanitize(jointext(split_phrase," "))
 
 proc/Stagger(mob/M,d) //Technically not a filter, but it relates to drunkenness.
-	step(M, pick(d,turn(d,90),turn(d,-90)))
+	seamless_step(M, pick(d,turn(d,90),turn(d,-90)))
 
 proc/Ellipsis(original_msg, chance = 50)
 	if(chance <= 0) return "..."

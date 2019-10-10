@@ -195,7 +195,7 @@ var/const/enterloopsanity = 100
 			if(M && !(M.anchored) && !(M.pulledby) && (M.loc == src))
 				if(!M.inertia_dir)
 					M.inertia_dir = M.last_move
-				step(M, M.inertia_dir)
+				seamless_step(M, M.inertia_dir)
 	return
 
 /turf/proc/levelupdate()
@@ -273,7 +273,7 @@ var/const/enterloopsanity = 100
 /turf/hitby(atom/movable/AM as mob|obj, var/speed)
 	if(src.density)
 		spawn(2)
-			step(AM, turn(AM.last_move, 180))
+			seamless_step(AM, turn(AM.last_move, 180))
 		if(isliving(AM))
 			var/mob/living/M = AM
 			M.turf_collision(src, speed)

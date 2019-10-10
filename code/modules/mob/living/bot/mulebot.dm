@@ -311,7 +311,7 @@
 			M.client.eye = src
 
 	if(dirn)
-		step(load, dirn)
+		seamless_step(load, dirn)
 
 	load = null
 

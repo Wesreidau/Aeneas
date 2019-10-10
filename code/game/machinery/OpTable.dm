@@ -96,7 +96,7 @@
 	if(!user.unequip_item())
 		return
 	if (O.loc != src.loc)
-		step(O, get_dir(O, src))
+		seamless_step(O, get_dir(O, src))
 
 /obj/machinery/optable/proc/check_victim()
 	if(!victim || !victim.lying || victim.loc != loc)

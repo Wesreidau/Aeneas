@@ -64,15 +64,15 @@
 	//--1---Move occupant---1--//
 	if(buckled_mob)
 		buckled_mob.buckled = null
-		step(buckled_mob, direction)
+		seamless_step(buckled_mob, direction)
 		buckled_mob.buckled = src
 	//--2----Move driver----2--//
 	if(pulling)
 		T = pulling.loc
 		if(get_physical_dist(src, pulling) >= 1)
-			step(pulling, get_dir(pulling.loc, src.loc))
+			seamless_step(pulling, get_dir(pulling.loc, src.loc))
 	//--3--Move wheelchair--3--//
-	step(src, direction)
+	seamless_step(src, direction)
 	if(buckled_mob) // Make sure it stays beneath the occupant
 		Move(buckled_mob.loc)
 	set_dir(direction)

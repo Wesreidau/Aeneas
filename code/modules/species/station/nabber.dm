@@ -287,7 +287,7 @@
 	var/turf/T = get_physical_step(get_turf(target), get_dir(get_turf(attacker), get_turf(target)))
 	playsound(target.loc, 'sound/weapons/pushhiss.ogg', 50, 1, -1)
 	if(!T.density)
-		step(target, get_dir(get_turf(attacker), get_turf(target)))
+		seamless_step(target, get_dir(get_turf(attacker), get_turf(target)))
 		target.visible_message("<span class='danger'>[pick("[target] was sent flying backward!", "[target] staggers back from the impact!")]</span>")
 	else
 		target.turf_collision(T, target.throw_speed / 2)
