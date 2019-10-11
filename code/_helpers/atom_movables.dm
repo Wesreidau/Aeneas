@@ -65,15 +65,46 @@
 	var/turf/old_location = get_turf(mover)
 
 	//Rather than stepping into the mirror, what we will do is teleport the atom next to the real destination turf, and then step into it.
+	var/reverse_direction = GLOB.reverse_dir[direction]
 	var/turf/true_destination = destination.get_self() //Get self returns the real turf, when used on a mirror
-	var/turf/step_from = get_step(true_destination, GLOB.reverse_dir[direction]) //We find the appropriate turf next to our destination.
+	var/turf/step_from = get_step(true_destination, reverse_direction) //We find the appropriate turf next to our destination.
 	//	This will usually be a mirror but not necessarily, it doesn't matter either way
 
 	mover.loc = step_from //We teleport the atom by directly setting its loc. This ensures that no enter/exit procs are called
 		//As far as most things are concerned, we haven't moved yet. The surroundings will look identical to where we left
 
-	sleep(3)
-	.=mover.Move(true_destination, direction) //Then we take a step, this will handle all the events that come with a move as normal
+	.=step(mover, direction)
+	//.=mover.Move(true_destination, direction) //Then we take a step, this will handle all the events that come with a move as normal
 	if (!.)
 		//If we failed to move, quietly put us back where we started, as if it never happened
 		mover.loc = old_location
+		return
+	else
+		//We have successfully moved, we may now do an animation to make it appear seamless
+		//But first, lets check if we even need to do an animation. We'll check the glide size
+		var/_time = GLIDESIZE2DELAY(mover.glide_size)
+
+		//First of all, record current pixel offsets of the mover
+		var/vector2/pixels = new /vector2(mover.pixel_x, mover.pixel_y)
+		var/vector2/client_pixels = new /vector2(mover.pixel_x, mover.pixel_y)
+
+
+		//Fetch the client if possible, we need to animate that so that the camera tracks the mob as it walks.
+		//If we don't animate the client too, the view jumps forward jarringly
+		var/client/C  = mover.get_client() //We use get mob which will return players inside vehicles too
+
+		if (istype(C))
+			client_pixels.x = C.pixel_x
+			client_pixels.y = C.pixel_y
+
+		//Next we'll offset the mover's pixels visually into the tile they just came from
+		mover.offset_dir(reverse_direction, world.icon_size)
+		if (C)
+			//We can offset client too
+			C.offset_dir(reverse_direction, world.icon_size)
+
+		//Then we'll animate them sliding into the new tile they've just entered, setting their pixel offsets back to what they were a second ago
+		animate(mover, pixel_x = pixels.x, pixel_y = pixels.y, time = _time)
+		if (C)
+			//Also animate client for smooth camera
+			animate(C, pixel_x = client_pixels.x, pixel_y = client_pixels.y, time = _time)

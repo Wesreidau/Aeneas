@@ -116,6 +116,54 @@
 
 	return list(R + x,R,R, G,G + x,G, B,B,B + x)
 
+//Changes our pixel offset by offset pixels towards the target atom
+/atom/proc/offset_to(var/atom/target, var/offset = 1)
+	target = get_nearest_mirror(src, target)
+	if (target.x < x)
+		pixel_x -= offset
+	else if (target.x > x)
+		pixel_x += offset
+	if (target.y < y)
+		pixel_y -= offset
+	else if (target.y > y)
+		pixel_y += offset
+
+//Changes our pixel offset by offset pixels in the specified direction
+/datum/proc/offset_dir(var/direction, var/length = 1)
+	return
+
+
+/atom/offset_dir(var/direction, var/length = 1)
+	var/vector2/offset = new /vector2(0,0)
+	if (direction & NORTH)
+		offset.y = 1
+	else if (direction & SOUTH)
+		offset.y = -1
+	if (direction & EAST)
+		offset.x = 1
+	else if (direction & WEST)
+		offset.x = -1
+
+	offset *= length
+	pixel_x += offset.x
+	pixel_y += offset.y
+
+//Works for clients too, had to duplicate code tho
+/client/offset_dir(var/direction, var/length = 1)
+	var/vector2/offset = new /vector2(0,0)
+	if (direction & NORTH)
+		offset.y = 1
+	else if (direction & SOUTH)
+		offset.y = -1
+	if (direction & EAST)
+		offset.x = 1
+	else if (direction & WEST)
+		offset.x = -1
+
+	offset *= length
+	pixel_x += offset.x
+	pixel_y += offset.y
+
 #undef LUMR
 #undef LUMG
 #undef LUMB

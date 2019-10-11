@@ -78,7 +78,7 @@
 	else
 		var/turf/target_loc = get_physical_step(exosuit, direction)
 		if(target_loc && exosuit.legs && exosuit.legs.can_move_on(exosuit.loc, target_loc) && exosuit.MayEnterTurf(target_loc))
-			exosuit.Move(target_loc)
+			seamless_step(exosuit, direction)//exosuit.Move(target_loc)
 	return MOVEMENT_HANDLED
 
 
