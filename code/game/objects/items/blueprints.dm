@@ -77,7 +77,7 @@
 	if(istype(A, /area/space))
 		return AREA_SPACE
 
-	if(A.z in GLOB.using_map.station_levels)
+	if(is_main_level(A.z))
 		return AREA_STATION
 
 	return AREA_SPECIAL

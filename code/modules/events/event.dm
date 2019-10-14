@@ -155,7 +155,7 @@
 	startedAt = world.time
 
 	if(!affecting_z)
-		affecting_z = GLOB.using_map.station_levels
+		affecting_z = get_main_levels()
 
 	setup()
 	..()

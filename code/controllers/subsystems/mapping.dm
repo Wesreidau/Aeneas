@@ -4,6 +4,8 @@ SUBSYSTEM_DEF(mapping)
 	flags = SS_NO_FIRE
 	var/map_index = 0 //This is incremented whenever a new map is created, and used to prevent namespace collisions
 
+	var/datum/scene/main_scene
+
 	var/list/map_templates = list()
 	var/list/space_ruins_templates = list()
 	var/list/exoplanet_ruins_templates = list()
@@ -20,6 +22,10 @@ SUBSYSTEM_DEF(mapping)
 	for (var/t in subtypesof(/datum/scene))
 		var/datum/scene/S = new t
 		all_scene_datums[S.id] = S
+
+		//There should be only one main scene.
+		if (S.main_scene)
+			src.main_scene = S
 
 	for (var/t in subtypesof(/datum/level))
 		var/datum/level/L = new t

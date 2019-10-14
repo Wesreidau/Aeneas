@@ -4,6 +4,7 @@
 	//------------------
 	name = "FTV Bearcat" //The name of the location. This may be shown in interfaces and should be human-readable
 	id = "ftv_bearcat"	  //ID must be unique, landmarks will use it to link levels to this scene datum
+	main_scene = TRUE
 
 //Base type of level, this one won't be instantiated but subtypes will
 /datum/level/bearcat

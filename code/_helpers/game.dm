@@ -2,7 +2,7 @@
 
 /proc/max_default_z_level()
 	var/max_z = 0
-	for(var/z in GLOB.using_map.station_levels)
+	for(var/z in get_main_levels())
 		max_z = max(z, max_z)
 	for(var/z in GLOB.using_map.admin_levels)
 		max_z = max(z, max_z)
@@ -54,11 +54,12 @@
 
 	return heard
 
-/proc/isStationLevel(var/level)
-	return level in GLOB.using_map.station_levels
+/proc/is_main_level(var/level)
+	var/datum/scene/S = get_scene_from_z(level)
+	return (S && S.main_scene)
 
-/proc/isNotStationLevel(var/level)
-	return !isStationLevel(level)
+/proc/is_not_main_level(var/level)
+	return !is_main_level(level)
 
 /proc/isPlayerLevel(var/level)
 	return level in GLOB.using_map.player_levels
@@ -71,6 +72,9 @@
 
 /proc/isContactLevel(var/level)
 	return level in GLOB.using_map.contact_levels
+
+/proc/get_main_levels()
+	return SSmapping.main_scene.levels
 
 /proc/circlerange(center=usr,radius=3)
 

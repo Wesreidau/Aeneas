@@ -89,7 +89,7 @@ var/global/ntnet_card_uid = 1
 	var/turf/T = get_turf(src)
 	if(!istype(T)) //no reception in nullspace
 		return
-	if(T.z in GLOB.using_map.station_levels)
+	if(is_main_level(T.z))
 		// Computer is on station. Low/High signal depending on what type of network card you have
 		. = strength
 	else if(T.z in GLOB.using_map.contact_levels) //not on station, but close enough for radio signal to travel
@@ -105,7 +105,7 @@ var/global/ntnet_card_uid = 1
 		var/obj/item/weapon/stock_parts/computer/network_card/network_card = comp.get_component(PART_NETWORK)
 		if(network_card)
 			. = min(., network_card.get_signal(specific_action, routed_through))
-		
+
 /obj/item/weapon/stock_parts/computer/network_card/on_disable()
 	ntnet_global.unregister(identification_id)
 

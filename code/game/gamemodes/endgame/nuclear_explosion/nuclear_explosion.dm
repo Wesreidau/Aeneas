@@ -22,7 +22,7 @@
 	start_cinematic_intro()
 
 	var/turf/T = get_turf(explosion_source)
-	if(isStationLevel(T.z))
+	if(is_main_level(T.z))
 		to_world("<span class='danger'>The [station_name()] was destoyed by the nuclear blast!</span>")
 
 		dust_mobs(GetConnectedZlevels(T.z))

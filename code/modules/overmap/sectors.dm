@@ -64,7 +64,6 @@
 	if(!in_space)
 		GLOB.using_map.sealed_levels |= map_z
 	if(base)
-		GLOB.using_map.station_levels |= map_z
 		GLOB.using_map.contact_levels |= map_z
 		GLOB.using_map.map_levels |= map_z
 
