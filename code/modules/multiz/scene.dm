@@ -17,6 +17,9 @@
 	var/list/level_numbers = list()
 		//This is a NON associative list containing only the raw z numbers of zlevels which are in this scene
 
+	var/main_scene = FALSE
+		//If true, this is the main station/ship/colony that the game revolves around. Only one scene should have this
+
 /*--------------------------------------------------------------------------------------------------------------
 
 	Helper Procs:

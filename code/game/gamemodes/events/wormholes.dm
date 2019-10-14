@@ -1,4 +1,4 @@
-/proc/wormhole_event(var/list/zlevels = GLOB.using_map.station_levels)
+/proc/wormhole_event(var/list/zlevels = get_main_levels())
 	spawn()
 		var/list/pick_turfs = list()
 		for(var/z in zlevels)

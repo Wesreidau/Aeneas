@@ -175,7 +175,7 @@
 	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
 		if(A.hacker && A.hacker == user)
 			continue
-		if(A.z in GLOB.using_map.station_levels)
+		if(A.z in get_main_levels())
 			station_apcs.Add(A)
 		else
 			offstation_apcs.Add(A)

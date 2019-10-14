@@ -515,7 +515,7 @@ datum/unit_test/ladder_check/start_test()
 /datum/unit_test/station_pipes_shall_not_leak/start_test()
 	var/failures = 0
 	for(var/obj/machinery/atmospherics/pipe/P in world)
-		if(P.leaking && isStationLevel(P.z))
+		if(P.leaking && is_main_level(P.z))
 			failures++
 			log_bad("Following pipe is leaking: [log_info_line(P)]")
 
@@ -539,7 +539,7 @@ datum/unit_test/ladder_check/start_test()
 			log_bad("Nullspace terminal : [log_info_line(term)]")
 			continue
 
-		if(!isStationLevel(T.z))
+		if(!is_main_level(T.z))
 			continue
 
 		var/found_cable = FALSE
@@ -601,7 +601,7 @@ datum/unit_test/ladder_check/start_test()
 		return FALSE
 
 	// We don't care about non-station wires
-	if(!isStationLevel(source_turf.z))
+	if(!is_main_level(source_turf.z))
 		return TRUE
 
 	for(var/dir in list(C.d1, C.d2))

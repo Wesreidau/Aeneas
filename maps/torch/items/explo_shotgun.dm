@@ -27,16 +27,12 @@
 	else
 		icon_state = "ghettexpshotgun[!!chambered]"
 	..()
-	
+
 /obj/item/weapon/gun/projectile/shotgun/pump/exploration/Destroy()
 	QDEL_NULL(reinforced)
 	. = ..()
-	
-/obj/item/weapon/gun/projectile/shotgun/pump/exploration/free_fire()
-	var/my_z = get_z(src)
-	if(!GLOB.using_map.station_levels.Find(my_z))
-		return TRUE
-	return ..()
+
+
 
 /obj/item/weapon/gun/projectile/shotgun/pump/exploration/attackby(obj/item/I, mob/user)
 	if(!reinforced && istype(I, /obj/item/pipe) && user.unEquip(I, src))

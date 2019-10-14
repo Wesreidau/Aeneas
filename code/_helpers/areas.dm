@@ -80,7 +80,7 @@
 	. = (A.z in z_levels)
 
 /proc/is_station_area(var/area/A)
-	. = isStationLevel(A.z)
+	. = is_main_level(A.z)
 
 /proc/is_contact_area(var/area/A)
 	. = isContactLevel(A.z)

@@ -77,7 +77,7 @@
 	return !turf_contains_dense_objects(T)
 
 /proc/is_station_turf(var/turf/T)
-	return T && isStationLevel(T.z)
+	return T && is_main_level(T.z)
 
 /proc/has_air(var/turf/T)
 	return !!T.return_air()

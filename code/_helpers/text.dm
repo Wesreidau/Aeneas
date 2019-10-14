@@ -576,3 +576,10 @@ proc/TextPreview(var/string,var/len=40)
 	var/where = "[A? A.name : "Unknown Location"] | [T.x], [T.y], [T.z]"
 	var/whereLink = "<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>[where]</a>"
 	return whereLink
+
+
+//Dumps an object into a string, so it can be written to disk and loaded later
+/proc/serialize(var/datum/thing)
+	var/savefile/s = new
+	s << thing
+	return s.ExportText()

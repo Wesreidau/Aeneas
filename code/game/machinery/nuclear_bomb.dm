@@ -155,7 +155,7 @@ var/bomb_set
 		extended = 1
 		if(!src.lighthack)
 			flick("lock", src)
-			update_icon()	
+			update_icon()
 
 /obj/machinery/nuclearbomb/interface_interact(mob/user as mob)
 	if(extended && !panel_open)
@@ -376,7 +376,7 @@ var/bomb_set
 		GLOB.moved_event.unregister(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level) // However, when we are certain unregister if necessary
 		return
 	var/turf/T = get_turf(src)
-	if(!T || isNotStationLevel(T.z))
+	if(!T || is_not_main_level(T.z))
 		qdel(src)
 
 /obj/item/weapon/disk/nuclear/Destroy()

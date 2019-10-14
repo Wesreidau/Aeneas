@@ -6,7 +6,7 @@
 	lobby_screens = list('maps/example/lobby.png')
 	lobby_tracks = list(/music_track/absconditus)
 
-	station_levels = list(1, 2, 3)
+	station_levels = list(1, 2, 3) //TODO: Update this example map at some point, to use landmarks/scenes/levels instead of station_levels
 	contact_levels = list(1, 2, 3)
 	player_levels = list(1, 2, 3)
 

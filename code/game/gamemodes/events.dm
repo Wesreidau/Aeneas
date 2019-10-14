@@ -16,7 +16,7 @@ var/hadevent    = 0
 
 /* // Haha, this is way too laggy. I'll keep the prison break though.
 	for(var/obj/machinery/light/L in world)
-		if(isNotStationLevel(L.z)) continue
+		if(is_not_main_level(L.z)) continue
 		L.flicker(50)
 
 	sleep(100)
@@ -25,7 +25,7 @@ var/hadevent    = 0
 		var/turf/T = get_turf(H)
 		if(!T)
 			continue
-		if(isNotStationLevel(T.z))
+		if(is_not_main_level(T.z))
 			continue
 		if(istype(H,/mob/living/carbon/human))
 			H.apply_damage((rand(15,75)),IRRADIATE, damage_flags = DAM_DISPERSED)

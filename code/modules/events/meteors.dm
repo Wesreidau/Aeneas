@@ -31,7 +31,7 @@
 	// Begin sending the alarm signals to shield diffusers so the field is already regenerated (if it exists) by the time actual meteors start flying around.
 	if(alarmWhen < activeFor)
 		for(var/obj/machinery/shield_diffuser/SD in SSmachines.machinery)
-			if(isStationLevel(SD.z))
+			if(is_main_level(SD.z))
 				SD.meteor_alarm(10)
 
 	if(waves && activeFor >= next_meteor)
@@ -130,7 +130,7 @@
 		. = round(. * 0.5)
 	if(speed > SHIP_SPEED_FAST) //Sanic stahp
 		. *= 2
-	
+
 	//Smol ship evasion
 	if(victim.vessel_size < SHIP_SIZE_LARGE && speed < SHIP_SPEED_FAST)
 		var/skill_needed = SKILL_PROF
