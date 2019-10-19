@@ -25,7 +25,7 @@ Thus, the two variables affect pump operation are set in New():
 	//var/max_volume_transfer = 10000
 
 	use_power = POWER_USE_OFF
-	idle_power_usage = 0		//internal circuitry, friction losses and stuff
+	idle_power_usage = 100		//internal circuitry, friction losses and stuff
 	power_rating = 30000			// 30000 W ~ 40 HP
 
 	var/max_pressure_setting = MAX_PUMP_PRESSURE
