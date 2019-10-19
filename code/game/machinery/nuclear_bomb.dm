@@ -332,7 +332,7 @@ var/bomb_set
 	return
 
 #define NUKERANGE 80
-/obj/machinery/nuclearbomb/proc/explode()
+/obj/machinery/nuclearbomb/explode()
 	if (safety)
 		timing = 0
 		return

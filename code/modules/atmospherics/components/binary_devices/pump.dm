@@ -25,7 +25,7 @@ Thus, the two variables affect pump operation are set in New():
 	//var/max_volume_transfer = 10000
 
 	use_power = POWER_USE_OFF
-	idle_power_usage = 150		//internal circuitry, friction losses and stuff
+	idle_power_usage = 0		//internal circuitry, friction losses and stuff
 	power_rating = 30000			// 30000 W ~ 40 HP
 
 	var/max_pressure_setting = MAX_PUMP_PRESSURE
@@ -36,10 +36,15 @@ Thus, the two variables affect pump operation are set in New():
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "pump"
 
+	var/input_volume = ATMOS_DEFAULT_VOLUME_PUMP
+	var/output_volume = ATMOS_DEFAULT_VOLUME_PUMP
+
+	var/open_valve = FALSE //If true, this pump allows gas to pass through freely
+
 /obj/machinery/atmospherics/binary/pump/Initialize()
 	. = ..()
-	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP
-	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP
+	air1.volume = input_volume
+	air2.volume = output_volume
 
 /obj/machinery/atmospherics/binary/pump/AltClick()
 	Topic(src, list("power" = "1"))
@@ -67,11 +72,34 @@ Thus, the two variables affect pump operation are set in New():
 /obj/machinery/atmospherics/binary/pump/hide(var/i)
 	update_underlays()
 
+//A wrapper on get_transfer_moles so it can be overridden
+/obj/machinery/atmospherics/binary/pump/proc/pump_get_transfer_moles(air1, air2, pressure_delta, sink_mod)
+	return calculate_transfer_moles(air1, air2, pressure_delta, sink_mod)
+
 /obj/machinery/atmospherics/binary/pump/Process()
 	last_power_draw = 0
 	last_flow_rate = 0
 
-	if((stat & (NOPOWER|BROKEN)) || !use_power)
+
+	/*
+		If open valve is true, this pump is inside an open pipe and gas can pass through freely. Even if the pump is off, broken, or depowered.
+		To reflect this, we will do a passive pump before anything else. This will equalize the pressure from input to outflow
+			This only does anything if the input pressure is higher than outflow. It still forces the flow to only go one way
+
+		Since we're doing this before the powered pumping, the actual pumping will be working on equal pressures and is therefore almost
+		guaranteed to make the output higher pressure
+
+		If open valve is false, then the pump only allows gas through when it personally forces that gas through, and is otherwise effectively a closed pipe
+	*/
+	if (open_valve)
+		pump_gas_passive(src, air1, air2)
+		if(network1)
+			network1.update = 1
+
+		if(network2)
+			network2.update = 1
+
+	if(inoperable())
 		return
 
 	var/power_draw = -1
@@ -79,7 +107,7 @@ Thus, the two variables affect pump operation are set in New():
 
 	if(pressure_delta > 0.01 && air1.temperature > 0)
 		//Figure out how much gas to transfer to meet the target pressure.
-		var/transfer_moles = calculate_transfer_moles(air1, air2, pressure_delta, (network2)? network2.volume : 0)
+		var/transfer_moles = pump_get_transfer_moles(air1, air2, pressure_delta, (network2)? network2.volume : 0)
 		power_draw = pump_gas(src, air1, air2, transfer_moles, power_rating)
 
 	if (power_draw >= 0)
