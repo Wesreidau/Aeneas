@@ -71,8 +71,8 @@
 	else
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		src.connected = new /obj/structure/m_tray( src.loc )
-		step(src.connected, src.dir)
-		var/turf/T = get_step(src, src.dir)
+		seamless_step(src.connected, src.dir)
+		var/turf/T = get_physical_step(src, src.dir)
 		if (T.contents.Find(src.connected))
 			src.connected.connected = src
 			src.icon_state = "morgue0"
@@ -111,8 +111,8 @@
 	if (user.stat)
 		return
 	src.connected = new /obj/structure/m_tray( src.loc )
-	step(src.connected, EAST)
-	var/turf/T = get_step(src, EAST)
+	seamless_step(src.connected, EAST)
+	var/turf/T = get_physical_step(src, EAST)
 	if (T.contents.Find(src.connected))
 		src.connected.connected = src
 		src.icon_state = "morgue0"
@@ -159,7 +159,7 @@
 	return
 
 /obj/structure/m_tray/MouseDrop_T(atom/movable/O as mob|obj, mob/user as mob)
-	if ((!( istype(O, /atom/movable) ) || O.anchored || get_dist(user, src) > 1 || get_dist(user, O) > 1 || user.contents.Find(src) || user.contents.Find(O)))
+	if ((!( istype(O, /atom/movable) ) || O.anchored || get_physical_dist(user, src) > 1 || get_physical_dist(user, O) > 1 || user.contents.Find(src) || user.contents.Find(O)))
 		return
 	if (!ismob(O) && !istype(O, /obj/structure/closet/body_bag))
 		return
@@ -243,8 +243,8 @@
 	else if(src.locked == 0)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		src.connected = new /obj/structure/c_tray(src.loc)
-		step(src.connected, dir)
-		var/turf/T = get_step(src, dir)
+		seamless_step(src.connected, dir)
+		var/turf/T = get_physical_step(src, dir)
 		if (T.contents.Find(src.connected))
 			src.connected.connected = src
 			src.icon_state = "crema0"
@@ -275,8 +275,8 @@
 	if (user.stat || locked)
 		return
 	src.connected = new /obj/structure/c_tray( src.loc )
-	step(src.connected, SOUTH)
-	var/turf/T = get_step(src, SOUTH)
+	seamless_step(src.connected, SOUTH)
+	var/turf/T = get_physical_step(src, SOUTH)
 	if (T.contents.Find(src.connected))
 		src.connected.connected = src
 		src.icon_state = "crema0"
@@ -403,7 +403,7 @@
 	return
 
 /obj/structure/c_tray/MouseDrop_T(atom/movable/O as mob|obj, mob/user as mob)
-	if ((!( istype(O, /atom/movable) ) || O.anchored || get_dist(user, src) > 1 || get_dist(user, O) > 1 || user.contents.Find(src) || user.contents.Find(O)))
+	if ((!( istype(O, /atom/movable) ) || O.anchored || get_physical_dist(user, src) > 1 || get_physical_dist(user, O) > 1 || user.contents.Find(src) || user.contents.Find(O)))
 		return
 	if (!ismob(O) && !istype(O, /obj/structure/closet/body_bag))
 		return
@@ -429,7 +429,7 @@
 /obj/machinery/button/crematorium/activate(mob/user)
 	if(operating)
 		return
-	for(var/obj/structure/crematorium/C in range())
+	for(var/obj/structure/crematorium/C in physical_range())
 		if (C.id == id_tag)
 			if (!C.cremating)
 				C.cremate(user)

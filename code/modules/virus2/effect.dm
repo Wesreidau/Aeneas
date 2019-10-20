@@ -296,7 +296,7 @@
 		mob.emote("cough")
 		if (mob.wear_mask)
 			return
-		for(var/mob/living/carbon/human/M in oview(2,mob))
+		for(var/mob/living/carbon/human/M in physical_oview(2,mob))
 			mob.spread_disease_to(M)
 
 /datum/disease2/effect/hungry
@@ -347,7 +347,7 @@
 			to_chat(mob, "<span class='warning'>You feel like you are about to sneeze!</span>")
 		sleep(5)
 		mob.emote("sneeze")
-		for(var/mob/living/carbon/human/M in get_step(mob,mob.dir))
+		for(var/mob/living/carbon/human/M in get_physical_step(mob,mob.dir))
 			mob.spread_disease_to(M)
 		if (prob(50) && !mob.wear_mask)
 			var/obj/effect/decal/cleanable/mucus/M = new(get_turf(mob))

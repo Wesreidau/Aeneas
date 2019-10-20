@@ -9,7 +9,7 @@
 	. = ..()
 
 /obj/item/psychic_power/telekinesis/Process()
-	if(!focus || !istype(focus.loc, /turf) || get_dist(get_turf(focus), get_turf(owner)) > owner.psi.get_rank(PSI_PSYCHOKINESIS))
+	if(!focus || !istype(focus.loc, /turf) || get_physical_dist(get_turf(focus), get_turf(owner)) > owner.psi.get_rank(PSI_PSYCHOKINESIS))
 		owner.drop_from_inventory(src)
 		return
 	. = ..()
@@ -67,7 +67,7 @@
 		to_chat(user, SPAN_WARNING("Your telekinetic power skates over \the [target] but cannot get a grip..."))
 		return
 
-	var/distance = get_dist(get_turf(user), get_turf(focus ? focus : target))
+	var/distance = get_physical_dist(get_turf(user), get_turf(focus ? focus : target))
 	if(distance > user.psi.get_rank(PSI_PSYCHOKINESIS))
 		to_chat(user, SPAN_WARNING("Your telekinetic power won't reach that far."))
 		return FALSE

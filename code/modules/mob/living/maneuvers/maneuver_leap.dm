@@ -27,7 +27,7 @@
 	. = ..()
 	if(.)
 		var/can_leap_distance = user.get_jump_distance() * user.get_acrobatics_multiplier()
-		. = (can_leap_distance > 0 && (!target || get_dist(user, target) <= can_leap_distance))
+		. = (can_leap_distance > 0 && (!target || get_physical_dist(user, target) <= can_leap_distance))
 
 /decl/maneuver/leap/spider
 	stamina_cost = 0

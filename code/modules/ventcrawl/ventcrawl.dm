@@ -81,7 +81,7 @@ var/list/ventcrawl_machinery = list(
 /mob/proc/start_ventcrawl()
 	var/atom/pipe
 	var/list/pipes = list()
-	for(var/obj/machinery/atmospherics/unary/U in range(1))
+	for(var/obj/machinery/atmospherics/unary/U in physical_range(1))
 		if(is_type_in_list(U,ventcrawl_machinery) && Adjacent(U) && U.can_crawl_through())
 			pipes |= U
 	if(!pipes || !pipes.len)
@@ -108,7 +108,7 @@ var/list/ventcrawl_machinery = list(
 			vent_found = null
 
 	if(!vent_found)
-		for(var/obj/machinery/atmospherics/machine in range(1,src))
+		for(var/obj/machinery/atmospherics/machine in physical_range(1,src))
 			if(is_type_in_list(machine, ventcrawl_machinery))
 				vent_found = machine
 

@@ -123,7 +123,7 @@
 	return istype(S, src)
 
 /obj/structure/proc/refresh_neighbors()
-	for(var/thing in RANGE_TURFS(src, 1))
+	for(var/thing in RANGE_TURFS(1, src))
 		var/turf/T = thing
 		T.update_icon()
 
@@ -131,7 +131,7 @@
 	var/list/dirs = list()
 	var/list/other_dirs = list()
 
-	for(var/obj/structure/S in orange(src, 1))
+	for(var/obj/structure/S in physical_orange(1, src))
 		if(can_visually_connect_to(S))
 			if(S.can_visually_connect())
 				if(propagate)
@@ -145,7 +145,7 @@
 		return FALSE
 
 	for(var/direction in GLOB.cardinal)
-		var/turf/T = get_step(src, direction)
+		var/turf/T = get_physical_step(src, direction)
 		var/success = 0
 		for(var/b_type in blend_objects)
 			if(istype(T, b_type))

@@ -7,7 +7,7 @@
 	async = 0
 
 /datum/unit_test/foundation/step_shall_return_true_on_success
-	name = "FOUNDATION: step() shall return true on success"
+	name = "FOUNDATION: seamless_step() shall return true on success"
 
 /datum/unit_test/foundation/step_shall_return_true_on_success/start_test()
 	var/mob_step_result = TestStep(/mob)
@@ -24,7 +24,7 @@
 	var/turf/start = get_safe_turf()
 	var/atom/movable/T = new type_to_test(start)
 
-	. = step(T, NORTH)
+	. = seamless_step(T, NORTH)
 	. = . && start.x == T.x
 	. = . && start.y + 1 == T.y
 	. = . && start.z == T.z

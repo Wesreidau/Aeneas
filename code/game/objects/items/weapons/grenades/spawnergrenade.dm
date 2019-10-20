@@ -28,7 +28,7 @@
 				x.dropInto(loc)
 				if(prob(50))
 					for(var/j = 1, j <= rand(1, 3), j++)
-						step(x, pick(NORTH,SOUTH,EAST,WEST))
+						seamless_step(x, pick(NORTH,SOUTH,EAST,WEST))
 
 				// Spawn some hostile syndicate critters
 

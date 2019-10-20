@@ -121,7 +121,7 @@
 			continue
 		attack_living(L)
 
-	if(!(locate(/obj/effect/blob/core) in range(T, 2)) && prob(secondary_core_growth_chance))
+	if(!(locate(/obj/effect/blob/core) in physical_range(2, T)) && prob(secondary_core_growth_chance))
 		new/obj/effect/blob/core/secondary(T)
 	else
 		new expandType(T, min(health, 30))
@@ -129,7 +129,7 @@
 /obj/effect/blob/proc/pulse(var/forceLeft, var/list/dirs)
 	sleep(4)
 	var/pushDir = pick(dirs)
-	var/turf/T = get_step(src, pushDir)
+	var/turf/T = get_physical_step(src, pushDir)
 	var/obj/effect/blob/B = (locate() in T)
 	if(!B)
 		if(prob(health))
@@ -148,7 +148,7 @@
 
 /obj/effect/blob/proc/attempt_attack(var/list/dirs)
 	var/attackDir = pick(dirs)
-	var/turf/T = get_step(src, attackDir)
+	var/turf/T = get_physical_step(src, attackDir)
 	for(var/mob/living/victim in T)
 		if(victim.stat == DEAD)
 			continue
@@ -221,7 +221,7 @@ the master core becomes more vulnereable to damage as it weakens,
 but it also becomes more aggressive, and channels more of its energy into regenerating rather than spreading
 regen() will cover update_icon() for this proc
 */
-/obj/effect/blob/core/proc/process_core_health() 
+/obj/effect/blob/core/proc/process_core_health()
 	switch(get_health_percent())
 		if(75 to INFINITY)
 			brute_resist = 3.5

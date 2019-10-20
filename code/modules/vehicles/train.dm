@@ -23,7 +23,7 @@
 //-------------------------------------------
 /obj/vehicle/train/Initialize()
 	. = ..()
-	for(var/obj/vehicle/train/T in orange(1, src))
+	for(var/obj/vehicle/train/T in physical_orange(1, src))
 		latch(T)
 
 /obj/vehicle/train/Move()
@@ -43,7 +43,7 @@
 	var/atom/movable/A = Obstacle
 
 	if(!A.anchored)
-		var/turf/T = get_step(A, dir)
+		var/turf/T = get_physical_step(A, dir)
 		if(isturf(T))
 			A.Move(T)	//bump things away when hit
 
@@ -77,7 +77,7 @@
 	if(user.incapacitated())
 		return 0
 
-	var/turf/T = get_step_to(src, get_step(src, direction))
+	var/turf/T = get_step_to(src, get_physical_step(src, direction))
 	if(!T)
 		to_chat(user, "You can't find a clear area to step onto.")
 		return 0
@@ -137,7 +137,7 @@
 //attempts to attach src as a follower of the train T
 //Note: there is a modified version of this in code\modules\vehicles\cargo_train.dm specifically for cargo train engines
 /obj/vehicle/train/proc/attach_to(obj/vehicle/train/T, mob/user)
-	if (get_dist(src, T) > 1)
+	if (get_physical_dist(src, T) > 1)
 		to_chat(user, "<span class='warning'>[src] is too far away from [T] to hitch them together.</span>")
 		return
 

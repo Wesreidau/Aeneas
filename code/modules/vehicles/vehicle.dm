@@ -303,18 +303,18 @@
 
 	//find a turf to unload to
 	if(direction)	//if direction specified, unload in that direction
-		dest = get_step(src, direction)
+		dest = get_physical_step(src, direction)
 	else if(user)	//if a user has unloaded the vehicle, unload at their feet
 		dest = get_turf(user)
 
 	if(!dest)
-		dest = get_step_to(src, get_step(src, turn(dir, 90))) //try unloading to the side of the vehicle first if neither of the above are present
+		dest = get_step_to(src, get_physical_step(src, turn(dir, 90))) //try unloading to the side of the vehicle first if neither of the above are present
 
 	//if these all result in the same turf as the vehicle or nullspace, pick a new turf with open space
 	if(!dest || dest == get_turf(src))
 		var/list/options = new()
 		for(var/test_dir in GLOB.alldirs)
-			var/new_dir = get_step_to(src, get_step(src, test_dir))
+			var/new_dir = get_step_to(src, get_physical_step(src, test_dir))
 			if(new_dir && load.Adjacent(new_dir))
 				options += new_dir
 		if(options.len)

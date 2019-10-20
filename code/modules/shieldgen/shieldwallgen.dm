@@ -173,7 +173,7 @@
 		oNSEW = 4
 
 	for(var/dist = 0, dist <= (max_range+1), dist += 1) // checks out to 8 tiles away for another generator
-		T = get_step(T2, NSEW)
+		T = get_physical_step(T2, NSEW)
 		T2 = T
 		steps += 1
 		if(locate(/obj/machinery/shieldwallgen) in T)
@@ -190,8 +190,8 @@
 	T2 = src.loc
 
 	for(var/dist = 0, dist < steps, dist += 1) // creates each field tile
-		var/field_dir = get_dir(T2,get_step(T2, NSEW))
-		T = get_step(T2, NSEW)
+		var/field_dir = get_dir(T2,get_physical_step(T2, NSEW))
+		T = get_physical_step(T2, NSEW)
 		T2 = T
 		var/obj/machinery/shieldwall/CF = new(T, src, G) //(ref to this gen, ref to connected gen)
 		CF.set_dir(field_dir)
@@ -235,7 +235,7 @@
 	var/turf/T2 = src.loc
 
 	for(var/dist = 0, dist <= (max_range+1), dist += 1) // checks out to 8 tiles away for fields
-		T = get_step(T2, NSEW)
+		T = get_physical_step(T2, NSEW)
 		T2 = T
 		if(locate(/obj/machinery/shieldwall) in T)
 			F = (locate(/obj/machinery/shieldwall) in T)

@@ -109,9 +109,9 @@
 		else if(prob(5)) //spawn adds
 			spellscast++
 			visible_message(SPAN_MFAUNA("\The [src] summons the imperial guard to his aid, and they appear in a flash!"))
-			new /mob/living/simple_animal/hostile/retaliate/goat/guard/master(get_step(src,pick(GLOB.cardinal)))
-			new /mob/living/simple_animal/hostile/retaliate/goat/guard(get_step(src,pick(GLOB.cardinal)))
-			new /mob/living/simple_animal/hostile/retaliate/goat/guard(get_step(src,pick(GLOB.cardinal)))
+			new /mob/living/simple_animal/hostile/retaliate/goat/guard/master(get_physical_step(src,pick(GLOB.cardinal)))
+			new /mob/living/simple_animal/hostile/retaliate/goat/guard(get_physical_step(src,pick(GLOB.cardinal)))
+			new /mob/living/simple_animal/hostile/retaliate/goat/guard(get_physical_step(src,pick(GLOB.cardinal)))
 
 		else if(prob(5)) //EMP blast
 			spellscast++
@@ -133,9 +133,9 @@
 			if(do_after(src, 6 SECONDS, src))
 				var/health_holder = health
 				visible_message(SPAN_MFAUNA("\The [src] raises its fore-hooves and stomps them into the ground with incredible force!"))
-				explosion(get_step(src,pick(GLOB.cardinal)), -1, 2, 2, 3, 6)
-				explosion(get_step(src,pick(GLOB.cardinal)), -1, 1, 4, 4, 6)
-				explosion(get_step(src,pick(GLOB.cardinal)), -1, 3, 4, 3, 6)
+				explosion(get_physical_step(src,pick(GLOB.cardinal)), -1, 2, 2, 3, 6)
+				explosion(get_physical_step(src,pick(GLOB.cardinal)), -1, 1, 4, 4, 6)
+				explosion(get_physical_step(src,pick(GLOB.cardinal)), -1, 3, 4, 3, 6)
 				stop_automation = FALSE
 				spellscast += 2
 				if(!health < health_holder)
@@ -211,6 +211,6 @@
 	. = ..()
 	if(damtype != BRUTE)
 		special_attacks++
-	
+
 /mob/living/simple_animal/hostile/retaliate/goat/king/Allow_Spacemove(check_drift = 0)
 	return 1

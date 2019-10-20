@@ -43,7 +43,7 @@ client/proc/Test_ZAS_Connection(var/turf/simulated/T as turf)
 			to_chat(mob, "No air passage :x")
 		return
 
-	var/turf/simulated/other_turf = get_step(T, direction_list[direction])
+	var/turf/simulated/other_turf = get_physical_step(T, direction_list[direction])
 	if(!istype(other_turf))
 		return
 

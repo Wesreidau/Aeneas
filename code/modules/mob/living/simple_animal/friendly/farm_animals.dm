@@ -67,7 +67,7 @@
 
 		if(!pulledby)
 			var/obj/effect/vine/food
-			food = locate(/obj/effect/vine) in oview(5,loc)
+			food = locate(/obj/effect/vine) in physical_oview(5,loc)
 			if(food)
 				var/step = get_step_to(src, food, 0)
 				Move(step)

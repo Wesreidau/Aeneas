@@ -43,7 +43,7 @@
 				continue
 			var/new_aggress = 1
 			var/mob/living/M = m
-			var/dist = get_dist(M, src)
+			var/dist = get_physical_dist(M, src)
 			if(dist < 2) //Attack! Attack!
 				M.attack_generic(src,10,"bitten")
 				return .

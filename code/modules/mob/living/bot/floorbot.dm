@@ -97,13 +97,13 @@
 		UnarmedAttack(target)
 
 /mob/living/bot/floorbot/lookForTargets()
-	for(var/turf/simulated/floor/T in view(src))
+	for(var/turf/simulated/floor/T in physical_view(src))
 		if(confirmTarget(T))
 			target = T
 			return
 
 	if(amount < maxAmount && (eattiles || maketiles))
-		for(var/obj/item/stack/S in view(src))
+		for(var/obj/item/stack/S in physical_view(src))
 			if(confirmTarget(S))
 				target = S
 				return
@@ -214,7 +214,7 @@
 
 
 	var/list/things = list()
-	for(var/atom/A in orange(5, src.loc))
+	for(var/atom/A in physical_orange(5, src.loc))
 		things += A
 
 	var/list/shrapnel = list()

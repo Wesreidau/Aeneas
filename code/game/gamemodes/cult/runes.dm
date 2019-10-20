@@ -77,7 +77,7 @@
 
 /obj/effect/rune/proc/get_cultists()
 	. = list()
-	for(var/mob/living/M in range(1))
+	for(var/mob/living/M in physical_range(1))
 		if(iscultist(M))
 			. += M
 
@@ -351,7 +351,7 @@
 
 /obj/effect/rune/defile/cast(var/mob/living/user)
 	speak_incantation(user, "Ia! Ia! Zasan therium viortia!")
-	for(var/turf/T in range(1, src))
+	for(var/turf/T in physical_range(1, src))
 		if(T.holy)
 			T.holy = 0
 		else
@@ -364,7 +364,7 @@
 
 /obj/effect/rune/obscure/cast(var/mob/living/user)
 	var/runecheck = 0
-	for(var/obj/effect/rune/R in orange(1, src))
+	for(var/obj/effect/rune/R in physical_orange(1, src))
 		if(R != src)
 			R.set_invisibility(INVISIBILITY_OBSERVER)
 		runecheck = 1
@@ -378,7 +378,7 @@
 
 /obj/effect/rune/reveal/cast(var/mob/living/user)
 	var/irunecheck = 0
-	for(var/obj/effect/rune/R in orange(1, src))
+	for(var/obj/effect/rune/R in physical_orange(1, src))
 		if(R != src)
 			R.set_invisibility(SEE_INVISIBLE_NOLIGHTING)
 		irunecheck = 1
@@ -625,7 +625,7 @@
 	else
 		for(var/mob/living/M in cultists)
 			M.say("Ia! Ia! Zasan therium viortia! Razan gilamrua kioha!")
-		for(var/turf/T in range(5, src))
+		for(var/turf/T in physical_range(5, src))
 			if(T.holy)
 				T.holy = 0
 			else
@@ -801,7 +801,7 @@
 			if(prob(5))
 				M.say(pick("Hakkrutju gopoenjim.", "Nherasai pivroiashan.", "Firjji prhiv mazenhor.", "Tanah eh wakantahe.", "Obliyae na oraie.", "Miyf hon vnor'c.", "Wakabai hij fen juswix."))
 
-		for(var/turf/T in range(min(the_end_comes, 15)))
+		for(var/turf/T in physical_range(min(the_end_comes, 15)))
 			if(prob(the_end_comes / 3))
 				T.cultify()
 		sleep(10)

@@ -41,14 +41,14 @@
 		return TRUE
 
 	for(var/obj/machinery/disperser/front/F in SSmachines.machinery)
-		if(get_dist(src, F) >= link_range)
+		if(get_physical_dist(src, F) >= link_range)
 			continue
 		var/backwards = turn(F.dir, 180)
-		var/obj/machinery/disperser/middle/M = locate() in get_step(F, backwards)
-		if(!M || get_dist(src, M) >= link_range)
+		var/obj/machinery/disperser/middle/M = locate() in get_physical_step(F, backwards)
+		if(!M || get_physical_dist(src, M) >= link_range)
 			continue
-		var/obj/machinery/disperser/back/B = locate() in get_step(M, backwards)
-		if(!B || get_dist(src, B) >= link_range)
+		var/obj/machinery/disperser/back/B = locate() in get_physical_step(M, backwards)
+		if(!B || get_physical_dist(src, B) >= link_range)
 			continue
 		front = F
 		middle = M
@@ -62,7 +62,7 @@
 
 obj/machinery/computer/ship/disperser/proc/is_valid_setup()
 	if(front && middle && back)
-		var/everything_in_range = (get_dist(src, front) < link_range) && (get_dist(src, middle) < link_range) && (get_dist(src, back) < link_range)
+		var/everything_in_range = (get_physical_dist(src, front) < link_range) && (get_physical_dist(src, middle) < link_range) && (get_physical_dist(src, back) < link_range)
 		var/everything_in_order = (middle.Adjacent(front) && middle.Adjacent(back)) && (front.dir == middle.dir && middle.dir == back.dir)
 		return everything_in_order && everything_in_range
 	return FALSE

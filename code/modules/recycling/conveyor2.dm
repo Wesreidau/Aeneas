@@ -74,7 +74,7 @@
 		for(var/atom/movable/A in affecting)
 			if(!A.anchored)
 				if(A.loc == src.loc) // prevents the object from being affected if it's not currently here.
-					step(A,movedir)
+					seamless_step(A,movedir)
 					items_moved++
 			if(items_moved >= 10)
 				break
@@ -97,16 +97,16 @@
 		return
 	if(user.pulling.anchored)
 		return
-	if((user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1))
+	if((user.pulling.loc != user.loc && get_physical_dist(user, user.pulling) > 1))
 		return
 	if(ismob(user.pulling))
 		var/mob/M = user.pulling
 		M.stop_pulling()
-		step(user.pulling, get_dir(user.pulling.loc, src))
+		seamless_step(user.pulling, get_dir(user.pulling.loc, src))
 		user.stop_pulling()
 		return TRUE
 	else
-		step(user.pulling, get_dir(user.pulling.loc, src))
+		seamless_step(user.pulling, get_dir(user.pulling.loc, src))
 		user.stop_pulling()
 		return TRUE
 
@@ -115,11 +115,11 @@
 /obj/machinery/conveyor/set_broken(new_state)
 	. = ..()
 	if(. && new_state)
-		var/obj/machinery/conveyor/C = locate() in get_step(src, dir)
+		var/obj/machinery/conveyor/C = locate() in get_physical_step(src, dir)
 		if(C)
 			C.set_operable(dir, id, 0)
 
-		C = locate() in get_step(src, turn(dir,180))
+		C = locate() in get_physical_step(src, turn(dir,180))
 		if(C)
 			C.set_operable(turn(dir,180), id, 0)
 
@@ -132,7 +132,7 @@
 	operable = op
 
 	update_icon()
-	var/obj/machinery/conveyor/C = locate() in get_step(src, stepdir)
+	var/obj/machinery/conveyor/C = locate() in get_physical_step(src, stepdir)
 	if(C)
 		C.set_operable(stepdir, id, op)
 
@@ -289,7 +289,7 @@
 	if(!proximity || !istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated())
 		return
 	var/found = 0
-	for(var/obj/machinery/conveyor/C in view())
+	for(var/obj/machinery/conveyor/C in physical_view())
 		if(C.id == src.id)
 			found = 1
 			break
@@ -308,7 +308,7 @@
 	if(!proximity || !istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated())
 		return
 	var/found = 0
-	for(var/obj/machinery/conveyor/C in view())
+	for(var/obj/machinery/conveyor/C in physical_view())
 		if(C.id == src.id)
 			found = 1
 			break

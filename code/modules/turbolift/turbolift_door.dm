@@ -35,7 +35,7 @@
 			if(LM.mob_size <= MOB_TINY)
 				var/moved = 0
 				for(dir in shuffle(GLOB.cardinal.Copy()))
-					var/dest = get_step(LM,dir)
+					var/dest = get_physical_step(LM,dir)
 					if(!(locate(/obj/machinery/door/airlock/lift) in dest))
 						if(LM.Move(dest))
 							moved = 1

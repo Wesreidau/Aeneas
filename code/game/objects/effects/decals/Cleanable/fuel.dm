@@ -11,7 +11,7 @@
 	var/turf/simulated/S = loc
 	if(!istype(S)) return
 	for(var/d in GLOB.cardinal)
-		var/turf/simulated/target = get_step(src,d)
+		var/turf/simulated/target = get_physical_step(src,d)
 		var/turf/simulated/origin = get_turf(src)
 		if(origin.CanPass(null, target, 0, 0) && target.CanPass(null, origin, 0, 0))
 			var/obj/effect/decal/cleanable/liquid_fuel/other_fuel = locate() in target
@@ -40,7 +40,7 @@
 	if(!istype(S)) return
 
 	for(var/d in list(turn(dir,90),turn(dir,-90), dir))
-		var/turf/simulated/O = get_step(S,d)
+		var/turf/simulated/O = get_physical_step(S,d)
 		if(locate(/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel) in O)
 			continue
 		if(O.CanPass(null, S, 0, 0) && S.CanPass(null, O, 0, 0))

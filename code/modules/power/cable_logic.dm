@@ -11,7 +11,7 @@
 
 
 	if(!input)
-		var/turf/T = get_step(src, dir)
+		var/turf/T = get_physical_step(src, dir)
 		if(T)
 			var/inv_dir = turn(dir, 180)
 			for(var/obj/structure/cable/C in T)
@@ -51,7 +51,7 @@
 		return 1
 
 	if(!output)
-		var/turf/T = get_step(src, dir)
+		var/turf/T = get_physical_step(src, dir)
 		if(T)
 			var/inv_dir = turn(dir, 180)
 			for(var/obj/structure/cable/C in T)
@@ -96,7 +96,7 @@
 		return 0
 
 	if(!input)
-		var/turf/T = get_step(src, dir_input)
+		var/turf/T = get_physical_step(src, dir_input)
 		if(T)
 			var/inv_dir = turn(dir_input, 180)
 			for(var/obj/structure/cable/C in T)
@@ -104,7 +104,7 @@
 					input = C
 
 	if(!output)
-		var/turf/T = get_step(src, dir_output)
+		var/turf/T = get_physical_step(src, dir_output)
 		if(T)
 			var/inv_dir = turn(dir_output, 180)
 			for(var/obj/structure/cable/C in T)
@@ -159,7 +159,7 @@
 		return 0
 
 	if(!input1)
-		var/turf/T = get_step(src, dir_input1)
+		var/turf/T = get_physical_step(src, dir_input1)
 		if(T)
 			var/inv_dir = turn(dir_input1, 180)
 			for(var/obj/structure/cable/C in T)
@@ -167,7 +167,7 @@
 					input1 = C
 
 	if(!input2)
-		var/turf/T = get_step(src, dir_input2)
+		var/turf/T = get_physical_step(src, dir_input2)
 		if(T)
 			var/inv_dir = turn(dir_input2, 180)
 			for(var/obj/structure/cable/C in T)
@@ -175,7 +175,7 @@
 					input2 = C
 
 	if(!output)
-		var/turf/T = get_step(src, dir_output)
+		var/turf/T = get_physical_step(src, dir_output)
 		if(T)
 			var/inv_dir = turn(dir_output, 180)
 			for(var/obj/structure/cable/C in T)

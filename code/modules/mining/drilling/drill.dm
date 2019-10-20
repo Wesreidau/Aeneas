@@ -249,7 +249,7 @@
 
 	if(usr.stat) return
 
-	var/obj/structure/ore_box/B = locate() in orange(1)
+	var/obj/structure/ore_box/B = locate() in physical_orange(1)
 	if(B)
 		for(var/obj/item/weapon/ore/O in contents)
 			O.forceMove(B)
@@ -295,7 +295,7 @@
 
 /obj/machinery/mining/brace/proc/connect()
 
-	var/turf/T = get_step(get_turf(src), src.dir)
+	var/turf/T = get_physical_step(get_turf(src), src.dir)
 
 	for(var/thing in T.contents)
 		if(istype(thing, /obj/machinery/mining/drill))

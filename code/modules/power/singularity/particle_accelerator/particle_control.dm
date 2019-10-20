@@ -77,7 +77,7 @@
 /obj/machinery/particle_accelerator/control_box/Topic(href, href_list)
 	..()
 	//Ignore input if we are broken, !silicon guy cant touch us, or nonai controlling from super far away
-	if(stat & (BROKEN|NOPOWER) || (get_dist(src, usr) > 1 && !istype(usr, /mob/living/silicon)) || (get_dist(src, usr) > 8 && !istype(usr, /mob/living/silicon/ai)))
+	if(stat & (BROKEN|NOPOWER) || (get_physical_dist(src, usr) > 1 && !istype(usr, /mob/living/silicon)) || (get_physical_dist(src, usr) > 8 && !istype(usr, /mob/living/silicon/ai)))
 		usr.unset_machine()
 		usr << browse(null, "window=pacontrol")
 		return
@@ -155,7 +155,7 @@
 
 
 /obj/machinery/particle_accelerator/control_box/proc/part_scan()
-	for(var/obj/structure/particle_accelerator/fuel_chamber/F in orange(1,src))
+	for(var/obj/structure/particle_accelerator/fuel_chamber/F in physical_orange(1,src))
 		src.set_dir(F.dir)
 	connected_parts = list()
 	var/tally = 0
@@ -163,24 +163,24 @@
 	var/rdir = turn(dir,90)
 	var/odir = turn(dir,180)
 	var/turf/T = src.loc
-	T = get_step(T,rdir)
+	T = get_physical_step(T,rdir)
 	if(check_part(T,/obj/structure/particle_accelerator/fuel_chamber))
 		tally++
-	T = get_step(T,odir)
+	T = get_physical_step(T,odir)
 	if(check_part(T,/obj/structure/particle_accelerator/end_cap))
 		tally++
-	T = get_step(T,dir)
-	T = get_step(T,dir)
+	T = get_physical_step(T,dir)
+	T = get_physical_step(T,dir)
 	if(check_part(T,/obj/structure/particle_accelerator/power_box))
 		tally++
-	T = get_step(T,dir)
+	T = get_physical_step(T,dir)
 	if(check_part(T,/obj/structure/particle_accelerator/particle_emitter/center))
 		tally++
-	T = get_step(T,ldir)
+	T = get_physical_step(T,ldir)
 	if(check_part(T,/obj/structure/particle_accelerator/particle_emitter/left))
 		tally++
-	T = get_step(T,rdir)
-	T = get_step(T,rdir)
+	T = get_physical_step(T,rdir)
+	T = get_physical_step(T,rdir)
 	if(check_part(T,/obj/structure/particle_accelerator/particle_emitter/right))
 		tally++
 	if(tally >= 6)
@@ -224,7 +224,7 @@
 
 
 /obj/machinery/particle_accelerator/control_box/interact(mob/user)
-	if((get_dist(src, user) > 1) || (stat & (BROKEN|NOPOWER)))
+	if((get_physical_dist(src, user) > 1) || (stat & (BROKEN|NOPOWER)))
 		if(!istype(user, /mob/living/silicon))
 			user.unset_machine()
 			user << browse(null, "window=pacontrol")

@@ -269,7 +269,7 @@ var/list/ai_verbs_default = list(
 			custom_icons += selected_sprite
 	update_icon()
 
-/mob/living/silicon/ai/pointed(atom/A as mob|obj|turf in view())
+/mob/living/silicon/ai/pointed(atom/A as mob|obj|turf in physical_view())
 	set popup_menu = 0
 	set src = usr.contents
 	return 0

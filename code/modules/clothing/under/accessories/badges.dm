@@ -20,7 +20,7 @@
 /obj/item/clothing/accessory/badge/proc/set_desc(var/mob/living/carbon/human/H)
 
 /obj/item/clothing/accessory/badge/CanUseTopic(var/user)
-	if(user in view(get_turf(src)))
+	if(user in physical_view(get_turf(src)))
 		return STATUS_INTERACTIVE
 
 /obj/item/clothing/accessory/badge/OnTopic(var/mob/user, var/list/href_list)

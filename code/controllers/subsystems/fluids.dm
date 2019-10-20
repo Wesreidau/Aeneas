@@ -87,7 +87,7 @@ var/datum/controller/subsystem/fluids/SSfluids
 			for(var/spread_dir in GLOB.cardinal)
 				if(F.start_loc.fluid_blocked_dirs & spread_dir)
 					continue
-				var/turf/T = get_step(F.start_loc, spread_dir)
+				var/turf/T = get_physical_step(F.start_loc, spread_dir)
 				var/coming_from = GLOB.reverse_dir[spread_dir]
 				if(!istype(T) || T.flooded)
 					continue
@@ -179,7 +179,7 @@ var/datum/controller/subsystem/fluids/SSfluids
 				for(var/atom/movable/AM in F.loc.contents)
 					if(isnull(pushing_atoms[AM]) && AM.is_fluid_pushable(F.flow_amount))
 						pushing_atoms[AM] = TRUE
-						step(AM, F.dir)
+						seamless_step(AM, F.dir)
 
 			if (F.fluid_amount <= FLUID_EVAPORATION_POINT & prob(10))
 				LOSE_FLUID(F, rand(1, 3))

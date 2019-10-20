@@ -27,7 +27,7 @@
 		skipface |= wear_mask.flags_inv & HIDEFACE
 
 	//no accuately spotting headsets from across the room.
-	if(get_dist(user, src) > 3)
+	if(get_physical_dist(user, src) > 3)
 		skipears = 1
 
 	var/list/msg = list("<span class='info'>*---------*\nThis is ")
@@ -164,7 +164,7 @@
 	if(isghost(user) || user.stat == DEAD) // ghosts can see anything
 		distance = 1
 	else
-		distance = get_dist(user,src)
+		distance = get_physical_dist(user,src)
 	if (src.stat)
 		msg += "<span class='warning'>[T.He] [T.is]n't responding to anything around [T.him] and seems to be unconscious.</span>\n"
 		if((stat == DEAD || is_asystole() || src.losebreath) && distance <= 3)

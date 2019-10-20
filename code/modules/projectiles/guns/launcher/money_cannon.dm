@@ -32,7 +32,7 @@
 		bling.update_icon()
 		if(projectile_vomit)
 			for(var/j = 1, j <= rand(2, 4), j++)
-				step(bling, pick(GLOB.cardinal))
+				seamless_step(bling, pick(GLOB.cardinal))
 
 	if(projectile_vomit)
 		vomit_onto.AdjustStunned(3)

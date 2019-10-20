@@ -15,7 +15,7 @@
 				. += M
 		return
 	if(hunger > 500) //time to look for some food
-		for(var/mob/living/L in view(src, dist))
+		for(var/mob/living/L in physical_view(src, dist))
 			if(!attack_same && L.faction != faction)
 				prey |= weakref(L)
 
@@ -27,7 +27,7 @@
 	if(hunger < 100) //stop hunting when satiated
 		prey.Cut()
 	else
-		for(var/mob/living/simple_animal/S in range(src,1))
+		for(var/mob/living/simple_animal/S in physical_range(1,src))
 			if(S.stat == DEAD)
 				visible_message("[src] consumes \the body of [S]!")
 				var/turf/T = get_turf(S)

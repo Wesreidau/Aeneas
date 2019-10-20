@@ -24,7 +24,7 @@
 	if(!A)
 		activate_pin(3)
 		return
-	if(!(A in view(get_turf(src))))
+	if(!(A in physical_view(get_turf(src))))
 		push_data()
 		activate_pin(3)
 		return // Can't see the target.

@@ -10,7 +10,7 @@
 		return 0
 	var/is_good = 0
 	for(var/obj/structure/deity/altar/A in linked.structures)
-		if(get_dist(target, A) < 2)
+		if(get_physical_dist(target, A) < 2)
 			is_good = 1
 			break
 	if(!is_good)

@@ -252,7 +252,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 /obj/structure/cable/proc/mergeDiagonalsNetworks(var/direction)
 
 	//search for and merge diagonally matching cables from the first direction component (north/south)
-	var/turf/T  = get_step(src, direction&3)//go north/south
+	var/turf/T  = get_physical_step(src, direction&3)//go north/south
 
 	for(var/obj/structure/cable/C in T)
 
@@ -273,7 +273,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 				C.powernet.add_cable(src) //else, we simply connect to the matching cable powernet
 
 	//the same from the second direction component (east/west)
-	T  = get_step(src, direction&12)//go east/west
+	T  = get_physical_step(src, direction&12)//go east/west
 
 	for(var/obj/structure/cable/C in T)
 
@@ -384,7 +384,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 					. += C
 		if(cable_dir & (cable_dir - 1)) // Diagonal, check for /\/\/\ style cables along cardinal directions
 			for(var/pair in list(NORTH|SOUTH, EAST|WEST))
-				T = get_step(src, cable_dir & pair)
+				T = get_physical_step(src, cable_dir & pair)
 				if(T)
 					var/req_dir = cable_dir ^ pair
 					for(var/obj/structure/cable/C in T)
@@ -428,7 +428,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	var/list/P_list
 	if(!T1)	return
 	if(d1)
-		T1 = get_step(T1, d1)
+		T1 = get_physical_step(T1, d1)
 		P_list = power_list(T1, src, turn(d1,180),0,cable_only = 1)	// what adjacently joins on to cut cable...
 
 	P_list += power_list(loc, src, d1, 0, cable_only = 1)//... and on turf
@@ -570,7 +570,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 /obj/item/stack/cable_coil/examine(mob/user)
 	. = ..()
-	if(get_dist(src, user) > 1)
+	if(get_physical_dist(src, user) > 1)
 		return
 
 	if(get_amount() == 1)
@@ -635,7 +635,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		to_chat(user, "There is no cable left.")
 		return
 
-	if(get_dist(F,user) > 1) // Too far
+	if(get_physical_dist(F,user) > 1) // Too far
 		to_chat(user, "You can't lay cable at a place that far away.")
 		return
 
@@ -677,7 +677,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	if(!isturf(T) || !T.is_plating())		// sanity checks, also stop use interacting with T-scanner revealed cable
 		return
 
-	if(get_dist(C, user) > 1)		// make sure it's close enough
+	if(get_physical_dist(C, user) > 1)		// make sure it's close enough
 		to_chat(user, "You can't lay cable at a place that far away.")
 		return
 

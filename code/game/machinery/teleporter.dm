@@ -19,9 +19,9 @@
 
 /obj/machinery/computer/teleporter/Initialize()
 	. = ..()
-	station = locate(/obj/machinery/teleport/station, get_step(src, turn(dir, 90)))
+	station = locate(/obj/machinery/teleport/station, get_physical_step(src, turn(dir, 90)))
 	if(station)
-		hub = locate(/obj/machinery/teleport/hub, get_step(station, turn(dir, 90)))
+		hub = locate(/obj/machinery/teleport/hub, get_physical_step(station, turn(dir, 90)))
 
 	if(istype(station))
 		station.hub = hub
@@ -75,7 +75,7 @@
 				for(var/mob/O in hearers(src, null))
 					O.show_message("<span class='warning'>Incoming bluespace portal detected, unable to lock in.</span>", 2)
 
-				for(var/obj/machinery/teleport/hub/H in range(1))
+				for(var/obj/machinery/teleport/hub/H in physical_range(1))
 					var/amount = rand(2,5)
 					for(var/i=0;i<amount;i++)
 						new /mob/living/simple_animal/hostile/carp(get_turf(H))

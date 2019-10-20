@@ -83,7 +83,7 @@ steam.start() -- spawns the effect
 		direction = pick(GLOB.alldirs)
 	for(i=0, i<pick(1,2,3), i++)
 		sleep(5)
-		step(steam,direction)
+		seamless_step(steam,direction)
 	QDEL_IN(steam, 2 SECONDS)
 
 /////////////////////////////////////////////
@@ -153,7 +153,7 @@ steam.start() -- spawns the effect
 		direction = pick(GLOB.alldirs)
 	for(i=0, i<pick(1,2,3), i++)
 		sleep(5)
-		step(sparks,direction)
+		seamless_step(sparks,direction)
 
 /////////////////////////////////////////////
 //// SMOKE SYSTEMS
@@ -337,7 +337,7 @@ steam.start() -- spawns the effect
 		if(QDELETED(smoke))
 			total_smoke--
 			return
-		step(smoke,direction)
+		seamless_step(smoke,direction)
 	QDEL_IN(smoke, smoke.time_to_live*0.75+rand(10,30))
 	total_smoke--
 

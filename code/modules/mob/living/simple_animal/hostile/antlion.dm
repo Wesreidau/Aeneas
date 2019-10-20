@@ -58,14 +58,14 @@
 /mob/living/simple_animal/hostile/antlion/proc/diggy()
 	var/list/turf_targets
 	if(target_mob)
-		for(var/turf/T in range(1, get_turf(target_mob)))
+		for(var/turf/T in physical_range(1, get_turf(target_mob)))
 			if(!T.is_floor())
 				continue
 			if(!T.z != src.z)
 				continue
 			turf_targets += T
 	else
-		for(var/turf/T in orange(5, src))
+		for(var/turf/T in physical_orange(5, src))
 			if(!T.is_floor())
 				continue
 			if(!T.z != src.z)

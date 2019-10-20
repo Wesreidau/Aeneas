@@ -332,7 +332,7 @@ var/global/datum/controller/radio/radio_controller
 			continue
 		if(z_levels && !(end_point.z in z_levels))
 			continue
-		if(range && get_dist(start_point, end_point) > range)
+		if(range && get_physical_dist(start_point, end_point) > range)
 			continue
 
 		device.receive_signal(signal, TRANSMISSION_RADIO, frequency)

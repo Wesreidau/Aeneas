@@ -200,7 +200,7 @@
 					skip = 1; break
 			if (skip) continue
 
-			var/turf/NT = get_step(T,dir)
+			var/turf/NT = get_physical_step(T,dir)
 			if (!isturf(NT) || (NT in found) || (NT in pending))
 				continue
 

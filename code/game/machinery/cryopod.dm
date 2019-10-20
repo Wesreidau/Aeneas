@@ -214,7 +214,7 @@
 /obj/machinery/cryopod/lifepod/proc/launch()
 	launched = 1
 	for(var/d in GLOB.cardinal)
-		var/turf/T = get_step(src,d)
+		var/turf/T = get_physical_step(src,d)
 		var/obj/machinery/door/blast/B = locate() in T
 		if(B && B.density)
 			B.force_open()
@@ -223,7 +223,7 @@
 	var/list/possible_locations = list()
 	if(GLOB.using_map.use_overmap)
 		var/obj/effect/overmap/O = map_sectors["[z]"]
-		for(var/obj/effect/overmap/OO in range(O,2))
+		for(var/obj/effect/overmap/OO in physical_range(2,O))
 			if(OO.in_space || istype(OO,/obj/effect/overmap/sector/exoplanet))
 				possible_locations |= text2num(level)
 
@@ -501,7 +501,7 @@
 		to_chat(usr, "<span class='notice'><B>\The [src] is in use.</B></span>")
 		return
 
-	for(var/mob/living/carbon/slime/M in range(1,usr))
+	for(var/mob/living/carbon/slime/M in physical_range(1,usr))
 		if(M.Victim == usr)
 			to_chat(usr, "You're too busy getting your life sucked out of you.")
 			return

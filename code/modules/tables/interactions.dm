@@ -21,10 +21,10 @@
 	if(flipped)
 		cover = get_turf(src)
 	else
-		cover = get_step(loc, get_dir(from, loc))
+		cover = get_physical_step(loc, get_dir(from, loc))
 	if(!cover)
 		return 1
-	if (get_dist(P.starting, loc) <= 1) //Tables won't help you if people are THIS close
+	if (get_physical_dist(P.starting, loc) <= 1) //Tables won't help you if people are THIS close
 		return 1
 
 	var/chance = 20
@@ -72,7 +72,7 @@
 		return
 	user.unequip_item()
 	if (O.loc != src.loc)
-		step(O, get_dir(O, src))
+		seamless_step(O, get_dir(O, src))
 	return
 
 /obj/structure/table/attackby(obj/item/W, mob/user, var/click_params)

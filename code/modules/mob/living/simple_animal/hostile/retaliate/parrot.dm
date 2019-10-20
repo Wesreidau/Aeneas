@@ -321,7 +321,7 @@
 //-----SLEEPING
 	if(parrot_state == PARROT_PERCH)
 		if(parrot_perch && parrot_perch.loc != src.loc) //Make sure someone hasnt moved our perch on us
-			if(parrot_perch in view(src))
+			if(parrot_perch in physical_view(src))
 				parrot_state = PARROT_SWOOP | PARROT_RETURN
 				icon_state = "[icon_set]_fly"
 				return
@@ -397,11 +397,11 @@
 					return
 			return
 
-		if(parrot_interest && parrot_interest in view(src))
+		if(parrot_interest && parrot_interest in physical_view(src))
 			parrot_state = PARROT_SWOOP | PARROT_STEAL
 			return
 
-		if(parrot_perch && parrot_perch in view(src))
+		if(parrot_perch && parrot_perch in physical_view(src))
 			parrot_state = PARROT_SWOOP | PARROT_RETURN
 			return
 
@@ -417,7 +417,7 @@
 			parrot_state = PARROT_SWOOP | PARROT_RETURN
 			return
 
-		if(!(parrot_interest in view(src)))
+		if(!(parrot_interest in physical_view(src)))
 			parrot_state = PARROT_SWOOP | PARROT_RETURN
 			return
 
@@ -489,7 +489,7 @@
 					held_item = steal_from_ground()
 					if(!held_item)
 						held_item = steal_from_mob() //Apparently it's possible for dead mobs to hang onto items in certain circumstances.
-				if(parrot_perch in view(src)) //If we have a home nearby, go to it, otherwise find a new home
+				if(parrot_perch in physical_view(src)) //If we have a home nearby, go to it, otherwise find a new home
 					parrot_state = PARROT_SWOOP | PARROT_RETURN
 				else
 					parrot_state = PARROT_WANDER
@@ -534,7 +534,7 @@
 	..()
 
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/search_for_item()
-	for(var/atom/movable/AM in view(src))
+	for(var/atom/movable/AM in physical_view(src))
 		//Skip items we already stole or are wearing or are too big
 		if(parrot_perch && AM.loc == parrot_perch.loc || AM.loc == src)
 			continue
@@ -549,7 +549,7 @@
 	return null
 
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/search_for_perch()
-	for(var/obj/O in view(src))
+	for(var/obj/O in physical_view(src))
 		for(var/path in desired_perches)
 			if(istype(O, path))
 				return O
@@ -557,7 +557,7 @@
 
 //This proc was made to save on doing two 'in view' loops seperatly
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/search_for_perch_and_item()
-	for(var/atom/movable/AM in view(src))
+	for(var/atom/movable/AM in physical_view(src))
 		for(var/perch_path in desired_perches)
 			if(istype(AM, perch_path))
 				return AM
@@ -596,7 +596,7 @@
 		to_chat(src, "<span class='warning'>You are already holding the [held_item]</span>")
 		return 1
 
-	for(var/obj/item/I in view(1,src))
+	for(var/obj/item/I in physical_view(1,src))
 		//Make sure we're not already holding it and it's small enough
 		if(I.loc != src && can_pick_up(I))
 
@@ -626,7 +626,7 @@
 
 	var/obj/item/stolen_item = null
 
-	for(var/mob/living/carbon/C in view(1,src))
+	for(var/mob/living/carbon/C in physical_view(1,src))
 		if(C.l_hand && can_pick_up(C.l_hand))
 			stolen_item = C.l_hand
 
@@ -689,7 +689,7 @@
 		return
 
 	if(icon_state == "[icon_set]_fly")
-		for(var/atom/movable/AM in view(src,1))
+		for(var/atom/movable/AM in physical_view(src,1))
 			for(var/perch_path in desired_perches)
 				if(istype(AM, perch_path))
 					forceMove(AM.loc)

@@ -282,7 +282,7 @@
 /obj/effect/fusion_em_field/proc/Radiate()
 	if(istype(loc, /turf))
 		var/empsev = max(1, min(3, ceil(size/2)))
-		for(var/atom/movable/AM in range(max(1,Floor(size/2)), loc))
+		for(var/atom/movable/AM in physical_range(max(1,Floor(size/2)), loc))
 
 			if(AM == src || AM == owned_core || !AM.simulated)
 				continue

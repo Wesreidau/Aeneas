@@ -72,7 +72,7 @@
 	update_nearby_tiles()
 	var/turf/location = loc
 	. = ..()
-	for(var/obj/structure/window/W in orange(location, 1))
+	for(var/obj/structure/window/W in physical_orange(1, location))
 		W.update_icon()
 
 /obj/structure/window/examine(mob/user)
@@ -171,7 +171,7 @@
 	if(reinf_material) tforce *= 0.25
 	if(health - tforce <= 7 && !reinf_material)
 		set_anchored(FALSE)
-		step(src, get_dir(AM, src))
+		seamless_step(src, get_dir(AM, src))
 	take_damage(tforce)
 
 /obj/structure/window/attack_hand(mob/user as mob)
@@ -291,7 +291,7 @@
 			hit(W.force)
 			if(health <= 7)
 				set_anchored(FALSE)
-				step(src, get_dir(user, src))
+				seamless_step(src, get_dir(user, src))
 		else
 			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		..()
@@ -357,7 +357,7 @@
 //This proc is used to update the icons of nearby windows. It should not be confused with update_nearby_tiles(), which is an atmos proc!
 /obj/structure/window/proc/update_nearby_icons()
 	update_icon()
-	for(var/obj/structure/window/W in orange(src, 1))
+	for(var/obj/structure/window/W in physical_orange(1, src))
 		W.update_icon()
 
 // Visually connect with every type of window as long as it's full-tile.
@@ -519,7 +519,7 @@
 /obj/machinery/button/windowtint/activate()
 	if(operating)
 		return
-	for(var/obj/structure/window/W in range(src,range))
+	for(var/obj/structure/window/W in physical_range(range, src))
 		if(W.polarized && (W.id == src.id || !W.id))
 			W.toggle()
 	..()

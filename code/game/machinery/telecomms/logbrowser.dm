@@ -137,7 +137,7 @@
 					temp = "<font color = #d70b00>- FAILED: CANNOT PROBE WHEN BUFFER FULL -</font>"
 
 				else
-					for(var/obj/machinery/telecomms/server/T in range(25, src))
+					for(var/obj/machinery/telecomms/server/T in physical_range(25, src))
 						if(T.network == network)
 							servers.Add(T)
 
@@ -174,7 +174,7 @@
 
 		var/newnet = input(usr, "Which network do you want to view?", "Comm Monitor", network) as null|text
 
-		if(newnet && ((usr in range(1, src) || issilicon(usr))))
+		if(newnet && ((usr in physical_range(1, src) || issilicon(usr))))
 			if(length(newnet) > 15)
 				temp = "<font color = #d70b00>- FAILED: NETWORK TAG STRING TOO LENGHTLY -</font>"
 

@@ -83,7 +83,7 @@
 	if(LAZYLEN(decals))
 		overlays += decals
 	for(var/direction in GLOB.cardinal)
-		var/turf/turf_to_check = get_step(src,direction)
+		var/turf/turf_to_check = get_physical_step(src,direction)
 		if(!istype(turf_to_check, type))
 			var/image/rock_side = image(icon, "edge[pick(0,1,2)]", dir = turn(direction, 180))
 			rock_side.plating_decal_layerise()
@@ -111,7 +111,7 @@
 	dynamic_lighting = FALSE
 	icon = null
 	icon_state = null
-	
+
 /turf/simulated/planet_edge/Initialize()
 	. = ..()
 	var/obj/effect/overmap/sector/exoplanet/E = map_sectors["[z]"]
@@ -128,7 +128,7 @@
 		ny = y + (E.maxy - 2*TRANSITIONEDGE) - 1
 	else if (y >= (E.maxy - TRANSITIONEDGE))
 		ny = y - (E.maxy - 2*TRANSITIONEDGE) + 1
-	
+
 	var/turf/NT = locate(nx, ny, z)
 	if(NT)
 		vis_contents = list(NT)

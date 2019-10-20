@@ -27,7 +27,7 @@
 		return
 	var/min_dist = INFINITY
 	for(var/s in connected_deity.structures)
-		var/dist = get_dist(holder,s)
+		var/dist = get_physical_dist(holder,s)
 		if(dist < min_dist)
 			min_dist = dist
 	if(min_dist > threshold_base)

@@ -46,7 +46,7 @@
 		CtrlClickOn(A)
 		return
 
-	face_atom(A) // change direction to face what you clicked on
+	physical_face_atom(A) // change direction to face what you clicked on
 
 	if(control_disabled || !canClick())
 		return
@@ -212,4 +212,4 @@
 
 /mob/living/silicon/ai/face_atom(var/atom/A)
 	if(eyeobj)
-		eyeobj.face_atom(A)
+		eyeobj.physical_face_atom(A)

@@ -32,7 +32,7 @@
 	var/node_connect = dir
 
 	//check that there is something to connect to
-	for(var/obj/machinery/atmospherics/target in get_step(src, node_connect))
+	for(var/obj/machinery/atmospherics/target in get_physical_step(src, node_connect))
 		if(target.initialize_directions & get_dir(target, src))
 			node = target
 			break

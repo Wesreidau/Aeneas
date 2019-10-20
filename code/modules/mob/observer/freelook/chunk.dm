@@ -60,7 +60,7 @@
 	src.y = y
 	src.z = z
 
-	for(var/turf/t in range(10, locate(x + 8, y + 8, z)))
+	for(var/turf/t in physical_range(10, locate(x + 8, y + 8, z)))
 		if(t.x >= x && t.y >= y && t.x < x + 16 && t.y < y + 16)
 			turfs[t] = t
 
@@ -83,7 +83,7 @@
 	var/turf/center = locate(x + 8, y + 8, z)
 	for(var/entry in sources)
 		var/atom/A = entry
-		if(get_dist(get_turf(A), center) > 16)
+		if(get_physical_dist(get_turf(A), center) > 16)
 			continue
 		add_source(A)
 

@@ -136,7 +136,7 @@
 
 		var/miss_chance = 15
 		if (O.throw_source)
-			var/distance = get_dist(O.throw_source, loc)
+			var/distance = get_physical_dist(O.throw_source, loc)
 			miss_chance = max(15*(distance-2), 0)
 
 		if (prob(miss_chance))
@@ -193,7 +193,7 @@
 	apply_damage(speed*5, BRUTE)
 
 /mob/living/proc/near_wall(var/direction,var/distance=1)
-	var/turf/T = get_step(get_turf(src),direction)
+	var/turf/T = get_physical_step(get_turf(src),direction)
 	var/turf/last_turf = src.loc
 	var/i = 1
 
@@ -202,7 +202,7 @@
 			return last_turf
 		i++
 		last_turf = T
-		T = get_step(T,direction)
+		T = get_physical_step(T,direction)
 
 	return 0
 

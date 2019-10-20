@@ -123,7 +123,7 @@
 	deal_at(usr, M)
 
 /obj/item/weapon/deck/proc/deal_at(mob/user, mob/target)
-	var/obj/item/weapon/hand/H = new(get_step(user, user.dir))
+	var/obj/item/weapon/hand/H = new(get_physical_step(user, user.dir))
 
 	H.cards += cards[1]
 	cards -= cards[1]
@@ -133,7 +133,7 @@
 		user.visible_message("\The [user] deals a card to \himself.")
 	else
 		user.visible_message("\The [user] deals a card to \the [target].")
-	H.throw_at(get_step(target,target.dir),10,1,H)
+	H.throw_at(get_physical_step(target,target.dir),10,1,H)
 
 /obj/item/weapon/hand/attackby(obj/O, mob/user)
 	if(istype(O,/obj/item/weapon/hand))

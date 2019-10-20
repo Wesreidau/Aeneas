@@ -169,7 +169,7 @@
 /obj/structure/iv_drip/examine(mob/user)
 	. = ..(user)
 
-	if (get_dist(src, user) > 2) 
+	if (get_physical_dist(src, user) > 2) 
 		return
 
 	to_chat(user, "The IV drip is [mode ? "injecting" : "taking blood"].")

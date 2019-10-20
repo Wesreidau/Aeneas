@@ -33,6 +33,7 @@
 	reinf_material = newrmaterial
 	update_material()
 
+
 /turf/simulated/wall/on_update_icon()
 
 	..()
@@ -117,20 +118,22 @@
 	var/list/wall_dirs = list()
 	var/list/other_dirs = list()
 
-	for(var/turf/simulated/wall/W in orange(src, 1))
+	var/list/nearby = get_adjacent_turfs(src, /turf/simulated/wall)
+	for(var/turf/simulated/wall/W in nearby)
 		switch(can_join_with(W))
 			if(0)
 				continue
 			if(1)
-				wall_dirs += get_dir(src, W)
+				wall_dirs += nearby[W]
 			if(2)
-				wall_dirs += get_dir(src, W)
-				other_dirs += get_dir(src, W)
+				wall_dirs += nearby[W]
+				other_dirs += nearby[W]
 		if(propagate)
 			W.update_connections()
 			W.update_icon()
 
-	for(var/turf/T in orange(src, 1))
+	nearby = get_adjacent_turfs(src, /turf)
+	for(var/turf/T in nearby)
 		var/success = 0
 		for(var/obj/O in T)
 			for(var/b_type in blend_objects)
@@ -145,9 +148,10 @@
 				break
 
 		if(success)
-			wall_dirs += get_dir(src, T)
-			if(get_dir(src, T) in GLOB.cardinal)
-				other_dirs += get_dir(src, T)
+			var/newdir = nearby[T]
+			wall_dirs += newdir
+			if(newdir in GLOB.cardinal)
+				other_dirs += newdir
 
 	wall_connections = dirs_to_corner_states(wall_dirs)
 	other_connections = dirs_to_corner_states(other_dirs)

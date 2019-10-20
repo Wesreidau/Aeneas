@@ -44,7 +44,7 @@
 
 /obj/structure/lattice/proc/update_neighbors(var/location = loc)
 	for (var/dir in GLOB.cardinal)
-		var/obj/structure/lattice/L = locate(/obj/structure/lattice, get_step(location, dir))
+		var/obj/structure/lattice/L = locate(/obj/structure/lattice, get_physical_step(location, dir))
 		if(L)
 			L.update_icon()
 
@@ -88,11 +88,11 @@
 /obj/structure/lattice/on_update_icon()
 	var/dir_sum = 0
 	for (var/direction in GLOB.cardinal)
-		var/turf/T = get_step(src, direction)
+		var/turf/T = get_physical_step(src, direction)
 		if(locate(/obj/structure/lattice, T) || locate(/obj/structure/catwalk, T))
 			dir_sum += direction
 		else
-			if(!(istype(get_step(src, direction), /turf/space)) && !(istype(get_step(src, direction), /turf/simulated/open)))
+			if(!(istype(get_physical_step(src, direction), /turf/space)) && !(istype(get_physical_step(src, direction), /turf/simulated/open)))
 				dir_sum += direction
 
 	icon_state = "lattice[dir_sum]"

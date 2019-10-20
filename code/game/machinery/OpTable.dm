@@ -19,7 +19,7 @@
 /obj/machinery/optable/Initialize()
 	. = ..()
 	for(dir in list(NORTH,EAST,SOUTH,WEST))
-		computer = locate(/obj/machinery/computer/operating, get_step(src, dir))
+		computer = locate(/obj/machinery/computer/operating, get_physical_step(src, dir))
 		if (computer)
 			computer.table = src
 			break
@@ -96,7 +96,7 @@
 	if(!user.unequip_item())
 		return
 	if (O.loc != src.loc)
-		step(O, get_dir(O, src))
+		seamless_step(O, get_dir(O, src))
 
 /obj/machinery/optable/proc/check_victim()
 	if(!victim || !victim.lying || victim.loc != loc)

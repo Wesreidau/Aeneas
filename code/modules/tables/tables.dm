@@ -81,7 +81,7 @@
 	material = null
 	reinforced = null
 	update_connections(1) // Update tables around us to ignore us (material=null forces no connections)
-	for(var/obj/structure/table/T in oview(src, 1))
+	for(var/obj/structure/table/T in physical_oview(src, 1))
 		T.update_icon()
 	. = ..()
 
@@ -128,7 +128,7 @@
 		if(!material)
 			update_connections(1)
 			update_icon()
-			for(var/obj/structure/table/T in oview(src, 1))
+			for(var/obj/structure/table/T in physical_oview(src, 1))
 				T.update_icon()
 			update_desc()
 			update_material()
@@ -339,7 +339,7 @@
 		var/type = 0
 		var/tabledirs = 0
 		for(var/direction in list(turn(dir,90), turn(dir,-90)) )
-			var/obj/structure/table/T = locate(/obj/structure/table ,get_step(src,direction))
+			var/obj/structure/table/T = locate(/obj/structure/table ,get_physical_step(src,direction))
 			if (T && T.flipped == 1 && T.dir == src.dir && material && T.material && T.material.name == material.name)
 				type++
 				tabledirs |= direction
@@ -379,7 +379,7 @@
 		connections = list("0", "0", "0", "0")
 
 		if(propagate)
-			for(var/obj/structure/table/T in oview(src, 1))
+			for(var/obj/structure/table/T in physical_oview(src, 1))
 				T.update_connections()
 		return
 
@@ -391,7 +391,7 @@
 		blocked_dirs |= W.dir
 
 	for(var/D in list(NORTH, SOUTH, EAST, WEST) - blocked_dirs)
-		var/turf/T = get_step(src, D)
+		var/turf/T = get_physical_step(src, D)
 		for(var/obj/structure/window/W in T)
 			if(W.is_fulltile() || W.dir == GLOB.reverse_dir[D])
 				blocked_dirs |= D
@@ -401,7 +401,7 @@
 					blocked_dirs |= W.dir|D // blocks the diagonal
 
 	for(var/D in list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST) - blocked_dirs)
-		var/turf/T = get_step(src, D)
+		var/turf/T = get_physical_step(src, D)
 
 		for(var/obj/structure/window/W in T)
 			if(W.is_fulltile() || (W.dir & GLOB.reverse_dir[D]))
@@ -416,7 +416,7 @@
 
 	var/list/connection_dirs = list()
 
-	for(var/obj/structure/table/T in orange(src, 1))
+	for(var/obj/structure/table/T in physical_orange(1, src))
 		if(!T.can_connect()) continue
 		var/T_dir = get_dir(src, T)
 		if(T_dir in blocked_dirs) continue

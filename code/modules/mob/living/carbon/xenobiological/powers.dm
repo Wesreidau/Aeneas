@@ -32,7 +32,7 @@
 			return "This subject does not have an edible life energy..."
 	if (istype(M, /mob/living/carbon) && M.getCloneLoss() >= M.maxHealth * 1.5 || istype(M, /mob/living/simple_animal) && M.stat == DEAD)
 		return "This subject does not have an edible life energy..."
-	for(var/mob/living/carbon/slime/met in view())
+	for(var/mob/living/carbon/slime/met in physical_view())
 		if(met.Victim == M && met != src)
 			return "\The [met] is already feeding on this subject..."
 	return 0

@@ -543,7 +543,7 @@
 //Somebody cut an important wire and now we're following a new definition of "pitch."
 /obj/machinery/vending/proc/throw_item()
 	var/obj/throw_item = null
-	var/mob/living/target = locate() in view(7,src)
+	var/mob/living/target = locate() in physical_view(7,src)
 	if(!target)
 		return 0
 

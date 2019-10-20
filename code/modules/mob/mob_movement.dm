@@ -116,33 +116,33 @@
 	if (direct & (direct - 1))
 		if (direct & 1)
 			if (direct & 4)
-				if (step(src, NORTH))
-					step(src, EAST)
+				if (seamless_step(src, NORTH))
+					seamless_step(src, EAST)
 				else
-					if (step(src, EAST))
-						step(src, NORTH)
+					if (seamless_step(src, EAST))
+						seamless_step(src, NORTH)
 			else
 				if (direct & 8)
-					if (step(src, NORTH))
-						step(src, WEST)
+					if (seamless_step(src, NORTH))
+						seamless_step(src, WEST)
 					else
-						if (step(src, WEST))
-							step(src, NORTH)
+						if (seamless_step(src, WEST))
+							seamless_step(src, NORTH)
 		else
 			if (direct & 2)
 				if (direct & 4)
-					if (step(src, SOUTH))
-						step(src, EAST)
+					if (seamless_step(src, SOUTH))
+						seamless_step(src, EAST)
 					else
-						if (step(src, EAST))
-							step(src, SOUTH)
+						if (seamless_step(src, EAST))
+							seamless_step(src, SOUTH)
 				else
 					if (direct & 8)
-						if (step(src, SOUTH))
-							step(src, WEST)
+						if (seamless_step(src, SOUTH))
+							seamless_step(src, WEST)
 						else
-							if (step(src, WEST))
-								step(src, SOUTH)
+							if (seamless_step(src, WEST))
+								seamless_step(src, SOUTH)
 	else
 		var/atom/A = src.loc
 
@@ -203,7 +203,7 @@
 			if(A.has_gravity || shoegrip)
 				return 1
 
-	for(var/obj/O in orange(1, src))
+	for(var/obj/O in physical_orange(1, src))
 		if(istype(O, /obj/structure/lattice))
 			return 1
 		if(O && O.density && O.anchored)
@@ -219,7 +219,7 @@
 	if(prob(skill_fail_chance(SKILL_EVA, slip_chance(10), SKILL_EXPERT)))
 		to_chat(src, "<span class='warning'>You slipped!</span>")
 		src.inertia_dir = src.last_move
-		step(src, src.inertia_dir)
+		seamless_step(src, src.inertia_dir)
 		return 1
 	return 0
 
@@ -234,7 +234,7 @@
 		prob_slip *= 0.5
 	return prob_slip
 
-#define DO_MOVE(this_dir) var/final_dir = turn(this_dir, -dir2angle(dir)); Move(get_step(mob, final_dir), final_dir);
+#define DO_MOVE(this_dir) var/final_dir = turn(this_dir, -dir2angle(dir)); Move(get_physical_step(mob, final_dir), final_dir);
 
 /client/verb/moveup()
 	set name = ".moveup"

@@ -86,7 +86,7 @@
 	else if(isobj(hit_atom))
 		var/obj/O = hit_atom
 		if(!O.anchored)
-			step(O, src.last_move)
+			seamless_step(O, src.last_move)
 		O.hitby(src,speed)
 
 	else if(isturf(hit_atom))
@@ -111,11 +111,15 @@
 		return 0
 	if(target.z != src.z)
 		return 0
+
+
 	//use a modified version of Bresenham's algorithm to get from the atom's current position to that of the target
 	src.throwing = 1
 	src.thrower = thrower
 	src.throw_source = get_turf(src)	//store the origin turf
 	src.pixel_z = 0
+
+	target = get_nearest_mirror(throw_source, target)
 	if(usr)
 		if(MUTATION_HULK in usr.mutations)
 			src.throwing = 2 // really strong throw!
@@ -169,9 +173,16 @@
 		else
 			step = get_step(src, minor_dir)
 			error += major_dist
-		if(!step) // going off the edge of the map makes get_step return null, don't let things go off the edge
+		if(!step) // going off the edge of the map makes get_physical_step return null, don't let things go off the edge
 			break
 		src.Move(step)
+
+		//Update the target turf every step, incase we just crossed a seam
+		//Kind of inefficient, but its the simplest way to do things since this is all happening inside one proc
+		//Possible todo: Add a crossed seam far, set by the crossed_seam function and checked in this loop. Do we really need more vars though?
+		target = get_nearest_mirror(src, target)
+
+
 		hit_check(speed)
 		dist_travelled++
 		dist_since_sleep++

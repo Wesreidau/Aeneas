@@ -231,7 +231,7 @@
 			travelling_in_vent = 0
 			entry_vent = null
 	else if(entry_vent)
-		if(get_dist(src, entry_vent) <= 1)
+		if(get_physical_dist(src, entry_vent) <= 1)
 			if(entry_vent.network && entry_vent.network.normal_members.len)
 				var/list/vents = list()
 				for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in entry_vent.network.normal_members)
@@ -242,7 +242,7 @@
 				var/obj/machinery/atmospherics/unary/vent_pump/exit_vent = pick(vents)
 
 				forceMove(entry_vent)
-				var/travel_time = round(get_dist(loc, exit_vent.loc) / 2)
+				var/travel_time = round(get_physical_dist(loc, exit_vent.loc) / 2)
 				addtimer(CALLBACK(src, .proc/start_vent_moving, exit_vent, travel_time), travel_time + rand(20,60))
 				travelling_in_vent = TRUE
 				return
@@ -268,7 +268,7 @@
 					pixel_y = Clamp(pixel_y + rand(min_y, max_y), -shift_range, shift_range)
 		else if(prob(5))
 			//vent crawl!
-			for(var/obj/machinery/atmospherics/unary/vent_pump/v in view(7,src))
+			for(var/obj/machinery/atmospherics/unary/vent_pump/v in physical_view(7,src))
 				if(!v.welded)
 					entry_vent = v
 					walk_to(src, entry_vent, 5)

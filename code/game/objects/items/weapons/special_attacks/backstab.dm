@@ -50,7 +50,7 @@ Proc returns a boolean if successful.
 			user.visible_message("<span class = 'danger'>\The [user] tries to stab deep into \The [target]'s back, but it dinks off, scraping \him instead!</span>", "<span class = 'warning'>\The [src] is too dull for a proper backstab!</span>", "<span class = 'notice'>You hear a soft dinking noise.</span>")
 			return FALSE
 
-		if(!( get_turf(user) == get_step(target, turn( target.dir, 180)) ) ) //You aren't behind them.
+		if(!( get_turf(user) == get_physical_step(target, turn( target.dir, 180)) ) ) //You aren't behind them.
 			return FALSE
 
 		if( user.dir != target.dir )

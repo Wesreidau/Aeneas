@@ -57,7 +57,7 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/structure/leech_spawner/Process()
-	if(!spent && (locate(/mob/living/carbon/human) in orange(5, src)))
+	if(!spent && (locate(/mob/living/carbon/human) in physical_orange(5, src)))
 		burst()
 
 /obj/structure/leech_spawner/proc/burst()

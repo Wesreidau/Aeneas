@@ -70,7 +70,7 @@
 	mob.jumpTo(T)
 
 	SSstatistics.add_field_details("admin_verb","JC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	log_and_message_admins("jumped to coordinates [tx], [ty], [tz]")
+	//log_and_message_admins("jumped to coordinates [tx], [ty], [tz]") //Message Removed by nanako, it screws up jumplink debugging
 
 /proc/sorted_client_keys()
 	return sortKey(GLOB.clients.Copy())

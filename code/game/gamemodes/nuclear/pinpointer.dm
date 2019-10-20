@@ -103,7 +103,7 @@
 
 	dir = get_dir(here,there)
 	var/image/pointer = image(icon,"pin_point")
-	var/distance = get_dist(here,there)
+	var/distance = get_physical_dist(here,there)
 	if(distance < world.view)
 		pointer.color = COLOR_LIME
 	else if(distance > 4*world.view)
@@ -152,10 +152,10 @@
 
 		if("Location")
 			var/locationx = input(usr, "Please input the x coordinate to search for.", "Location?" , "") as num
-			if(!locationx || !(usr in view(1,src)))
+			if(!locationx || !(usr in physical_view(1,src)))
 				return
 			var/locationy = input(usr, "Please input the y coordinate to search for.", "Location?" , "") as num
-			if(!locationy || !(usr in view(1,src)))
+			if(!locationy || !(usr in physical_view(1,src)))
 				return
 
 			var/turf/Z = get_turf(src)

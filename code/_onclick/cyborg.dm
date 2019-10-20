@@ -34,7 +34,7 @@
 	if(!canClick())
 		return
 
-	face_atom(A) // change direction to face what you clicked on
+	physical_face_atom(A) // change direction to face what you clicked on
 
 	if(silicon_camera.in_camera_mode)
 		silicon_camera.camera_mode_off()

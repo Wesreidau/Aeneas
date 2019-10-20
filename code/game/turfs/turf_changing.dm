@@ -76,7 +76,7 @@
 
 	SSair.mark_for_update(src) //handle the addition of the new turf.
 
-	for(var/turf/space/S in range(W,1))
+	for(var/turf/space/S in physical_range(1, W))
 		S.update_starlight()
 
 	W.post_change()
@@ -95,7 +95,7 @@
 			else
 				lighting_clear_overlay()
 
-	for(var/turf/T in RANGE_TURFS(src, 1))
+	for(var/turf/T in RANGE_TURFS(1, src))
 		T.update_icon()
 
 /turf/proc/transport_properties_from(turf/other)

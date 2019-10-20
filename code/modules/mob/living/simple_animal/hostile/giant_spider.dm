@@ -209,7 +209,7 @@
 		//chance to skitter madly away
 		if(!busy && prob(hunt_chance))
 			stop_automated_movement = 1
-			walk_to(src, pick(orange(20, src)), 1, move_to_delay)
+			walk_to(src, pick(physical_orange(20, src)), 1, move_to_delay)
 			addtimer(CALLBACK(src, .proc/disable_stop_automated_movement), 5 SECONDS)
 
 /mob/living/simple_animal/hostile/giant_spider/proc/disable_stop_automated_movement()
@@ -313,7 +313,7 @@ Nurse caste procs
 /mob/living/simple_animal/hostile/giant_spider/nurse/proc/GiveUp(var/C)
 	spawn(100)
 		if(busy == MOVING_TO_TARGET)
-			if(cocoon_target == C && get_dist(src,cocoon_target) > 1)
+			if(cocoon_target == C && get_physical_dist(src,cocoon_target) > 1)
 				cocoon_target = null
 			busy = 0
 			stop_automated_movement = 0
@@ -323,7 +323,7 @@ Nurse caste procs
 	if(!.)
 		return FALSE
 	if(stance == HOSTILE_STANCE_IDLE)
-		var/list/can_see = view(src, 10)
+		var/list/can_see = physical_view(src, 10)
 		//30% chance to stop wandering and do something
 		if(!busy && prob(30))
 			//first, check for potential food nearby to cocoon
@@ -384,14 +384,14 @@ Nurse caste procs
 							GiveUp(O)
 
 		else if(busy == MOVING_TO_TARGET && cocoon_target)
-			if(get_dist(src, cocoon_target) <= 1)
+			if(get_physical_dist(src, cocoon_target) <= 1)
 				busy = SPINNING_COCOON
 				src.visible_message("<span class='notice'>\The [src] begins to secrete a sticky substance around \the [cocoon_target].</span>")
 				stop_automated_movement = 1
 				walk(src,0)
 				spawn(50)
 					if(busy == SPINNING_COCOON)
-						if(cocoon_target && istype(cocoon_target.loc, /turf) && get_dist(src,cocoon_target) <= 1)
+						if(cocoon_target && istype(cocoon_target.loc, /turf) && get_physical_dist(src,cocoon_target) <= 1)
 							var/obj/effect/spider/cocoon/C = new(cocoon_target.loc)
 							var/large_cocoon = 0
 							C.pixel_x = cocoon_target.pixel_x
@@ -434,7 +434,7 @@ Hunter caste procs
 	return leap_range
 
 /mob/living/simple_animal/hostile/giant_spider/hunter/perform_maneuver(var/maneuver, var/atom/target)
-	if(!isliving(target) || get_dist(src, target) <= 3)
+	if(!isliving(target) || get_physical_dist(src, target) <= 3)
 		return FALSE
 	walk(src,0)
 	var/first_stop_automation

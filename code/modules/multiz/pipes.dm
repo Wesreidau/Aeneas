@@ -96,7 +96,7 @@ obj/machinery/atmospherics/pipe/zpipe/up/atmos_init()
 			if (!node1_dir)
 				node1_dir = direction
 
-	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
+	for(var/obj/machinery/atmospherics/target in get_physical_step(src,node1_dir))
 		if(target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node1 = target
@@ -134,7 +134,7 @@ obj/machinery/atmospherics/pipe/zpipe/down/atmos_init()
 			if (!node1_dir)
 				node1_dir = direction
 
-	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
+	for(var/obj/machinery/atmospherics/target in get_physical_step(src,node1_dir))
 		if(target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node1 = target

@@ -141,7 +141,7 @@
 		if(assembly.loc == T) // Check if we're held by someone.  If the loc is the floor, we're not held.
 			var/datum/integrated_io/wanted_dir = inputs[1]
 			if(isnum(wanted_dir.data))
-				if(step(assembly, wanted_dir.data))
+				if(seamless_step(assembly, wanted_dir.data))
 					activate_pin(2)
 					return
 				else
@@ -430,7 +430,7 @@
 		if(4)
 			if(pulling)
 				var/dir = get_pin_data(IC_INPUT, 2)
-				var/turf/G =get_step(get_turf(acting_object),dir)
+				var/turf/G =get_physical_step(get_turf(acting_object),dir)
 				var/turf/Pl = get_turf(pulling)
 				var/turf/F = get_step_towards(Pl,G)
 				if(acting_object.Adjacent(F))
@@ -451,7 +451,7 @@
 		stop_pulling()
 
 /obj/item/integrated_circuit/manipulation/claw/proc/check_pull()
-	if(get_dist(pulling,src) > 1)
+	if(get_physical_dist(pulling,src) > 1)
 		stop_pulling()
 
 /obj/item/integrated_circuit/manipulation/claw/proc/stop_pulling()
@@ -570,11 +570,11 @@
 		return
 
 	if(isnum(step_dir) && (!step_dir || (step_dir in GLOB.cardinal)))
-		rift_location = get_step(rift_location, step_dir) || rift_location
+		rift_location = get_physical_step(rift_location, step_dir) || rift_location
 	else
 		var/obj/item/device/electronic_assembly/assembly = get_object()
 		if(assembly)
-			rift_location = get_step(rift_location, assembly.dir) || rift_location
+			rift_location = get_physical_step(rift_location, assembly.dir) || rift_location
 
 	if(tporter && tporter.locked && !tporter.one_time_use && tporter.operable())
 		new /obj/effect/portal(rift_location, get_turf(tporter.locked))

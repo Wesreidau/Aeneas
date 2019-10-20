@@ -100,7 +100,7 @@
 		if(!T.is_plating() || !istype(T, /turf/simulated/floor))
 			return
 
-		if(get_dist(src, user) > 1)
+		if(get_physical_dist(src, user) > 1)
 			return
 
 		coil.turf_place(T, user)
@@ -120,7 +120,7 @@
 	var/turf/T
 
 	for(var/card in GLOB.cardinal)
-		T = get_step(loc,card)
+		T = get_physical_step(loc,card)
 		cdir = get_dir(T,loc)
 
 		for(var/obj/structure/cable/C in T)
@@ -139,7 +139,7 @@
 	var/turf/T
 
 	for(var/card in GLOB.cardinal)
-		T = get_step(loc,card)
+		T = get_physical_step(loc,card)
 		cdir = get_dir(T,loc)
 
 		for(var/obj/structure/cable/C in T)

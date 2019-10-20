@@ -124,7 +124,7 @@
 
 
 /mob/living/simple_animal/hostile/commanded/proc/attack_command(var/mob/speaker,var/text)
-	target_mob = null //want me to attack something? Well I better forget my old target.
+	set_target(null) //want me to attack something? Well I better forget my old target.
 	walk_to(src,0)
 	stance = HOSTILE_STANCE_IDLE
 	if(text == "attack" || findtext(text,"everyone") || findtext(text,"anybody") || findtext(text, "somebody") || findtext(text, "someone")) //if its just 'attack' then just attack anybody, same for if they say 'everyone', somebody, anybody. Assuming non-pickiness.
@@ -136,7 +136,7 @@
 	return targets.len != 0
 
 /mob/living/simple_animal/hostile/commanded/proc/stay_command(var/mob/speaker,var/text)
-	target_mob = null
+	set_target(null)
 	stance = COMMANDED_STOP
 	stop_automated_movement = 1
 	walk_to(src,0)
@@ -145,7 +145,7 @@
 /mob/living/simple_animal/hostile/commanded/proc/stop_command(var/mob/speaker,var/text)
 	allowed_targets = list()
 	walk_to(src,0)
-	target_mob = null //gotta stop SOMETHIN
+	set_target(null) //gotta stop SOMETHIN
 	stance = HOSTILE_STANCE_IDLE
 	stop_automated_movement = 0
 	return 1
@@ -154,14 +154,14 @@
 	//we can assume 'stop following' is handled by stop_command
 	if(findtext(text,"me"))
 		stance = COMMANDED_FOLLOW
-		target_mob = speaker //this wont bite me in the ass later.
+		set_target(speaker) //this wont bite me in the ass later.
 		return 1
 	var/list/targets = get_targets_by_name(text)
 	if(targets.len > 1 || !targets.len) //CONFUSED. WHO DO I FOLLOW?
 		return 0
 
 	stance = COMMANDED_FOLLOW //GOT SOMEBODY. BETTER FOLLOW EM.
-	target_mob = targets[1] //YEAH GOOD IDEA
+	set_target(targets[1]) //YEAH GOOD IDEA
 
 	return 1
 
@@ -174,7 +174,7 @@
 	. = ..()
 	if(. && retribution)
 		stance = HOSTILE_STANCE_ATTACK
-		target_mob = user
+		set_target(user)
 		allowed_targets += user //fuck this guy in particular.
 		if(weakref(user) in friends) //We were buds :'(
 			friends -= weakref(user)
@@ -183,7 +183,7 @@
 /mob/living/simple_animal/hostile/commanded/attack_hand(mob/living/carbon/human/M as mob)
 	..()
 	if(M.a_intent == I_HURT && retribution) //assume he wants to hurt us.
-		target_mob = M
+		set_target(M)
 		allowed_targets += M
 		stance = HOSTILE_STANCE_ATTACK
 		if(weakref(M) in friends)

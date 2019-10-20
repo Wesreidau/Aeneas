@@ -171,7 +171,7 @@
 			steam.attach(src)
 			steam.start()
 
-			for(var/atom/A in view(affected_area, src.loc))
+			for(var/atom/A in physical_view(affected_area, src.loc))
 				if( A == src ) continue
 				src.reagents.touch(A)
 

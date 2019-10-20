@@ -261,7 +261,7 @@
 /mob/living/bot/proc/stepToTarget()
 	if(!target || !target.loc)
 		return
-	if(get_dist(src, target) > min_target_dist)
+	if(get_physical_dist(src, target) > min_target_dist)
 		if(!target_path.len || get_turf(target) != target_path[target_path.len])
 			calcTargetPath()
 		if(makeStep(target_path))
@@ -309,8 +309,8 @@
 		for(var/obj/machinery/navbeacon/N in navbeacons)
 			if(!N.codes["patrol"])
 				continue
-			if(get_dist(src, N) < minDist)
-				minDist = get_dist(src, N)
+			if(get_physical_dist(src, N) < minDist)
+				minDist = get_physical_dist(src, N)
 				targ = N
 
 	if(targ && targ.codes["next_patrol"])
@@ -380,10 +380,10 @@
 /turf/proc/CardinalTurfsWithAccess(var/obj/item/weapon/card/id/ID)
 	var/L[] = new()
 
-	//	for(var/turf/simulated/t in oview(src,1))
+	//	for(var/turf/simulated/t in physical_oview(src,1))
 
 	for(var/d in GLOB.cardinal)
-		var/turf/simulated/T = get_step(src, d)
+		var/turf/simulated/T = get_physical_step(src, d)
 		if(istype(T) && !T.density)
 			if(!LinkBlockedWithAccess(src, T, ID))
 				L.Add(T)
@@ -398,11 +398,11 @@
 	var/adir = get_dir(A,B)
 	var/rdir = get_dir(B,A)
 	if((adir & (NORTH|SOUTH)) && (adir & (EAST|WEST)))	//	diagonal
-		var/iStep = get_step(A,adir&(NORTH|SOUTH))
+		var/iStep = get_physical_step(A,adir&(NORTH|SOUTH))
 		if(!LinkBlockedWithAccess(A,iStep, ID) && !LinkBlockedWithAccess(iStep,B,ID))
 			return 0
 
-		var/pStep = get_step(A,adir&(EAST|WEST))
+		var/pStep = get_physical_step(A,adir&(EAST|WEST))
 		if(!LinkBlockedWithAccess(A,pStep,ID) && !LinkBlockedWithAccess(pStep,B,ID))
 			return 0
 		return 1

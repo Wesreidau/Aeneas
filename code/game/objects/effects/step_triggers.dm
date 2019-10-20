@@ -37,7 +37,7 @@
 		return
 	var/curtiles = 0
 	var/stopthrow = 0
-	for(var/obj/effect/step_trigger/thrower/T in orange(2, src))
+	for(var/obj/effect/step_trigger/thrower/T in physical_orange(2, src))
 		if(AM in T.affecting)
 			return
 
@@ -60,17 +60,17 @@
 
 		// Calculate if we should stop the process
 		if(!nostop)
-			for(var/obj/effect/step_trigger/T in get_step(AM, direction))
+			for(var/obj/effect/step_trigger/T in get_physical_step(AM, direction))
 				if(T.stopper && T != src)
 					stopthrow = 1
 		else
-			for(var/obj/effect/step_trigger/teleporter/T in get_step(AM, direction))
+			for(var/obj/effect/step_trigger/teleporter/T in get_physical_step(AM, direction))
 				if(T.stopper)
 					stopthrow = 1
 
 		if(AM)
 			var/predir = AM.dir
-			step(AM, direction)
+			seamless_step(AM, direction)
 			if(!facedir)
 				AM.set_dir(predir)
 

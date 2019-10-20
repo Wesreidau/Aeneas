@@ -85,7 +85,7 @@ var/intercom_range_display_status = 0
 					output += "<li><font color='red'>FULLY overlapping sec. cameras at \[[C1.x], [C1.y], [C1.z]\] ([C1.loc.loc]) Networks: [C1.network] and [C2.network]</font></li>"
 				if(C1.loc == C2.loc)
 					output += "<li>overlapping sec. cameras at \[[C1.x], [C1.y], [C1.z]\] ([C1.loc.loc]) Networks: [C1.network] and [C2.network]</font></li>"
-		var/turf/T = get_step(C1,turn(C1.dir,180))
+		var/turf/T = get_physical_step(C1,turn(C1.dir,180))
 		if(!T || !isturf(T) || !T.density )
 			if(!(locate(/obj/structure/grille,T)))
 				var/window_check = 0
@@ -114,9 +114,9 @@ var/intercom_range_display_status = 0
 
 	if(intercom_range_display_status)
 		for(var/obj/item/device/radio/intercom/I in world)
-			for(var/turf/T in orange(7,I))
+			for(var/turf/T in physical_orange(7,I))
 				var/obj/effect/debugging/marker/F = new/obj/effect/debugging/marker(T)
-				if (!(F in view(7,I.loc)))
+				if (!(F in physical_view(7,I.loc)))
 					qdel(F)
 	SSstatistics.add_field_details("admin_verb","mIRD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -231,7 +231,7 @@ var/list/debug_verbs = list (
 				continue
 			recurse_zone(connected,1)
 
-	for(var/turf/T in range(25,location))
+	for(var/turf/T in physical_range(25,location))
 		if(!istype(T))
 			continue
 		if(T in testZAScolors_turfs)

@@ -553,7 +553,7 @@
 	s.set_up(2, 1, location)
 	s.start()
 	for(var/mob/living/carbon/M in viewers(world.view, location))
-		switch(get_dist(M, location))
+		switch(get_physical_dist(M, location))
 			if(0 to 3)
 				if(hasvar(M, "glasses"))
 					if(istype(M:glasses, /obj/item/clothing/glasses/sunglasses))
@@ -614,7 +614,7 @@
 /datum/chemical_reaction/phlogiston/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
 	var/turf/location = get_turf(holder.my_atom.loc)
-	for(var/turf/simulated/floor/target_tile in range(0,location))
+	for(var/turf/simulated/floor/target_tile in physical_range(0,location))
 		target_tile.assume_gas(/datum/reagent/toxin/phoron, created_volume, 400+T0C)
 		spawn (0) target_tile.hotspot_expose(700, 400)
 
@@ -1055,7 +1055,7 @@
 		if(B)
 			if(prob(50))
 				for(var/j = 1, j <= rand(1, 3), j++)
-					step(B, pick(NORTH, SOUTH, EAST, WEST))
+					seamless_step(B, pick(NORTH, SOUTH, EAST, WEST))
 
 //Blue
 /datum/chemical_reaction/slime/frost
@@ -1292,9 +1292,9 @@
 
 /datum/chemical_reaction/slime/teleport/on_reaction(var/datum/reagents/holder)
 	var/list/turfs = list()
-	for(var/turf/T in orange(holder.my_atom,6))
+	for(var/turf/T in physical_orange(6, holder.my_atom))
 		turfs += T
-	for(var/atom/movable/a in viewers(holder.my_atom,2))
+	for(var/atom/movable/a in viewers(2, holder.my_atom))
 		if(!a.simulated)
 			continue
 		a.forceMove(pick(turfs))

@@ -20,7 +20,7 @@
 	if(!build_machine_type)
 		return
 
-	if (get_dist(on_wall,usr)>1)
+	if (get_physical_dist(on_wall,usr)>1)
 		return
 
 	var/ndir

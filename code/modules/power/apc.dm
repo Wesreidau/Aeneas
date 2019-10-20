@@ -286,7 +286,7 @@
 	if(update_state < 0)
 		pixel_x = 0
 		pixel_y = 0
-		var/turf/T = get_step(get_turf(src), dir)
+		var/turf/T = get_physical_step(get_turf(src), dir)
 		if(istype(T) && T.density)
 			if(dir == SOUTH)
 				pixel_y = -22
@@ -420,7 +420,7 @@
 //attack with an item - open/close cover, insert cell, or (un)lock interface
 
 /obj/machinery/power/apc/attackby(obj/item/W, mob/user)
-	if (istype(user, /mob/living/silicon) && get_dist(src,user)>1)
+	if (istype(user, /mob/living/silicon) && get_physical_dist(src,user)>1)
 		return attack_robot(user)
 	if(istype(W, /obj/item/inducer))
 		return FALSE // inducer.dm afterattack handles this
@@ -1129,9 +1129,9 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	switch(val)
 		if(2)
 			return POWERCHAN_OFF_AUTO
-		if(1) 
+		if(1)
 			return POWERCHAN_OFF_TEMP
-		else 
+		else
 			return POWERCHAN_OFF
 
 // Malfunction: Transfers APC under AI's control

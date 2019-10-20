@@ -34,7 +34,7 @@
 			spawn()
 				for(var/i = 1, i <= rand(1,2), i++)
 					if(I)
-						step(I, pick(NORTH,SOUTH,EAST,WEST))
+						seamless_step(I, pick(NORTH,SOUTH,EAST,WEST))
 						sleep(rand(2,4))
 
 
@@ -201,5 +201,5 @@
 				spawn()
 					for(var/i = 1, i <= rand(1,2), i++)
 						if(I)
-							step(I, pick(NORTH,SOUTH,EAST,WEST))
+							seamless_step(I, pick(NORTH,SOUTH,EAST,WEST))
 							sleep(rand(2,4))

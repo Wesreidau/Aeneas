@@ -76,7 +76,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/ListTargets()
 	if(hostile_drone)
-		return view(src, 10)
+		return physical_view(src, 10)
 	else
 		return ..()
 
@@ -178,42 +178,42 @@
 
 		//shards
 		O = new /obj/item/weapon/material/shard(src.loc)
-		step_to(O, get_turf(pick(view(7, src))))
+		step_to(O, get_turf(pick(physical_view(7, src))))
 		if(prob(75))
 			O = new /obj/item/weapon/material/shard(src.loc)
-			step_to(O, get_turf(pick(view(7, src))))
+			step_to(O, get_turf(pick(physical_view(7, src))))
 		if(prob(50))
 			O = new /obj/item/weapon/material/shard(src.loc)
-			step_to(O, get_turf(pick(view(7, src))))
+			step_to(O, get_turf(pick(physical_view(7, src))))
 		if(prob(25))
 			O = new /obj/item/weapon/material/shard(src.loc)
-			step_to(O, get_turf(pick(view(7, src))))
+			step_to(O, get_turf(pick(physical_view(7, src))))
 
 		//rods
 		O = new /obj/item/stack/material/rods(loc)
-		step_to(O, get_turf(pick(view(7, src))))
+		step_to(O, get_turf(pick(physical_view(7, src))))
 		if(prob(75))
 			O = new /obj/item/stack/material/rods(loc)
-			step_to(O, get_turf(pick(view(7, src))))
+			step_to(O, get_turf(pick(physical_view(7, src))))
 		if(prob(50))
 			O = new /obj/item/stack/material/rods(loc)
-			step_to(O, get_turf(pick(view(7, src))))
+			step_to(O, get_turf(pick(physical_view(7, src))))
 		if(prob(25))
 			O = new /obj/item/stack/material/rods(loc)
-			step_to(O, get_turf(pick(view(7, src))))
+			step_to(O, get_turf(pick(physical_view(7, src))))
 
 		//plasteel
 		O = new /obj/item/stack/material/plasteel(src.loc)
-		step_to(O, get_turf(pick(view(7, src))))
+		step_to(O, get_turf(pick(physical_view(7, src))))
 		if(prob(75))
 			O = new /obj/item/stack/material/plasteel(src.loc)
-			step_to(O, get_turf(pick(view(7, src))))
+			step_to(O, get_turf(pick(physical_view(7, src))))
 		if(prob(50))
 			O = new /obj/item/stack/material/plasteel(src.loc)
-			step_to(O, get_turf(pick(view(7, src))))
+			step_to(O, get_turf(pick(physical_view(7, src))))
 		if(prob(25))
 			O = new /obj/item/stack/material/plasteel(src.loc)
-			step_to(O, get_turf(pick(view(7, src))))
+			step_to(O, get_turf(pick(physical_view(7, src))))
 
 		//also drop dummy circuit boards deconstructable for research (loot)
 		var/obj/item/weapon/stock_parts/circuitboard/C

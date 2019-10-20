@@ -91,7 +91,7 @@
 		user.visible_message("\The [user] begins to read a passage from \the [src]...", "You begin to read a passage from \the [src]...")
 		if(do_after(user, 5 SECONDS))
 			user.visible_message("\The [user] reads a passage from \the [src].", "You read a passage from \the [src].")
-			for(var/mob/living/carbon/human/H in view(user))
+			for(var/mob/living/carbon/human/H in physical_view(user))
 				if(user.get_cultural_value(TAG_RELIGION) == H.get_cultural_value(TAG_RELIGION))
 					to_chat(H, SPAN_NOTICE("You feel calm and relaxed, at one with the universe."))
 

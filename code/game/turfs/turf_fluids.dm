@@ -70,7 +70,7 @@
 	// Wake up our neighbors.
 	if(!ignore_neighbors)
 		for(var/checkdir in GLOB.cardinal)
-			var/turf/T = get_step(src, checkdir)
+			var/turf/T = get_physical_step(src, checkdir)
 			if(T) T.fluid_update(1)
 
 	// Wake up ourself!

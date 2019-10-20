@@ -16,7 +16,7 @@
 	return
 
 //mob verbs are faster than object verbs. See above.
-/mob/living/pointed(atom/A as mob|obj|turf in view())
+/mob/living/pointed(atom/A as mob|obj|turf in physical_view())
 	if(incapacitated())
 		return 0
 	if(src.status_flags & FAKEDEATH)
@@ -76,7 +76,7 @@ default behaviour is:
 		if (istype(AM, /mob/living))
 			var/mob/living/tmob = AM
 
-			for(var/mob/living/M in range(tmob, 1))
+			for(var/mob/living/M in range(1, tmob))
 				if(tmob.pinned.len ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/grab, tmob.grabbed_by.len)) )
 					if ( !(world.time % 5) )
 						to_chat(src, "<span class='warning'>[tmob] is restrained, you cannot push past</span>")
@@ -93,7 +93,7 @@ default behaviour is:
 				forceMove(tmob.loc)
 				tmob.forceMove(oldloc)
 				now_pushing = 0
-				for(var/mob/living/carbon/slime/slime in view(1,tmob))
+				for(var/mob/living/carbon/slime/slime in physical_view(1,tmob))
 					if(slime.Victim == tmob)
 						slime.UpdateFeed()
 				return
@@ -144,19 +144,19 @@ default behaviour is:
 
 				var/t = get_dir(src, AM)
 				if (istype(AM, /obj/structure/window))
-					for(var/obj/structure/window/win in get_step(AM,t))
+					for(var/obj/structure/window/win in get_physical_step(AM,t))
 						now_pushing = 0
 						return
-				step(AM, t)
+				seamless_step(AM, t)
 				if (istype(AM, /mob/living))
 					var/mob/living/tmob = AM
 					if(istype(tmob.buckled, /obj/structure/bed))
 						if(!tmob.buckled.anchored)
-							step(tmob.buckled, t)
+							seamless_step(tmob.buckled, t)
 				if(ishuman(AM))
 					var/mob/living/carbon/human/M = AM
 					for(var/obj/item/grab/G in M.grabbed_by)
-						step(G.assailant, get_dir(G.assailant, AM))
+						seamless_step(G.assailant, get_dir(G.assailant, AM))
 						G.adjust_position()
 				now_pushing = 0
 
@@ -303,47 +303,29 @@ default behaviour is:
 
 // ++++ROCKDTBEN++++ MOB PROCS //END
 
-/mob/proc/get_contents()
-	return
+
 
 //Recursive function to find everything a mob is holding.
-/mob/living/get_contents(var/obj/item/weapon/storage/Storage = null)
+/mob/living/get_contents(var/includeself)
 	var/list/L = list()
 
-	if(Storage) //If it called itself
-		L += Storage.return_inv()
+	L += src.contents
+	if (includeself)
+		L += src
 
-		//Leave this commented out, it will cause storage items to exponentially add duplicate to the list
-		//for(var/obj/item/weapon/storage/S in Storage.return_inv()) //Check for storage items
-		//	L += get_contents(S)
+	for(var/obj/item/weapon/storage/S in src.contents)	//Check for storage items
+		L += S.get_contents()
 
-		for(var/obj/item/weapon/gift/G in Storage.return_inv()) //Check for gift-wrapped items
-			L += G.gift
-			if(istype(G.gift, /obj/item/weapon/storage))
-				L += get_contents(G.gift)
+	for(var/obj/item/weapon/gift/G in src.contents) //Check for gift-wrapped items
+		L += G.gift
+		if(istype(G.gift, /obj/item/weapon/storage))
+			L += G.gift.get_contents()
 
-		for(var/obj/item/smallDelivery/D in Storage.return_inv()) //Check for package wrapped items
-			L += D.wrapped
-			if(istype(D.wrapped, /obj/item/weapon/storage)) //this should never happen
-				L += get_contents(D.wrapped)
-		return L
-
-	else
-
-		L += src.contents
-		for(var/obj/item/weapon/storage/S in src.contents)	//Check for storage items
-			L += get_contents(S)
-
-		for(var/obj/item/weapon/gift/G in src.contents) //Check for gift-wrapped items
-			L += G.gift
-			if(istype(G.gift, /obj/item/weapon/storage))
-				L += get_contents(G.gift)
-
-		for(var/obj/item/smallDelivery/D in src.contents) //Check for package wrapped items
-			L += D.wrapped
-			if(istype(D.wrapped, /obj/item/weapon/storage)) //this should never happen
-				L += get_contents(D.wrapped)
-		return L
+	for(var/obj/item/smallDelivery/D in src.contents) //Check for package wrapped items
+		L += D.wrapped
+		if(istype(D.wrapped, /obj/item/weapon/storage)) //this should never happen
+			L += D.wrapped.get_contents()
+	return L
 
 /mob/living/proc/check_contents_for(A)
 	var/list/L = src.get_contents()
@@ -518,7 +500,7 @@ default behaviour is:
 	if (buckled)
 		return
 
-	if(get_dist(src, pulling) > 1)
+	if(pulling && get_physical_dist(src, pulling) > 1)
 		stop_pulling()
 
 	var/turf/old_loc = get_turf(src)
@@ -532,28 +514,33 @@ default behaviour is:
 		s_active.close(src)
 
 	if(update_slimes)
-		for(var/mob/living/carbon/slime/M in view(1,src))
+		for(var/mob/living/carbon/slime/M in physical_view(1,src))
 			M.UpdateFeed()
 
+/*
+	Name is a little unintuitive. This checks if the mob can continue pulling what its already pulling, or start pulling something new
+*/
 /mob/living/proc/can_pull()
 	if(!moving)
 		return FALSE
-	if(pulling.anchored)
-		return FALSE
-	if(!isturf(pulling.loc))
-		return FALSE
 	if(restrained())
 		return FALSE
-
-	if(get_dist(src, pulling) > 2)
-		return FALSE
-
-	if(pulling.z != z)
-		if(pulling.z < z)
+	if (pulling)
+		if(pulling.anchored)
 			return FALSE
-		var/turf/T = GetAbove(src)
-		if(!isopenspace(T))
+		if(!isturf(pulling.loc))
 			return FALSE
+
+
+		if(get_physical_dist(src, pulling) > 2)
+			return FALSE
+
+		if(pulling.z != z)
+			if(pulling.z < z)
+				return FALSE
+			var/turf/T = GetAbove(src)
+			if(!isopenspace(T))
+				return FALSE
 	return TRUE
 
 /mob/living/proc/handle_pulling_after_move(turf/old_loc)
@@ -563,9 +550,13 @@ default behaviour is:
 	if(!can_pull())
 		stop_pulling()
 		return
-	
+
+	//We replace old loc with the nearest mirror - from the pulled item's perspective.
+	//This ensures things can be properly dragged across seams
+	old_loc = get_nearest_mirror(pulling.loc, old_loc)
+
 	if (!isliving(pulling))
-		step(pulling, get_dir(pulling.loc, old_loc))
+		seamless_step(pulling, get_dir(pulling.loc, old_loc))
 	else
 		var/mob/living/M = pulling
 		if(M.grabbed_by.len)
@@ -579,7 +570,7 @@ default behaviour is:
 
 			var/atom/movable/t = M.pulling
 			M.stop_pulling()
-			step(M, get_dir(pulling.loc, old_loc))
+			seamless_step(M, get_dir(pulling.loc, old_loc))
 			if(t)
 				M.start_pulling(t)
 
