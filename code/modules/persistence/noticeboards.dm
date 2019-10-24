@@ -28,7 +28,7 @@
 		var/turf/here = get_turf(src)
 		var/placing = 0
 		for(var/checkdir in GLOB.cardinal)
-			var/turf/T = get_step(here, checkdir)
+			var/turf/T = get_physical_step(here, checkdir)
 			if(T.density)
 				placing = checkdir
 				break

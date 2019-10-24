@@ -94,7 +94,7 @@
 
 /obj/singularity/proc/admin_investigate_setup()
 	last_warning = world.time
-	var/count = locate(/obj/machinery/containment_field) in orange(30, src)
+	var/count = locate(/obj/machinery/containment_field) in physical_orange(30, src)
 
 	if (!count)
 		message_admins("A singulo has been created without containment fields active ([x], [y], [z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>).")
@@ -267,8 +267,8 @@
 	return 1
 
 /obj/singularity/proc/eat()
-	for(var/atom/X in orange(grav_pull, src))
-		var/dist = get_dist(X, src)
+	for(var/atom/X in physical_orange(grav_pull, src))
+		var/dist = get_physical_dist(X, src)
 		var/obj/singularity/S = src
 		if(!istype(src))
 			return
@@ -300,14 +300,14 @@
 
 	if(current_size >= 9)//The superlarge one does not care about things in its way
 		spawn(0)
-			step(src, movement_dir)
+			seamless_step(src, movement_dir)
 		spawn(1)
-			step(src, movement_dir)
+			seamless_step(src, movement_dir)
 		return 1
 	else if(check_turfs_in(movement_dir))
 		last_failed_movement = 0 // Reset this because we moved
 		spawn(0)
-			step(src, movement_dir)
+			seamless_step(src, movement_dir)
 		return 1
 	else
 		last_failed_movement = movement_dir
@@ -336,7 +336,7 @@
 	var/list/turfs = list()
 	var/turf/T = src.loc
 	for(var/i = 1 to steps)
-		T = get_step(T,direction)
+		T = get_physical_step(T,direction)
 	if(!isturf(T))
 		return 0
 	turfs.Add(T)
@@ -351,12 +351,12 @@
 			dir3 = 2
 	var/turf/T2 = T
 	for(var/j = 1 to steps)
-		T2 = get_step(T2,dir2)
+		T2 = get_physical_step(T2,dir2)
 		if(!isturf(T2))
 			return 0
 		turfs.Add(T2)
 	for(var/k = 1 to steps)
-		T = get_step(T,dir3)
+		T = get_physical_step(T,dir3)
 		if(!isturf(T))
 			return 0
 		turfs.Add(T)
@@ -410,7 +410,7 @@
 		toxdamage = round(((src.energy-150)/50)*4,1)
 		radiation = round(((src.energy-150)/50)*5,1)
 	SSradiation.radiate(src, radiation) //Always radiate at max, so a decent dose of radiation is applied
-	for(var/mob/living/M in view(toxrange, src.loc))
+	for(var/mob/living/M in physical_view(toxrange, src.loc))
 		if(M.status_flags & GODMODE)
 			continue
 		M.apply_damage(toxdamage, TOX, null, damage_flags = DAM_DISPERSED)
@@ -441,7 +441,7 @@
 		empulse(src, 12, 16)
 
 /obj/singularity/proc/smwave()
-	for(var/mob/living/M in view(10, src.loc))
+	for(var/mob/living/M in physical_view(10, src.loc))
 		if(prob(67))
 			to_chat(M, "<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
 			to_chat(M, "<span class=\"notice\">Miraculously, it fails to kill you.</span>")
@@ -454,7 +454,7 @@
 
 /obj/singularity/proc/pulse()
 	for(var/obj/machinery/power/rad_collector/R in rad_collectors)
-		if (get_dist(R, src) <= 15) //Better than using orange() every process.
+		if (get_physical_dist(R, src) <= 15) //Better than using physical_orange() every process.
 			R.receive_pulse(energy)
 
 /obj/singularity/proc/on_capture()

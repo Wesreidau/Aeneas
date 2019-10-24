@@ -18,7 +18,7 @@
 		bang(get_turf(src), M)
 
 	for(var/obj/effect/blob/B in hear(8,get_turf(src)))       		//Blob damage here
-		var/damage = round(30/(get_dist(B,get_turf(src))+1))
+		var/damage = round(30/(get_physical_dist(B,get_turf(src))+1))
 		B.health -= damage
 		B.update_icon()
 
@@ -52,7 +52,7 @@
 		M.Weaken(10)
 
 //Now applying sound
-	if((get_dist(M, T) <= 2 || src.loc == M.loc || src.loc == M))
+	if((get_physical_dist(M, T) <= 2 || src.loc == M.loc || src.loc == M))
 		if(ear_safety > 0)
 			M.Stun(2)
 			M.Weaken(1)
@@ -65,7 +65,7 @@
 				M.ear_damage += rand(0, 5)
 				M.ear_deaf = max(M.ear_deaf,15)
 
-	else if(get_dist(M, T) <= 5)
+	else if(get_physical_dist(M, T) <= 5)
 		if(!ear_safety)
 			M.Stun(8)
 			M.ear_damage += rand(0, 3)

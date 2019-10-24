@@ -179,8 +179,8 @@
 /obj/item/weapon/reagent_containers/spray/chemsprayer/Spray_at(atom/A as mob|obj)
 	var/direction = get_dir(src, A)
 	var/turf/T = get_turf(A)
-	var/turf/T1 = get_step(T,turn(direction, 90))
-	var/turf/T2 = get_step(T,turn(direction, -90))
+	var/turf/T1 = get_physical_step(T,turn(direction, 90))
+	var/turf/T2 = get_physical_step(T,turn(direction, -90))
 	var/list/the_targets = list(T, T1, T2)
 
 	for(var/a = 1 to 3)

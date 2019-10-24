@@ -172,7 +172,7 @@
 
 //checks for whether the machine can be activated or not should already have occurred by this point
 /obj/machinery/suspension_gen/proc/activate()
-	var/turf/T = get_turf(get_step(src,dir))
+	var/turf/T = get_turf(get_physical_step(src,dir))
 	var/collected = 0
 
 	for(var/mob/living/M in T)

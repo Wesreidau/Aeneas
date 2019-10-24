@@ -95,7 +95,7 @@
 
 	Topic(href, href_list)
 		..()
-		if ((usr.stat || usr.restrained()) || (get_dist(src, usr) > 1))
+		if ((usr.stat || usr.restrained()) || (get_physical_dist(src, usr) > 1))
 			return
 		if (href_list["type"])
 			if (href_list["type"] == "E")
@@ -160,7 +160,7 @@
 			src.open(usr)
 		else
 			..()
-			for(var/mob/M in range(1))
+			for(var/mob/M in physical_range(1))
 				if (M.s_active == src)
 					src.close(M)
 		src.add_fingerprint(user)

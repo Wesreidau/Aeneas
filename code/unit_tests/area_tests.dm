@@ -45,7 +45,7 @@
 		. |= T
 		var/turf/neighbour
 		for(var/direction in GLOB.cardinal)
-			neighbour = get_step(T, direction)
+			neighbour = get_physical_step(T, direction)
 			SHOULD_CHECK_TURF(neighbour)
 #ifdef MULTIZAS
 		neighbour = GetAbove(T)

@@ -197,7 +197,7 @@
 	return ..()
 
 /obj/structure/stairs/Bumped(atom/movable/A)
-	var/turf/target = get_step(GetAbove(A), dir)
+	var/turf/target = get_physical_step(GetAbove(A), dir)
 	var/turf/source = A.loc
 	var/turf/above = GetAbove(A)
 	if(above.CanZPass(source, UP) && target.Enter(A, src))
@@ -240,10 +240,10 @@
 /obj/structure/stairs/west
 	dir = WEST
 	bound_width = 64
-	
+
 /obj/structure/stairs/short
 	bound_height = 32
 	bound_width = 32
-	
+
 /obj/structure/stairs/short/west
 	dir = WEST

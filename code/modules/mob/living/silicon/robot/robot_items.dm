@@ -258,7 +258,7 @@
 				spawn()
 					for(var/i = 1, i <= rand(1,2), i++)
 						if(I)
-							step(I, pick(NORTH,SOUTH,EAST,WEST))
+							seamless_step(I, pick(NORTH,SOUTH,EAST,WEST))
 							sleep(rand(2,4))
 		if ( droppedSomething )
 			if ( foundtable )
@@ -312,7 +312,7 @@
 		return
 
 	//n_name = copytext(n_name, 1, 32)
-	if(( get_dist(user,paper) <= 1  && user.stat == 0))
+	if(( get_physical_dist(user,paper) <= 1  && user.stat == 0))
 		paper.SetName("paper[(n_name ? text("- '[n_name]'") : null)]")
 		paper.last_modified_ckey = user.ckey
 	add_fingerprint(user)
@@ -574,7 +574,7 @@
 		if(istype(A, /obj/item/weapon/reagent_containers/food/snacks/grown))
 			generating_power = base_power_generation
 			using_item = A
-		else 
+		else
 			for(var/fuel_type in fuel_types)
 				if(istype(A, fuel_type))
 					generating_power = fuel_types[fuel_type] * base_power_generation

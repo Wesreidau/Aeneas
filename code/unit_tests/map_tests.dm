@@ -424,16 +424,16 @@ datum/unit_test/ladder_check/start_test()
 			if(!(D.dir == SOUTH || D.dir == EAST))
 				log_bad("Following disposal pipe has an invalid direction set: [log_info_line(D)]")
 				continue
-			var/turf/turf_one = get_step(D.loc, D.dir)
-			var/turf/turf_two = get_step(D.loc, turn(D.dir, 180))
+			var/turf/turf_one = get_physical_step(D.loc, D.dir)
+			var/turf/turf_two = get_physical_step(D.loc, turn(D.dir, 180))
 
 			var/list/desired_dirs = straight_desired_directions[num2text(D.dir)]
 			if(!turf_contains_matching_disposal_pipe(turf_one, D.dir, desired_dirs[1]) || !turf_contains_matching_disposal_pipe(turf_two, D.dir, desired_dirs[2]))
 				log_bad("Following disposal pipe does not connect correctly: [log_info_line(D)]")
 				faulty_pipes += D
 		else
-			var/turf/turf_one = get_step(D.loc, D.dir)
-			var/turf/turf_two = get_step(D.loc, turn(D.dir, -90))
+			var/turf/turf_one = get_physical_step(D.loc, D.dir)
+			var/turf/turf_two = get_physical_step(D.loc, turn(D.dir, -90))
 
 			var/list/desired_dirs = curved_desired_directions[num2text(D.dir)]
 			var/main_dirs = desired_dirs[1]
@@ -622,7 +622,7 @@ datum/unit_test/ladder_check/start_test()
 		if(dir == DOWN)
 			target_turf = GetBelow(C)
 		else
-			target_turf = get_step(C, dir)
+			target_turf = get_physical_step(C, dir)
 
 		var/connected = FALSE
 		for(var/obj/structure/cable/revC in target_turf)
@@ -738,7 +738,7 @@ datum/unit_test/ladder_check/start_test()
 			var/obj/structure/disposalpipe/trunk/trunk = our_pipe
 			return trunk.linked
 		var/obj/structure/disposalpipe/next_pipe
-		for(var/obj/structure/disposalpipe/P in get_step(our_pipe, current_dir))
+		for(var/obj/structure/disposalpipe/P in get_physical_step(our_pipe, current_dir))
 			if(turn(current_dir, 180) & P.dpdir)
 				next_pipe = P
 				break

@@ -192,13 +192,13 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 
 
 //on examination get hints of evidence
-/mob/examinate(atom/A as mob|obj|turf in view())
+/mob/examinate(atom/A as mob|obj|turf in physical_view())
 	if(..())
 		return 1 //I'll admit I am just imitating examine.dm
 
 
 	//Detective is on the case
-	if(get_skill_value(SKILL_FORENSICS) >= SKILL_EXPERT && get_dist(src, A) <= (get_skill_value(SKILL_FORENSICS) - SKILL_ADEPT))
+	if(get_skill_value(SKILL_FORENSICS) >= SKILL_EXPERT && get_physical_dist(src, A) <= (get_skill_value(SKILL_FORENSICS) - SKILL_ADEPT))
 		var/clue
 		if(LAZYLEN(A.suit_fibers))
 			to_chat(src, "<span class='notice'>You notice some fibers embedded in \the [A]</span>")

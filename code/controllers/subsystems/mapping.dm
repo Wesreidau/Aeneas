@@ -16,6 +16,9 @@ SUBSYSTEM_DEF(mapping)
 	var/list/empty_levels = list()
 	var/list/all_level_datums = list()
 	var/list/all_scene_datums = list()
+	var/list/all_loop_areas = list()
+	//This contains all instances of areas which are subtypes of /area/loop.
+	//It is used to tell them (and their tiles) to do extra setup after level datums have finished initializing (which is done in LateInitialize)
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
 	//Load level and scene datums

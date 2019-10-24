@@ -42,8 +42,8 @@
 /obj/machinery/compressor/Initialize()
 	. = ..()
 	gas_contained = new
-	inturf = get_step(src, dir)
-	turbine = locate() in get_step(src, get_dir(inturf, src))
+	inturf = get_physical_step(src, dir)
+	turbine = locate() in get_physical_step(src, get_dir(inturf, src))
 	if(!turbine)
 		set_broken(TRUE)
 	else
@@ -98,7 +98,7 @@
 
 /obj/machinery/power/turbine/Initialize()
 	..()
-	outturf = get_step(src, dir)
+	outturf = get_physical_step(src, dir)
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/power/turbine/LateInitialize()
@@ -148,7 +148,7 @@
 
 /obj/machinery/power/turbine/interact(mob/user)
 
-	if ( (get_dist(src, user) > 1 ) || (stat & (NOPOWER|BROKEN)) && (!istype(user, /mob/living/silicon/ai)) )
+	if ( (get_physical_dist(src, user) > 1 ) || (stat & (NOPOWER|BROKEN)) && (!istype(user, /mob/living/silicon/ai)) )
 		user.machine = null
 		user << browse(null, "window=turbine")
 		return

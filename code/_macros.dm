@@ -45,6 +45,8 @@
 
 #define isliving(A) istype(A, /mob/living)
 
+#define ismirror(A) istype(A, /turf/mirror)
+
 #define ismouse(A) istype(A, /mob/living/simple_animal/mouse)
 
 #define ismovable(A) istype(A, /atom/movable)

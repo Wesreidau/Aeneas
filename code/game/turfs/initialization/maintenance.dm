@@ -55,12 +55,12 @@
 	return how_dirty
 
 /decl/turf_initializer/maintenance/proc/attempt_web(var/turf/simulated/T)
-	var/turf/north_turf = get_step(T, NORTH)
+	var/turf/north_turf = get_physical_step(T, NORTH)
 	if(!north_turf || !north_turf.density)
 		return
 
 	for(var/dir in list(WEST, EAST))	// For the sake of efficiency, west wins over east in the case of 1-tile valid spots, rather than doing pick()
-		var/turf/neighbour = get_step(T, dir)
+		var/turf/neighbour = get_physical_step(T, dir)
 		if(neighbour && neighbour.density)
 			if(dir == WEST)
 				new /obj/effect/decal/cleanable/cobweb(T)

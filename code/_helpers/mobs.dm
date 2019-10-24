@@ -17,7 +17,7 @@
 
 /proc/mobs_in_view(var/range, var/source)
 	var/list/mobs = list()
-	for(var/atom/movable/AM in view(range, source))
+	for(var/atom/movable/AM in physical_view(range, source))
 		var/M = AM.get_mob()
 		if(M)
 			mobs += M
@@ -198,7 +198,7 @@ proc/age2agedescription(age)
 
 /proc/able_mobs_in_oview(var/origin)
 	var/list/mobs = list()
-	for(var/mob/living/M in oview(origin)) // Only living mobs are considered able.
+	for(var/mob/living/M in physical_oview(origin)) // Only living mobs are considered able.
 		if(!M.is_physically_disabled())
 			mobs += M
 	return mobs

@@ -244,10 +244,10 @@
 			valid_turfs |= T
 
 			for(var/dir in GLOB.alldirs)
-				var/turf/neighbor = get_step(T,dir)
+				var/turf/neighbor = get_physical_step(T,dir)
 				if(!neighbor || (neighbor in closed_turfs) || (neighbor in open_turfs))
 					continue
-				if(neighbor.density || get_dist(neighbor,origin_turf) > flood_dist || istype(neighbor,/turf/space))
+				if(neighbor.density || get_physical_dist(neighbor,origin_turf) > flood_dist || istype(neighbor,/turf/space))
 					closed_turfs |= neighbor
 					continue
 				// Check for windows.
@@ -335,7 +335,7 @@
 		if(abs(light_supplied - get_trait(TRAIT_IDEAL_LIGHT)) > get_trait(TRAIT_LIGHT_TOLERANCE))
 			health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
 
-	for(var/obj/effect/effect/smoke/chem/smoke in range(1, current_turf))
+	for(var/obj/effect/effect/smoke/chem/smoke in physical_range(1, current_turf))
 		if(smoke.reagents.has_reagent(/datum/reagent/toxin/plantbgone))
 			return 100
 

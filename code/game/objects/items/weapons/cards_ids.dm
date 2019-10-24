@@ -217,7 +217,7 @@ var/const/NO_EMAG_ACT = -50
 		overlays += overlay_image(icon, detail, flags=RESET_COLOR)
 
 /obj/item/weapon/card/id/CanUseTopic(var/user)
-	if(user in view(get_turf(src)))
+	if(user in physical_view(get_turf(src)))
 		return STATUS_INTERACTIVE
 
 /obj/item/weapon/card/id/OnTopic(var/mob/user, var/list/href_list)

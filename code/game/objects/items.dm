@@ -647,7 +647,7 @@ GLOBAL_LIST_EMPTY(blood_overlay_cache)
 	GLOB.blood_overlay_cache["[icon]" + icon_state] = blood_overlay
 
 /obj/item/proc/showoff(mob/user)
-	for (var/mob/M in view(user))
+	for (var/mob/M in physical_view(user))
 		M.show_message("[user] holds up [src]. <a HREF=?src=\ref[M];lookitem=\ref[src]>Take a closer look.</a>",1)
 
 /mob/living/carbon/verb/showoff()

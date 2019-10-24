@@ -52,8 +52,6 @@
 	for(var/obj/machinery/M in T)
 		M.area_changed(old_area, A) // They usually get moved events, but this is the one way an area can change without triggering one.
 
-/area/proc/get_contents()
-	return contents
 
 /area/proc/get_cameras()
 	var/list/cameras = list()

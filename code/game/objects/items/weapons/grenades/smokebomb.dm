@@ -20,8 +20,8 @@
 	smoke.attach(src)
 	smoke.set_up(10, 0, get_turf(src))
 	START_PROCESSING(SSobj, src)
-	for(var/obj/effect/blob/B in view(8,src))
-		var/damage = round(30/(get_dist(B,src)+1))
+	for(var/obj/effect/blob/B in physical_view(8,src))
+		var/damage = round(30/(get_physical_dist(B,src)+1))
 		B.health -= damage
 		B.update_icon()
 	QDEL_IN(src, 8 SECONDS)

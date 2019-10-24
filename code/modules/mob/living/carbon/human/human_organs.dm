@@ -63,7 +63,7 @@
 		if(T.density)	//walls work
 			return 1
 
-	for(var/obj/O in orange(1, src))
+	for(var/obj/O in physical_orange(1, src))
 		if(O && O.density && O.anchored)
 			return 1
 

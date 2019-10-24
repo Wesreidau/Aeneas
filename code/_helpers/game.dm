@@ -37,7 +37,7 @@
 		return A
 
 /proc/in_range(source, user)
-	if(get_dist(source, user) <= 1)
+	if(get_physical_dist(source, user) <= 1)
 		return 1
 
 	return 0 //not in range and not telekinetic
@@ -49,7 +49,7 @@
 	var/lum = source.luminosity
 	source.luminosity = 6
 
-	var/list/heard = view(range, source)
+	var/list/heard = physical_view(range, source)
 	source.luminosity = lum
 
 	return heard
@@ -73,8 +73,47 @@
 /proc/isContactLevel(var/level)
 	return level in GLOB.using_map.contact_levels
 
+
 /proc/get_main_levels()
 	return SSmapping.main_scene.levels
+
+/*******************************
+	Detection Procs
+********************************/
+//Physical view: Returns the contents of all physically present turfs within a view radius.
+//Most notably, this accounts for mirror tiles, returning the contents of their reflection
+/proc/physical_view(var/dist, var/center)
+	var/list/L1 = view(dist, center)
+	. = list()
+	for (var/turf/T in L1)
+		. += T.get_contents(TRUE)
+
+
+/proc/physical_oview(var/dist, var/center)
+	var/list/L1 = oview(dist, center)
+	. = list()
+	for (var/turf/T in L1)
+		. += T.get_contents(TRUE)
+
+//Rather than simply being a wrapper on native functionality, this wraps trange instead which is much better for the purpose
+/proc/physical_range(var/dist, var/center)
+	var/list/turfs = trange(dist, center)
+	. = list()
+	for (var/t in turfs)
+		var/turf/T = t
+		. += T.get_contents(TRUE)
+
+/proc/physical_orange(var/dist, var/center)
+	var/turf/origin = get_turf(center)
+	var/list/turfs = trange(dist, center)
+	. = list()
+	for (var/t in turfs)
+		if (t == origin)
+			continue
+		var/turf/T = t
+		. += T.get_contents(TRUE)
+
+
 
 /proc/circlerange(center=usr,radius=3)
 
@@ -97,7 +136,7 @@
 	var/list/atoms = new/list()
 	var/rsq = radius * (radius+0.5)
 
-	for(var/atom/A in view(radius, centerturf))
+	for(var/atom/A in physical_view(radius, centerturf))
 		var/dx = A.x - centerturf.x
 		var/dy = A.y - centerturf.y
 		if(dx*dx + dy*dy <= rsq)
@@ -112,7 +151,14 @@
 
 	var/turf/x1y1 = locate(((centre.x-rad)<1 ? 1 : centre.x-rad),((centre.y-rad)<1 ? 1 : centre.y-rad),centre.z)
 	var/turf/x2y2 = locate(((centre.x+rad)>world.maxx ? world.maxx : centre.x+rad),((centre.y+rad)>world.maxy ? world.maxy : centre.y+rad),centre.z)
-	return block(x1y1,x2y2)
+	var/list/L1 = block(x1y1,x2y2)
+	. = list()
+	for (var/t in L1)
+		var/turf/T = t
+		var/turf/T2 = T.get_self()
+		if (T2)
+			. += T2
+
 
 /proc/get_dist_euclidian(atom/Loc1 as turf|mob|obj,atom/Loc2 as turf|mob|obj)
 	var/dx = Loc1.x - Loc2.x
@@ -142,7 +188,7 @@
 	var/list/turfs = new/list()
 	var/rsq = radius * (radius+0.5)
 
-	for(var/turf/T in view(radius, centerturf))
+	for(var/turf/T in physical_view(radius, centerturf))
 		var/dx = T.x - centerturf.x
 		var/dy = T.y - centerturf.y
 		if(dx*dx + dy*dy <= rsq)
@@ -323,14 +369,14 @@ proc/isInSight(var/atom/A, var/atom/B)
 	var/dy = finish.y - start.y
 	if(abs(dy) > abs (dx)) //slope is above 1:1 (move horizontally in a tie)
 		if(dy > 0)
-			return get_step(start, SOUTH)
+			return get_physical_step(start, SOUTH)
 		else
-			return get_step(start, NORTH)
+			return get_physical_step(start, NORTH)
 	else
 		if(dx > 0)
-			return get_step(start, WEST)
+			return get_physical_step(start, WEST)
 		else
-			return get_step(start, EAST)
+			return get_physical_step(start, EAST)
 
 /proc/get_mob_by_key(var/key)
 	for(var/mob/M in SSmobs.mob_list)
@@ -484,7 +530,7 @@ datum/projectile_data
 	var/minp=16777216;
 	var/maxp=0;
 	for(var/dir in GLOB.cardinal)
-		var/turf/simulated/T=get_turf(get_step(loc,dir))
+		var/turf/simulated/T=get_turf(get_physical_step(loc,dir))
 		var/cp=0
 		if(T && istype(T) && T.zone)
 			var/datum/gas_mixture/environment = T.return_air()
@@ -515,7 +561,7 @@ datum/projectile_data
 				direction = 3
 			if(WEST)
 				direction = 4
-		var/turf/simulated/T=get_turf(get_step(loc,dir))
+		var/turf/simulated/T=get_turf(get_physical_step(loc,dir))
 		var/list/rstats = new /list(stats.len)
 		if(T && istype(T) && T.zone)
 			var/datum/gas_mixture/environment = T.return_air()

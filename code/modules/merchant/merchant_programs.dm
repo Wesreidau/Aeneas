@@ -59,7 +59,7 @@
 		ui.open()
 
 /datum/computer_file/program/merchant/proc/connect_pad()
-	for(var/obj/machinery/merchant_pad/P in orange(1,get_turf(computer)))
+	for(var/obj/machinery/merchant_pad/P in physical_orange(1,get_turf(computer)))
 		pad = P
 		return
 

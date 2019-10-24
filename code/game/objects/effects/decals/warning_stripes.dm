@@ -6,6 +6,7 @@
 	var/turf/T=get_turf(src)
 	var/image/I=image(icon, icon_state = icon_state, dir = dir)
 	I.color=color
-	I.layer = DECAL_LAYER
+	I.layer = layer
 	T.overlays += I
+	LAZYADD(T.decals,I)
 	qdel(src)

@@ -25,7 +25,7 @@
 	bloodstr.clear_reagents()
 	touching.clear_reagents()
 	var/datum/reagents/R = get_ingested_reagents()
-	if(istype(R)) 
+	if(istype(R))
 		R.clear_reagents()
 	set_nutrition(400)
 	set_hydration(400)
@@ -335,7 +335,7 @@
 	if((istype(src.loc, /turf/space)) || (src.lastarea.has_gravity == 0))
 		if(prob((itemsize * itemsize * 10) * MOB_MEDIUM/src.mob_size))
 			src.inertia_dir = get_dir(target, src)
-			step(src, inertia_dir)
+			seamless_step(src, inertia_dir)
 
 	item.throw_at(target, throw_range, item.throw_speed * skill_mod, src)
 

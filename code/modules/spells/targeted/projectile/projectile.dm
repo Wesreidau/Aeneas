@@ -39,7 +39,7 @@ If the spell_projectile is seeking, it will update its target every process and 
 
 /spell/targeted/projectile/proc/choose_prox_targets(mob/user = usr, var/atom/movable/spell_holder)
 	var/list/targets = list()
-	for(var/mob/living/M in range(spell_holder, cast_prox_range))
+	for(var/mob/living/M in physical_range(cast_prox_range,spell_holder))
 		if(M == user && !(spell_flags & INCLUDEUSER))
 			continue
 		targets += M

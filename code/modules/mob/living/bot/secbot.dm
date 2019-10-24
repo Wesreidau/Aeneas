@@ -127,7 +127,7 @@
 	var/mob/shooter = P.firer
 	. = ..()
 	//if we already have a target just ignore to avoid lots of checking
-	if(!target && health < curhealth && shooter && (shooter in view(world.view, src)))
+	if(!target && health < curhealth && shooter && (shooter in physical_view(world.view, src)))
 		react_to_attack(shooter)
 
 /mob/living/bot/secbot/proc/begin_arrest(mob/target, var/threat)
@@ -139,7 +139,7 @@
 	GLOB.moved_event.register(target, src, /mob/living/bot/secbot/proc/target_moved)
 
 /mob/living/bot/secbot/proc/target_moved(atom/movable/moving_instance, atom/old_loc, atom/new_loc)
-	if(get_dist(get_turf(src), get_turf(target)) >= 1)
+	if(get_physical_dist(get_turf(src), get_turf(target)) >= 1)
 		awaiting_surrender = INFINITY
 		GLOB.moved_event.unregister(moving_instance, src)
 
@@ -167,7 +167,7 @@
 	return (check_threat(A) >= SECBOT_THREAT_ARREST)
 
 /mob/living/bot/secbot/lookForTargets()
-	for(var/mob/living/M in view(src))
+	for(var/mob/living/M in physical_view(src))
 		if(M.stat == DEAD)
 			continue
 		if(confirmTarget(M))

@@ -234,7 +234,7 @@ var/global/photo_count = 0
 	var/viewer = src
 	if(src.client)		//To make shooting through security cameras possible
 		viewer = src.client.eye
-	var/can_see = (T in view(viewer))
+	var/can_see = (T in physical_view(viewer))
 	return can_see
 
 /obj/item/device/camera/proc/captureimage(atom/target, mob/living/user, flag)

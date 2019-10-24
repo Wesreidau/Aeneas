@@ -70,7 +70,7 @@ var/hadevent    = 0
 			return
 
 		for(var/obj/effect/landmark/epicentre in epicentreList)
-			for(var/obj/machinery/power/apc/apc in range(epicentre,lightsoutRange))
+			for(var/obj/machinery/power/apc/apc in physical_range(lightsoutRange,epicentre))
 				apc.overload_lighting()
 
 	else

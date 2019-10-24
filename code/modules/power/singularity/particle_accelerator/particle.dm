@@ -71,12 +71,12 @@
 	if(target)
 		destination = movetotarget ? get_step_towards(src, target) : get_step_away(src, source)
 	else
-		destination = get_step(src, dir)
+		destination = get_physical_step(src, dir)
 	if(!step_towards(src, destination))
 		if(QDELETED(src))
 			return
 		forceMove(destination)
-	if(target && movetotarget && (get_dist(src,target) < 1))
+	if(target && movetotarget && (get_physical_dist(src,target) < 1))
 		movetotarget = 0
 	movement_range--
 	if(movement_range <= 0)

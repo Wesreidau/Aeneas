@@ -71,7 +71,7 @@
 	else
 		for(var/turf/simulated/mineral/T in SSxenoarch.artifact_spawning_turfs)
 			if(T.artifact_find)
-				var/cur_dist = get_dist(container, T) * 2
+				var/cur_dist = get_physical_dist(container, T) * 2
 				if( (artifact_distance < 0 || cur_dist < artifact_distance))
 					artifact_distance = cur_dist + rand() * 2 - 1
 					artifact_id = T.artifact_find.artifact_id

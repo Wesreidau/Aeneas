@@ -173,7 +173,7 @@
 	if(linked_god)
 		for(var/m in linked_god.minions)
 			var/datum/mind/M = m
-			if(get_dist(M.current, src) <= 3)
+			if(get_physical_dist(M.current, src) <= 3)
 				. += M.current
 
 /obj/structure/deity/radiant_statue/attack_hand(var/mob/living/L)

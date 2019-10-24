@@ -160,10 +160,10 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/adir = get_dir(A,B)
 	var/rdir = get_dir(B,A)
 	if((adir & (NORTH|SOUTH)) && (adir & (EAST|WEST)))	//	diagonal
-		var/iStep = get_step(A,adir&(NORTH|SOUTH))
+		var/iStep = get_physical_step(A,adir&(NORTH|SOUTH))
 		if(!LinkBlocked(A,iStep) && !LinkBlocked(iStep,B)) return 0
 
-		var/pStep = get_step(A,adir&(EAST|WEST))
+		var/pStep = get_physical_step(A,adir&(EAST|WEST))
 		if(!LinkBlocked(A,pStep) && !LinkBlocked(pStep,B)) return 0
 		return 1
 
@@ -592,14 +592,14 @@ proc/GaussRandRound(var/sigma,var/roundto)
 			if(!is_blocked_turf(turf_last2))
 				free_tile = turf_last2
 				break
-			turf_last1 = get_step(turf_last1,dir_alt1)
-			turf_last2 = get_step(turf_last2,dir_alt2)
+			turf_last1 = get_physical_step(turf_last1,dir_alt1)
+			turf_last2 = get_physical_step(turf_last2,dir_alt2)
 			breakpoint++
 
-		if(!free_tile) return get_step(ref, base_dir)
+		if(!free_tile) return get_physical_step(ref, base_dir)
 		else return get_step_towards(ref,free_tile)
 
-	else return get_step(ref, base_dir)
+	else return get_physical_step(ref, base_dir)
 
 //Takes: Anything that could possibly have variables and a varname to check.
 //Returns: 1 if found, 0 if not.
@@ -826,17 +826,17 @@ proc/anyprob(value)
 proc/view_or_range(distance = world.view , center = usr , type)
 	switch(type)
 		if("view")
-			. = view(distance,center)
+			. = physical_view(distance,center)
 		if("range")
-			. = range(distance,center)
+			. = physical_range(distance,center)
 	return
 
 proc/oview_or_orange(distance = world.view , center = usr , type)
 	switch(type)
 		if("view")
-			. = oview(distance,center)
+			. = physical_oview(distance,center)
 		if("range")
-			. = orange(distance,center)
+			. = physical_orange(distance,center)
 	return
 
 proc/get_mob_with_client_list()
@@ -1044,7 +1044,7 @@ var/list/WALLITEMS = list(
 
 
 	//Some stuff is placed directly on the wallturf (signs)
-	for(var/obj/O in get_step(loc, dir))
+	for(var/obj/O in get_physical_step(loc, dir))
 		for(var/item in WALLITEMS)
 			if(istype(O, item))
 				if(O.pixel_x == 0 && O.pixel_y == 0)
@@ -1073,14 +1073,14 @@ var/list/WALLITEMS = list(
 
 GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 
-//Version of view() which ignores darkness, because BYOND doesn't have it.
+//Version of physical_view() which ignores darkness, because BYOND doesn't have it.
 /proc/dview(var/range = world.view, var/center, var/invis_flags = 0)
 	if(!center)
 		return
 
 	GLOB.dview_mob.loc = center
 	GLOB.dview_mob.see_invisible = invis_flags
-	. = view(range, GLOB.dview_mob)
+	. = physical_view(range, GLOB.dview_mob)
 	GLOB.dview_mob.loc = null
 
 /mob/dview
@@ -1121,7 +1121,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 		var/mob/M = user.pulling
 		var/atom/movable/t = M.pulling
 		M.stop_pulling()
-		step(user.pulling, get_dir(user.pulling.loc, A))
+		seamless_step(user.pulling, get_dir(user.pulling.loc, A))
 		M.start_pulling(t)
 	else
-		step(user.pulling, get_dir(user.pulling.loc, A))
+		seamless_step(user.pulling, get_dir(user.pulling.loc, A))

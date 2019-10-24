@@ -46,7 +46,7 @@
 		return
 	if(propelled)
 		return
-	if(pulling && (get_dist(src, pulling) > 1))
+	if(pulling && (get_physical_dist(src, pulling) > 1))
 		pulling = null
 		user.pulledby = null
 		if(user==pulling)
@@ -64,15 +64,15 @@
 	//--1---Move occupant---1--//
 	if(buckled_mob)
 		buckled_mob.buckled = null
-		step(buckled_mob, direction)
+		seamless_step(buckled_mob, direction)
 		buckled_mob.buckled = src
 	//--2----Move driver----2--//
 	if(pulling)
 		T = pulling.loc
-		if(get_dist(src, pulling) >= 1)
-			step(pulling, get_dir(pulling.loc, src.loc))
+		if(get_physical_dist(src, pulling) >= 1)
+			seamless_step(pulling, get_dir(pulling.loc, src.loc))
 	//--3--Move wheelchair--3--//
-	step(src, direction)
+	seamless_step(src, direction)
 	if(buckled_mob) // Make sure it stays beneath the occupant
 		Move(buckled_mob.loc)
 	set_dir(direction)
@@ -81,7 +81,7 @@
 			pulling.forceMove(T)
 		else
 			spawn(0)
-			if(get_dist(src, pulling) > 1) // We are too far away? Losing control.
+			if(get_physical_dist(src, pulling) > 1) // We are too far away? Losing control.
 				pulling = null
 				user.pulledby = null
 			pulling.set_dir(get_dir(pulling, src)) // When everything is right, face the wheelchair
@@ -101,7 +101,7 @@
 							Bump(O)
 				else
 					unbuckle_mob()
-			if (pulling && (get_dist(src, pulling) > 1))
+			if (pulling && (get_physical_dist(src, pulling) > 1))
 				pulling.pulledby = null
 				to_chat(pulling, "<span class='warning'>You lost your grip!</span>")
 				pulling = null
@@ -172,7 +172,7 @@
 
 /obj/structure/bed/chair/wheelchair/proc/create_track()
 	var/obj/effect/decal/cleanable/blood/tracks/B = new(loc)
-	var/newdir = get_dir(get_step(loc, dir), loc)
+	var/newdir = get_dir(get_physical_step(loc, dir), loc)
 	if(newdir == dir)
 		B.set_dir(newdir)
 	else

@@ -110,12 +110,12 @@
 		visible_message("<span class='danger'>\The [src] flashes a bit as it eventually fades out in a rain of sparks!</span>")
 	fail(range * 2)
 
-	for(var/obj/effect/shield/S in range(range, src))
+	for(var/obj/effect/shield/S in physical_range(range, src))
 		// Don't affect shields owned by other shield generators
 		if(S.gen != src.gen)
 			continue
 		// The closer we are to impact site, the longer it takes for shield to come back up.
-		S.fail(-(-range + get_dist(src, S)) * 2)
+		S.fail(-(-range + get_physical_dist(src, S)) * 2)
 
 /obj/effect/shield/proc/take_damage(var/damage, var/damtype, var/hitby)
 	if(!gen)

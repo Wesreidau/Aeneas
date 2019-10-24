@@ -75,14 +75,14 @@
 	//see if we've identified anyone nearby
 	if(world.time - last_bloodcall > bloodcall_interval && nearby_mobs.len)
 		var/mob/living/carbon/human/M = pop(nearby_mobs)
-		if(M in view(7,src) && M.health > 20)
+		if(M in physical_view(7,src) && M.health > 20)
 			if(prob(50))
 				bloodcall(M)
 				nearby_mobs.Add(M)
 
 	//suck up some blood to gain power
 	if(world.time - last_eat > eat_interval)
-		var/obj/effect/decal/cleanable/blood/B = locate() in range(2,src)
+		var/obj/effect/decal/cleanable/blood/B = locate() in physical_range(2,src)
 		if(B)
 			last_eat = world.time
 			if(istype(B, /obj/effect/decal/cleanable/blood/drip))
@@ -95,13 +95,13 @@
 	//use up stored charges
 	if(charges >= 10)
 		charges -= 10
-		new /obj/effect/spider/eggcluster(pick(view(1,src)))
+		new /obj/effect/spider/eggcluster(pick(physical_view(1,src)))
 
 	if(charges >= 3)
 		if(prob(5))
 			charges -= 1
 			var/spawn_type = pick(/mob/living/simple_animal/hostile/creature)
-			new spawn_type(pick(view(1,src)))
+			new spawn_type(pick(physical_view(1,src)))
 			playsound(src.loc, pick('sound/hallucinations/growl1.ogg','sound/hallucinations/growl2.ogg','sound/hallucinations/growl3.ogg'), 50, 1, -3)
 
 	if(charges >= 1)
@@ -126,12 +126,12 @@
 			shadow_wights.Remove(wight_check_index)
 		else if(isnull(W.loc))
 			shadow_wights.Remove(wight_check_index)
-		else if(get_dist(W, src) > 10)
+		else if(get_physical_dist(W, src) > 10)
 			shadow_wights.Remove(wight_check_index)
 
 /obj/item/weapon/vampiric/hear_talk(mob/M as mob, text)
 	..()
-	if(world.time - last_bloodcall >= bloodcall_interval && M in view(7, src))
+	if(world.time - last_bloodcall >= bloodcall_interval && M in physical_view(7, src))
 		bloodcall(M)
 
 /obj/item/weapon/vampiric/proc/bloodcall(var/mob/living/carbon/human/M)
@@ -144,7 +144,7 @@
 		M.apply_damage(rand(5, 10), BRUTE, target)
 		to_chat(M, "<span class='warning'>The skin on your [parse_zone(target)] feels like it's ripping apart, and a stream of blood flies out.</span>")
 		var/obj/effect/decal/cleanable/blood/splatter/animated/B = new(M.loc)
-		B.target_turf = pick(range(1, src))
+		B.target_turf = pick(physical_range(1, src))
 		B.blood_DNA = list()
 		B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 		M.vessel.remove_reagent(/datum/reagent/blood,rand(25,50))

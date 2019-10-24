@@ -42,10 +42,10 @@
 	return get_dir(Loc1, Loc2)
 
 /proc/_get_dist(Loc1, Loc2)
-	return get_dist(Loc1, Loc2)
+	return get_physical_dist(Loc1, Loc2)
 
-/proc/_get_step(Ref, Dir)
-	return get_step(Ref, Dir)
+/proc/_get_physical_step(Ref, Dir)
+	return get_physical_step(Ref, Dir)
 
 /proc/_hearers(Depth = world.view, Center = usr)
 	return hearers(Depth, Center)
@@ -93,13 +93,13 @@
 	return ohearers(Dist, Center)
 
 /proc/_orange(Dist, Center = usr)
-	return orange(Dist, Center)
+	return physical_orange(Dist, Center)
 
 /proc/_output(thing, msg, control)
 	send_output(thing, msg, control)
 
 /proc/_oview(Dist, Center = usr)
-	return oview(Dist, Center)
+	return physical_oview(Dist, Center)
 
 /proc/_oviewers(Dist, Center = usr)
 	return oviewers(Dist, Center)
@@ -117,7 +117,7 @@
 	return rand(L, H)
 
 /proc/_range(Dist, Center = usr)
-	return range(Dist, Center)
+	return physical_range(Dist, Center)
 
 /proc/_regex(pattern, flags)
 	return regex(pattern, flags)
@@ -150,7 +150,7 @@
 	return sin(X)
 
 /proc/_step(Ref, Dir, Speed = 0)
-	return step(Ref, Dir, Speed)
+	return seamless_step(Ref, Dir, Speed)
 
 
 /proc/_list_add(var/list/L, ...)

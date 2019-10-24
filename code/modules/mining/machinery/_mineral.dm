@@ -31,10 +31,10 @@
 		updateUsrDialog()
 
 /obj/machinery/mineral/proc/set_input(var/_dir)
-	input_turf = _dir ? get_step(loc, _dir) : null
+	input_turf = _dir ? get_physical_step(loc, _dir) : null
 
 /obj/machinery/mineral/proc/set_output(var/_dir)
-	output_turf = _dir ? get_step(loc, _dir) : null
+	output_turf = _dir ? get_physical_step(loc, _dir) : null
 
 /obj/machinery/mineral/proc/get_console_data()
 	. = list("<h1>Input/Output</h1>")
@@ -54,7 +54,7 @@
 /obj/machinery/mineral/proc/find_console()
 	if(ispath(console))
 		for(var/c in GLOB.alldirs)
-			var/turf/T = get_step(loc, c)
+			var/turf/T = get_physical_step(loc, c)
 			if(T)
 				var/obj/machinery/computer/mining/tmpconsole = locate(console) in T
 				if(tmpconsole && !tmpconsole.connected)

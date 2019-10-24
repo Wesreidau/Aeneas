@@ -14,7 +14,7 @@
 	var/direction = front.dir
 
 	var/distance = 0
-	for(var/turf/T in getline(get_step(front,front.dir),get_target_turf(start, direction)))
+	for(var/turf/T in getline(get_physical_step(front,front.dir),get_target_turf(start, direction)))
 		distance++
 		if(T.density)
 			if(distance < 7)
@@ -58,7 +58,7 @@
 
 	var/list/candidates = list()
 
-	for(var/obj/effect/overmap_event/O in get_step(linked, overmapdir))
+	for(var/obj/effect/overmap_event/O in get_physical_step(linked, overmapdir))
 		candidates += O
 
 	//Way to waste a charge
@@ -86,7 +86,7 @@
 
 /obj/machinery/computer/ship/disperser/proc/handle_overbeam()
 	set waitfor = FALSE
-	linked.Beam(get_step(linked, overmapdir), "disperser_beam", time = 150, maxdistance = world.maxx)
+	linked.Beam(get_physical_step(linked, overmapdir), "disperser_beam", time = 150, maxdistance = world.maxx)
 
 /obj/machinery/computer/ship/disperser/proc/get_target_turf(turf/start, direction)
 	switch(direction)

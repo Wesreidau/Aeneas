@@ -25,7 +25,7 @@
 
 /obj/structure/catwalk/proc/redraw_nearby_catwalks()
 	for(var/direction in GLOB.alldirs)
-		var/obj/structure/catwalk/L = locate() in get_step(src, direction)
+		var/obj/structure/catwalk/L = locate() in get_physical_step(src, direction)
 		if(L)
 			L.update_connections()
 			L.update_icon() //so siding get updated properly
@@ -163,7 +163,7 @@
 		C.name = "plated catwalk"
 		C.update_icon()
 	activated = 1
-	for(var/turf/T in orange(src, 1))
+	for(var/turf/T in physical_orange(1, src))
 		for(var/obj/effect/wallframe_spawn/other in T)
 			if(!other.activated) other.activate()
 

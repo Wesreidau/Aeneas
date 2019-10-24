@@ -48,7 +48,7 @@
 		if(will_hunt(hungry) || attacked || rabid) // Only add to the list if we need to
 			var/list/targets = list()
 
-			for(var/mob/living/L in view(7,src))
+			for(var/mob/living/L in physical_view(7,src))
 				if(AssessTarget(L))
 					targets += L // Possible target found!
 
@@ -135,7 +135,7 @@
 			AIproc = 0
 			return
 
-		for(var/mob/living/carbon/slime/M in view(1, Target))
+		for(var/mob/living/carbon/slime/M in physical_view(1, Target))
 			if(M.Victim == Target)
 				Target = null
 				AIproc = 0
@@ -159,7 +159,7 @@
 					addedDelay = 10
 				UnarmedAttack(Target)
 
-		else if(Target in view(7, src))
+		else if(Target in physical_view(7, src))
 			step_to(src, Target)
 
 		else
@@ -169,7 +169,7 @@
 
 	else
 		var/mob/living/carbon/slime/frenemy
-		for (var/mob/living/carbon/slime/S in view(1, src))
+		for (var/mob/living/carbon/slime/S in physical_view(1, src))
 			if (S != src)
 				frenemy = S
 		if (frenemy && prob(1) && frenemy.Adjacent(src))
@@ -288,7 +288,7 @@
 		var/slimes_near = -1 // Don't count myself
 		var/dead_slimes = 0
 		var/friends_near = list()
-		for (var/mob/living/carbon/M in view(7,src))
+		for (var/mob/living/carbon/M in physical_view(7,src))
 			if (isslime(M))
 				++slimes_near
 				if (M.stat == DEAD)

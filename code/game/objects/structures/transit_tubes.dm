@@ -158,7 +158,7 @@ obj/structure/ex_act(severity)
 				sleep(CLOSE_DURATION + 2)
 
 				//reverse directions for automated cycling
-				var/turf/next_loc = get_step(loc, pod.dir)
+				var/turf/next_loc = get_physical_step(loc, pod.dir)
 				var/obj/structure/transit_tube/nexttube
 				for(var/obj/structure/transit_tube/tube in next_loc)
 					if(tube.has_entrance(pod.dir))
@@ -306,7 +306,7 @@ obj/structure/ex_act(severity)
 
 			sleep(exit_delay)
 
-			next_loc = get_step(loc, next_dir)
+			next_loc = get_physical_step(loc, next_dir)
 
 			current_tube = null
 			for(var/obj/structure/transit_tube/tube in next_loc)
@@ -316,7 +316,7 @@ obj/structure/ex_act(severity)
 
 			if(current_tube == null)
 				set_dir(next_dir)
-				Move(get_step(loc, dir)) // Allow collisions when leaving the tubes.
+				Move(get_physical_step(loc, dir)) // Allow collisions when leaving the tubes.
 				break
 
 			last_delay = current_tube.enter_delay(src, next_dir)
@@ -344,7 +344,7 @@ obj/structure/ex_act(severity)
 				if(last_delay > 10)
 					break
 
-			while(isturf(loc) && Move(get_step(loc, dir)))
+			while(isturf(loc) && Move(get_physical_step(loc, dir)))
 
 		moving = 0
 
@@ -377,7 +377,7 @@ obj/structure/ex_act(severity)
 		if(!(locate(/obj/structure/transit_tube) in loc))
 			var/turf/T = get_turf(src)
 			mob.forceMove(T)
-			mob.client.Move(get_step(T, direction), direction)
+			mob.client.Move(get_physical_step(T, direction), direction)
 
 			//if(moving && istype(loc, /turf/space))
 				// Todo: If you get out of a moving pod in space, you should move as well.
@@ -391,7 +391,7 @@ obj/structure/ex_act(severity)
 							if(station.icon_state == "open")
 								var/turf/T = get_turf(src)
 								mob.forceMove(T)
-								mob.client.Move(get_step(T, direction), direction)
+								mob.client.Move(get_physical_step(T, direction), direction)
 
 							else
 								station.open_animation()
@@ -444,7 +444,7 @@ obj/structure/ex_act(severity)
 	var/list/connected_auto = list()
 
 	for(var/direction in tube_dir_list)
-		var/location = get_step(loc, direction)
+		var/location = get_physical_step(loc, direction)
 		for(var/obj/structure/transit_tube/tube in location)
 			if(tube.directions() == null && tube.icon_state == "auto")
 				connected_auto += direction
@@ -496,16 +496,16 @@ obj/structure/ex_act(severity)
 	for(var/direction in directions)
 		if(direction == 5 || direction == 6 || direction == 9 || direction == 10)
 			if(direction & NORTH)
-				create_automatic_decorative_corner(get_step(loc, NORTH), direction ^ 3)
+				create_automatic_decorative_corner(get_physical_step(loc, NORTH), direction ^ 3)
 
 			else
-				create_automatic_decorative_corner(get_step(loc, SOUTH), direction ^ 3)
+				create_automatic_decorative_corner(get_physical_step(loc, SOUTH), direction ^ 3)
 
 			if(direction & EAST)
-				create_automatic_decorative_corner(get_step(loc, EAST), direction ^ 12)
+				create_automatic_decorative_corner(get_physical_step(loc, EAST), direction ^ 12)
 
 			else
-				create_automatic_decorative_corner(get_step(loc, WEST), direction ^ 12)
+				create_automatic_decorative_corner(get_physical_step(loc, WEST), direction ^ 12)
 
 
 

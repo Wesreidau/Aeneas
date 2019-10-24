@@ -17,14 +17,14 @@
 	if(!connected)
 		to_chat(user, "<span class='warning'>\The [src] is not connected to a processing machine. <a href='?src=\ref[src];scan_for_machine=1'>Scan</a></span>")
 		return STATUS_CLOSE
-	. = ..()	
+	. = ..()
 
 /obj/machinery/computer/mining/Topic(href, href_list)
 	if((. = ..()))
 		return
 	if(href_list["scan_for_machine"])
 		for(var/c in GLOB.alldirs)
-			var/turf/T = get_step(loc, c)
+			var/turf/T = get_physical_step(loc, c)
 			if(T)
 				var/obj/machinery/mineral/M = locate(/obj/machinery/mineral) in T
 				if(M && ispath(M.console) && istype(src, M.console))

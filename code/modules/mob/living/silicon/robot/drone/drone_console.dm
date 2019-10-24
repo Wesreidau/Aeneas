@@ -88,7 +88,7 @@
 		if(dronefab)
 			return
 
-		for(var/obj/machinery/drone_fabricator/fab in oview(3,src))
+		for(var/obj/machinery/drone_fabricator/fab in physical_oview(3,src))
 
 			if(fab.stat & NOPOWER)
 				continue
@@ -104,7 +104,7 @@
 		if(!dronefab)
 			return
 
-		if(get_dist(src,dronefab) > 3)
+		if(get_physical_dist(src,dronefab) > 3)
 			dronefab = null
 			to_chat(usr, "<span class='danger'>Unable to locate drone fabricator.</span>")
 			return

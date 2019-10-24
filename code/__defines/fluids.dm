@@ -39,7 +39,7 @@
 	for(var/spread_dir in GLOB.cardinal) {\
 		UPDATE_FLUID_BLOCKED_DIRS(T); \
 		if(T:fluid_blocked_dirs & spread_dir) continue; \
-		var/turf/next = get_step(T, spread_dir); \
+		var/turf/next = get_physical_step(T, spread_dir); \
 		if(!istype(next) || next.flooded) continue; \
 		UPDATE_FLUID_BLOCKED_DIRS(next); \
 		if((next.fluid_blocked_dirs & GLOB.reverse_dir[spread_dir]) || !next.CanFluidPass(spread_dir)) continue; \

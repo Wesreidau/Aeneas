@@ -16,7 +16,7 @@ SUBSYSTEM_DEF(radiation)
 	if (!resumed)
 		current_sources = sources.Copy()
 		current_res_cache = resistance_cache.Copy()
-		listeners = GLOB.living_mob_list_.Copy()		
+		listeners = GLOB.living_mob_list_.Copy()
 
 	while(current_sources.len)
 		var/datum/radiation_source/S = current_sources[current_sources.len]
@@ -28,7 +28,7 @@ SUBSYSTEM_DEF(radiation)
 			S.update_rad_power(S.rad_power - config.radiation_decay_rate)
 		if (MC_TICK_CHECK)
 			return
-	
+
 	while(current_res_cache.len)
 		var/turf/T = current_res_cache[current_res_cache.len]
 		current_res_cache.len--
@@ -75,7 +75,7 @@ SUBSYSTEM_DEF(radiation)
 			if(A.area_flags & AREA_FLAG_RAD_SHIELDED)
 				continue // In shielded area
 
-		var/dist = get_dist(source.source_turf, T)
+		var/dist = get_physical_dist(source.source_turf, T)
 		if(dist > source.range)
 			continue // Too far to possibly affect
 		if(source.flat)

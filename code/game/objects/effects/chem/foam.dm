@@ -46,7 +46,7 @@
 		return
 
 	for(var/direction in GLOB.cardinal)
-		var/turf/T = get_step(src, direction)
+		var/turf/T = get_physical_step(src, direction)
 		if(!T)
 			continue
 

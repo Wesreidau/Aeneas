@@ -195,7 +195,7 @@ its easier to just keep the beam vertical.
 
 		set_dir(get_dir(src,BeamTarget))	//Causes the source of the beam to rotate to continuosly face the BeamTarget.
 
-		for(var/obj/effect/overlay/beam/O in orange(10,src))	//This section erases the previously drawn beam because I found it was easier to
+		for(var/obj/effect/overlay/beam/O in physical_orange(10,src))	//This section erases the previously drawn beam because I found it was easier to
 			if(O.BeamSource==src)				//just draw another instance of the beam instead of trying to manipulate all the
 				qdel(O)							//pieces to a new orientation.
 		var/Angle=round(Get_Angle(src,BeamTarget))
@@ -238,7 +238,7 @@ its easier to just keep the beam vertical.
 			X.pixel_y=Pixel_y
 		sleep(3)	//Changing this to a lower value will cause the beam to follow more smoothly with movement, but it will also be more laggy.
 					//I've found that 3 ticks provided a nice balance for my use.
-	for(var/obj/effect/overlay/beam/O in orange(10,src)) if(O.BeamSource==src) qdel(O)
+	for(var/obj/effect/overlay/beam/O in physical_orange(10,src)) if(O.BeamSource==src) qdel(O)
 
 
 //All atoms
@@ -255,7 +255,7 @@ its easier to just keep the beam vertical.
 	to_chat(user, "\icon[src] That's [f_name] [suffix]")
 	to_chat(user, desc)
 
-	return distance == -1 || (get_dist(src, user) <= distance)
+	return distance == -1 || (get_physical_dist(src, user) <= distance)
 
 // called by mobs when e.g. having the atom as their machine, pulledby, loc (AKA mob being inside the atom) or buckled var set.
 // see code/modules/mob/mob_movement.dm for more.
@@ -507,7 +507,7 @@ its easier to just keep the beam vertical.
 
 	//climbing over border objects like railings
 	if((atom_flags & ATOM_FLAG_CHECKS_BORDER) && get_turf(user) == target_turf)
-		target_turf = get_step(src, dir)
+		target_turf = get_physical_step(src, dir)
 
 	user.forceMove(target_turf)
 
@@ -567,3 +567,7 @@ its easier to just keep the beam vertical.
 
 /atom/proc/get_cell()
 	return
+
+//Overrideable if you want to have special contents, used by mirror turfs
+/atom/proc/get_contents(var/includeself = FALSE)
+	return (includeself ? contents + src : contents)

@@ -43,7 +43,7 @@
 	else
 		user.electrocute_act(100, src, def_zone = BP_CHEST)
 		visible_message("<span class='danger'>\The [user] has been shocked by \the [src]!</span>")
-	user.throw_at(get_step(user,get_dir(src,user)), 5, 10)
+	user.throw_at(get_physical_step(user,get_dir(src,user)), 5, 10)
 
 /obj/structure/adherent_pylon/attackby(obj/item/grab/normal/G, mob/user)
 	if(!istype(G))

@@ -89,7 +89,7 @@
 			var/turf/simulated/mineral/T = A
 			if(T.density && T.artifact_find)
 				if(T.z == cur_turf.z)
-					var/cur_dist = get_dist(cur_turf, T) * 2
+					var/cur_dist = get_physical_dist(cur_turf, T) * 2
 					if(nearestTargetDist < 0 || cur_dist < nearestTargetDist)
 						nearestTargetDist = cur_dist + rand() * 2 - 1
 						nearestTargetId = T.artifact_find.artifact_id
@@ -100,7 +100,7 @@
 			var/turf/simulated/mineral/T = A
 			if(T.density && T.finds && T.finds.len)
 				if(T.z == cur_turf.z)
-					var/cur_dist = get_dist(cur_turf, T) * 2
+					var/cur_dist = get_physical_dist(cur_turf, T) * 2
 					if(nearestSimpleTargetDist < 0 || cur_dist < nearestSimpleTargetDist)
 						nearestSimpleTargetDist = cur_dist + rand() * 2 - 1
 			else
@@ -254,7 +254,7 @@
 		if(!R.functioning)
 			continue
 		if((R.z in zlevels) && R.frequency == tracking_freq)
-			var/check_dist = get_dist(src,R)
+			var/check_dist = get_physical_dist(src,R)
 			if(check_dist < cur_dist)
 				cur_dist = check_dist
 				. = weakref(R)

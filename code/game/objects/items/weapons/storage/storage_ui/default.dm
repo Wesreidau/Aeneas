@@ -77,7 +77,7 @@
 		user.s_active.show_to(user)
 
 /datum/storage_ui/default/on_pre_remove(var/mob/user, var/obj/item/W)
-	for(var/mob/M in range(1, storage.loc))
+	for(var/mob/M in physical_range(1, storage.loc))
 		if (M.s_active == storage)
 			if (M.client)
 				M.client.screen -= W
@@ -87,7 +87,7 @@
 		user.s_active.show_to(user)
 
 /datum/storage_ui/default/on_hand_attack(var/mob/user)
-	for(var/mob/M in range(1))
+	for(var/mob/M in physical_range(1))
 		if (M.s_active == storage)
 			storage.close(M)
 

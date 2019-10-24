@@ -27,7 +27,7 @@
 	. = MOVEMENT_HANDLED
 
 	var/atom/movable/control_object = mob.control_object
-	step(control_object, direction)
+	seamless_step(control_object, direction)
 	if(QDELETED(control_object))
 		. |= MOVEMENT_REMOVE
 	else
@@ -200,7 +200,7 @@
 			return MOVEMENT_STOP
 
 	if(mob.restrained())
-		for(var/mob/M in range(mob, 1))
+		for(var/mob/M in physical_range(1, mob))
 			if(M.pulling == mob)
 				if(!M.incapacitated() && mob.Adjacent(M))
 					if(mover == mob)
@@ -236,7 +236,7 @@
 
 	direction = mob.AdjustMovementDirection(direction)
 	var/turf/old_turf = get_turf(mob)
-	step(mob, direction)
+	seamless_step(mob, direction)
 
 	// Something with pulling things
 	var/extra_delay = HandleGrabs(direction, old_turf)
@@ -287,10 +287,10 @@
 				L -= mob
 				var/mob/M = L[1]
 				if(M)
-					if (get_dist(old_turf, M) <= 1)
+					if (get_physical_dist(old_turf, M) <= 1)
 						if (isturf(M.loc) && isturf(mob.loc))
 							if (mob.loc != old_turf && M.loc != mob.loc)
-								step(M, get_dir(M.loc, old_turf))
+								seamless_step(M, get_dir(M.loc, old_turf))
 			else
 				for(var/mob/M in L)
 					M.other_mobs = 1
@@ -298,7 +298,7 @@
 						M.animate_movement = 3
 				for(var/mob/M in L)
 					spawn( 0 )
-						step(M, direction)
+						seamless_step(M, direction)
 						return
 					spawn( 1 )
 						M.other_mobs = null

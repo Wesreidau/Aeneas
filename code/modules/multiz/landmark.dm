@@ -24,11 +24,12 @@
 
 /obj/effect/landmark/map_data/Initialize()
 	..()
+	return INITIALIZE_HINT_LATELOAD
+
+
+/obj/effect/landmark/map_data/LateInitialize()
+	..()
 	create_level(z, level_id) //This proc is in multiz/level.dm
-	return INITIALIZE_HINT_QDEL
-
-
-
 
 /*--------------------------------------------------------------------------------------------------------------
 

@@ -76,7 +76,7 @@
 		carrying.dropInto(loc)
 		carrying = null
 	. = ..()
-	
+
 // A lot of this is copied from floodlights.
 /obj/item/mech_equipment/light
 	name = "floodlight"
@@ -112,7 +112,7 @@
 	on = FALSE
 	update_icon()
 	. = ..()
-	
+
 #define CATAPULT_SINGLE 1
 #define CATAPULT_AREA   2
 
@@ -161,7 +161,7 @@
 					to_chat(user, SPAN_NOTICE("Locked on [AM]."))
 					return
 				else if(target != locked)
-					if(locked in view(owner))
+					if(locked in physical_view(owner))
 						locked.throw_at(target, 14, 1.5, owner)
 						log_and_message_admins("used [src] to throw [locked] at [target].", user, owner.loc)
 						locked = null
@@ -174,12 +174,12 @@
 						locked = null
 						to_chat(user, SPAN_NOTICE("Lock on [locked] disengaged."))
 			if(CATAPULT_AREA)
-				
+
 				var/list/atoms = list()
 				if(isturf(target))
-					atoms = range(target,3)
+					atoms = physical_range(3, target)
 				else
-					atoms = orange(target,3)
+					atoms = physical_orange(3, target)
 				for(var/atom/movable/A in atoms)
 					if(A.anchored || !A.simulated) continue
 					var/dist = 5-get_dist(A,target)
@@ -202,7 +202,7 @@
 	name = "drill head"
 	desc = "A replaceable drill head usually used in exosuit drills."
 	icon_state = "drill_head"
-	
+
 /obj/item/weapon/material/drill_head/Initialize()
 	. = ..()
 	durability = 2 * material.integrity
@@ -218,7 +218,7 @@
 	//Drill can have a head
 	var/obj/item/weapon/material/drill_head/drill_head
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
-	
+
 
 
 /obj/item/mech_equipment/drill/Initialize()
@@ -253,7 +253,7 @@
 		if(drill_head == null)
 			to_chat(user, SPAN_WARNING("Your drill doesn't have a head!"))
 			return
-		
+
 		var/obj/item/weapon/cell/C = owner.get_cell()
 		if(istype(C))
 			C.use(active_power_use * CELLRATE)
@@ -261,7 +261,7 @@
 
 		var/T = target.loc
 
-		//Better materials = faster drill! 
+		//Better materials = faster drill!
 		var/delay = max(5, 20 - drill_head.material.brute_armor)
 		owner.setClickCooldown(delay) //Don't spamclick!
 		if(do_after(owner, delay, target) && drill_head)
@@ -278,12 +278,12 @@
 					drill_head.durability -= 1
 					log_and_message_admins("used [src] on the wall [W].", user, owner.loc)
 				else if(istype(target, /turf/simulated/mineral))
-					for(var/turf/simulated/mineral/M in range(target,1))
+					for(var/turf/simulated/mineral/M in physical_range(1, target))
 						if(get_dir(owner,M)&owner.dir)
 							M.GetDrilled()
 							drill_head.durability -= 1
 				else if(istype(target, /turf/simulated/floor/asteroid))
-					for(var/turf/simulated/floor/asteroid/M in range(target,1))
+					for(var/turf/simulated/floor/asteroid/M in physical_range(1, target))
 						if(get_dir(owner,M)&owner.dir)
 							M.gets_dug()
 							drill_head.durability -= 1
@@ -292,9 +292,9 @@
 					drill_head.durability -= 1
 					log_and_message_admins("[src] used to drill [target].", user, owner.loc)
 
-				
 
-	
+
+
 				if(owner.hardpoints.len) //if this isn't true the drill should not be working to be fair
 					for(var/hardpoint in owner.hardpoints)
 						var/obj/item/I = owner.hardpoints[hardpoint]
@@ -302,18 +302,18 @@
 							continue
 						var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in I //clamps work, but anythin that contains an ore crate internally is valid
 						if(ore_box)
-							for(var/obj/item/weapon/ore/ore in range(T,1))
+							for(var/obj/item/weapon/ore/ore in physical_range(1, T))
 								if(get_dir(owner,ore)&owner.dir)
 									ore.Move(ore_box)
 
 				playsound(src, 'sound/weapons/circsawhit.ogg', 50, 1)
-		
-		else
-			to_chat(user, "You must stay still while the drill is engaged!")		
 
-				
+		else
+			to_chat(user, "You must stay still while the drill is engaged!")
+
+
 		return 1
-		
+
 
 
 
@@ -329,5 +329,5 @@
 /obj/item/weapon/gun/energy/plasmacutter/mounted/mech
 	use_external_power = TRUE
 	has_safety = FALSE
-	
+
 

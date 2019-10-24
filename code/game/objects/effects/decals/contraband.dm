@@ -60,7 +60,7 @@
 		user.visible_message("<span class='notice'>\The [user] has placed a poster on \the [W].</span>","<span class='notice'>You have placed the poster on \the [W].</span>")
 	else
 		// We cannot rely on user being on the appropriate turf when placement fails
-		P.roll_and_drop(get_step(W, turn(placement_dir, 180)))
+		P.roll_and_drop(get_physical_step(W, turn(placement_dir, 180)))
 
 /obj/item/weapon/contraband/poster/proc/ArePostersOnWall(var/turf/W, var/placed_poster)
 	//just check if there is a poster on or adjacent to the wall
@@ -69,7 +69,7 @@
 
 	//crude, but will cover most cases. We could do stuff like check pixel_x/y but it's not really worth it.
 	for (var/dir in GLOB.cardinal)
-		var/turf/T = get_step(W, dir)
+		var/turf/T = get_physical_step(W, dir)
 		var/poster = locate(/obj/structure/sign/poster) in T
 		if (poster && placed_poster != poster)
 			return TRUE

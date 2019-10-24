@@ -252,7 +252,7 @@
 		damage(proj_damage)
 
 	if(Proj.penetrating)
-		var/distance = get_dist(Proj.starting, get_turf(loc))
+		var/distance = get_physical_dist(Proj.starting, get_turf(loc))
 		for(var/mob/living/L in contents)
 			Proj.attack_mob(L, distance)
 			if(!(--Proj.penetrating))

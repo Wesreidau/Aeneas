@@ -113,7 +113,7 @@
 			scrubber.update_icon()
 
 	proc/validscrubber( var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber as obj )
-		if(!isobj(scrubber) || get_dist(scrubber.loc, src.loc) > src.range || scrubber.loc.z != src.loc.z)
+		if(!isobj(scrubber) || get_physical_dist(scrubber.loc, src.loc) > src.range || scrubber.loc.z != src.loc.z)
 			return 0
 
 		return 1
@@ -122,7 +122,7 @@
 		connectedscrubbers = new()
 
 		var/found = 0
-		for(var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber in range(range, src.loc))
+		for(var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber in physical_range(range, src.loc))
 			if(istype(scrubber))
 				found = 1
 				connectedscrubbers += scrubber

@@ -257,7 +257,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		var/rendered = "<i><span class='game say'>The holographic image of <span class='message'>[msg]</span></span></i>"
 		master.show_message(rendered, type)
 	if(targetpad)
-		for(var/mob/living/carbon/master in view(targetpad))
+		for(var/mob/living/carbon/master in physical_view(targetpad))
 			var/rendered = "<i><span class='game say'>The holographic image of <span class='message'>[msg]</span></span></i>"
 			master.show_message(rendered, type)
 
@@ -280,7 +280,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	hologram.anchored = 1//So space wind cannot drag it.
 	if(caller_id)
 		hologram.SetName("[caller_id.name] (Hologram)")
-		hologram.forceMove(get_step(src,1))
+		hologram.forceMove(get_physical_step(src,1))
 		masters[caller_id] = hologram
 	else
 		hologram.SetName("[A.name] (Hologram)") //If someone decides to right click.
@@ -317,7 +317,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 			clear_holo(master)
 			continue
 
-		if(!(masters[master] in view(src)))
+		if(!(masters[master] in physical_view(src)))
 			clear_holo(master)
 			continue
 
@@ -341,11 +341,11 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		H.dropInto(user.eyeobj)
 		masters[user] = H
 
-		if(!(H in view(src)))
+		if(!(H in physical_view(src)))
 			clear_holo(user)
 			return 0
 
-		if((HOLOPAD_MODE == RANGE_BASED && (get_dist(user.eyeobj, src) > holo_range)))
+		if((HOLOPAD_MODE == RANGE_BASED && (get_physical_dist(user.eyeobj, src) > holo_range)))
 			clear_holo(user)
 
 		if(HOLOPAD_MODE == AREA_BASED)

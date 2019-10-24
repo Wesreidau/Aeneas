@@ -111,7 +111,7 @@ PROCESSING_SUBSYSTEM_DEF(airflow)
 	if (!airflow_dest || airflow_speed < 0 || last_airflow > world.time - vsc.airflow_delay)
 		return FALSE
 	if (airflow_speed)
-		airflow_speed = n / max(get_dist(src, airflow_dest), 1)
+		airflow_speed = n / max(get_physical_dist(src, airflow_dest), 1)
 		return FALSE
 
 	if (airflow_dest == loc)

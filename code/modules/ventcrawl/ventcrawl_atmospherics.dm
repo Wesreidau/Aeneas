@@ -54,7 +54,7 @@
 	return !welded
 
 /obj/machinery/atmospherics/proc/findConnecting(var/direction)
-	for(var/obj/machinery/atmospherics/target in get_step(src,direction))
+	for(var/obj/machinery/atmospherics/target in get_physical_step(src,direction))
 		if(target.initialize_directions & get_dir(target,src))
 			if(isConnectable(target) && target.isConnectable(src))
 				return target

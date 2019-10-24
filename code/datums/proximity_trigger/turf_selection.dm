@@ -7,7 +7,7 @@
 	if(!center)
 		return
 	for(var/i = 0 to range)
-		center = get_step(center, origin.dir)
+		center = get_physical_step(center, origin.dir)
 		if(!center) // Reached the end of the world most likely
 			return
 		. += center

@@ -50,7 +50,7 @@
 	var/i
 
 	// Diagonal one is easy.
-	T = get_step(new_turf, diagonal)
+	T = get_physical_step(new_turf, diagonal)
 	if (T) // In case we're on the map's border.
 		if (!T.corners)
 			T.corners = list(null, null, null, null)
@@ -60,7 +60,7 @@
 		T.corners[i] = src
 
 	// Now the horizontal one.
-	T = get_step(new_turf, horizontal)
+	T = get_physical_step(new_turf, horizontal)
 	if (T) // Ditto.
 		if (!T.corners)
 			T.corners = list(null, null, null, null)
@@ -70,7 +70,7 @@
 		T.corners[i] = src
 
 	// And finally the vertical one.
-	T = get_step(new_turf, vertical)
+	T = get_physical_step(new_turf, vertical)
 	if (T)
 		if (!T.corners)
 			T.corners = list(null, null, null, null)

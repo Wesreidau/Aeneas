@@ -46,7 +46,7 @@
 
 
 
-	for(var/mob/living/simple_animal/mouse/snack in oview(src,5))
+	for(var/mob/living/simple_animal/mouse/snack in physical_oview(src,5))
 		if(snack.stat < DEAD && prob(15))
 			audible_emote(pick("hisses and spits!","mrowls fiercely!","eyes [snack] hungrily."))
 		break
@@ -64,7 +64,7 @@
 			handle_movement_target()
 
 	if(prob(2)) //spooky
-		var/mob/observer/ghost/spook = locate() in range(src,5)
+		var/mob/observer/ghost/spook = locate() in physical_range(5, src)
 		if(spook)
 			var/turf/T = spook.loc
 			var/list/visible = list()
@@ -81,10 +81,10 @@
 		movement_target = null
 		stop_automated_movement = 0
 	//if we have no target or our current one is out of sight/too far away
-	if( !movement_target || !(movement_target.loc in oview(src, 4)) )
+	if( !movement_target || !(movement_target.loc in physical_oview(src, 4)) )
 		movement_target = null
 		stop_automated_movement = 0
-		for(var/mob/living/simple_animal/mouse/snack in oview(src)) //search for a new target
+		for(var/mob/living/simple_animal/mouse/snack in physical_oview(src)) //search for a new target
 			if(isturf(snack.loc) && !snack.stat)
 				movement_target = snack
 				break
@@ -95,7 +95,7 @@
 
 /mob/living/simple_animal/cat/proc/handle_flee_target()
 	//see if we should stop fleeing
-	if (flee_target && !(flee_target.loc in view(src)))
+	if (flee_target && !(flee_target.loc in physical_view(src)))
 		flee_target = null
 		stop_automated_movement = 0
 
@@ -144,10 +144,10 @@
 		else if (friend.stat || friend.health <= 50) //danger or just sleeping
 			follow_dist = 2
 		var/near_dist = max(follow_dist - 2, 1)
-		var/current_dist = get_dist(src, friend)
+		var/current_dist = get_physical_dist(src, friend)
 
 		if (movement_target != friend)
-			if (current_dist > follow_dist && !istype(movement_target, /mob/living/simple_animal/mouse) && (friend in oview(src)))
+			if (current_dist > follow_dist && !istype(movement_target, /mob/living/simple_animal/mouse) && (friend in physical_oview(src)))
 				//stop existing movement
 				walk_to(src,0)
 				turns_since_scan = 0
@@ -171,10 +171,10 @@
 /mob/living/simple_animal/cat/fluff/Life()
 	. = ..()
 	if(!.)
-		return FALSE 
+		return FALSE
 	if (stat || !friend)
 		return
-	if (get_dist(src, friend) <= 1)
+	if (get_physical_dist(src, friend) <= 1)
 		if (friend.stat >= DEAD || friend.is_asystole())
 			if (prob((friend.stat < DEAD)? 50 : 15))
 				var/verb = pick("meows", "mews", "mrowls")

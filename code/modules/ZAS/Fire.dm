@@ -159,7 +159,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 	//spread
 	for(var/direction in GLOB.cardinal)
-		var/turf/simulated/enemy_tile = get_step(my_tile, direction)
+		var/turf/simulated/enemy_tile = get_physical_step(my_tile, direction)
 
 		if(istype(enemy_tile))
 			if(my_tile.open_directions & direction) //Grab all valid bordering tiles

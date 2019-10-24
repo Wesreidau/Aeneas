@@ -110,22 +110,22 @@
 
 /mob/living/bot/farmbot/lookForTargets()
 	if(emagged)
-		for(var/mob/living/carbon/human/H in view(7, src))
+		for(var/mob/living/carbon/human/H in physical_view(7, src))
 			target = H
 			return
 	else
-		for(var/obj/machinery/portable_atmospherics/hydroponics/tray in view(7, src))
+		for(var/obj/machinery/portable_atmospherics/hydroponics/tray in physical_view(7, src))
 			if(confirmTarget(tray))
 				target = tray
 				return
 		if(!target && refills_water && tank && tank.reagents.total_volume < tank.reagents.maximum_volume)
-			for(var/obj/structure/hygiene/sink/source in view(7, src))
+			for(var/obj/structure/hygiene/sink/source in physical_view(7, src))
 				target = source
 				return
 
 /mob/living/bot/farmbot/calcTargetPath() // We need to land NEXT to the tray, because the tray itself is impassable
 	for(var/trayDir in list(NORTH, SOUTH, EAST, WEST))
-		target_path = AStar(get_turf(loc), get_step(get_turf(target), trayDir), /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, max_target_dist, id = botcard)
+		target_path = AStar(get_turf(loc), get_physical_step(get_turf(target), trayDir), /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, max_target_dist, id = botcard)
 		if(target_path)
 			break
 	if(!target_path)
@@ -250,7 +250,7 @@
 		return 0
 
 	if(emagged && ishuman(targ))
-		if(targ in view(world.view, src))
+		if(targ in physical_view(world.view, src))
 			return 1
 		return 0
 

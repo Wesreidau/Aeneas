@@ -33,7 +33,7 @@
 	UnarmedAttack(target)
 
 /mob/living/bot/medbot/lookForTargets()
-	for(var/mob/living/carbon/human/H in view(7, src)) // Time to find a patient!
+	for(var/mob/living/carbon/human/H in physical_view(7, src)) // Time to find a patient!
 		if(confirmTarget(H))
 			target = H
 			if(last_newpatient_speak + 300 < world.time)

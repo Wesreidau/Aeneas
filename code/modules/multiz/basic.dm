@@ -61,4 +61,4 @@
 	else if (dir == DOWN)
 		. = GetBelow(ref)
 	else
-		. = get_step(ref, dir)
+		. = get_physical_step(ref, dir)

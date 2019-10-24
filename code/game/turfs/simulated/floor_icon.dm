@@ -31,7 +31,7 @@ var/list/flooring_cache = list()
 		var/has_border = 0
 		//Check the cardinal turfs
 		for(var/step_dir in GLOB.cardinal)
-			var/turf/simulated/floor/T = get_step(src, step_dir)
+			var/turf/simulated/floor/T = get_physical_step(src, step_dir)
 			var/is_linked = flooring.symmetric_test_link(src, T)
 
 			//Alright we've figured out whether or not we smooth with this turf
@@ -43,21 +43,20 @@ var/list/flooring_cache = list()
 
 		has_smooth = ~(has_border & (NORTH | SOUTH | EAST | WEST))
 
-		if(flooring.can_paint && decals && decals.len)
-			overlays |= decals
+
 
 		//We can only have inner corners if we're smoothed with something
 		if (has_smooth && flooring.flags & TURF_HAS_INNER_CORNERS)
 			for(var/direction in GLOB.cornerdirs)
 				if((has_smooth & direction) == direction)
-					if(!flooring.symmetric_test_link(src, get_step(src, direction)))
+					if(!flooring.symmetric_test_link(src, get_physical_step(src, direction)))
 						overlays |= get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-corner-[direction]", "[flooring.icon_base]_corners", direction)
 
 		//Next up, outer corners
 		if (has_border && flooring.flags & TURF_HAS_CORNERS)
 			for(var/direction in GLOB.cornerdirs)
 				if((has_border & direction) == direction)
-					if(!flooring.symmetric_test_link(src, get_step(src, direction)))
+					if(!flooring.symmetric_test_link(src, get_physical_step(src, direction)))
 						overlays |= get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[direction]", "[flooring.icon_base]_edges", direction,(flooring.flags & TURF_HAS_EDGES))
 
 		/*
@@ -70,12 +69,16 @@ var/list/flooring_cache = list()
 			else
 				icon_state = flooring.icon_base+"0"
 		*/
+	if(decals && decals.len)
+		overlays |= decals
 
+	/*
 	if(decals && decals.len)
 		for(var/image/I in decals)
 			if(I.layer != DECAL_PLATING_LAYER)
 				continue
 			overlays |= I
+			*/
 
 	if(is_plating() && !(isnull(broken) && isnull(burnt))) //temp, todo
 		icon = 'icons/turf/flooring/plating.dmi'
@@ -88,7 +91,7 @@ var/list/flooring_cache = list()
 
 	queue_ao(FALSE)
 	if(update_neighbors)
-		for(var/turf/simulated/floor/F in orange(src, 1))
+		for(var/turf/simulated/floor/F in physical_orange(1, src))
 			F.queue_ao(FALSE)
 			F.update_icon()
 
@@ -124,6 +127,11 @@ var/list/flooring_cache = list()
 
 /decl/flooring/proc/test_link(var/turf/origin, var/turf/T)
 	var/is_linked = FALSE
+
+	//T will be false at roundstart near mirror turfs, but the next update check will find them
+	if (!origin || !T)
+		return is_linked
+
 	//is_wall is true for wall turfs and for floors containing a low wall
 	if(T.is_wall())
 		if(wall_smooth == SMOOTH_ALL)

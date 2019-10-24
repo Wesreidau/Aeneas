@@ -34,7 +34,7 @@
 	if(!ghost_ability_check())
 		return
 
-	for(var/obj/machinery/light/L in range(3))
+	for(var/obj/machinery/light/L in physical_range(3))
 		L.flicker()
 
 	ghost_magic_cd = world.time + 30 SECONDS
@@ -67,7 +67,7 @@
 	var/obj/effect/decal/cleanable/blood/choice
 	if(!bloodless)
 		var/list/choices = list()
-		for(var/obj/effect/decal/cleanable/blood/B in range(1))
+		for(var/obj/effect/decal/cleanable/blood/B in physical_range(1))
 			if(B.amount > 0)
 				choices += B
 
@@ -89,7 +89,7 @@
 	if(!ghost_ability_check())
 		return
 
-	if(message && (bloodless || (choice && (choice in range(1)))))
+	if(message && (bloodless || (choice && (choice in physical_range(1)))))
 		if(length(message) > max_length)
 			message += "-"
 			to_chat(src, "<span class='warning'>You ran out of blood to write with!</span>")
@@ -143,7 +143,7 @@
 	var/turf/T = get_turf(src)
 
 	var/list/obj/item/choices = list()
-	for(var/obj/item/I in range(1))
+	for(var/obj/item/I in physical_range(1))
 		if(I.w_class <= 2)
 			choices += I
 
@@ -152,7 +152,7 @@
 		return
 
 	var/obj/item/choice = input(src, "What item would you like to pull?") as null|anything in choices
-	if(!choice || !(choice in range(1)) || choice.w_class > 2)
+	if(!choice || !(choice in physical_range(1)) || choice.w_class > 2)
 		return
 
 	if(!ghost_ability_check())
@@ -175,7 +175,7 @@
 		return
 
 	var/list/mob/living/choices = list()
-	for(var/mob/living/M in range(1))
+	for(var/mob/living/M in physical_range(1))
 		choices += M
 
 	var/mob/living/choice = input(src, "Whom do you want to whisper to?") as null|anything in choices
@@ -207,7 +207,7 @@
 		return
 
 	var/list/mob/living/carbon/human/choices = list()
-	for(var/mob/living/carbon/human/H in range(1))
+	for(var/mob/living/carbon/human/H in physical_range(1))
 		choices += H
 
 	var/mob/living/carbon/human/choice = input(src, "Whom do you want to scratch?") as null|anything in choices
@@ -235,7 +235,7 @@
 		return
 
 	var/list/mob/living/carbon/human/choices = list()
-	for(var/mob/living/carbon/human/H in range(1))
+	for(var/mob/living/carbon/human/H in physical_range(1))
 		choices += H
 
 	var/mob/living/carbon/human/choice = input(src, "Whom do you want to scare?") as null|anything in choices

@@ -79,6 +79,6 @@
 			if(D.deity_flags & DEITY_STRUCTURE_NEAR_IMPORTANT)//If it needs to be near an important structure, it isn't important.
 				continue
 
-		if(get_dist(T, s) <= 3)
+		if(get_physical_dist(T, s) <= 3)
 			return 1
 	return 0

@@ -326,7 +326,7 @@ obj/structure/disposalpipe/Destroy()
 				P = F
 
 	else
-		T = get_step(src.loc, H.dir)
+		T = get_physical_step(src.loc, H.dir)
 		P = H.findpipe(T)
 
 	if(P)
@@ -375,7 +375,7 @@ obj/structure/disposalpipe/Destroy()
 			for(var/obj/structure/disposalpipe/up/F in T)
 				P = F
 	else
-		T = get_step(src.loc, H.dir)
+		T = get_physical_step(src.loc, H.dir)
 		P = H.findpipe(T)
 	if(P)
 		// find other holder in next loc, if inactive merge it with current

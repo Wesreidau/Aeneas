@@ -119,7 +119,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 		to_chat(owner, "<span class='warning'>You must be conscious and standing to keep track of your target!</span>")
 	else if(aiming_at.is_invisible_to(owner))
 		to_chat(owner, "<span class='warning'>Your target has become invisible!</span>")
-	else if(!(aiming_at in view(owner)))
+	else if(!(aiming_at in physical_view(owner)))
 		to_chat(owner, "<span class='warning'>Your target is too far away to track!</span>")
 	else
 		cancel_aim = 0

@@ -70,7 +70,7 @@ var/global/list/narsie_list = list()
 		mezzer()
 
 /obj/singularity/narsie/large/eat()
-	for (var/turf/A in orange(consume_range, src))
+	for (var/turf/A in physical_orange(consume_range, src))
 		consume(A)
 
 /obj/singularity/narsie/mezzer()
@@ -110,9 +110,9 @@ var/global/list/narsie_list = list()
 		movement_dir = get_dir(src,target)
 
 	spawn(0)
-		step(src, movement_dir)
+		seamless_step(src, movement_dir)
 	spawn(1)
-		step(src, movement_dir)
+		seamless_step(src, movement_dir)
 	return 1
 
 /obj/singularity/narsie/large/move(var/force_move = 0)
@@ -127,13 +127,13 @@ var/global/list/narsie_list = list()
 	if(target && prob(60))
 		movement_dir = get_dir(src,target)
 	spawn(0)
-		step(src, movement_dir)
+		seamless_step(src, movement_dir)
 		narsiefloor(get_turf(loc))
 		for(var/mob/M in GLOB.player_list)
 			if(M.client)
 				M.see_narsie(src,movement_dir)
 	spawn(10)
-		step(src, movement_dir)
+		seamless_step(src, movement_dir)
 		narsiefloor(get_turf(loc))
 		for(var/mob/M in GLOB.player_list)
 			if(M.client)
@@ -167,7 +167,7 @@ var/global/list/narsie_list = list()
 		old_narsie(A)
 
 /obj/singularity/narsie/proc/new_narsie(const/atom/A)
-	if (istype(A, /mob/) && (get_dist(A, src) <= 7))
+	if (istype(A, /mob/) && (get_physical_dist(A, src) <= 7))
 		var/mob/M = A
 
 		if(M.status_flags & GODMODE)
@@ -177,7 +177,7 @@ var/global/list/narsie_list = list()
 
 //TURF PROCESSING
 	else if (isturf(A))
-		var/dist = get_dist(A, src)
+		var/dist = get_physical_dist(A, src)
 
 		for (var/atom/movable/AM in A.contents)
 			if (dist <= consume_range)
@@ -208,7 +208,7 @@ var/global/list/narsie_list = list()
 		if (A)
 			qdel(A)
 	else if (isturf(A))
-		var/dist = get_dist(A, src)
+		var/dist = get_physical_dist(A, src)
 
 		for (var/atom/movable/AM2 in A.contents)
 			if (AM2 == src) // This is the snowflake.
@@ -240,7 +240,7 @@ var/global/list/narsie_list = list()
 		if (A)
 			qdel(A)
 	else if (isturf(A))
-		var/dist = get_dist(A, src)
+		var/dist = get_physical_dist(A, src)
 
 		for (var/atom/movable/AM2 in A.contents)
 			if (AM2 == src) // This is the snowflake.

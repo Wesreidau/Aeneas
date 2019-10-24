@@ -53,8 +53,8 @@
 		var/turf/origin = get_turf(src)
 		if(!origin)
 			return
-		for(var/turf/T in range(range, origin))
-			var/use_alpha = 255 - (step_alpha * get_dist(origin, T))
+		for(var/turf/T in physical_range(range, origin))
+			var/use_alpha = 255 - (step_alpha * get_physical_dist(origin, T))
 			for(var/atom/A in T.contents)
 				if(A.fluorescent == 1)
 					A.fluorescent = 2 //To prevent light crosstalk.

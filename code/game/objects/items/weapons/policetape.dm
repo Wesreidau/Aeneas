@@ -192,7 +192,7 @@ var/list/tape_roll_applications = list()
 			var/turf/T
 			var/possible_dirs = 0
 			for(var/dir in GLOB.cardinal)
-				T = get_step(start, dir)
+				T = get_physical_step(start, dir)
 				if(T && T.density)
 					possible_dirs += dir
 				else
@@ -255,14 +255,14 @@ var/list/tape_roll_applications = list()
 			tapetest = 0
 			tape_dir = dir
 			if(cur == start)
-				var/turf/T = get_step(start, GLOB.reverse_dir[orientation])
+				var/turf/T = get_physical_step(start, GLOB.reverse_dir[orientation])
 				if(T && !T.density)
 					tape_dir = orientation
 					for(var/obj/structure/window/W in T)
 						if(W.is_fulltile() || W.dir == orientation)
 							tape_dir = dir
 			else if(cur == end)
-				var/turf/T = get_step(end, orientation)
+				var/turf/T = get_physical_step(end, orientation)
 				if(T && !T.density)
 					tape_dir = GLOB.reverse_dir[orientation]
 					for(var/obj/structure/window/W in T)
@@ -365,14 +365,14 @@ var/list/tape_roll_applications = list()
 	for (var/obj/item/tape/T in get_turf(src))
 		tapeline += T
 	for(var/dir in dirs)
-		var/turf/cur = get_step(src, dir)
+		var/turf/cur = get_physical_step(src, dir)
 		var/not_found = 0
 		while (!not_found)
 			not_found = 1
 			for (var/obj/item/tape/T in cur)
 				tapeline += T
 				not_found = 0
-			cur = get_step(cur, dir)
+			cur = get_physical_step(cur, dir)
 	return tapeline
 
 

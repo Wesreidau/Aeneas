@@ -29,7 +29,7 @@
 		arrow = image('icons/mob/screen1.dmi', icon_state = "arrow", layer = POINTER_LAYER)
 	var/turf/T = get_turf(a)
 	arrow.loc = T
-	var/list/view = view(7,T)
+	var/list/view = physical_view(7,T)
 	for(var/m in linked.minions)
 		var/datum/mind/mind = m
 		if(mind.current)

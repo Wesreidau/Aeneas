@@ -77,7 +77,7 @@
 	var/max_local_temp = 0
 
 	for(var/check_dir in GLOB.cardinal)
-		var/turf/T = get_step(get_turf(src), check_dir)
+		var/turf/T = get_physical_step(get_turf(src), check_dir)
 		var/datum/gas_mixture/env = T.return_air()
 		var/pressure = env.return_pressure()
 		min_pressure = min(min_pressure, pressure)
@@ -217,7 +217,7 @@
 	if(isAI(user)) //so the AI can't open it
 		return
 	else if(isrobot(user)) //but cyborgs can
-		if(get_dist(user,src) <= 1) //not remotely though
+		if(get_physical_dist(user,src) <= 1) //not remotely though
 			return TryToSwitchState(user)
 
 /obj/structure/inflatable/door/attack_hand(mob/user as mob)

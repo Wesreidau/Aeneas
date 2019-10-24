@@ -217,7 +217,7 @@
 			var/turf/T = get_turf(M)
 			if(!T || T.z != src.z)
 				continue
-			var/dist = get_dist(M.loc, src.loc)
+			var/dist = get_physical_dist(M.loc, src.loc)
 			shake_camera(M, dist > 20 ? 3 : 5, dist > 20 ? 1 : 3)
 
 
@@ -333,7 +333,7 @@
 /obj/effect/meteor/supermatter/meteor_effect()
 	..()
 	explosion(src.loc, 1, 2, 3, 4, 0)
-	for(var/obj/machinery/power/apc/A in range(rand(12, 20), src))
+	for(var/obj/machinery/power/apc/A in physical_range(rand(12, 20), src))
 		A.energy_fail(round(10 * rand(8, 12)))
 
 /obj/effect/meteor/supermatter/get_shield_damage()

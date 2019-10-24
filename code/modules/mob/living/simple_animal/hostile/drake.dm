@@ -64,7 +64,7 @@
 /mob/living/simple_animal/hostile/drake/proc/vent_gas()
 	visible_message(SPAN_MFAUNA("\The [src] raises its wings, vents a miasma of burning gas, and spreads it about with a flap!"))
 	gas_spent = TRUE
-	for(var/mob/living/L in oview(2))
+	for(var/mob/living/L in physical_oview(2))
 		var/obj/item/projectile/P = new /obj/item/projectile/hotgas(get_turf(src))
 		P.launch(L)
 

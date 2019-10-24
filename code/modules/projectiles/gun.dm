@@ -557,7 +557,7 @@
 
 /obj/item/weapon/gun/on_disarm_attempt(mob/target, mob/attacker)
 	var/list/turfs = list()
-	for(var/turf/T in view())
+	for(var/turf/T in physical_view())
 		turfs += T
 	if(turfs.len)
 		var/turf/shoot_to = pick(turfs)

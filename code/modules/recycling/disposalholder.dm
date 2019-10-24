@@ -71,7 +71,7 @@
 			active = 0
 		if(!active || QDELETED(src))
 			return PROCESS_KILL
-		
+
 		var/obj/structure/disposalpipe/last
 
 		if(hasmob && prob(3))
@@ -95,7 +95,7 @@
 
 	// find the turf which should contain the next pipe
 /obj/structure/disposalholder/proc/nextloc()
-	return get_step(loc,dir)
+	return get_physical_step(loc,dir)
 
 // find a matching pipe on a turf
 /obj/structure/disposalholder/proc/findpipe(var/turf/T)
@@ -144,7 +144,7 @@
 
 	if (src.loc)
 		for (var/mob/M in hearers(src.loc.loc))
-			to_chat(M, "<FONT size=[max(0, 5 - get_dist(src, M))]>CLONG, clong!</FONT>")
+			to_chat(M, "<FONT size=[max(0, 5 - get_physical_dist(src, M))]>CLONG, clong!</FONT>")
 
 	playsound(src.loc, 'sound/effects/clang.ogg', 50, 0, 0)
 

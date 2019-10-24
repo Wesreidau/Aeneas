@@ -49,7 +49,7 @@
 	var/oldhealth = health
 	. = ..()
 	if((target_mob != Proj.firer) && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
-		target_mob = Proj.firer
+		set_target(Proj.firer)
 		turns_per_move = 2
 		MoveToTarget()
 

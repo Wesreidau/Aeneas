@@ -107,7 +107,7 @@
 /turf/simulated/wall/proc/clear_plants()
 	for(var/obj/effect/overlay/wallrot/WR in src)
 		qdel(WR)
-	for(var/obj/effect/vine/plant in range(src, 1))
+	for(var/obj/effect/vine/plant in physical_range(1, src))
 		if(!plant.floor) //shrooms drop to the floor
 			plant.floor = 1
 			plant.update_icon()
@@ -279,9 +279,9 @@
 		spawn(2)
 			new /obj/structure/girder(src)
 			src.ChangeTurf(/turf/simulated/floor)
-			for(var/turf/simulated/wall/W in range(3,src))
+			for(var/turf/simulated/wall/W in physical_range(3,src))
 				W.burn((temperature/4))
-			for(var/obj/machinery/door/airlock/phoron/D in range(3,src))
+			for(var/obj/machinery/door/airlock/phoron/D in physical_range(3,src))
 				D.ignite(temperature/4)
 
 /turf/simulated/wall/get_color()

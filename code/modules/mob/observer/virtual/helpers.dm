@@ -17,7 +17,7 @@
 	. = list()
 
 	ACQUIRE_VIRTUAL_OR_TURF(center_vmob)
-	for(var/mob/observer/virtual/v_mob in range(world.view, center_vmob))
+	for(var/mob/observer/virtual/v_mob in physical_range(world.view, center_vmob))
 		var/client/C = v_mob.get_client()
 		if(C)
 			. |= C
@@ -26,7 +26,7 @@
 	. = list()
 
 	ACQUIRE_VIRTUAL_OR_TURF(center_vmob)
-	for(var/mob/observer/virtual/v_mob in range(hearing_range, center_vmob))
+	for(var/mob/observer/virtual/v_mob in physical_range(hearing_range, center_vmob))
 		if(v_mob.abilities & VIRTUAL_ABILITY_HEAR)
 			. |= v_mob.host
 
@@ -34,7 +34,7 @@
 	. = list()
 
 	ACQUIRE_VIRTUAL_OR_TURF(center_vmob)
-	for(var/mob/observer/virtual/v_mob in range(world.view, center_vmob))
+	for(var/mob/observer/virtual/v_mob in physical_range(world.view, center_vmob))
 		if(v_mob.abilities & VIRTUAL_ABILITY_SEE)
 			. |= v_mob.host
 

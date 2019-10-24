@@ -25,7 +25,7 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 
 	//This steap handles the gathering of turfs which will be ex_act() -ed in the next step. It also ensures each turf gets the maximum possible amount of power dealt to it.
 	for(var/direction in GLOB.cardinal)
-		var/turf/T = get_step(epicenter, direction)
+		var/turf/T = get_physical_step(epicenter, direction)
 		var/adj_power = power - epicenter.get_explosion_resistance()
 		if(shaped)
 			if (shaped == direction)
@@ -88,13 +88,13 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 */
 	var/spread_power = power - src.get_explosion_resistance() //This is the amount of power that will be spread to the tile in the direction of the blast
 
-	var/turf/T = get_step(src, direction)
+	var/turf/T = get_physical_step(src, direction)
 	if(T)
 		T.explosion_spread(spread_power, direction)
-	T = get_step(src, turn(direction,90))
+	T = get_physical_step(src, turn(direction,90))
 	if(T)
 		T.explosion_spread(spread_power, turn(direction,90))
-	T = get_step(src, turn(direction,-90))
+	T = get_physical_step(src, turn(direction,-90))
 	if(T)
 		T.explosion_spread(spread_power, turn(direction,90))
 
