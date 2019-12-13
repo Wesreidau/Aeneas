@@ -6,6 +6,8 @@
 	#include "atlas_hub.dmm"
 	#include "atlas_torus.dmm"
 
+	#include "atlas_scene.dm"
+
 	#define using_map_DATUM /datum/map/atlas
 
 #elif !defined(MAP_OVERRIDE)

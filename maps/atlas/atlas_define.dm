@@ -3,7 +3,7 @@
 	full_name = "Atlas"
 	path = "atlas"
 
-	station_name  = "IRV Atlas"
+	station_name  = "MSV Atlas"
 	station_short = "Atlas"
 
 	dock_name     = "Hektor Consolidated Claimants"
