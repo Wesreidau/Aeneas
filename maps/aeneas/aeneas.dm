@@ -3,16 +3,16 @@
 	#include "../../code/datums/music_tracks/businessend.dm"
 	#include "../../code/datums/music_tracks/salutjohn.dm"
 
-	#include "atlas_hub.dmm"
-	#include "atlas_torus.dmm"
+	#include "aeneas_hub.dmm"
+	#include "aeneas_torus.dmm"
 
-	#include "atlas_scene.dm"
+	#include "aeneas_scene.dm"
 
-	#define using_map_DATUM /datum/map/atlas
+	#define using_map_DATUM /datum/map/aeneas
 
 #elif !defined(MAP_OVERRIDE)
 
-	#warn A map has already been included, ignoring Atlas
+	#warn A map has already been included, ignoring Aeneas
 
 #endif
 

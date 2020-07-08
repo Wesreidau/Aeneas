@@ -152,14 +152,14 @@ var/const/NETWORK_NANOTRASEN  = "Petrov"
 	_output_on = TRUE
 	_fully_charged = TRUE
 
-// Substation SMES (Atlas)
-/obj/machinery/power/smes/buildable/preset/atlas/substation
+// Substation SMES (Aeneas)
+/obj/machinery/power/smes/buildable/preset/aeneas/substation
 	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil = 1) // Note that it gets one more from construction
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 
-// Substation SMES (Atlas, charged and with full I/O setting)
-/obj/machinery/power/smes/buildable/preset/atlas/substation_full
+// Substation SMES (Aeneas, charged and with full I/O setting)
+/obj/machinery/power/smes/buildable/preset/aeneas/substation_full
 	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil = 1)
 	_input_maxed = TRUE
 	_output_maxed = TRUE

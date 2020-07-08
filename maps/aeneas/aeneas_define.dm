@@ -1,10 +1,10 @@
-/datum/map/atlas
-	name = "Atlas"
-	full_name = "Atlas"
-	path = "atlas"
+/datum/map/aeneas
+	name = "Aeneas"
+	full_name = "Aeneas"
+	path = "aeneas"
 
-	station_name  = "MSV Atlas"
-	station_short = "Atlas"
+	station_name  = "MSV Aeneas"
+	station_short = "Aeneas"
 
 	dock_name     = "Hektor Consolidated Claimants"
 	boss_name     = "HCC Board of Directors"
