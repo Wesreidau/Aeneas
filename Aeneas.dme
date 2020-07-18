@@ -5,6 +5,7 @@
 // END_INTERNALS
 // BEGIN_FILE_DIR
 #define FILE_DIR .
+<<<<<<< HEAD:Atlas.dme
 #define FILE_DIR "code"
 #define FILE_DIR "code/modules"
 #define FILE_DIR "code/modules/modular_computers"
@@ -202,6 +203,8 @@
 #define FILE_DIR "sound/weapons/guns"
 #define FILE_DIR "sound/weapons/guns/interaction"
 #define FILE_DIR "sound/weapons/gunshot"
+=======
+>>>>>>> NikovianMapping:Aeneas.dme
 // END_FILE_DIR
 // BEGIN_PREFERENCES
 #define DEBUG
@@ -209,13 +212,8 @@
 #define TileWidth 32
 #define TileHeight 32
 // BEGIN_INCLUDE
-#include <kaiochao\event\Event.dme>
 #include <kaiochao\hypot\Hypot.dme>
-#include <kaiochao\mouseposition\MousePosition.dme>
-#include <kaiochao\shapes\shapes.dme>
-#include <kaiochao\tilesizes\TileSizes.dme>
 #include <kaiochao\vector2\Vector2.dme>
-#include <kaiochao\viewporttoworldpoint\ViewportToWorldPoint.dme>
 #include "code\_macros.dm"
 #include "code\client_macros.dm"
 #include "code\hub.dm"
@@ -3351,6 +3349,12 @@
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
 #include "maps\_map_include.dm"
+#include "maps\aeneas\aeneas.dm"
+#include "maps\aeneas\aeneas_areas.dm"
+#include "maps\aeneas\aeneas_define.dm"
+#include "maps\aeneas\aeneas_scene.dm"
+#include "maps\aeneas\aeneas_hub.dmm"
+#include "maps\aeneas\aeneas_torus.dmm"
 #include "maps\away\away_sites.dm"
 #include "maps\away_sites_testing\away_sites_testing_define.dm"
 #include "maps\example\example_define.dm"
@@ -3373,6 +3377,12 @@
 #include "maps\random_ruins\space_ruins\space_ruins.dm"
 #include "maps\shipyard\ringtest.dm"
 #include "maps\shipyard\ringtest_define.dm"
+<<<<<<< HEAD:Atlas.dme
+=======
+#include "maps\shipyard\ringtest_scene.dm"
+#include "maps\shipyard\ringtest.dmm"
+#include "maps\shipyard\ringtestbigger.dmm"
+>>>>>>> NikovianMapping:Aeneas.dme
 #include "maps\~mapsystem\map_preferences.dm"
 #include "maps\~mapsystem\map_ranks.dm"
 #include "maps\~mapsystem\maps.dm"
