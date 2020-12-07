@@ -1,0 +1,12 @@
+// BEGIN_INTERNALS
+/*
+MAP_ZOOM: 1.000
+LAST_COMPILE_TIME: 1607297045
+DIR: code code\__defines code\_global_vars code\_global_vars\lists code\_helpers code\controllers code\controllers\subsystems code\datums code\datums\movement code\datums\music_tracks code\datums\repositories code\game code\game\turfs code\game\turfs\loop maps maps\aeneas 
+AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 513.1513
+WINDOW: code\_macros.dm;code\_helpers\lists.dm;code\_helpers\maths.dm;code\_global_vars\lists\names.dm;maps\aeneas\aeneas_hub.dmm;code\__defines\antagonists.dm
+FILE: code\__defines\antagonists.dm
+*/
+// END_INTERNALS
