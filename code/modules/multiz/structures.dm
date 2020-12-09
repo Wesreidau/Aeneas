@@ -19,6 +19,10 @@
 	var/static/list/climbsounds = list('sound/effects/ladder.ogg','sound/effects/ladder2.ogg','sound/effects/ladder3.ogg','sound/effects/ladder4.ogg')
 
 /obj/structure/ladder/Initialize()
+	.=..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/structure/ladder/LateInitialize()
 	. = ..()
 	// the upper will connect to the lower
 	if(allowed_directions & DOWN) //we only want to do the top one, as it will initialize the ones before it.
